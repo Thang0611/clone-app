@@ -19,6 +19,7 @@ export default function Hero() {
   const [courses, setCourses] = useState<CourseInfo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string>("");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,6 +37,9 @@ export default function Hero() {
       return;
     }
 
+    // Store email for order page
+    setUserEmail(email);
+
     // Parse course links (split by newline)
     const urls = courseLinks
       .split("\n")
@@ -49,6 +53,10 @@ export default function Hero() {
     }
 
     try {
+      // Create AbortController for timeout (30 seconds)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
       const response = await fetch("https://api.khoahocgiare.info/api/v1/get-course-info", {
         method: "POST",
         headers: {
@@ -57,25 +65,59 @@ export default function Hero() {
         body: JSON.stringify({
           urls: urls,
         }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
+
+      // Check if response is ok before trying to parse JSON
+      if (!response.ok) {
+        let errorMessage = `HTTP error! status: ${response.status}`;
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.message || errorMessage;
+        } catch {
+          // If response is not JSON, use status text
+          errorMessage = response.statusText || errorMessage;
+        }
+        throw new Error(errorMessage);
+      }
 
       const data = await response.json();
 
       // Handle error responses from backend
-      if (!response.ok || data.success === false) {
-        const errorMessage = data.message || `HTTP error! status: ${response.status}`;
+      if (data.success === false) {
+        const errorMessage = data.message || "Không thể lấy thông tin khóa học";
         throw new Error(errorMessage);
       }
       
       // Backend returns: { success: true, results: [...] }
+      // or could be: { success: true, data: [...] }
       if (data.success && Array.isArray(data.results)) {
         setCourses(data.results);
+      } else if (data.success && Array.isArray(data.data)) {
+        setCourses(data.data);
+      } else if (Array.isArray(data)) {
+        // If response is directly an array
+        setCourses(data);
       } else {
         throw new Error("Format response không đúng");
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("Error fetching course info:", err);
-      setError(err instanceof Error ? err.message : "Có lỗi xảy ra khi lấy thông tin khóa học");
+      
+      // Handle different types of errors with user-friendly messages
+      let errorMessage = "Có lỗi xảy ra khi lấy thông tin khóa học";
+      
+      if (err.name === 'AbortError') {
+        errorMessage = "Request timeout. Vui lòng thử lại sau.";
+      } else if (err.name === 'TypeError' && err.message.includes('fetch')) {
+        errorMessage = "Không thể kết nối đến server. Vui lòng kiểm tra kết nối internet và thử lại.";
+      } else if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
       setCourses([]);
     } finally {
       setIsLoading(false);
@@ -188,6 +230,7 @@ export default function Hero() {
         onClose={() => setIsModalOpen(false)}
         courses={courses}
         isLoading={isLoading}
+        email={userEmail}
       />
     </section>
   );

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function WhatIsFullBootcamp() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 text-center">
           Full Bootcamp là công cụ gì?

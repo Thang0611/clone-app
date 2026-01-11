@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface CourseInfo {
   success: boolean;
@@ -18,9 +19,109 @@ interface CourseModalProps {
   onClose: () => void;
   courses: CourseInfo[];
   isLoading?: boolean;
+  email?: string;
 }
 
-export default function CourseModal({ isOpen, onClose, courses, isLoading }: CourseModalProps) {
+export default function CourseModal({ isOpen, onClose, courses, isLoading, email }: CourseModalProps) {
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const router = useRouter();
+
+  const [isCreatingOrder, setIsCreatingOrder] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+
+  const handlePayment = async () => {
+    // Filter only successful courses
+    const successfulCourses = courses.filter(c => c.success);
+    
+    if (successfulCourses.length === 0) return;
+
+    if (!email || email.trim() === "") {
+      setPaymentError("Vui lòng nhập email");
+      return;
+    }
+
+    setIsCreatingOrder(true);
+    setPaymentError(null);
+
+    try {
+      // Prepare request body
+      const requestBody = {
+        email: email.trim(),
+        courses: successfulCourses.map(course => ({
+          url: course.url || "",
+          price: course.price || 50000,
+          title: course.title || "Khóa học",
+        })),
+      };
+
+      // Call API to create order
+      const response = await fetch("https://api.khoahocgiare.info/api/payment/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || `HTTP error! status: ${response.status}`);
+      }
+
+      // Parse bank info from QR URL if needed
+      let bankInfo = null;
+      if (data.qrCodeUrl) {
+        try {
+          // Parse QR URL: https://img.vietqr.io/image/TPB-10001874613-compact.png?amount=50000&addInfo=DH953282&accountName=NGUYEN%20HUU%20THANG
+          const urlMatch = data.qrCodeUrl.match(/image\/([^-]+)-(\d+)-/);
+          const urlParams = new URLSearchParams(data.qrCodeUrl.split('?')[1]);
+          if (urlMatch) {
+            bankInfo = {
+              bankName: urlMatch[1],
+              accountNo: urlMatch[2],
+              accountName: decodeURIComponent(urlParams.get('accountName') || ''),
+            };
+          }
+        } catch (e) {
+          console.error("Error parsing bank info from QR URL:", e);
+        }
+      }
+
+      // Prepare order data with API response
+      // Note: Luôn set paymentStatus là "pending" ban đầu, chờ webhook xác nhận
+      const orderData = {
+        success: data.success,
+        orderId: data.orderId,
+        orderCode: data.orderCode,
+        totalAmount: data.totalAmount,
+        qrCodeUrl: data.qrCodeUrl,
+        paymentStatus: "pending", // Luôn là pending khi mới tạo, chờ webhook xác nhận
+        bankInfo: bankInfo,
+        email: email.trim(),
+        items: data.courses || successfulCourses.map(course => ({
+          title: course.title || "Khóa học",
+          url: course.url || "",
+          price: course.price || 50000,
+          courseId: course.courseId,
+        })),
+        status: "Chưa thanh toán", // Luôn là "Chưa thanh toán" ban đầu
+        date: new Date().toLocaleDateString("vi-VN"),
+      };
+
+      // Store in localStorage as backup
+      localStorage.setItem("orderData", JSON.stringify(orderData));
+
+      // Navigate to order page with data
+      const encodedData = encodeURIComponent(JSON.stringify(orderData));
+      router.push(`/order?data=${encodedData}`);
+    } catch (err) {
+      console.error("Error creating order:", err);
+      setPaymentError(err instanceof Error ? err.message : "Có lỗi xảy ra khi tạo đơn hàng");
+      setIsCreatingOrder(false);
+    }
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -31,6 +132,11 @@ export default function CourseModal({ isOpen, onClose, courses, isLoading }: Cou
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    // Reset image errors when courses change
+    setImageErrors(new Set());
+  }, [courses]);
 
   if (!isOpen) return null;
 
@@ -74,14 +180,19 @@ export default function CourseModal({ isOpen, onClose, courses, isLoading }: Cou
                 >
                   {/* Course Image */}
                   <div className="flex-shrink-0">
-                    {course.image ? (
-                      <Image
-                        src={course.image}
-                        alt={course.title || "Course"}
-                        width={150}
-                        height={150}
-                        className="w-32 h-32 object-cover rounded-lg"
-                      />
+                    {course.image && !imageErrors.has(index) ? (
+                      <div className="w-32 h-32 relative rounded-lg overflow-hidden bg-gradient-to-br from-primary-100 to-primary-200">
+                        <Image
+                          src={course.image}
+                          alt={course.title || "Course"}
+                          width={150}
+                          height={150}
+                          className="w-full h-full object-cover"
+                          onError={() => {
+                            setImageErrors((prev) => new Set(prev).add(index));
+                          }}
+                        />
+                      </div>
                     ) : (
                       <div className="w-32 h-32 bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg flex items-center justify-center">
                         <svg className="w-16 h-16 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,8 +256,15 @@ export default function CourseModal({ isOpen, onClose, courses, isLoading }: Cou
           {/* Payment Button - Only show if at least one course is successful */}
           {courses.length > 0 && !isLoading && courses.some(c => c.success) && (
             <div className="mt-6 pt-6 border-t border-slate-200">
-              <button className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 rounded-xl font-bold text-lg hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl">
-                Thanh toán
+              {paymentError && (
+                <p className="text-sm text-red-600 text-center mb-4">{paymentError}</p>
+              )}
+              <button 
+                onClick={handlePayment}
+                disabled={isCreatingOrder}
+                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 rounded-xl font-bold text-lg hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isCreatingOrder ? "Đang tạo đơn hàng..." : "Thanh toán"}
               </button>
             </div>
           )}

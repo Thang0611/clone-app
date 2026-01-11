@@ -1,6 +1,6 @@
 export default function Pricing() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 text-center">Bảng giá</h2>
         <p className="text-xl text-slate-600 mb-16 text-center">
