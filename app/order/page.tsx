@@ -230,7 +230,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 // --- CẤU HÌNH TÀI KHOẢN NGÂN HÀNG CỦA BẠN ---
 const MY_BANK = {
@@ -267,7 +267,8 @@ interface OrderData {
   date: string;
 }
 
-export default function OrderPage() {
+// Inner component that uses useSearchParams - must be wrapped in Suspense
+function OrderPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [orderData, setOrderData] = useState<OrderData | null>(null);
@@ -705,5 +706,23 @@ export default function OrderPage() {
       </div>
       <Footer />
     </div>
+  );
+}
+
+// Default export with Suspense boundary for useSearchParams
+export default function OrderPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-slate-600">Đang tải thông tin đơn hàng...</p>
+          </div>
+        </div>
+      }
+    >
+      <OrderPageContent />
+    </Suspense>
   );
 }
