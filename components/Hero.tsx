@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect, useRef } from "react";
 import { BookOpen, GraduationCap, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import CourseModal from "./CourseModal";
@@ -9,6 +9,7 @@ import { Input } from "./ui/Input";
 import { Textarea } from "./ui/Textarea";
 import { useCourseAPI } from "@/hooks/useCourseAPI";
 import { parseUrls, isValidEmail } from "@/lib/utils";
+import { useTracking } from "@/hooks/useTracking";
 import type { CourseInfo } from "@/types";
 
 export default function Hero() {
@@ -19,6 +20,45 @@ export default function Hero() {
   const [urlsError, setUrlsError] = useState<string>("");
 
   const { getCourseInfo, courseInfoLoading } = useCourseAPI();
+  const { trackContent, trackFormBegin, trackForm, trackFormSuccess, trackFormError } = useTracking();
+  
+  // Refs for tracking
+  const formRef = useRef<HTMLFormElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const formViewTracked = useRef(false);
+
+  // Step 3.2: ViewContent tracking - Track when form is in viewport for 3+ seconds
+  useEffect(() => {
+    if (formViewTracked.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !formViewTracked.current) {
+            // Track after 3 seconds in viewport
+            const timer = setTimeout(() => {
+              trackContent('course_form', 'main_hero_form', 'education');
+              formViewTracked.current = true;
+            }, 3000);
+
+            // Cleanup timer if element leaves viewport
+            return () => clearTimeout(timer);
+          }
+        });
+      },
+      { threshold: 0.5 } // Trigger when 50% of form is visible
+    );
+
+    if (formRef.current) {
+      observer.observe(formRef.current);
+    }
+
+    return () => {
+      if (formRef.current) {
+        observer.unobserve(formRef.current);
+      }
+    };
+  }, [trackContent]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,6 +91,9 @@ export default function Hero() {
       return;
     }
 
+    // Step 3.4: Track form submit BEFORE API call
+    trackForm('hero_course_form', 'Course Request Form', 'hero_section', urls.length);
+
     // Store email for later use
     setUserEmail(email);
 
@@ -64,14 +107,19 @@ export default function Hero() {
       const results = await getCourseInfo(urls);
       setCourses(results);
       
+      // Step 3.4: Track form submit success after successful API response
+      const validCourses = results.filter(c => c.success).length;
+      trackFormSuccess('hero_course_form', urls.length, validCourses);
+      
       // Success toast
       toast.success("Lấy thông tin thành công!", {
         id: loadingToast,
-        description: `Tìm thấy ${results.filter(c => c.success).length}/${results.length} khóa học hợp lệ`,
+        description: `Tìm thấy ${validCourses}/${results.length} khóa học hợp lệ`,
       });
     } catch (error: any) {
-      // Error handling
+      // Step 3.4: Track form submit error on API failure
       const errorMessage = error.message || "Có lỗi xảy ra khi lấy thông tin khóa học";
+      trackFormError('hero_course_form', errorMessage);
       
       toast.error("Không thể lấy thông tin khóa học", {
         id: loadingToast,
@@ -88,16 +136,25 @@ export default function Hero() {
   };
 
   return (
-    <section className="bg-gradient-to-br from-slate-900 via-indigo-950 to-violet-950 py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative bg-gradient-to-br from-blue-100 via-indigo-100 to-violet-100 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-300/40 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-300/40 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet-300/30 rounded-full blur-3xl animate-pulse delay-500"></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight !text-white">
-              Tải Khóa Học Udemy, Coursera, LinkedIn Learning{" "}
-              <span className="!text-green-400 font-extrabold">Giá Chỉ từ 2k</span>
+          <div className="animate-in fade-in slide-in-from-left duration-700">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-slate-800">
+              Tải Khóa Học Online{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent font-extrabold animate-gradient">
+                Giá Chỉ từ 30k
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 !text-white">
+            <p className="text-xl md:text-2xl mb-8 text-slate-600">
               Công cụ hỗ trợ tải khóa học từ Udemy, Coursera, LinkedIn Learning về Google Drive
             </p>
             
@@ -112,39 +169,39 @@ export default function Hero() {
 
             {/* Features Icons */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 border border-white/10">
-                  <BookOpen className="w-6 h-6 text-white" strokeWidth={2} />
+              <div className="flex items-center gap-3 group">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 border border-blue-200/50 shadow-sm group-hover:shadow-md group-hover:scale-110 transition-all duration-300">
+                  <BookOpen className="w-6 h-6 text-blue-600" strokeWidth={2} />
                 </div>
                 <div>
-                  <p className="!text-white font-semibold">22000+ khoá học</p>
-                  <p className="!text-gray-200 text-sm">Có sẵn</p>
+                  <p className="text-slate-800 font-semibold">9000+ khóa học</p>
+                  <p className="text-slate-500 text-sm">Có sẵn</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 border border-white/10">
-                  <GraduationCap className="w-6 h-6 text-white" strokeWidth={2} />
+              <div className="flex items-center gap-3 group">
+                <div className="w-12 h-12 bg-gradient-to-br from-indigo-100 to-violet-100 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 border border-indigo-200/50 shadow-sm group-hover:shadow-md group-hover:scale-110 transition-all duration-300">
+                  <GraduationCap className="w-6 h-6 text-indigo-600" strokeWidth={2} />
                 </div>
                 <div>
-                  <p className="!text-white font-semibold">9000+ khoá học</p>
-                  <p className="!text-gray-200 text-sm">Có sẵn</p>
+                  <p className="text-slate-800 font-semibold">Đa nền tảng</p>
+                  <p className="text-slate-500 text-sm">Udemy, Coursera, LinkedIn</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 border border-white/10">
-                  <RefreshCw className="w-6 h-6 text-white" strokeWidth={2} />
+              <div className="flex items-center gap-3 group">
+                <div className="w-12 h-12 bg-gradient-to-br from-violet-100 to-purple-100 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 border border-violet-200/50 shadow-sm group-hover:shadow-md group-hover:scale-110 transition-all duration-300">
+                  <RefreshCw className="w-6 h-6 text-violet-600" strokeWidth={2} />
                 </div>
                 <div>
-                  <p className="!text-white font-semibold">Update</p>
-                  <p className="!text-gray-200 text-sm">Khoá học hàng tuần</p>
+                  <p className="text-slate-800 font-semibold">Cập nhật</p>
+                  <p className="text-slate-500 text-sm">Hàng tuần</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right Form - Modern Clean Design */}
-          <div className="lg:pl-8">
-            <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-xl border border-slate-200/50 p-8 md:p-10 hover:shadow-2xl transition-shadow duration-300">
+          <div className="lg:pl-8 animate-in fade-in slide-in-from-right duration-700">
+            <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-slate-200/50 p-8 md:p-10 hover:shadow-2xl transition-all duration-300 hover:scale-[1.01]">
               <div className="text-center mb-8">
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
                   Bắt đầu ngay
@@ -154,18 +211,23 @@ export default function Hero() {
                 </p>
               </div>
               
-              <form className="space-y-5" onSubmit={handleSubmit}>
+              <form ref={formRef} className="space-y-5" onSubmit={handleSubmit}>
                 {/* Email Input - Modern Style */}
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
                     Gmail nhận khóa học <span className="text-red-500">*</span>
                   </label>
                   <input
+                    ref={emailInputRef}
                     type="email"
                     name="email"
                     required
                     placeholder="example@gmail.com"
                     disabled={courseInfoLoading}
+                    // Step 3.3: Track form start on focus
+                    onFocus={() => {
+                      trackFormBegin('hero_course_form', 'Course Request Form', 'hero_section');
+                    }}
                     className={`
                       w-full px-4 py-3.5 rounded-xl border-2 bg-white
                       text-slate-900 placeholder:text-slate-400

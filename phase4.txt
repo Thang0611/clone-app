@@ -1,0 +1,1657 @@
+Tạo hướng dẫn cấu hình Phase 4 cho GTM, Meta Pixel và Google Ads. Đây chủ yếu là cấu hình trên các nền tảng, nên sẽ là tài liệu chi tiết.
+TRACKING_PHASE4_GTM_CONFIG.md
++553
+# Phase 4: GTM Configuration Guide
+
+Complete guide to configure Google Tag Manager, Meta Pixel, and Google Ads for tracking.
+
+---
+
+## Prerequisites
+
+Before starting, ensure:
+- ✅ Phase 1-3 are complete
+- ✅ GTM container created and ID configured
+- ✅ GA4 property created and ID configured
+- ✅ Meta Pixel created and ID configured
+- ✅ All tracking IDs are in `.env.local`
+
+---
+
+## Step 4.1: Create GTM Triggers
+
+### Trigger 1: Page View
+
+**Purpose:** Fire on every page view (including route changes)
+
+1. **Go to GTM** → Your Container → **Triggers** → **New**
+2. **Trigger Name:** `Page View - All Pages`
+3. **Trigger Type:** `Page View`
+4. **This trigger fires on:** `All Pages`
+5. **Click Save**
+
+**Additional Trigger for History Changes:**
+1. **Trigger Name:** `Page View - History Change`
+2. **Trigger Type:** `History Change`
+3. **This trigger fires on:** `All History Change Events`
+4. **Click Save**
+
+**Why both?** Next.js App Router uses client-side navigation, so we need both triggers to catch all page views.
+
+---
+
+### Trigger 2: View Content
+
+1. **Trigger Name:** `Event - view_content`
+2. **Trigger Type:** `Custom Event`
+3. **Event name:** `view_content`
+4. **This trigger fires on:** `All Custom Events` (or specific: `view_content`)
+5. **Click Save**
+
+---
+
+### Trigger 3: Form Start
+
+1. **Trigger Name:** `Event - form_start`
+2. **Trigger Type:** `Custom Event`
+3. **Event name:** `form_start`
+4. **This trigger fires on:** `All Custom Events`
+5. **Click Save**
+
+---
+
+### Trigger 4: Form Submit
+
+1. **Trigger Name:** `Event - form_submit`
+2. **Trigger Type:** `Custom Event`
+3. **Event name:** `form_submit`
+4. **This trigger fires on:** `All Custom Events`
+5. **Click Save**
+
+---
+
+### Trigger 5: Form Submit Success
+
+1. **Trigger Name:** `Event - form_submit_success`
+2. **Trigger Type:** `Custom Event`
+3. **Event name:** `form_submit_success`
+4. **This trigger fires on:** `All Custom Events`
+5. **Click Save**
+
+---
+
+### Trigger 6: Begin Checkout
+
+1. **Trigger Name:** `Event - begin_checkout`
+2. **Trigger Type:** `Custom Event`
+3. **Event name:** `begin_checkout`
+4. **This trigger fires on:** `All Custom Events`
+5. **Click Save**
+
+---
+
+### Trigger 7: Purchase
+
+1. **Trigger Name:** `Event - purchase`
+2. **Trigger Type:** `Custom Event`
+3. **Event name:** `purchase`
+4. **This trigger fires on:** `All Custom Events`
+5. **Click Save**
+
+---
+
+## Step 4.2: Create GTM Tags
+
+### Tag 1: Meta Pixel - Base Code
+
+**Purpose:** Initialize Meta Pixel on all pages
+
+1. **Go to Tags** → **New**
+2. **Tag Name:** `Meta Pixel - Base Code`
+3. **Tag Type:** `Custom HTML`
+4. **HTML:**
+
+```html
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '{{Meta Pixel ID}}');
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id={{Meta Pixel ID}}&ev=PageView&noscript=1"/>
+</noscript>
+```
+
+5. **Triggering:** `Page View - All Pages`
+6. **Advanced Settings:**
+   - **Tag firing priority:** `100`
+   - **Tag firing options:** `Once per page`
+7. **Click Save**
+
+**Note:** Replace `{{Meta Pixel ID}}` with your actual Pixel ID, or create a variable.
+
+---
+
+### Tag 2: Meta Pixel - ViewContent
+
+1. **Tag Name:** `Meta Pixel - ViewContent`
+2. **Tag Type:** `Custom HTML`
+3. **HTML:**
+
+```html
+<script>
+fbq('track', 'ViewContent', {
+  content_type: '{{DLV - content_type}}',
+  content_name: '{{DLV - content_name}}',
+  content_category: '{{DLV - content_category}}'
+});
+</script>
+```
+
+4. **Triggering:** `Event - view_content`
+5. **Click Save**
+
+---
+
+### Tag 3: Meta Pixel - Lead (Form Submit)
+
+1. **Tag Name:** `Meta Pixel - Lead`
+2. **Tag Type:** `Custom HTML`
+3. **HTML:**
+
+```html
+<script>
+fbq('track', 'Lead', {
+  content_name: '{{DLV - form_name}}',
+  content_category: '{{DLV - form_location}}'
+});
+</script>
+```
+
+4. **Triggering:** `Event - form_submit`
+5. **Click Save**
+
+---
+
+### Tag 4: Meta Pixel - InitiateCheckout
+
+1. **Tag Name:** `Meta Pixel - InitiateCheckout`
+2. **Tag Type:** `Custom HTML`
+3. **HTML:**
+
+```html
+<script>
+fbq('track', 'InitiateCheckout', {
+  value: {{DLV - value}},
+  currency: '{{DLV - currency}}',
+  num_items: {{DLV - items.length}}
+});
+</script>
+```
+
+4. **Triggering:** `Event - begin_checkout`
+5. **Click Save**
+
+---
+
+### Tag 5: Meta Pixel - Purchase
+
+1. **Tag Name:** `Meta Pixel - Purchase`
+2. **Tag Type:** `Custom HTML`
+3. **HTML:**
+
+```html
+<script>
+fbq('track', 'Purchase', {
+  value: {{DLV - value}},
+  currency: '{{DLV - currency}}',
+  contents: [
+    {{#each DLV - items}}
+    {
+      id: '{{item_id}}',
+      quantity: {{quantity}},
+      item_price: {{price}}
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ],
+  content_type: 'product',
+  content_ids: [
+    {{#each DLV - items}}
+    '{{item_id}}'{{#unless @last}},{{/unless}}
+    {{/each}}
+  ]
+});
+</script>
+```
+
+**Alternative (Simpler):**
+
+```html
+<script>
+var items = {{DLV - items}};
+var contents = items.map(function(item) {
+  return {
+    id: item.item_id,
+    quantity: item.quantity,
+    item_price: item.price
+  };
+});
+
+fbq('track', 'Purchase', {
+  value: {{DLV - value}},
+  currency: '{{DLV - currency}}',
+  contents: contents,
+  content_type: 'product',
+  content_ids: items.map(function(item) { return item.item_id; })
+});
+</script>
+```
+
+4. **Triggering:** `Event - purchase`
+5. **Click Save**
+
+---
+
+### Tag 6: GA4 - Event Configuration
+
+**Note:** If using `@next/third-parties` for GA4 (recommended), you may not need separate GA4 event tags. However, if you want to track events through GTM:
+
+1. **Tag Name:** `GA4 Event - view_content`
+2. **Tag Type:** `Google Analytics: GA4 Event`
+3. **Configuration Tag:** (Select your GA4 Configuration tag, or create one)
+4. **Event Name:** `view_content`
+5. **Event Parameters:**
+   - `content_type`: `{{DLV - content_type}}`
+   - `content_name`: `{{DLV - content_name}}`
+   - `content_category`: `{{DLV - content_category}}`
+6. **Triggering:** `Event - view_content`
+7. **Click Save**
+
+**Repeat for other events:**
+- `GA4 Event - form_start`
+- `GA4 Event - form_submit`
+- `GA4 Event - begin_checkout`
+- `GA4 Event - purchase`
+
+---
+
+### Tag 7: Google Ads - Conversion (via GA4)
+
+**Note:** Google Ads conversions are typically imported from GA4, not set up directly in GTM. However, if you need direct tracking:
+
+1. **Tag Name:** `Google Ads - Conversion`
+2. **Tag Type:** `Google Ads: Conversion Tracking`
+3. **Conversion ID:** (Your Google Ads Conversion ID)
+4. **Conversion Label:** (Your Conversion Label)
+5. **Conversion Value:** `{{DLV - value}}`
+6. **Currency Code:** `{{DLV - currency}}`
+7. **Triggering:** `Event - purchase`
+8. **Click Save**
+
+**Better Approach:** Import conversions from GA4 (see Step 4.4)
+
+---
+
+## Step 4.3: Create GTM Variables
+
+### Data Layer Variables
+
+Create variables to access dataLayer values:
+
+1. **Go to Variables** → **New**
+2. **Variable Name:** `DLV - content_type`
+3. **Variable Type:** `Data Layer Variable`
+4. **Data Layer Variable Name:** `content_type`
+5. **Data Layer Version:** `Version 2`
+6. **Click Save**
+
+**Repeat for:**
+- `DLV - content_name`
+- `DLV - content_category`
+- `DLV - form_id`
+- `DLV - form_name`
+- `DLV - form_location`
+- `DLV - value`
+- `DLV - currency`
+- `DLV - items`
+- `DLV - transaction_id`
+- `DLV - payment_type`
+- `DLV - email_hash`
+
+### Constant Variables
+
+1. **Variable Name:** `Meta Pixel ID`
+2. **Variable Type:** `Constant`
+3. **Value:** Your Meta Pixel ID (e.g., `1234567890123456`)
+4. **Click Save**
+
+---
+
+## Step 4.4: Configure Meta Pixel Events Mapping
+
+### Event Mapping Table
+
+| dataLayer Event | Meta Pixel Event | GTM Tag |
+|----------------|------------------|---------|
+| `page_view` | `PageView` | Meta Pixel - Base Code |
+| `view_content` | `ViewContent` | Meta Pixel - ViewContent |
+| `form_submit` | `Lead` | Meta Pixel - Lead |
+| `begin_checkout` | `InitiateCheckout` | Meta Pixel - InitiateCheckout |
+| `purchase` | `Purchase` | Meta Pixel - Purchase |
+
+### Verification
+
+1. **Open GTM Preview Mode**
+2. **Visit your site**
+3. **Perform actions:**
+   - Navigate pages → Should see `PageView`
+   - Wait 3 seconds on homepage → Should see `ViewContent`
+   - Focus email input → Should see `Lead` (if configured)
+   - Submit form → Should see `Lead`
+   - Open checkout → Should see `InitiateCheckout`
+   - Complete payment → Should see `Purchase`
+4. **Check Facebook Events Manager** → Test Events
+5. **Verify events appear in real-time**
+
+---
+
+## Step 4.5: Set Up Conversions
+
+### Facebook: Custom Conversions
+
+1. **Go to Facebook Events Manager**
+2. **Navigate to:** Data Sources → Your Pixel → Custom Conversions
+3. **Click:** `Create Custom Conversion`
+
+#### Conversion 1: Lead
+
+1. **Conversion Name:** `Form Submit - Lead`
+2. **Event:** `Lead`
+3. **Conditions:**
+   - `content_name` contains `Course Request Form`
+   - OR `Event` equals `Lead`
+4. **Value:** `None` (or set value if needed)
+5. **Click Create**
+
+#### Conversion 2: Purchase
+
+1. **Conversion Name:** `Purchase - Confirmed`
+2. **Event:** `Purchase`
+3. **Conditions:**
+   - `Event` equals `Purchase`
+4. **Value:** Use `value` parameter
+5. **Click Create**
+
+---
+
+### Google Ads: Import from GA4
+
+1. **Go to Google Ads**
+2. **Navigate to:** Tools & Settings → Conversions
+3. **Click:** `+` (New conversion action)
+4. **Select:** `Import`
+5. **Select:** `Google Analytics 4`
+6. **Choose:** Your GA4 property
+7. **Select conversions to import:**
+   - `purchase`
+   - `begin_checkout` (optional)
+   - `form_submit` (optional)
+8. **Click Import**
+
+**Alternative: Manual Setup**
+
+1. **Go to Google Ads** → Conversions
+2. **Click:** `+` (New conversion action)
+3. **Category:** `Purchase`
+4. **Value:** Use different values for each conversion
+5. **Count:** `One`
+6. **Attribution:** `Data-driven` (recommended)
+7. **Click Create and continue**
+
+---
+
+## Step 4.6: Testing & Validation
+
+### GTM Preview Mode Testing
+
+1. **Open GTM Preview Mode**
+2. **Connect to your site**
+3. **Navigate through user journey:**
+   - Homepage → Check `PageView` tag fires
+   - Wait 3 seconds → Check `ViewContent` tag fires
+   - Focus email → Check `form_start` event (if tagged)
+   - Submit form → Check `Lead` tag fires
+   - Open checkout → Check `InitiateCheckout` tag fires
+   - Complete payment → Check `Purchase` tag fires
+
+### Facebook Events Manager Testing
+
+1. **Go to Facebook Events Manager**
+2. **Open:** Test Events tab
+3. **Visit your site**
+4. **Verify events appear:**
+   - `PageView`
+   - `ViewContent`
+   - `Lead`
+   - `InitiateCheckout`
+   - `Purchase`
+
+### GA4 DebugView Testing
+
+1. **Enable debug mode** (add `?debug_mode=true` to URL or use GA Debugger extension)
+2. **Visit your site**
+3. **Go to GA4** → DebugView
+4. **Verify events:**
+   - `page_view`
+   - `view_content`
+   - `form_start`
+   - `form_submit`
+   - `begin_checkout`
+   - `purchase`
+
+### Google Ads Testing
+
+1. **Go to Google Ads** → Conversions
+2. **Check conversion actions are active**
+3. **Test conversion** (may take 24-48 hours to see data)
+
+---
+
+## Common Issues & Solutions
+
+### Issue 1: Tags Not Firing
+
+**Symptoms:** Events in dataLayer but tags not firing
+
+**Solutions:**
+1. Check trigger configuration
+2. Verify event names match exactly
+3. Check tag firing conditions
+4. Verify GTM container is published
+
+### Issue 2: Meta Pixel Events Not Appearing
+
+**Symptoms:** Tags fire but events don't show in Facebook
+
+**Solutions:**
+1. Verify Pixel ID is correct
+2. Check Facebook Pixel Helper extension
+3. Verify events are using correct Meta Pixel event names
+4. Check browser console for errors
+
+### Issue 3: GA4 Events Not Showing
+
+**Symptoms:** Events fire but don't appear in GA4
+
+**Solutions:**
+1. Verify GA4 Measurement ID
+2. Check GA4 DebugView
+3. Verify events are configured in GA4
+4. Check data retention settings
+
+### Issue 4: Conversion Values Incorrect
+
+**Symptoms:** Conversion values are wrong
+
+# Phase 4: GTM Configuration GuideComplete guide to configure Google Tag Manager, Meta Pixel, and Google Ads for tracking.---
+TRACKING_GTM_TAGS_REFERENCE.md
++271
+# GTM Tags Reference - Quick Copy/Paste
+
+Quick reference for GTM tag configurations. Copy and paste these into GTM.
+
+---
+
+## Meta Pixel Tags
+
+### 1. Meta Pixel - Base Code
+
+**Tag Type:** Custom HTML  
+**Trigger:** Page View - All Pages
+
+```html
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'YOUR_PIXEL_ID_HERE');
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID_HERE&ev=PageView&noscript=1"/>
+</noscript>
+```
+
+**Replace:** `YOUR_PIXEL_ID_HERE` with your actual Pixel ID
+
+---
+
+### 2. Meta Pixel - ViewContent
+
+**Tag Type:** Custom HTML  
+**Trigger:** Event - view_content
+
+```html
+<script>
+fbq('track', 'ViewContent', {
+  content_type: '{{DLV - content_type}}',
+  content_name: '{{DLV - content_name}}',
+  content_category: '{{DLV - content_category}}'
+});
+</script>
+```
+
+---
+
+### 3. Meta Pixel - Lead (Form Submit)
+
+**Tag Type:** Custom HTML  
+**Trigger:** Event - form_submit
+
+```html
+<script>
+fbq('track', 'Lead', {
+  content_name: '{{DLV - form_name}}',
+  content_category: '{{DLV - form_location}}'
+});
+</script>
+```
+
+---
+
+### 4. Meta Pixel - InitiateCheckout
+
+**Tag Type:** Custom HTML  
+**Trigger:** Event - begin_checkout
+
+```html
+<script>
+fbq('track', 'InitiateCheckout', {
+  value: {{DLV - value}},
+  currency: '{{DLV - currency}}',
+  num_items: {{DLV - items.length}}
+});
+</script>
+```
+
+---
+
+### 5. Meta Pixel - Purchase
+
+**Tag Type:** Custom HTML  
+**Trigger:** Event - purchase
+
+```html
+<script>
+var items = {{DLV - items}};
+var contents = items.map(function(item) {
+  return {
+    id: item.item_id,
+    quantity: item.quantity,
+    item_price: item.price
+  };
+});
+
+var contentIds = items.map(function(item) {
+  return item.item_id;
+});
+
+fbq('track', 'Purchase', {
+  value: {{DLV - value}},
+  currency: '{{DLV - currency}}',
+  contents: contents,
+  content_type: 'product',
+  content_ids: contentIds
+});
+</script>
+```
+
+---
+
+## GA4 Event Tags
+
+### GA4 Event - view_content
+
+**Tag Type:** Google Analytics: GA4 Event  
+**Configuration Tag:** (Your GA4 Configuration tag)  
+**Event Name:** `view_content`  
+**Event Parameters:**
+- `content_type`: `{{DLV - content_type}}`
+- `content_name`: `{{DLV - content_name}}`
+- `content_category`: `{{DLV - content_category}}`  
+**Trigger:** Event - view_content
+
+---
+
+### GA4 Event - form_start
+
+**Tag Type:** Google Analytics: GA4 Event  
+**Event Name:** `form_start`  
+**Event Parameters:**
+- `form_id`: `{{DLV - form_id}}`
+- `form_name`: `{{DLV - form_name}}`
+- `form_location`: `{{DLV - form_location}}`  
+**Trigger:** Event - form_start
+
+---
+
+### GA4 Event - form_submit
+
+**Tag Type:** Google Analytics: GA4 Event  
+**Event Name:** `form_submit`  
+**Event Parameters:**
+- `form_id`: `{{DLV - form_id}}`
+- `form_name`: `{{DLV - form_name}}`
+- `course_count`: `{{DLV - course_count}}`  
+**Trigger:** Event - form_submit
+
+---
+
+### GA4 Event - begin_checkout
+
+**Tag Type:** Google Analytics: GA4 Event  
+**Event Name:** `begin_checkout`  
+**Event Parameters:**
+- `value`: `{{DLV - value}}`
+- `currency`: `{{DLV - currency}}`
+- `items`: `{{DLV - items}}`  
+**Trigger:** Event - begin_checkout
+
+---
+
+### GA4 Event - purchase
+
+**Tag Type:** Google Analytics: GA4 Event  
+**Event Name:** `purchase`  
+**Event Parameters:**
+- `transaction_id`: `{{DLV - transaction_id}}`
+- `value`: `{{DLV - value}}`
+- `currency`: `{{DLV - currency}}`
+- `items`: `{{DLV - items}}`
+- `payment_type`: `{{DLV - payment_type}}`  
+**Trigger:** Event - purchase
+
+---
+
+## Data Layer Variables to Create
+
+Create these variables in GTM → Variables:
+
+| Variable Name | Type | Data Layer Variable Name |
+|--------------|------|-------------------------|
+| `DLV - content_type` | Data Layer Variable | `content_type` |
+| `DLV - content_name` | Data Layer Variable | `content_name` |
+| `DLV - content_category` | Data Layer Variable | `content_category` |
+| `DLV - form_id` | Data Layer Variable | `form_id` |
+| `DLV - form_name` | Data Layer Variable | `form_name` |
+| `DLV - form_location` | Data Layer Variable | `form_location` |
+| `DLV - course_count` | Data Layer Variable | `course_count` |
+| `DLV - value` | Data Layer Variable | `value` |
+| `DLV - currency` | Data Layer Variable | `currency` |
+| `DLV - items` | Data Layer Variable | `items` |
+| `DLV - transaction_id` | Data Layer Variable | `transaction_id` |
+| `DLV - payment_type` | Data Layer Variable | `payment_type` |
+| `DLV - email_hash` | Data Layer Variable | `email_hash` |
+
+---
+
+## Trigger Configuration
+
+### Page View Triggers
+
+1. **Page View - All Pages**
+   - Type: Page View
+   - Fires on: All Pages
+
+2. **Page View - History Change**
+   - Type: History Change
+   - Fires on: All History Change Events
+
+### Custom Event Triggers
+
+For each event, create a trigger:
+
+1. **Event - view_content**
+   - Type: Custom Event
+   - Event name: `view_content`
+
+2. **Event - form_start**
+   - Type: Custom Event
+   - Event name: `form_start`
+
+3. **Event - form_submit**
+   - Type: Custom Event
+   - Event name: `form_submit`
+
+4. **Event - form_submit_success**
+   - Type: Custom Event
+   - Event name: `form_submit_success`
+
+5. **Event - begin_checkout**
+   - Type: Custom Event
+   - Event name: `begin_checkout`
+
+6. **Event - purchase**
+   - Type: Custom Event
+   - Event name: `purchase`
+
+---
+
+## Quick Setup Checklist
+
+1. [ ] Create all triggers (7 triggers)
+2. [ ] Create all data layer variables (13 variables)
+3. [ ] Create Meta Pixel base code tag
+4. [ ] Create Meta Pixel event tags (4 tags)
+5. [ ] Create GA4 event tags (5 tags, optional)
+6. [ ] Test in GTM Preview mode
+7. [ ] Publish GTM container
+8. [ ] Verify in Facebook Events Manager
+9. [ ] Verify in GA4 DebugView
+10. [ ] Set up conversions in Facebook
+11. [ ] Import conversions in Google Ads
+
+---
+
+## Notes
+
+- Replace `YOUR_PIXEL_ID_HERE` with actual Pixel ID
+- Use GTM variables (e.g., `{{DLV - value}}`) instead of hardcoding
+- Test in Preview mode before publishing
+- Keep GTM container exported as backup
+
+# GTM Tags Reference - Quick Copy/PasteQuick reference for GTM tag configurations. Copy and paste these into GTM.---
+TRACKING_PHASE4_COMPLETE.md
++191
+# Phase 4: GTM Configuration - COMPLETED ✅
+
+## Summary
+
+Phase 4 configuration guide has been created. This phase requires manual configuration in GTM, Facebook, and Google Ads web interfaces.
+
+---
+
+## ✅ Documentation Created
+
+### 1. **`docs/TRACKING_PHASE4_GTM_CONFIG.md`**
+   - Complete step-by-step GTM configuration guide
+   - Trigger setup instructions
+   - Tag creation instructions
+   - Meta Pixel event mapping
+   - Conversion setup guide
+   - Testing & validation steps
+
+### 2. **`docs/TRACKING_GTM_TAGS_REFERENCE.md`**
+   - Quick reference for GTM tags
+   - Copy/paste ready HTML code
+   - Variable reference table
+   - Trigger configuration checklist
+
+---
+
+## 📋 Configuration Checklist
+
+### Step 4.1: GTM Triggers ✅
+- [ ] Page View - All Pages
+- [ ] Page View - History Change
+- [ ] Event - view_content
+- [ ] Event - form_start
+- [ ] Event - form_submit
+- [ ] Event - form_submit_success
+- [ ] Event - begin_checkout
+- [ ] Event - purchase
+
+### Step 4.2: GTM Tags ✅
+- [ ] Meta Pixel - Base Code
+- [ ] Meta Pixel - ViewContent
+- [ ] Meta Pixel - Lead
+- [ ] Meta Pixel - InitiateCheckout
+- [ ] Meta Pixel - Purchase
+- [ ] GA4 Event tags (optional, if not using direct integration)
+
+### Step 4.3: GTM Variables ✅
+- [ ] Data Layer Variables (13 variables)
+- [ ] Constant Variables (Meta Pixel ID)
+
+### Step 4.4: Meta Pixel Event Mapping ✅
+- [ ] `page_view` → `PageView`
+- [ ] `view_content` → `ViewContent`
+- [ ] `form_submit` → `Lead`
+- [ ] `begin_checkout` → `InitiateCheckout`
+- [ ] `purchase` → `Purchase`
+
+### Step 4.5: Conversions Setup ✅
+- [ ] Facebook Custom Conversions (Lead, Purchase)
+- [ ] Google Ads Conversions (import from GA4 or manual)
+
+---
+
+## 🎯 Event Mapping Reference
+
+### dataLayer → Meta Pixel
+
+| dataLayer Event | Meta Pixel Event | Conversion Type |
+|----------------|------------------|-----------------|
+| `page_view` | `PageView` | - |
+| `view_content` | `ViewContent` | - |
+| `form_submit` | `Lead` | Custom Conversion |
+| `begin_checkout` | `InitiateCheckout` | - |
+| `purchase` | `Purchase` | Custom Conversion |
+
+### dataLayer → GA4
+
+| dataLayer Event | GA4 Event | Conversion |
+|----------------|-----------|------------|
+| `page_view` | `page_view` | - |
+| `view_content` | `view_content` | - |
+| `form_start` | `form_start` | - |
+| `form_submit` | `form_submit` | Optional |
+| `begin_checkout` | `begin_checkout` | Optional |
+| `purchase` | `purchase` | ✅ Primary |
+
+---
+
+## 📊 Expected Results
+
+After configuration:
+
+### GTM Preview Mode
+- All tags fire on correct triggers
+- Data Layer variables populated correctly
+- No tag firing errors
+
+### Facebook Events Manager
+- Events appear in Test Events
+- Custom conversions created
+- Conversion values tracked
+
+### GA4 DebugView
+- All events visible
+- Event parameters correct
+- Conversions imported to Google Ads
+
+### Google Ads
+- Conversions imported from GA4
+- Conversion values tracked
+- Attribution working
+
+---
+
+## 🔧 Configuration Steps
+
+### Quick Start:
+
+1. **Open GTM** → Your Container
+2. **Create Triggers** (follow Step 4.1)
+3. **Create Variables** (follow Step 4.3)
+4. **Create Tags** (follow Step 4.2, use reference guide)
+5. **Test in Preview Mode**
+6. **Publish Container**
+7. **Set up Conversions** (follow Step 4.5)
+
+---
+
+## 📝 Important Notes
+
+### Meta Pixel
+- Use Custom HTML tags (not Meta Pixel tag type)
+- Replace `YOUR_PIXEL_ID_HERE` with actual ID
+- Test with Facebook Pixel Helper extension
+
+### GA4
+- If using `@next/third-parties`, events may already be tracked
+- GTM tags are optional but provide more control
+- Use GA4 DebugView to verify
+
+### Google Ads
+- Best practice: Import from GA4
+- Manual setup also possible
+- May take 24-48 hours to see data
+
+### Testing
+- Always test in Preview mode before publishing
+- Verify events in all platforms
+- Check dataLayer values are correct
+
+---
+
+## 🚀 Next Steps
+
+After completing Phase 4:
+
+1. **Monitor Tracking**
+   - Check GTM container health
+   - Monitor event firing rates
+   - Verify conversion tracking
+
+2. **Optimize**
+   - Review conversion rates
+   - A/B test different events
+   - Optimize attribution
+
+3. **Reporting**
+   - Set up dashboards
+   - Create custom reports
+   - Monitor ROI
+
+---
+
+## 📚 Documentation
+
+- **Complete Guide**: `docs/TRACKING_PHASE4_GTM_CONFIG.md`
+- **Quick Reference**: `docs/TRACKING_GTM_TAGS_REFERENCE.md`
+- **This Summary**: `docs/TRACKING_PHASE4_COMPLETE.md`
+
+---
+
+## ✅ Status
+
+**Phase 4 Documentation:** ✅ Complete
+
+**Next:** Follow the configuration guides to set up GTM, Facebook, and Google Ads manually.
+
+---
+
+**Note:** Phase 4 requires manual configuration in web interfaces. The code is ready - you just need to configure the platforms using the guides provided.
+
+# Phase 4: GTM Configuration - COMPLETED ✅## SummaryPhase 4 configuration guide has been created. This phase requires manual configuration in GTM, Facebook, and Google Ads web interfaces.
+Tạo script kiểm tra để xác minh cấu hình GTM:
+TRACKING_GTM_VERIFICATION.js
++170
+/**
+ * GTM Configuration Verification Script
+ * 
+ * Paste this into browser console after GTM is configured
+ * Helps verify that GTM tags are firing correctly
+ */
+
+(function() {
+  console.log('========================================');
+  console.log('GTM Configuration Verification');
+  console.log('========================================\n');
+
+  // Check if GTM is loaded
+  if (typeof window.google_tag_manager === 'undefined') {
+    console.error('❌ GTM is not loaded!');
+    console.log('Please check:');
+    console.log('  1. GTM container ID is correct');
+    console.log('  2. GTM container is published');
+    console.log('  3. GTM script is loading (check Network tab)');
+    return;
+  }
+
+  console.log('✅ GTM is loaded');
+  console.log('');
+
+  // Check if Meta Pixel is loaded
+  if (typeof window.fbq === 'undefined') {
+    console.warn('⚠️  Meta Pixel (fbq) is not loaded');
+    console.log('This is OK if Meta Pixel is loaded via GTM');
+  } else {
+    console.log('✅ Meta Pixel (fbq) is loaded');
+  }
+  console.log('');
+
+  // Check dataLayer
+  if (typeof window.dataLayer === 'undefined') {
+    console.error('❌ dataLayer is not defined!');
+    return;
+  }
+
+  console.log('✅ dataLayer exists');
+  console.log(`📊 Total events: ${window.dataLayer.length}\n`);
+
+  // Check for required events
+  const events = window.dataLayer
+    .map(e => e.event)
+    .filter(Boolean)
+    .filter((v, i, a) => a.indexOf(v) === i);
+
+  const requiredEvents = [
+    'page_view',
+    'view_content',
+    'form_start',
+    'form_submit',
+    'begin_checkout',
+    'purchase'
+  ];
+
+  console.log('========================================');
+  console.log('Event Verification');
+  console.log('========================================\n');
+
+  requiredEvents.forEach(event => {
+    const found = events.includes(event);
+    const icon = found ? '✅' : '❌';
+    console.log(`${icon} ${event.padEnd(20)} ${found ? 'Found' : 'Missing'}`);
+  });
+
+  console.log('');
+
+  // Check dataLayer variables
+  console.log('========================================');
+  console.log('DataLayer Variables Check');
+  console.log('========================================\n');
+
+  const latestEvent = window.dataLayer[window.dataLayer.length - 1];
+  if (latestEvent && latestEvent.event) {
+    console.log(`Latest event: ${latestEvent.event}`);
+    console.log('Available variables:');
+    
+    Object.keys(latestEvent).forEach(key => {
+      if (key !== 'event' && key !== 'timestamp') {
+        const value = latestEvent[key];
+        const displayValue = typeof value === 'object' 
+          ? JSON.stringify(value).substring(0, 50) + '...'
+          : String(value).substring(0, 50);
+        console.log(`  - ${key}: ${displayValue}`);
+      }
+    });
+  }
+
+  console.log('');
+
+  // GTM-specific checks
+  console.log('========================================');
+  console.log('GTM Container Info');
+  console.log('========================================\n');
+
+  const gtmContainers = Object.keys(window.google_tag_manager || {});
+  if (gtmContainers.length > 0) {
+    console.log(`✅ GTM Containers loaded: ${gtmContainers.length}`);
+    gtmContainers.forEach(container => {
+      console.log(`   - ${container}`);
+    });
+  } else {
+    console.warn('⚠️  No GTM containers found');
+  }
+
+  console.log('');
+
+  // Meta Pixel check
+  if (typeof window.fbq !== 'undefined') {
+    console.log('========================================');
+    console.log('Meta Pixel Info');
+    console.log('========================================\n');
+    
+    // Try to get pixel ID from GTM
+    const pixelScript = document.querySelector('script[src*="fbevents.js"]');
+    if (pixelScript) {
+      console.log('✅ Meta Pixel script found');
+    } else {
+      console.warn('⚠️  Meta Pixel script not found in DOM');
+      console.log('   (May be loaded via GTM)');
+    }
+  }
+
+  console.log('');
+
+  // Recommendations
+  console.log('========================================');
+  console.log('Recommendations');
+  console.log('========================================\n');
+
+  const missingEvents = requiredEvents.filter(e => !events.includes(e));
+  
+  if (missingEvents.length === 0) {
+    console.log('🎉 All required events are present!');
+    console.log('✅ GTM configuration appears correct');
+  } else {
+    console.log('⚠️  Missing events:', missingEvents.join(', '));
+    console.log('');
+    console.log('To trigger missing events:');
+    console.log('  - page_view: Navigate between pages');
+    console.log('  - view_content: Wait 3+ seconds on homepage');
+    console.log('  - form_start: Focus email input');
+    console.log('  - form_submit: Submit form');
+    console.log('  - begin_checkout: Open checkout modal');
+    console.log('  - purchase: Complete payment');
+  }
+
+  console.log('\n========================================');
+  console.log('Next Steps:');
+  console.log('========================================');
+  console.log('1. Open GTM Preview mode');
+  console.log('2. Verify tags fire on events');
+  console.log('3. Check Facebook Events Manager');
+  console.log('4. Check GA4 DebugView');
+  console.log('========================================\n');
+
+  // Return summary
+  return {
+    gtmLoaded: typeof window.google_tag_manager !== 'undefined',
+    dataLayerExists: typeof window.dataLayer !== 'undefined',
+    events: events,
+    requiredEvents: requiredEvents,
+    missingEvents: missingEvents,
+    allPresent: missingEvents.length === 0
+  };
+})();
+
+/** * GTM Configuration Verification Script *  * Paste this into browser console after GTM is configured * Helps verify that GTM tags are firing correctly
+TRACKING_FACEBOOK_CONVERSIONS.md
++190
+# Facebook Custom Conversions Setup Guide
+
+Step-by-step guide to create custom conversions in Facebook Events Manager.
+
+---
+
+## Prerequisites
+
+- ✅ Meta Pixel is installed and firing events
+- ✅ Events are visible in Facebook Events Manager → Test Events
+- ✅ You have admin access to Facebook Business Manager
+
+---
+
+## Step 1: Access Events Manager
+
+1. Go to: https://business.facebook.com/events_manager2/
+2. Select your Pixel
+3. Click on **"Custom Conversions"** in the left sidebar
+
+---
+
+## Step 2: Create Lead Conversion
+
+### Conversion Details
+
+1. **Click:** `Create Custom Conversion`
+2. **Conversion Name:** `Form Submit - Lead`
+3. **Description:** `Tracks when user submits course request form`
+
+### Event Configuration
+
+1. **Event:** Select `Lead`
+2. **URL Contains:** (Leave empty - we'll use event parameters)
+3. **Event Parameter:** 
+   - **Parameter:** `content_name`
+   - **Operator:** `contains`
+   - **Value:** `Course Request Form`
+
+**OR** (Simpler option):
+- **Event:** `Lead`
+- **All URL traffic:** (Leave as default)
+
+### Value Settings
+
+1. **Conversion Value:** `None` (or set a value if you want)
+2. **Currency:** `VND` (if setting value)
+
+### Attribution Window
+
+1. **Click-through:** `7 days` (default)
+2. **View-through:** `1 day` (default)
+
+### Click Create
+
+---
+
+## Step 3: Create Purchase Conversion
+
+### Conversion Details
+
+1. **Conversion Name:** `Purchase - Confirmed Payment`
+2. **Description:** `Tracks confirmed purchases when payment status is paid`
+
+### Event Configuration
+
+1. **Event:** Select `Purchase`
+2. **Event Parameter:**
+   - **Parameter:** `value`
+   - **Operator:** `greater than`
+   - **Value:** `0`
+
+### Value Settings
+
+1. **Conversion Value:** `Use the value parameter`
+2. **Currency:** `VND`
+
+### Attribution Window
+
+1. **Click-through:** `7 days`
+2. **View-through:** `1 day`
+
+### Click Create
+
+---
+
+## Step 4: Verify Conversions
+
+### Test Conversion 1: Lead
+
+1. **Go to:** Custom Conversions → `Form Submit - Lead`
+2. **Visit your site**
+3. **Submit the form**
+4. **Go back to:** Custom Conversions
+5. **Check:** Should see conversion count increase
+
+### Test Conversion 2: Purchase
+
+1. **Go to:** Custom Conversions → `Purchase - Confirmed Payment`
+2. **Complete a test purchase**
+3. **Wait for payment confirmation**
+4. **Go back to:** Custom Conversions
+5. **Check:** Should see conversion count increase
+
+---
+
+## Advanced: Multiple Conversion Rules
+
+### Option 1: Form Submit by Location
+
+Create separate conversions for different form locations:
+
+- **Conversion Name:** `Lead - Hero Section`
+  - Event: `Lead`
+  - Parameter: `content_category` equals `hero_section`
+
+- **Conversion Name:** `Lead - Other Sections`
+  - Event: `Lead`
+  - Parameter: `content_category` not equals `hero_section`
+
+### Option 2: Purchase by Value
+
+Create value-based conversions:
+
+- **Conversion Name:** `Purchase - Low Value (< 100k)`
+  - Event: `Purchase`
+  - Parameter: `value` less than `100000`
+
+- **Conversion Name:** `Purchase - High Value (>= 100k)`
+  - Event: `Purchase`
+  - Parameter: `value` greater than or equal `100000`
+
+---
+
+## Conversion Optimization
+
+### For Facebook Ads:
+
+1. **Go to:** Facebook Ads Manager
+2. **Create Campaign** → Conversion Campaign
+3. **Optimization Event:** Select your custom conversion
+   - `Form Submit - Lead` (for lead generation)
+   - `Purchase - Confirmed Payment` (for sales)
+
+### Best Practices:
+
+- Use **Purchase** conversion for sales campaigns
+- Use **Lead** conversion for lead generation campaigns
+- Set appropriate attribution windows
+- Monitor conversion values
+
+---
+
+## Troubleshooting
+
+### Conversion Not Tracking
+
+**Check:**
+1. Events are firing (Test Events tab)
+2. Event names match exactly (`Lead`, `Purchase`)
+3. Event parameters are correct
+4. Conversion rules match event data
+
+### Wrong Conversion Values
+
+**Check:**
+1. `value` parameter is being sent
+2. Value is a number (not string)
+3. Currency code is correct
+
+### Conversions Not Showing in Ads
+
+**Check:**
+1. Attribution window hasn't expired
+2. Conversion is selected in campaign settings
+3. Enough data for optimization (usually 50+ conversions)
+
+---
+
+## Summary
+
+✅ **Lead Conversion:** Tracks form submissions  
+✅ **Purchase Conversion:** Tracks confirmed payments  
+✅ **Value Tracking:** Uses event value parameter  
+✅ **Attribution:** 7-day click-through, 1-day view-through  
+
+---
+
+**Next:** Set up Google Ads conversions (see main Phase 4 guide)
+
+# Facebook Custom Conversions Setup GuideStep-by-step guide to create custom conversions in Facebook Events Manager.---
+TRACKING_GOOGLE_ADS_CONVERSIONS.md
++228
+# Google Ads Conversions Setup Guide
+
+Step-by-step guide to set up conversions in Google Ads (via GA4 import or manual setup).
+
+---
+
+## Prerequisites
+
+- ✅ GA4 property is set up and tracking events
+- ✅ Google Ads account is created
+- ✅ GA4 is linked to Google Ads account
+- ✅ You have admin access to Google Ads
+
+---
+
+## Method 1: Import from GA4 (Recommended)
+
+### Step 1: Link GA4 to Google Ads
+
+1. **Go to:** Google Ads → Tools & Settings → Linked accounts
+2. **Find:** Google Analytics (GA4)
+3. **Click:** Details → Link
+4. **Select:** Your GA4 property
+5. **Click:** Link accounts
+
+**OR** (From GA4):
+1. **Go to:** GA4 → Admin → Google Ads Links
+2. **Click:** Link → Select Google Ads account
+3. **Click:** Confirm
+
+---
+
+### Step 2: Import Conversions
+
+1. **Go to:** Google Ads → Tools & Settings → Conversions
+2. **Click:** `+` (New conversion action)
+3. **Select:** `Import`
+4. **Select:** `Google Analytics 4`
+5. **Choose:** Your GA4 property
+6. **Select conversions to import:**
+   - ✅ `purchase` (Primary conversion)
+   - ⚪ `begin_checkout` (Optional)
+   - ⚪ `form_submit` (Optional)
+
+7. **Click:** Import and continue
+
+---
+
+### Step 3: Configure Imported Conversions
+
+For each imported conversion:
+
+1. **Click on conversion** to edit
+2. **Category:** 
+   - `purchase` → `Purchase`
+   - `begin_checkout` → `Add to cart`
+   - `form_submit` → `Submit lead form`
+
+3. **Value:**
+   - `purchase` → Use different values for each conversion
+   - Others → Don't use a value
+
+4. **Count:**
+   - `purchase` → `One` (count once per transaction)
+   - Others → `Every` (count every occurrence)
+
+5. **Attribution Model:**
+   - Recommended: `Data-driven` (if available)
+   - Alternative: `Last click`
+
+6. **Click:** Save
+
+---
+
+## Method 2: Manual Setup (Alternative)
+
+If you prefer manual setup or need more control:
+
+### Step 1: Create Conversion Action
+
+1. **Go to:** Google Ads → Conversions
+2. **Click:** `+` (New conversion action)
+3. **Select:** `Website`
+4. **Category:** `Purchase`
+
+### Step 2: Configure Conversion
+
+1. **Conversion Name:** `Purchase - Confirmed Payment`
+2. **Value:**
+   - **Use different values:** Yes
+   - **Value:** Use the value from your tag
+   - **Currency:** `VND`
+
+3. **Count:**
+   - **How many:** `One` (count once per transaction)
+
+4. **Attribution Model:**
+   - **Model:** `Data-driven` (recommended)
+   - **Or:** `Last click`
+
+5. **Click-through conversion window:** `30 days`
+6. **View-through conversion window:** `1 day`
+
+### Step 3: Get Conversion Tag
+
+1. **After creating conversion**, you'll get:
+   - **Conversion ID:** `AW-XXXXXXXXX`
+   - **Conversion Label:** `AbCdEfGhIj`
+
+2. **Add to GTM** (if using GTM):
+   - Create Google Ads Conversion Tracking tag
+   - Use Conversion ID and Label
+   - Trigger on `purchase` event
+
+**OR** (If not using GTM):
+- Add conversion tag directly to site
+- Fire on purchase confirmation
+
+---
+
+## Method 3: Enhanced Conversions (Recommended)
+
+### Setup Enhanced Conversions
+
+1. **Go to:** Google Ads → Conversions
+2. **Select:** Your conversion action
+3. **Click:** Edit settings
+4. **Enable:** Enhanced conversions
+5. **Choose:** 
+   - `Automatic collection` (recommended)
+   - OR `Manual collection` (if you want more control)
+
+### Benefits
+
+- Better attribution
+- More accurate conversion tracking
+- Improved optimization
+
+---
+
+## Conversion Optimization
+
+### For Google Ads Campaigns:
+
+1. **Go to:** Google Ads → Campaigns
+2. **Create Campaign** → Conversion campaign
+3. **Bidding Strategy:**
+   - **Target CPA** (if you have conversion data)
+   - **Maximize conversions** (if starting out)
+   - **Target ROAS** (if tracking revenue)
+
+4. **Conversion Action:** Select your `purchase` conversion
+
+---
+
+## Verification
+
+### Test Conversion Tracking
+
+1. **Complete a test purchase**
+2. **Wait 24-48 hours** (conversions may take time to appear)
+3. **Go to:** Google Ads → Conversions
+4. **Check:** Conversion count should increase
+
+### Real-Time Verification
+
+1. **Go to:** Google Ads → Tools & Settings → Conversions
+2. **Select:** Your conversion
+3. **Check:** Recent conversions (may take a few hours)
+
+---
+
+## Best Practices
+
+### Conversion Settings
+
+- ✅ Use `purchase` as primary conversion
+- ✅ Set value to track revenue
+- ✅ Use "One" count for purchases
+- ✅ Use data-driven attribution
+- ✅ Enable enhanced conversions
+
+### Campaign Optimization
+
+- ✅ Start with "Maximize conversions"
+- ✅ Switch to "Target CPA" after 30+ conversions
+- ✅ Use "Target ROAS" if tracking revenue
+- ✅ Monitor conversion quality
+
+---
+
+## Troubleshooting
+
+### Conversions Not Importing
+
+**Check:**
+1. GA4 is linked to Google Ads
+2. Events are firing in GA4
+3. Event names match exactly
+4. Enough time has passed (24-48 hours)
+
+### Wrong Conversion Values
+
+**Check:**
+1. `value` parameter is sent in GA4 events
+2. Value is a number (not string)
+3. Currency is correct
+
+### Conversions Not Optimizing
+
+**Check:**
+1. Enough conversions (usually 30+)
+2. Conversion action is selected in campaign
+3. Bidding strategy is set correctly
+
+---
+
+## Summary
+
+✅ **Method 1 (Recommended):** Import from GA4  
+✅ **Method 2:** Manual setup with conversion tag  
+✅ **Enhanced Conversions:** Enable for better tracking  
+✅ **Optimization:** Use in campaign bidding  
+
+---
+
+**Next:** Test and verify all conversions are working
+
+# Google Ads Conversions Setup GuideStep-by-step guide to set up conversions in Google Ads (via GA4 import or manual setup).---
+Đã tạo tài liệu cho Phase 4. Tóm tắt:
+Phase 4: GTM Configuration - Documentation Complete
+Documentation Created:
+docs/TRACKING_PHASE4_GTM_CONFIG.md (Complete Guide)
+Step-by-step GTM configuration
+Trigger setup (8 triggers)
+Tag creation (Meta Pixel + GA4)
+Variable setup (13 data layer variables)
+Meta Pixel event mapping
+Conversion setup instructions
+Testing & validation steps
+docs/TRACKING_GTM_TAGS_REFERENCE.md (Quick Reference)
+Copy/paste ready HTML code for Meta Pixel tags
+GA4 event tag configurations
+Variable reference table
+Trigger checklist
+docs/TRACKING_FACEBOOK_CONVERSIONS.md (Facebook Setup)
+Custom conversions setup
+Lead conversion configuration
+Purchase conversion configuration
+Advanced rules
+Troubleshooting
+docs/TRACKING_GOOGLE_ADS_CONVERSIONS.md (Google Ads Setup)
+Import from GA4 (recommended)
+Manual setup (alternative)
+Enhanced conversions
+Optimization tips
+docs/TRACKING_GTM_VERIFICATION.js (Verification Script)
+Browser console test script
+Verifies GTM is loaded
+Checks events and variables
+Provides recommendations
+docs/TRACKING_PHASE4_COMPLETE.md (Summary)
+Phase 4 overview
+Checklist
+Event mapping reference
+Quick Start Guide
+Step 1: Create GTM Triggers (8 triggers)
+Follow: docs/TRACKING_PHASE4_GTM_CONFIG.md → Step 4.1
+Step 2: Create GTM Variables (13 variables)
+Follow: docs/TRACKING_PHASE4_GTM_CONFIG.md → Step 4.3
+Step 3: Create GTM Tags
+Use: docs/TRACKING_GTM_TAGS_REFERENCE.md for copy/paste code
+Step 4: Configure Meta Pixel Events
+Follow: docs/TRACKING_PHASE4_GTM_CONFIG.md → Step 4.4
+Step 5: Set Up Conversions
+Facebook: docs/TRACKING_FACEBOOK_CONVERSIONS.md
+Google Ads: docs/TRACKING_GOOGLE_ADS_CONVERSIONS.md
+Step 6: Test & Verify
+Use: docs/TRACKING_GTM_VERIFICATION.js in browser console
+Test in GTM Preview mode
+Verify in Facebook Events Manager
+Verify in GA4 DebugView
+Event Mapping Summary
+dataLayer Event	Meta Pixel Event	GA4 Event	Conversion
+page_view	PageView	page_view	-
+view_content	ViewContent	view_content	-
+form_submit	Lead	form_submit	✅ Facebook
+begin_checkout	InitiateCheckout	begin_checkout	Optional
+purchase	Purchase	purchase	✅ Both
+Configuration Checklist
+[ ] GTM triggers created (8 triggers)
+[ ] GTM variables created (13 variables)
+[ ] Meta Pixel tags created (5 tags)
+[ ] GA4 event tags created (optional)
+[ ] Meta Pixel events mapped
+[ ] Facebook custom conversions created
+[ ] Google Ads conversions imported/configured
+[ ] Tested in GTM Preview
+[ ] Verified in Facebook Events Manager
+[ ] Verified in GA4 DebugView
+[ ] GTM container published
+Important Notes
+Phase 4 requires manual configuration in web interfaces (GTM, Facebook, Google Ads)
+Code is ready — you just need to configure the platforms
+Test in Preview mode before publishing
+Conversions may take 24-48 hours to appear
+Keep GTM container exported as backup
+All Documentation Files
+Main Guide: docs/TRACKING_PHASE4_GTM_CONFIG.md
+Quick Reference: docs/TRACKING_GTM_TAGS_REFERENCE.md
+Facebook Setup: docs/TRACKING_FACEBOOK_CONVERSIONS.md
+Google Ads Setup: docs/TRACKING_GOOGLE_ADS_CONVERSIONS.md
+Verification Script: docs/TRACKING_GTM_VERIFICATION.js
+Summary: docs/TRACKING_PHASE4_COMPLETE.md
+Bạn có thể bắt đầu cấu hình Phase 4. Tất cả hướng dẫn đã sẵn sàng. Follow các guides để set up GTM, Facebook, và Google Ads.

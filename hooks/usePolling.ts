@@ -10,7 +10,7 @@ interface UsePollingOptions {
   enabled?: boolean;
   interval?: number;
   timeout?: number;
-  onSuccess?: () => void;
+  onSuccess?: (data: { status: 'paid'; amount: number }) => void;
   onError?: (error: string) => void;
   onTimeout?: () => void;
 }
@@ -81,7 +81,7 @@ export function usePolling(
         isPaymentSuccessHandledRef.current = true;
         setStatus('paid');
         stopPolling();
-        onSuccess?.();
+        onSuccess?.({ status: 'paid', amount: data.amount });
       }
     } catch (err: any) {
       if (!isMountedRef.current) return;

@@ -302,7 +302,7 @@ function CoursesPageContent() {
             Khám phá khóa học
           </h1>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Hơn {COURSES.length}+ khóa học từ Udemy, Coursera, LinkedIn Learning với giá chỉ từ 2K
+            Hơn {COURSES.length}+ khóa học từ Udemy, Coursera, LinkedIn Learning với giá chỉ từ 30K
           </p>
 
           {/* Search Bar */}

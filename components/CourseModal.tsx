@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { BookOpen } from "lucide-react";
 import { Spinner } from "./ui/Spinner";
 import { useCoursePayment } from "@/hooks/useCoursePayment";
 import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
+import { useTracking } from "@/hooks/useTracking";
 import { CourseModalHeader } from "./course-modal/CourseModalHeader";
 import { CourseScrollList } from "./course-modal/CourseScrollList";
 import { PaymentFooter } from "./course-modal/PaymentFooter";
@@ -28,6 +29,8 @@ export default function CourseModal({
 }: CourseModalProps) {
   const router = useRouter();
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const { trackCheckout } = useTracking();
+  const checkoutTracked = useRef(false);
   
   // Payment logic
   const {
@@ -46,6 +49,39 @@ export default function CourseModal({
       router.push(`/order/${orderCode}`);
     },
   });
+
+  // Step 3.5: Track begin_checkout when modal opens with courses
+  useEffect(() => {
+    if (isOpen && successfulCourses.length > 0 && !isLoading && !checkoutTracked.current) {
+      // Helper function to extract platform from URL
+      const getPlatformFromUrl = (url?: string): string => {
+        if (!url) return 'Unknown';
+        if (url.includes('udemy.com')) return 'Udemy';
+        if (url.includes('coursera.org')) return 'Coursera';
+        if (url.includes('linkedin.com/learning')) return 'LinkedIn Learning';
+        return 'Unknown';
+      };
+
+      // Prepare items for tracking
+      const items = successfulCourses.map((course, index) => ({
+        item_id: String(course.courseId || `course_${index}`),
+        item_name: course.title || 'Khóa học',
+        item_category: 'education',
+        item_brand: getPlatformFromUrl(course.url),
+        price: course.price || 2000,
+        quantity: 1,
+      }));
+
+      // Track checkout
+      trackCheckout(totalAmount, 'VND', items);
+      checkoutTracked.current = true;
+    }
+
+    // Reset when modal closes
+    if (!isOpen) {
+      checkoutTracked.current = false;
+    }
+  }, [isOpen, successfulCourses, isLoading, totalAmount, trackCheckout]);
 
   // Horizontal scroll logic
   const {

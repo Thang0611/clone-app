@@ -12,6 +12,7 @@ import { Spinner } from "@/components/ui/Spinner";
 import { usePolling } from "@/hooks/usePolling";
 import { useOrderData } from "@/hooks/useOrderData";
 import { useCheckoutTimer } from "@/hooks/useCheckoutTimer";
+import { useTracking } from "@/hooks/useTracking";
 import { OrderHeader } from "@/components/order/OrderHeader";
 import { CheckoutTimer } from "@/components/order/CheckoutTimer";
 import { PaymentSection } from "@/components/order/PaymentSection";
@@ -22,6 +23,7 @@ function OrderPageContent() {
   const params = useParams();
   const router = useRouter();
   const orderCode = params.orderCode as string;
+  const { trackPurchase } = useTracking();
   
   // Fetch order data
   const { orderData, isLoading, loadError, updateOrderData } = useOrderData(orderCode);
@@ -37,7 +39,44 @@ function OrderPageContent() {
     orderData?.orderCode || null,
     {
       enabled: isNotPaid,
-      onSuccess: () => {
+      onSuccess: async (paymentData) => {
+        // Check for duplicate tracking using localStorage
+        const trackingKey = `tracking_sent_${orderCode}`;
+        const alreadyTracked = localStorage.getItem(trackingKey);
+        
+        if (!alreadyTracked && paymentData.status === 'paid' && orderData) {
+          // Prepare items for tracking
+          const getPlatformFromUrl = (url?: string): string => {
+            if (!url) return 'Unknown';
+            if (url.includes('udemy.com')) return 'Udemy';
+            if (url.includes('coursera.org')) return 'Coursera';
+            if (url.includes('linkedin.com/learning')) return 'LinkedIn Learning';
+            return 'Unknown';
+          };
+
+          const items = orderData.items.map((item, index) => ({
+            item_id: String(item.courseId || `course_${index}`),
+            item_name: item.title || 'Khóa học',
+            item_category: 'education',
+            item_brand: getPlatformFromUrl(item.url),
+            price: item.price || 0,
+            quantity: 1,
+          }));
+
+          // Track confirmed purchase
+          await trackPurchase(
+            orderCode,
+            paymentData.amount || orderData.totalAmount,
+            'VND',
+            items,
+            'bank_transfer',
+            orderData.email
+          );
+
+          // Mark as tracked to prevent duplicates
+          localStorage.setItem(trackingKey, 'true');
+        }
+
         toast.success("✅ Thanh toán thành công!", {
           description: "Khóa học sẽ được gửi đến email của bạn trong 15-30 phút",
           duration: 10000,

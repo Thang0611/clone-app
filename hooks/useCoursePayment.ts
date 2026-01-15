@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useCourseAPI } from './useCourseAPI';
+import { useTracking } from './useTracking';
 import type { CourseInfo, OrderData } from '@/types';
 
 interface UseCoursePaymentProps {
@@ -19,6 +20,7 @@ interface BankInfo {
 export function useCoursePayment({ courses, email, onSuccess }: UseCoursePaymentProps) {
   const router = useRouter();
   const { createOrder, createOrderLoading } = useCourseAPI();
+  const { trackPurchase } = useTracking();
   const [isPaymentInProgress, setIsPaymentInProgress] = useState(false);
   const paymentRequestRef = useRef<boolean>(false);
 
@@ -138,6 +140,34 @@ export function useCoursePayment({ courses, email, onSuccess }: UseCoursePayment
 
       // Store order data
       await storeOrderData(orderData.orderCode, fullOrderData);
+
+      // Step 3.6: Track purchase after payment confirmation
+      // Helper function to extract platform from URL
+      const getPlatformFromUrl = (url?: string): string => {
+        if (!url) return 'Unknown';
+        if (url.includes('udemy.com')) return 'Udemy';
+        if (url.includes('coursera.org')) return 'Coursera';
+        if (url.includes('linkedin.com/learning')) return 'LinkedIn Learning';
+        return 'Unknown';
+      };
+
+      const purchaseItems = successfulCourses.map((course, index) => ({
+        item_id: String(course.courseId || `course_${index}`),
+        item_name: course.title || 'Khóa học',
+        item_category: 'education',
+        item_brand: getPlatformFromUrl(course.url),
+        price: course.price || 2000,
+        quantity: 1,
+      }));
+
+      await trackPurchase(
+        orderData.orderCode,
+        totalAmount,
+        'VND',
+        purchaseItems,
+        'bank_transfer', // Payment method
+        email
+      );
 
       // Success toast
       toast.success("Tạo đơn hàng thành công!", {
