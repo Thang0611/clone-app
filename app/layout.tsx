@@ -3,8 +3,8 @@ import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Full Bootcamp - Get Khoá Học Udemy, Unica, Gitiho Giá Chỉ từ 50k",
-  description: "Công cụ hỗ trợ GET khoá học Udemy về Google Drive. 9000+ khoá học có sẵn, update hàng tuần.",
+  title: "Khóa Học Giá Rẻ - Tải Khóa Học Udemy, Coursera, LinkedIn Learning Giá Chỉ từ 2k",
+  description: "Công cụ hỗ trợ tải khóa học từ Udemy, Coursera, LinkedIn Learning về Google Drive. 9000+ khoá học có sẵn, update hàng tuần.",
 };
 
 export default function RootLayout({

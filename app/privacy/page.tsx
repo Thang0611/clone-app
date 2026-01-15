@@ -238,7 +238,7 @@ export default function PrivacyPage() {
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-slate-700 ml-4">
                   <li>Google Drive (lưu trữ khóa học)</li>
-                  <li>Udemy, Unica, Gitiho (link khóa học gốc)</li>
+                  <li>Udemy, Coursera, LinkedIn Learning (link khóa học gốc)</li>
                   <li>Ngân hàng (thanh toán)</li>
                   <li>Social media (Facebook, etc.)</li>
                 </ul>

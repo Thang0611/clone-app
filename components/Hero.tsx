@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useState, FormEvent } from "react";
+import { BookOpen, GraduationCap, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import CourseModal from "./CourseModal";
 import { Button } from "./ui/Button";
@@ -94,11 +94,11 @@ export default function Hero() {
           {/* Left Content */}
           <div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight !text-white">
-              Get Khoá Học Udemy, Unica, Gitiho{" "}
+              Tải Khóa Học Udemy, Coursera, LinkedIn Learning{" "}
               <span className="!text-green-400 font-extrabold">Giá Chỉ từ 2k</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 !text-white">
-              Công cụ hỗ trợ GET khoá học Udemy về Google Drive
+              Công cụ hỗ trợ tải khóa học từ Udemy, Coursera, LinkedIn Learning về Google Drive
             </p>
             
             <Button 
@@ -113,30 +113,30 @@ export default function Hero() {
             {/* Features Icons */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Image src="/images/icons/hero-1.svg" alt="Icon" width={24} height={24} className="w-6 h-6" />
+                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 border border-white/10">
+                  <BookOpen className="w-6 h-6 text-white" strokeWidth={2} />
                 </div>
                 <div>
-                  <p className="text-slate-300 font-semibold">22000+ khoá học</p>
-                  <p className="text-slate-300 text-sm">Có sẵn</p>
+                  <p className="!text-white font-semibold">22000+ khoá học</p>
+                  <p className="!text-gray-200 text-sm">Có sẵn</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Image src="/images/icons/hero-3.svg" alt="9000+ khoá học" width={24} height={24} className="w-6 h-6" />
+                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 border border-white/10">
+                  <GraduationCap className="w-6 h-6 text-white" strokeWidth={2} />
                 </div>
                 <div>
-                  <p className="text-slate-300 font-semibold">9000+ khoá học</p>
-                  <p className="text-slate-300 text-sm">Có sẵn</p>
+                  <p className="!text-white font-semibold">9000+ khoá học</p>
+                  <p className="!text-gray-200 text-sm">Có sẵn</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Image src="/images/icons/hero-2.svg" alt="Update" width={24} height={24} className="w-6 h-6" />
+                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center flex-shrink-0 border border-white/10">
+                  <RefreshCw className="w-6 h-6 text-white" strokeWidth={2} />
                 </div>
                 <div>
-                  <p className="text-slate-300 font-semibold">Update</p>
-                  <p className="text-slate-300 text-sm">Khoá học hàng tuần</p>
+                  <p className="!text-white font-semibold">Update</p>
+                  <p className="!text-gray-200 text-sm">Khoá học hàng tuần</p>
                 </div>
               </div>
             </div>
@@ -158,13 +158,13 @@ export default function Hero() {
                 {/* Email Input - Modern Style */}
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
-                    Email nhận khóa học <span className="text-red-500">*</span>
+                    Gmail nhận khóa học <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
                     name="email"
                     required
-                    placeholder="name@example.com"
+                    placeholder="example@gmail.com"
                     disabled={courseInfoLoading}
                     className={`
                       w-full px-4 py-3.5 rounded-xl border-2 bg-white
@@ -195,7 +195,7 @@ export default function Hero() {
                     name="courseLinks"
                     rows={5}
                     required
-                    placeholder="https://www.udemy.com/course/example-course/"
+                    placeholder="https://www.udemy.com/course/nodejs-for-beginners/"
                     disabled={courseInfoLoading}
                     className={`
                       w-full px-4 py-3.5 rounded-xl border-2 bg-white

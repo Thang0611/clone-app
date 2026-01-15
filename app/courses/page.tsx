@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Search, Filter, Star, Clock, Users, BookOpen, ChevronDown } from "lucide-react";
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardBody } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Input } from "@/components/ui/Input";
+import CourseCard from "@/components/CourseCard";
 import { toast } from "sonner";
 
 // Mock course data
@@ -163,9 +165,9 @@ const COURSES = [
   {
     id: 10,
     title: "UI/UX Design với Figma",
-    platform: "Unica",
+    platform: "Coursera",
     category: "Thiết kế",
-    instructor: "Nguyễn Văn A",
+    instructor: "Google",
     rating: 4.7,
     students: 12345,
     duration: "15 hours",
@@ -173,15 +175,15 @@ const COURSES = [
     price: 2000,
     originalPrice: 1990000,
     thumbnail: "https://via.placeholder.com/400x225/DB2777/FFFFFF?text=UI+UX",
-    url: "https://unica.vn/ui-ux-design",
+    url: "https://www.coursera.org/learn/ui-ux-design",
     description: "Học thiết kế giao diện chuyên nghiệp với Figma từ cơ bản đến nâng cao",
   },
   {
     id: 11,
     title: "Excel từ cơ bản đến nâng cao",
-    platform: "Unica",
+    platform: "Coursera",
     category: "Kỹ năng văn phòng",
-    instructor: "Trần Thị B",
+    instructor: "Macquarie University",
     rating: 4.6,
     students: 23456,
     duration: "12 hours",
@@ -189,15 +191,15 @@ const COURSES = [
     price: 2000,
     originalPrice: 1490000,
     thumbnail: "https://via.placeholder.com/400x225/059669/FFFFFF?text=Excel",
-    url: "https://unica.vn/excel-co-ban-nang-cao",
+    url: "https://www.coursera.org/learn/excel-basics",
     description: "Làm chủ Excel với các công thức, biểu đồ và phân tích dữ liệu chuyên nghiệp",
   },
   {
     id: 12,
     title: "Lập trình Java Spring Boot",
-    platform: "Gitiho",
+    platform: "LinkedIn Learning",
     category: "Lập trình",
-    instructor: "Lê Văn C",
+    instructor: "Frank Moley",
     rating: 4.5,
     students: 8901,
     duration: "28 hours",
@@ -205,7 +207,7 @@ const COURSES = [
     price: 2000,
     originalPrice: 2990000,
     thumbnail: "https://via.placeholder.com/400x225/DC2626/FFFFFF?text=Java",
-    url: "https://gitiho.com/khoa-hoc/java-spring-boot",
+    url: "https://www.linkedin.com/learning/java-spring-boot",
     description: "Xây dựng ứng dụng web với Java Spring Boot từ A-Z",
   },
 ];
@@ -221,14 +223,23 @@ const CATEGORIES = [
   "Kỹ năng văn phòng",
 ];
 
-const PLATFORMS = ["Tất cả", "Udemy", "Unica", "Gitiho"];
+const PLATFORMS = ["Tất cả", "Udemy", "Coursera", "LinkedIn Learning"];
 
-export default function CoursesPage() {
+function CoursesPageContent() {
+  const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Tất cả");
   const [selectedPlatform, setSelectedPlatform] = useState("Tất cả");
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("popular"); // popular, rating, newest
+
+  // Initialize search query from URL params
+  useEffect(() => {
+    const searchParam = searchParams.get("search");
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    }
+  }, [searchParams]);
 
   // Filter and search courses
   const filteredCourses = useMemo(() => {
@@ -291,7 +302,7 @@ export default function CoursesPage() {
             Khám phá khóa học
           </h1>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Hơn {COURSES.length}+ khóa học từ Udemy, Unica, Gitiho với giá chỉ từ 2K
+            Hơn {COURSES.length}+ khóa học từ Udemy, Coursera, LinkedIn Learning với giá chỉ từ 2K
           </p>
 
           {/* Search Bar */}
@@ -401,96 +412,22 @@ export default function CoursesPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCourses.map((course) => (
-              <Card key={course.id} className="hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-                {/* Thumbnail */}
-                <div className="relative">
-                  <img
-                    src={course.thumbnail}
-                    alt={course.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  {course.bestseller && (
-                    <Badge className="absolute top-3 left-3 bg-amber-500 text-white">
-                      Bestseller
-                    </Badge>
-                  )}
-                  <Badge className="absolute top-3 right-3 bg-white/90 text-slate-900">
-                    {course.platform}
-                  </Badge>
-                </div>
-
-                <CardBody className="p-5">
-                  {/* Title */}
-                  <h3 className="font-bold text-lg text-slate-900 mb-2 line-clamp-2 min-h-[56px]">
-                    {course.title}
-                  </h3>
-
-                  {/* Instructor */}
-                  <p className="text-sm text-slate-600 mb-3">
-                    {course.instructor}
-                  </p>
-
-                  {/* Stats */}
-                  <div className="flex items-center gap-4 mb-3 text-sm text-slate-600">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-                      <span className="font-semibold">{course.rating}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Users className="w-4 h-4" />
-                      <span>{formatNumber(course.students)}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-4 text-sm text-slate-600">
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      <span>{course.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <BookOpen className="w-4 h-4" />
-                      <span>{course.lectures} bài</span>
-                    </div>
-                  </div>
-
-                  {/* Category */}
-                  <div className="mb-4">
-                    <Badge variant="secondary" className="text-xs">
-                      {course.category}
-                    </Badge>
-                  </div>
-
-                  {/* Price */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-2xl font-bold text-green-600">
-                      {formatCurrency(course.price)}
-                    </span>
-                    <span className="text-sm text-slate-500 line-through">
-                      {formatCurrency(course.originalPrice)}
-                    </span>
-                  </div>
-
-                  {/* Action Button */}
-                  <Button
-                    onClick={() => handleQuickOrder(course)}
-                    className="w-full"
-                    size="lg"
-                  >
-                    Đặt hàng ngay
-                  </Button>
-                </CardBody>
-              </Card>
+              <CourseCard
+                key={course.id}
+                {...course}
+                onAddToCart={() => handleQuickOrder(course)}
+              />
             ))}
           </div>
         )}
 
         {/* CTA Section */}
-        <div className="mt-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-8 md:p-12 text-center">
+        <div className="mt-16 bg-gradient-to-r from-primary-600 to-emerald-600 rounded-3xl p-8 md:p-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Không tìm thấy khóa học bạn cần?
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Gửi link khóa học bất kỳ từ Udemy, Unica, Gitiho và chúng tôi sẽ hỗ trợ bạn!
+            Gửi link khóa học bất kỳ từ Udemy, Coursera, LinkedIn Learning và chúng tôi sẽ hỗ trợ bạn!
           </p>
           <Button
             size="lg"
@@ -504,5 +441,21 @@ export default function CoursesPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function CoursesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+          <div className="animate-pulse">Đang tải...</div>
+        </div>
+        <Footer />
+      </div>
+    }>
+      <CoursesPageContent />
+    </Suspense>
   );
 }

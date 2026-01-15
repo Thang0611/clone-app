@@ -54,7 +54,7 @@ export default function TermsPage() {
                   2. Mô tả dịch vụ
                 </h2>
                 <p className="text-slate-700 leading-relaxed mb-4">
-                  KhoaHocGiaRe.info cung cấp dịch vụ phân phối khóa học trực tuyến từ các nền tảng như Udemy, Unica, và Gitiho. 
+                  KhoaHocGiaRe.info cung cấp dịch vụ phân phối khóa học trực tuyến từ các nền tảng như Udemy, Coursera, và LinkedIn Learning. 
                   Chúng tôi:
                 </p>
                 <ul className="space-y-3 mb-4">
@@ -119,7 +119,7 @@ export default function TermsPage() {
                   5. Quyền sở hữu trí tuệ
                 </h2>
                 <p className="text-slate-700 leading-relaxed mb-4">
-                  Tất cả nội dung khóa học (video, tài liệu, phụ đề) thuộc quyền sở hữu của tác giả và nền tảng gốc (Udemy, Unica, Gitiho). 
+                  Tất cả nội dung khóa học (video, tài liệu, phụ đề) thuộc quyền sở hữu của tác giả và nền tảng gốc (Udemy, Coursera, LinkedIn Learning). 
                   Chúng tôi chỉ là đơn vị phân phối.
                 </p>
                 <p className="text-slate-700 leading-relaxed">

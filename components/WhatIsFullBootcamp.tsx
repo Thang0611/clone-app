@@ -7,10 +7,10 @@ export default function WhatIsFullBootcamp() {
         {/* Header */}
         <div className="text-center mb-10 sm:mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-            Full Bootcamp là công cụ gì?
+            Khóa Học Giá Rẻ là gì?
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto px-4">
-            Là công cụ giúp bạn tải khóa học Udemy về Drive với chi phí thấp hơn giá gốc.
+            Là công cụ giúp bạn tải khóa học từ Udemy, Coursera, LinkedIn Learning về Drive với chi phí thấp hơn giá gốc.
             <br className="hidden sm:block" />
             <span className="block mt-2 sm:inline sm:mt-0">
               Bao gồm: Video HD, Phụ đề (eng, vi), Files đầy đủ.

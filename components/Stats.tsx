@@ -22,7 +22,7 @@ export default function Stats() {
               22000+ Khoá học
             </h3>
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-              Có sẵn kho đồ sộ từ Udemy
+              Có sẵn kho đồ sộ từ Udemy, Coursera, LinkedIn Learning
             </p>
           </div>
 

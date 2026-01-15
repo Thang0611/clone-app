@@ -42,7 +42,7 @@ export default function AboutPage() {
                 <p className="text-lg text-slate-700 leading-relaxed mb-6">
                   <strong className="text-indigo-600">KhoaHocGiaRe.info</strong> được thành lập với niềm tin rằng 
                   <strong> giáo dục không nên bị giới hạn bởi rào cản tài chính</strong>. 
-                  Chúng tôi nhận thấy rằng nhiều khóa học chất lượng cao trên các nền tảng như Udemy, Unica, và Gitiho 
+                  Chúng tôi nhận thấy rằng nhiều khóa học chất lượng cao trên các nền tảng như Udemy, Coursera, và LinkedIn Learning 
                   có giá khá cao, khiến nhiều người không thể tiếp cận.
                 </p>
                 <p className="text-lg text-slate-700 leading-relaxed mb-6">
@@ -210,7 +210,7 @@ export default function AboutPage() {
               "Cập nhật miễn phí khi khóa học có nội dung mới",
               "Toàn quyền download về máy",
               "Giao hàng nhanh chóng trong 2-4 giờ",
-              "Hỗ trợ nhiều nền tảng: Udemy, Unica, Gitiho",
+              "Hỗ trợ nhiều nền tảng: Udemy, Coursera, LinkedIn Learning",
               "Thanh toán an toàn qua ngân hàng",
               "Support 24/7 qua email và hotline"
             ].map((item, idx) => (

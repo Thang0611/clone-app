@@ -17,20 +17,20 @@ export default function Pricing() {
             Bảng giá
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed">
-            Mua theo Combo để được giảm giá tốt nhất
+            Chọn gói phù hợp với nhu cầu của bạn
           </p>
         </div>
 
         {/* Pricing Cards - Mobile: Stack, Desktop: 3 columns */}
-        <div className="flex flex-col gap-6 sm:gap-8 md:grid md:grid-cols-3 md:gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3 md:gap-6">
           
-          {/* Plan 1: Mua lẻ */}
+          {/* Plan 1: Gói Trải Nghiệm */}
           <div className="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-shadow border border-slate-200">
             <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 sm:mb-4">
-              Mua lẻ
+              Gói Trải Nghiệm
             </h3>
-            <div className="text-4xl sm:text-5xl font-bold text-indigo-600 mb-4 sm:mb-6">
-              2K <span className="text-xl text-slate-600">/ Khóa</span>
+            <div className="text-4xl sm:text-5xl font-bold text-primary-600 mb-4 sm:mb-6">
+              50.000đ <span className="text-xl text-slate-600">/ 1 khóa</span>
             </div>
             <p className="text-base sm:text-lg text-slate-700 mb-6 sm:mb-8">
               Gói mua thử và trải nghiệm
@@ -38,110 +38,128 @@ export default function Pricing() {
             
             {/* Features */}
             <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-              {[
-                "Đầy đủ video",
-                "Không chặn download",
-                "Update miễn phí",
-                "24/7 Full support"
-              ].map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-sm sm:text-base text-slate-700">{feature}</span>
-                </li>
-              ))}
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm sm:text-base text-slate-700">Link Google Drive tốc độ cao</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm sm:text-base text-slate-700">Đầy đủ video & tài liệu</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm sm:text-base text-slate-700">Hỗ trợ 24/7</span>
+              </li>
             </ul>
 
             <button 
               onClick={scrollToForm}
-              className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-indigo-700 hover:to-indigo-800 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
+              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
             >
-              Tải khóa học ngay!
+              Đăng ký ngay
             </button>
           </div>
 
-          {/* Plan 2: Combo 5 - POPULAR */}
-          <div className="bg-indigo-600 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl hover:shadow-2xl transition-shadow relative border-4 border-indigo-400 transform md:scale-105">
-            {/* Popular Badge */}
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-indigo-600 px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-              PHỔ BIẾN
+          {/* Plan 2: Gói Tiết Kiệm - RECOMMENDED */}
+          <div className="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-2xl hover:shadow-2xl transition-shadow relative border-4 border-primary-500 md:scale-105">
+            {/* Recommended Badge */}
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary-600 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+              KHUYÊN DÙNG
             </div>
             
-            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 mt-2">
-              Combo 5 khóa
+            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 sm:mb-4 mt-2">
+              Gói Tiết Kiệm
             </h3>
-            <div className="text-4xl sm:text-5xl font-bold text-white mb-4 sm:mb-6">
-              8K <span className="text-xl text-indigo-200">~1.6K/khóa</span>
+            <div className="text-4xl sm:text-5xl font-bold text-primary-600 mb-2">
+              199.000đ
             </div>
-            <p className="text-base sm:text-lg text-indigo-100 mb-6 sm:mb-8">
-              Combo tiết kiệm 20%
+            <div className="text-xl text-slate-600 mb-2">
+              / 5 khóa • Chỉ ~40k/khóa
+            </div>
+            <p className="text-base sm:text-lg font-bold text-emerald-600 mb-6 sm:mb-8">
+              Tiết kiệm 20% so với mua lẻ
             </p>
             
             {/* Features */}
             <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-              {[
-                "Đầy đủ video",
-                "Không chặn download",
-                "Update miễn phí",
-                "24/7 Full support"
-              ].map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-sm sm:text-base lg:text-lg text-white font-medium">{feature}</span>
-                </li>
-              ))}
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm sm:text-base lg:text-lg text-slate-700 font-medium">Link Google Drive tốc độ cao</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm sm:text-base lg:text-lg text-slate-700 font-medium">Đầy đủ video & tài liệu</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm sm:text-base lg:text-lg text-slate-700 font-medium">Hỗ trợ 24/7</span>
+              </li>
             </ul>
 
             <button 
               onClick={scrollToForm}
-              className="w-full bg-white text-indigo-600 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:bg-indigo-50 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
+              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
             >
-              Tải khóa học ngay!
+              Đăng ký ngay
             </button>
           </div>
 
-          {/* Plan 3: Combo 10 */}
+          {/* Plan 3: Gói Siêu Tốc */}
           <div className="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg hover:shadow-xl transition-shadow border border-slate-200 relative">
-            {/* Sale Badge */}
-            <div className="absolute top-0 right-0 bg-red-500 text-white px-4 py-2 rounded-bl-xl text-xs sm:text-sm font-bold">
-              KHUYẾN MÃI
-            </div>
-            
             <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3 sm:mb-4">
-              Combo 10 khóa
+              Gói Siêu Tốc
             </h3>
-            <div className="text-4xl sm:text-5xl font-bold text-indigo-600 mb-4 sm:mb-6">
-              15K <span className="text-xl text-slate-600">~1.5K/khóa</span>
+            <div className="text-4xl sm:text-5xl font-bold text-primary-600 mb-2">
+              299.000đ
+            </div>
+            <div className="flex items-baseline gap-1 text-base md:text-xl text-slate-600 mb-4 sm:mb-6 whitespace-nowrap">
+              <span>/ 10 khóa</span>
+              <span>•</span>
+              <span>Chỉ ~30k/khóa</span>
             </div>
             <p className="text-base sm:text-lg text-slate-700 mb-6 sm:mb-8">
-              Siêu khuyến mãi đến 15/2/2026
+              Gói tốt nhất cho người học nhiều
             </p>
             
             {/* Features */}
             <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-              {[
-                "Đầy đủ video",
-                "Không chặn download",
-                "Update miễn phí",
-                "24/7 Full support"
-              ].map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-sm sm:text-base lg:text-lg text-slate-700">{feature}</span>
-                </li>
-              ))}
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm sm:text-base lg:text-lg text-slate-700">Link Google Drive tốc độ cao</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm sm:text-base lg:text-lg text-slate-700">Đầy đủ video & tài liệu</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                <span className="text-sm sm:text-base lg:text-lg text-slate-700">Hỗ trợ 24/7</span>
+              </li>
             </ul>
 
             <button 
               onClick={scrollToForm}
-              className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-indigo-700 hover:to-indigo-800 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
+              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-primary-700 hover:to-primary-800 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
             >
-              Tải khóa học ngay!
+              Đăng ký ngay
             </button>
           </div>
 

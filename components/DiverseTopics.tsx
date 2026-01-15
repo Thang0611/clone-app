@@ -9,7 +9,7 @@ export default function DiverseTopics() {
           Chúng tôi tự hào cung cấp bộ sưu tập đa dạng các khóa học trên nhiều lĩnh vực: 
           <span className="font-semibold text-slate-700"> lập trình, thiết kế đồ họa, kỹ năng mềm, tiếng Anh, marketing, quản lý dự án</span> và nhiều lĩnh vực khác.
           <span className="block mt-3 sm:mt-4">
-            Tất cả đều có sẵn trên <span className="font-semibold text-indigo-600">Udemy, Unica, và Gitiho</span>.
+            Tất cả đều có sẵn trên <span className="font-semibold text-indigo-600">Udemy, Coursera, và LinkedIn Learning</span>.
           </span>
         </p>
       </div>

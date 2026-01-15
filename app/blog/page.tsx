@@ -25,7 +25,7 @@ const BLOG_POSTS = [
   {
     id: 2,
     title: "Hướng Dẫn Tải Khóa Học Về Google Drive",
-    excerpt: "Chi tiết từng bước để tải khóa học Udemy, Unica, Gitiho về Google Drive một cách nhanh chóng và tiện lợi.",
+    excerpt: "Chi tiết từng bước để tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive một cách nhanh chóng và tiện lợi.",
     content: "Bước 1: Nhập link khóa học vào form...",
     author: "Support Team",
     date: "2026-01-12",
@@ -36,15 +36,15 @@ const BLOG_POSTS = [
   },
   {
     id: 3,
-    title: "So Sánh Udemy vs Unica vs Gitiho - Nền Tảng Nào Tốt Hơn?",
-    excerpt: "Phân tích chi tiết ưu nhược điểm của 3 nền tảng học online hàng đầu Việt Nam và quốc tế.",
+    title: "So Sánh Udemy vs Coursera vs LinkedIn Learning - Nền Tảng Nào Tốt Hơn?",
+    excerpt: "Phân tích chi tiết ưu nhược điểm của 3 nền tảng học online hàng đầu thế giới.",
     content: "Udemy là nền tảng học online lớn nhất thế giới với hơn 200,000 khóa học...",
     author: "Nguyễn Văn A",
     date: "2026-01-10",
     readTime: "10 phút",
     category: "So sánh",
     thumbnail: "https://via.placeholder.com/800x450/EC4899/FFFFFF?text=Comparison",
-    tags: ["Udemy", "Unica", "Gitiho", "Comparison"],
+    tags: ["Udemy", "Coursera", "LinkedIn Learning", "Comparison"],
   },
   {
     id: 4,

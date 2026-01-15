@@ -224,26 +224,36 @@ export default function TrackOrderPage() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-6">
-            <Search className="w-10 h-10 text-white" />
+      {/* Hero Section - Minimalist Modern Design */}
+      <section className="relative bg-white pt-24 pb-32 px-4 overflow-hidden">
+        {/* Dot Pattern Overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `radial-gradient(circle, #000 1px, transparent 1px)`,
+            backgroundSize: '24px 24px',
+          }}
+        />
+        
+        {/* Soft Glow Blob */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 blur-3xl rounded-full -z-0" />
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          {/* Badge */}
+          <div className="inline-flex items-center bg-indigo-50 border border-indigo-100 rounded-full mb-6">
+            <span className="text-xs font-semibold text-indigo-700 tracking-wide">
+              Hệ thống tra cứu tự động
+            </span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Tra cứu đơn hàng
-          </h1>
-          <p className="text-xl text-white/90 mb-8">
-            Kiểm tra trạng thái đơn hàng của bạn bằng email đã đặt hàng
-          </p>
+
         </div>
       </section>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-4xl min-h-screen mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
         
-        {/* Search Form */}
-        <Card className="mb-8 shadow-xl">
+        {/* Search Form - Overlapping Card */}
+        <Card className="mb-8 shadow-2xl border border-slate-200/50 backdrop-blur-sm bg-white/95">
           <CardBody className="p-6 sm:p-8">
             <form onSubmit={handleSearch}>
               {/* Search Input */}

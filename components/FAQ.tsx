@@ -1,4 +1,89 @@
+"use client";
+
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+
+interface FAQItemProps {
+  question: string;
+  answer: string | React.ReactNode;
+  isOpen: boolean;
+  onClick: () => void;
+}
+
+const FAQ_DATA = [
+  {
+    id: 1,
+    question: "Giá khoá học là bao nhiêu?",
+    answer: "1 khoá Udemy = 50k, Coursera = 50k, LinkedIn Learning = 50k nhé bạn",
+  },
+  {
+    id: 2,
+    question: "Mình có được tải về không?",
+    answer: "Có. Bạn hoàn toàn có quyền download mọi khóa học khi mua tại Khóa Học Giá Rẻ",
+  },
+  {
+    id: 3,
+    question: "Có được Update khi khóa học cập nhật thêm không?",
+    answer: "Có. Mình có cập nhật MIỄN PHÍ cho các bạn",
+  },
+  {
+    id: 4,
+    question: "Thanh toán xong bao lâu nhận được khoá học?",
+    answer: "Thời gian giao hàng khoảng 2-4 tiếng. Khoá nào nặng có thể lâu hơn",
+  },
+  {
+    id: 5,
+    question: "Cách dùng phụ đề rời như thể nào? Cách dịch phụ đề sang tiếng việt?",
+    answer: (
+      <>
+        Hướng dẫn dùng phụ đề rời: <a href="#" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
+        <br />
+        Cách dịch sang tiếng việt: <a href="#" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
+      </>
+    ),
+  },
+];
+
+function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
+  return (
+    <div className="border-b border-slate-200 last:border-b-0">
+      <button
+        onClick={onClick}
+        className="w-full py-6 px-4 sm:px-6 flex items-center justify-between text-left hover:bg-slate-50 transition-colors duration-200 group"
+        aria-expanded={isOpen}
+      >
+        <h3 className="text-lg sm:text-xl font-semibold text-slate-900 pr-4 flex-1">
+          {question}
+        </h3>
+        <ChevronDown
+          className={`w-5 h-5 text-slate-500 flex-shrink-0 transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          } group-hover:text-indigo-600`}
+          strokeWidth={2}
+        />
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-4 sm:px-6 pb-6">
+          <div className="text-base text-slate-600 leading-relaxed">
+            {answer}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-100">
       <div className="max-w-4xl mx-auto">
@@ -6,86 +91,19 @@ export default function FAQ() {
           CÂU HỎI THƯỜNG GẶP
         </h2>
         <p className="text-xl text-slate-600 mb-16 text-center">
-          Các câu hỏi thường gặp khi mua khoá học tại Full Bootcamp
+          Các câu hỏi thường gặp khi mua khoá học tại Khóa Học Giá Rẻ
         </p>
 
-        <div className="space-y-6">
-          <div className="card bg-white p-6 sm:p-8 faq-accordion">
-            <input type="checkbox" id="faq-1" className="faq-checkbox" />
-            <label htmlFor="faq-1" className="faq-label">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                Giá khoá học là bao nhiêu?
-              </h3>
-              <span className="faq-icon">▼</span>
-            </label>
-            <div className="faq-content">
-              <p className="text-base sm:text-lg text-slate-600">
-                1 khoá Udemy = 50k, Unica = 99k nhé bạn
-              </p>
-            </div>
-          </div>
-
-          <div className="card bg-white p-6 sm:p-8 faq-accordion">
-            <input type="checkbox" id="faq-2" className="faq-checkbox" />
-            <label htmlFor="faq-2" className="faq-label">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                Mình có được tải về không?
-              </h3>
-              <span className="faq-icon">▼</span>
-            </label>
-            <div className="faq-content">
-              <p className="text-base sm:text-lg text-slate-600">
-                Có. Bạn hoàn toàn có quyền download mọi khóa học khi mua tại Full Bootcamp
-              </p>
-            </div>
-          </div>
-
-          <div className="card bg-white p-6 sm:p-8 faq-accordion">
-            <input type="checkbox" id="faq-3" className="faq-checkbox" />
-            <label htmlFor="faq-3" className="faq-label">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                Có được Update khi khóa học cập nhật thêm không?
-              </h3>
-              <span className="faq-icon">▼</span>
-            </label>
-            <div className="faq-content">
-              <p className="text-base sm:text-lg text-slate-600">
-                Có. Mình có cập nhật MIỄN PHÍ cho các bạn
-              </p>
-            </div>
-          </div>
-
-          <div className="card bg-white p-6 sm:p-8 faq-accordion">
-            <input type="checkbox" id="faq-4" className="faq-checkbox" />
-            <label htmlFor="faq-4" className="faq-label">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                Thanh toán xong bao lâu nhận được khoá học?
-              </h3>
-              <span className="faq-icon">▼</span>
-            </label>
-            <div className="faq-content">
-              <p className="text-base sm:text-lg text-slate-600">
-                Thời gian giao hàng khoảng 2-4 tiếng. Khoá nào nặng có thể lâu hơn
-              </p>
-            </div>
-          </div>
-
-          <div className="card bg-white p-6 sm:p-8 faq-accordion">
-            <input type="checkbox" id="faq-5" className="faq-checkbox" />
-            <label htmlFor="faq-5" className="faq-label">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                Cách dùng phụ đề rời như thể nào? Cách dịch phụ đề sang tiếng việt?
-              </h3>
-              <span className="faq-icon">▼</span>
-            </label>
-            <div className="faq-content">
-              <p className="text-base sm:text-lg text-slate-600">
-                Hướng dẫn dùng phụ đề rời: <a href="#" className="text-primary-600 hover:underline font-semibold">Tại đây</a>
-                <br />
-                Cách dịch sang tiếng việt: <a href="#" className="text-primary-600 hover:underline font-semibold">Tại đây</a>
-              </p>
-            </div>
-          </div>
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+          {FAQ_DATA.map((item, index) => (
+            <FAQItem
+              key={item.id}
+              question={item.question}
+              answer={item.answer}
+              isOpen={openIndex === index}
+              onClick={() => handleToggle(index)}
+            />
+          ))}
         </div>
       </div>
     </section>
