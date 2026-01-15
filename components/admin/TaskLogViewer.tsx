@@ -1,26 +1,29 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Terminal, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
+import { FileText, RefreshCw, Download, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface TaskLogViewerProps {
   taskId: number;
+  taskTitle?: string;
   autoRefresh?: boolean;
   maxLines?: number;
 }
 
-export function TaskLogViewer({ taskId, autoRefresh = false, maxLines = 200 }: TaskLogViewerProps) {
+export function TaskLogViewer({ taskId, taskTitle, autoRefresh: initialAutoRefresh = false, maxLines = 200 }: TaskLogViewerProps) {
   const [logs, setLogs] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [autoRefreshEnabled, setAutoRefreshEnabled] = useState(autoRefresh);
+  const [expanded, setExpanded] = useState(false);
+  const [autoRefresh, setAutoRefresh] = useState(initialAutoRefresh);
   const logEndRef = useRef<HTMLDivElement>(null);
 
   const fetchLogs = async () => {
     try {
+      setLoading(true);
       setError(null);
+
       const response = await fetch(`/api/admin/tasks/${taskId}/logs/raw?lines=${maxLines}`);
       
       if (!response.ok) {
@@ -28,7 +31,7 @@ export function TaskLogViewer({ taskId, autoRefresh = false, maxLines = 200 }: T
       }
 
       const data = await response.json();
-      
+
       if (data.success) {
         setLogs(data.data?.logs || []);
       } else {
@@ -36,140 +39,144 @@ export function TaskLogViewer({ taskId, autoRefresh = false, maxLines = 200 }: T
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred';
-      setError(errorMessage);
       console.error('[TaskLogViewer] Error fetching logs:', err);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchLogs();
-    
-    let interval: NodeJS.Timeout | null = null;
-    if (autoRefreshEnabled && isExpanded) {
-      // Auto-refresh every 3 seconds when expanded
-      interval = setInterval(fetchLogs, 3000);
+    if (expanded) {
+      fetchLogs();
     }
+  }, [taskId, expanded]);
 
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
-  }, [taskId, autoRefreshEnabled, isExpanded, maxLines]);
-
-  // Auto-scroll to bottom when new logs arrive
+  // Auto-refresh when expanded and auto-refresh is enabled
   useEffect(() => {
-    if (isExpanded && logEndRef.current) {
+    if (!expanded || !autoRefresh) return;
+
+    const interval = setInterval(() => {
+      fetchLogs();
+    }, 3000); // Refresh every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [expanded, autoRefresh, taskId]);
+
+  // Scroll to bottom when new logs arrive
+  useEffect(() => {
+    if (logEndRef.current) {
       logEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [logs, isExpanded]);
+  }, [logs]);
 
-  if (!isExpanded) {
-    return (
-      <button
-        onClick={() => setIsExpanded(true)}
-        className="mt-3 w-full flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors text-sm"
-      >
-        <div className="flex items-center gap-2">
-          <Terminal className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-          <span className="text-gray-700 dark:text-gray-300 font-medium">
-            Xem Worker Logs ({logs.length} dòng)
-          </span>
-        </div>
-        <ChevronDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-      </button>
-    );
+  if (loading && !expanded) {
+    return null;
   }
 
   return (
-    <div className="mt-3 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+    <div className="mt-4 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between p-3 bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="w-full flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+      >
         <div className="flex items-center gap-2">
-          <Terminal className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-          <span className="text-sm font-semibold text-gray-900 dark:text-white">
-            Worker Download Logs
+          <FileText className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+          <span className="text-sm font-medium text-gray-900 dark:text-white">
+            Download Logs (Worker Python)
           </span>
-          <span className="text-xs text-gray-500 dark:text-gray-400">
-            ({logs.length} dòng gần nhất)
-          </span>
+          {taskTitle && (
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              - {taskTitle}
+            </span>
+          )}
         </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setAutoRefreshEnabled(!autoRefreshEnabled)}
-            className={cn(
-              'px-2 py-1 text-xs rounded transition-colors',
-              autoRefreshEnabled
-                ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
-            )}
-          >
-            {autoRefreshEnabled ? '🔄 Auto' : '⏸️ Manual'}
-          </button>
-          <button
-            onClick={fetchLogs}
-            disabled={loading}
-            className="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors disabled:opacity-50"
-            title="Refresh logs"
-          >
-            <RefreshCw className={cn('w-4 h-4 text-gray-600 dark:text-gray-400', loading && 'animate-spin')} />
-          </button>
-          <button
-            onClick={() => setIsExpanded(false)}
-            className="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-          >
-            <ChevronUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-          </button>
-        </div>
-      </div>
-
-      {/* Log Content */}
-      <div className="relative">
-        {loading && logs.length === 0 ? (
-          <div className="p-8 text-center">
-            <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-            <p className="text-sm text-gray-600 dark:text-gray-400">Đang tải logs...</p>
-          </div>
-        ) : error ? (
-          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded m-3">
-            <p className="text-sm text-red-700 dark:text-red-300">
-              Lỗi: {error}
-            </p>
-          </div>
-        ) : logs.length === 0 ? (
-          <div className="p-8 text-center text-gray-500 dark:text-gray-400 text-sm">
-            Chưa có logs
-          </div>
+        {expanded ? (
+          <ChevronUp className="w-4 h-4 text-gray-600 dark:text-gray-400" />
         ) : (
-          <div className="bg-gray-900 text-gray-100 font-mono text-xs p-4 max-h-96 overflow-y-auto">
-            {logs.map((line, index) => {
-              // Color code based on log level
-              let lineColor = 'text-gray-300';
-              if (line.includes('[ERROR]') || line.includes('ERROR') || line.includes('Failed')) {
-                lineColor = 'text-red-400';
-              } else if (line.includes('[WARN]') || line.includes('WARNING')) {
-                lineColor = 'text-yellow-400';
-              } else if (line.includes('[INFO]') || line.includes('INFO')) {
-                lineColor = 'text-blue-400';
-              } else if (line.includes('[SUCCESS]') || line.includes('completed')) {
-                lineColor = 'text-green-400';
-              }
-
-              return (
-                <div
-                  key={index}
-                  className={cn('py-0.5 break-words', lineColor)}
-                >
-                  {line || '\u00A0'} {/* Non-breaking space for empty lines */}
-                </div>
-              );
-            })}
-            <div ref={logEndRef} />
-          </div>
+          <ChevronDown className="w-4 h-4 text-gray-600 dark:text-gray-400" />
         )}
-      </div>
+      </button>
+
+      {/* Logs Content */}
+      {expanded && (
+        <div className="bg-gray-900 text-gray-100 p-4">
+          {/* Toolbar */}
+          <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-700">
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-400">
+                {logs.length} lines (last 200)
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="flex items-center gap-2 text-xs text-gray-400 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={autoRefresh}
+                  onChange={(e) => setAutoRefresh(e.target.checked)}
+                  className="w-3 h-3"
+                />
+                Auto-refresh
+              </label>
+              <button
+                onClick={fetchLogs}
+                disabled={loading}
+                className="p-1.5 hover:bg-gray-800 rounded transition-colors disabled:opacity-50"
+                title="Refresh logs"
+              >
+                <RefreshCw className={cn('w-4 h-4 text-gray-400', loading && 'animate-spin')} />
+              </button>
+            </div>
+          </div>
+
+          {/* Logs Display */}
+          {loading && logs.length === 0 ? (
+            <div className="text-center py-8 text-gray-500">
+              <div className="w-6 h-6 border-2 border-gray-600 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+              <p className="text-sm">Loading logs...</p>
+            </div>
+          ) : error ? (
+            <div className="p-4 bg-red-900/20 border border-red-800 rounded text-sm text-red-300">
+              Error: {error}
+            </div>
+          ) : logs.length === 0 ? (
+            <div className="text-center py-8 text-gray-500 text-sm">
+              No logs available yet
+            </div>
+          ) : (
+            <div className="font-mono text-xs leading-relaxed max-h-96 overflow-y-auto">
+              {logs.map((line, index) => {
+                // Color code based on log level
+                const isError = line.toLowerCase().includes('error') || 
+                               line.toLowerCase().includes('failed') ||
+                               line.toLowerCase().includes('exception');
+                const isWarning = line.toLowerCase().includes('warning') || 
+                                 line.toLowerCase().includes('warn');
+                const isInfo = line.toLowerCase().includes('info') || 
+                              line.toLowerCase().includes('downloading') ||
+                              line.toLowerCase().includes('progress');
+                
+                return (
+                  <div
+                    key={index}
+                    className={cn(
+                      'px-2 py-0.5 hover:bg-gray-800/50',
+                      isError && 'text-red-400',
+                      isWarning && 'text-yellow-400',
+                      isInfo && 'text-green-400',
+                      !isError && !isWarning && !isInfo && 'text-gray-300'
+                    )}
+                  >
+                    {line || '\u00A0'} {/* Non-breaking space for empty lines */}
+                  </div>
+                );
+              })}
+              <div ref={logEndRef} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

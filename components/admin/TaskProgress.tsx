@@ -113,6 +113,7 @@ export function TaskProgress({ task }: TaskProgressProps) {
       {/* Worker Logs - Show for all tasks */}
       <TaskLogViewer 
         taskId={task.id} 
+        taskTitle={task.title || undefined}
         autoRefresh={task.status === 'downloading' || task.status === 'enrolled'}
         maxLines={200}
       />

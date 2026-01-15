@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * Proxy to backend API for raw task log file content
- * Fetches worker download logs from log files
+ * Returns the last N lines from the task log file (worker Python download logs)
  */
 export async function GET(
   request: NextRequest,
@@ -24,7 +24,7 @@ export async function GET(
     // Get backend API URL from environment
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     
-    // Call backend API
+    // Call real backend API
     const backendUrl = `${apiUrl}/api/admin/tasks/${taskId}/logs/raw?lines=${lines}`;
     
     const response = await fetch(backendUrl, {
@@ -50,7 +50,15 @@ export async function GET(
     }
 
     const data = await response.json();
-    return NextResponse.json(data);
+
+    return NextResponse.json({
+      success: data.success !== false,
+      data: data.data || {
+        logs: [],
+        totalLines: 0,
+        rawContent: ''
+      }
+    });
   } catch (error) {
     console.error('Error fetching raw logs from backend:', error);
     return NextResponse.json(
