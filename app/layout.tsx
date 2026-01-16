@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Toaster } from "sonner";
 import "./globals.css";
 import GoogleTagManager from "@/components/GoogleTagManager";
@@ -29,7 +30,9 @@ export default function RootLayout({
         <UserPropertiesTracker />
         
         {/* Page View Tracker - Tracks route changes */}
-        <PageViewTracker />
+        <Suspense fallback={null}>
+          <PageViewTracker />
+        </Suspense>
         
         {children}
         <Toaster position="top-right" richColors expand={false} />

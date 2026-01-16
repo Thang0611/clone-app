@@ -9,7 +9,7 @@ import { trackingConfig } from './tracking-config';
 // Declare dataLayer type for TypeScript
 declare global {
   interface Window {
-    dataLayer: any[];
+    dataLayer?: any[];
     gtag?: (...args: any[]) => void;
   }
 }
@@ -42,7 +42,9 @@ export function pushToDataLayer(data: Record<string, any>): void {
     timestamp: new Date().toISOString(),
   };
 
-  window.dataLayer.push(eventData);
+  if (window.dataLayer) {
+    window.dataLayer.push(eventData);
+  }
 
   // Log in development
   if (process.env.NODE_ENV === 'development') {

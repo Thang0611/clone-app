@@ -129,33 +129,38 @@ export default function TrackOrderPage() {
       color: string; 
       icon: any; 
       bgColor: string;
+      borderColor: string;
       description: string;
     }> = {
       pending: {
         label: "Chưa thanh toán",
-        color: "text-amber-700",
-        bgColor: "bg-amber-100 border-amber-300",
+        color: "text-amber-800",
+        bgColor: "bg-amber-100",
+        borderColor: "border-amber-300",
         icon: Clock,
         description: "Vui lòng hoàn tất thanh toán để xử lý đơn hàng"
       },
       paid: {
         label: "Đã thanh toán",
-        color: "text-green-700",
-        bgColor: "bg-green-100 border-green-300",
+        color: "text-green-800",
+        bgColor: "bg-green-100",
+        borderColor: "border-green-300",
         icon: CheckCircle2,
         description: "Thanh toán thành công. Đang xử lý khóa học..."
       },
       cancelled: {
         label: "Đã hủy",
-        color: "text-red-700",
-        bgColor: "bg-red-100 border-red-300",
+        color: "text-red-800",
+        bgColor: "bg-red-100",
+        borderColor: "border-red-300",
         icon: XCircle,
         description: "Đơn hàng đã bị hủy"
       },
       refunded: {
         label: "Đã hoàn tiền",
-        color: "text-blue-700",
-        bgColor: "bg-blue-100 border-blue-300",
+        color: "text-blue-800",
+        bgColor: "bg-blue-100",
+        borderColor: "border-blue-300",
         icon: Package,
         description: "Đơn hàng đã được hoàn tiền"
       }
@@ -165,13 +170,43 @@ export default function TrackOrderPage() {
   };
 
   const getOrderStatusInfo = (status: string) => {
-    const statusMap: Record<string, { label: string; color: string }> = {
-      pending: { label: "Chờ xử lý", color: "bg-amber-100 text-amber-700" },
-      processing: { label: "Đang xử lý", color: "bg-blue-100 text-blue-700" },
-      completed: { label: "Hoàn thành", color: "bg-green-100 text-green-700" },
-      failed: { label: "Thất bại", color: "bg-red-100 text-red-700" },
+    const statusMap: Record<string, { 
+      label: string; 
+      bgColor: string; 
+      textColor: string;
+      borderColor: string;
+    }> = {
+      pending: { 
+        label: "Chờ xử lý", 
+        bgColor: "bg-amber-100",
+        textColor: "text-amber-800",
+        borderColor: "border-amber-300"
+      },
+      processing: { 
+        label: "Đang xử lý", 
+        bgColor: "bg-blue-100",
+        textColor: "text-blue-800",
+        borderColor: "border-blue-300"
+      },
+      completed: { 
+        label: "Hoàn thành", 
+        bgColor: "bg-green-100",
+        textColor: "text-green-800",
+        borderColor: "border-green-300"
+      },
+      failed: { 
+        label: "Thất bại", 
+        bgColor: "bg-red-100",
+        textColor: "text-red-800",
+        borderColor: "border-red-300"
+      },
     };
-    return statusMap[status] || { label: status, color: "bg-gray-100 text-gray-700" };
+    return statusMap[status] || { 
+      label: status, 
+      bgColor: "bg-gray-100",
+      textColor: "text-gray-800",
+      borderColor: "border-gray-300"
+    };
   };
 
   const handleCopy = async (text: string, label: string) => {
@@ -239,13 +274,20 @@ export default function TrackOrderPage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 blur-3xl rounded-full -z-0" />
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          {/* Badge */}
-          <div className="inline-flex items-center bg-indigo-50 border border-indigo-100 rounded-full mb-6">
-            <span className="text-xs font-semibold text-indigo-700 tracking-wide">
-              Hệ thống tra cứu tự động
+          {/* Modern Badge */}
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg mb-6 backdrop-blur-sm">
+            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+            <span className="text-sm font-semibold tracking-wide">
+              Tra cứu tự động
             </span>
           </div>
-
+          
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+            Tra cứu đơn hàng
+          </h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Nhập email để xem tất cả đơn hàng và link tải khóa học của bạn
+          </p>
         </div>
       </section>
 
@@ -268,7 +310,7 @@ export default function TrackOrderPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="VD: example@email.com"
                     disabled={isLoading}
-                    className="w-full px-4 py-3.5 pl-12 rounded-xl border-2 border-slate-200 focus:outline-none focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 disabled:opacity-60 disabled:cursor-not-allowed text-lg"
+                    className="w-full px-4 py-3.5 pl-12 rounded-xl border-2 border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 focus:bg-white disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-slate-50 text-lg"
                   />
                   <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
                 </div>
@@ -371,10 +413,10 @@ export default function TrackOrderPage() {
                           <h3 className="text-lg font-bold text-slate-900">
                             #{order.order_code}
                           </h3>
-                          <span className={`px-2 py-1 rounded-full text-xs font-semibold ${paymentInfo.bgColor}`}>
+                          <span className={`px-3 py-1.5 rounded-full text-xs font-semibold ${paymentInfo.bgColor} ${paymentInfo.color} border ${paymentInfo.borderColor}`}>
                             {paymentInfo.label}
                           </span>
-                          <span className={`px-2 py-1 rounded-full text-xs font-semibold ${orderInfo.color}`}>
+                          <span className={`px-3 py-1.5 rounded-full text-xs font-semibold ${orderInfo.bgColor} ${orderInfo.textColor} border ${orderInfo.borderColor}`}>
                             {orderInfo.label}
                           </span>
                         </div>
@@ -417,7 +459,7 @@ export default function TrackOrderPage() {
                     {/* Expanded Content */}
                     <div className="mt-4 space-y-4">
                       {/* Status Description */}
-                      <div className={`p-4 rounded-lg ${paymentInfo.bgColor} flex items-start gap-3`}>
+                      <div className={`p-4 rounded-lg ${paymentInfo.bgColor} border ${paymentInfo.borderColor} flex items-start gap-3`}>
                         {(() => {
                           const StatusIcon = paymentInfo.icon;
                           return <StatusIcon className={`w-6 h-6 ${paymentInfo.color} flex-shrink-0 mt-0.5`} />;
@@ -427,7 +469,7 @@ export default function TrackOrderPage() {
                             {paymentInfo.description}
                           </p>
                           {order.payment_status === 'pending' && (
-                            <p className="text-sm text-slate-600">
+                            <p className="text-sm text-slate-700 font-medium">
                               Vui lòng liên hệ support để nhận thông tin thanh toán
                             </p>
                           )}
@@ -465,9 +507,14 @@ export default function TrackOrderPage() {
                                       {item.title}
                                     </h5>
                                     <div className="flex items-center gap-2 flex-wrap">
-                                      <span className={`px-2 py-0.5 rounded text-xs font-semibold ${getOrderStatusInfo(item.status).color}`}>
-                                        {getOrderStatusInfo(item.status).label}
-                                      </span>
+                                      {(() => {
+                                        const itemStatus = getOrderStatusInfo(item.status);
+                                        return (
+                                          <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${itemStatus.bgColor} ${itemStatus.textColor} border ${itemStatus.borderColor}`}>
+                                            {itemStatus.label}
+                                          </span>
+                                        );
+                                      })()}
                                       <span className="text-sm font-bold text-slate-900">
                                         {formatCurrency(typeof item.price === 'string' ? parseInt(item.price) : item.price)}
                                       </span>
