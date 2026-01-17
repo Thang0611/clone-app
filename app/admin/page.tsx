@@ -49,55 +49,55 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <AdminSidebar activeView="orders" />
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-auto">
+      {/* Main Content - Modern Clean Light Theme */}
+      <main className="flex-1 overflow-auto bg-gray-50">
         {/* Header with Connection Status */}
-        <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-8 py-4">
+        <div className="bg-white border-b border-gray-200 px-8 py-6 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                Real-time Admin Dashboard
+              <h1 className="text-3xl font-bold text-gray-900">
+                Bảng quản lý đơn hàng
               </h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
-                Monitor download progress for paid orders
+              <p className="text-gray-600 mt-1.5">
+                Theo dõi và quản lý đơn hàng đã thanh toán
               </p>
             </div>
-            <div className="flex items-center gap-2">
-              <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                {isConnected ? 'Live Updates Active' : 'Disconnected'}
+            <div className="flex items-center gap-2.5 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
+              <div className={`w-2.5 h-2.5 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
+              <span className="text-sm font-medium text-gray-700">
+                {isConnected ? 'Đang kết nối' : 'Mất kết nối'}
               </span>
             </div>
           </div>
         </div>
 
-        {/* Stats Cards */}
+        {/* Stats Cards - Modern Clean Design */}
         <div className="p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <StatsCard
-              title="Total Orders"
+              title="Tổng đơn hàng"
               value={statsLoading ? '...' : stats?.orders.total || 0}
               icon={Package}
               color="blue"
             />
             <StatsCard
-              title="Processing"
+              title="Đang xử lý"
               value={statsLoading ? '...' : stats?.orders.processing || 0}
               icon={Clock}
               color="yellow"
             />
             <StatsCard
-              title="Completed"
+              title="Hoàn thành"
               value={statsLoading ? '...' : stats?.orders.completed || 0}
               icon={TrendingUp}
               color="green"
             />
             <StatsCard
-              title="Failed"
+              title="Thất bại"
               value={statsLoading ? '...' : stats?.orders.failed || 0}
               icon={XCircle}
               color="red"
@@ -106,15 +106,15 @@ export default function AdminDashboard() {
 
           {/* Error State */}
           {error && (
-            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-              <p className="text-red-700 dark:text-red-300">
-                <span className="font-semibold">Error:</span> {error}
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-700 text-sm">
+                <span className="font-semibold">Lỗi:</span> {error}
               </p>
             </div>
           )}
 
-          {/* Orders Table */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+          {/* Orders Table - White Card with Shadow */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <OrderTable
               orders={orders}
               loading={loading}

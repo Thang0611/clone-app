@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getAuthHeader } from '@/lib/auth-utils';
 
 /**
  * Proxy to backend API for raw task log file content
@@ -21,6 +22,15 @@ export async function GET(
       );
     }
 
+    // Get JWT token for authentication
+    const authHeader = await getAuthHeader(request);
+    if (!authHeader) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized. Please login.' },
+        { status: 401 }
+      );
+    }
+
     // Get backend API URL from environment
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     
@@ -31,6 +41,7 @@ export async function GET(
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': authHeader,
       },
       signal: AbortSignal.timeout(30000), // 30 seconds
     });

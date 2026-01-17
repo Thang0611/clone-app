@@ -14,36 +14,56 @@ interface StatsCardProps {
   };
 }
 
+// Modern Clean Light Theme Colors
 const colorClasses = {
-  blue: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
-  green: 'bg-green-500/10 text-green-600 dark:text-green-400',
-  yellow: 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400',
-  red: 'bg-red-500/10 text-red-600 dark:text-red-400',
-  purple: 'bg-purple-500/10 text-purple-600 dark:text-purple-400'
+  blue: {
+    icon: 'bg-blue-50 text-blue-600',
+    value: 'text-blue-600'
+  },
+  green: {
+    icon: 'bg-green-50 text-green-600',
+    value: 'text-green-600'
+  },
+  yellow: {
+    icon: 'bg-amber-50 text-amber-600',
+    value: 'text-amber-600'
+  },
+  red: {
+    icon: 'bg-red-50 text-red-600',
+    value: 'text-red-600'
+  },
+  purple: {
+    icon: 'bg-purple-50 text-purple-600',
+    value: 'text-purple-600'
+  }
 };
 
 export function StatsCard({ title, value, icon: Icon, color = 'blue', trend }: StatsCardProps) {
+  const colors = colorClasses[color];
+  
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</p>
-          <p className="text-3xl font-bold mt-2 text-gray-900 dark:text-white">{value}</p>
+          <p className="text-sm font-medium text-gray-600 mb-2">{title}</p>
+          <p className={cn('text-3xl font-bold', colors.value)}>
+            {value}
+          </p>
           
           {trend && (
-            <div className="flex items-center gap-1 mt-2">
+            <div className="flex items-center gap-1.5 mt-3">
               <span className={cn(
-                'text-sm font-medium',
+                'text-sm font-semibold',
                 trend.isPositive ? 'text-green-600' : 'text-red-600'
               )}>
                 {trend.isPositive ? '↑' : '↓'} {Math.abs(trend.value)}%
               </span>
-              <span className="text-xs text-gray-500">vs last period</span>
+              <span className="text-xs text-gray-500">so với kỳ trước</span>
             </div>
           )}
         </div>
 
-        <div className={cn('p-3 rounded-lg', colorClasses[color])}>
+        <div className={cn('p-3 rounded-lg', colors.icon)}>
           <Icon className="w-6 h-6" />
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getAuthHeader } from '@/lib/auth-utils';
 
 /**
  * Proxy to backend API for admin order audit logs
@@ -6,12 +7,10 @@ import { NextRequest, NextResponse } from 'next/server';
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ orderId: string }> | { orderId: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    // FIX: Handle both Next.js 13+ (Promise) and older versions
-    const resolvedParams = params instanceof Promise ? await params : params;
-    const orderId = resolvedParams.orderId;
+    const { id: orderId } = await params;
     const searchParams = request.nextUrl.searchParams;
     const severity = searchParams.get('severity');
 
@@ -19,6 +18,15 @@ export async function GET(
       return NextResponse.json(
         { success: false, error: 'Order ID is required' },
         { status: 400 }
+      );
+    }
+
+    // Get JWT token for authentication
+    const authHeader = await getAuthHeader(request);
+    if (!authHeader) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized. Please login.' },
+        { status: 401 }
       );
     }
 
@@ -34,14 +42,25 @@ export async function GET(
     // Call real backend API
     const backendUrl = `${apiUrl}/api/admin/orders/${orderId}/logs${queryParams.toString() ? '?' + queryParams.toString() : ''}`;
     
-    const response = await fetch(backendUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // Add timeout to prevent hanging
-      signal: AbortSignal.timeout(30000), // 30 seconds
-    });
+    let response;
+    try {
+      response = await fetch(backendUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': authHeader,
+        },
+      });
+    } catch (fetchError) {
+      console.error('[Logs] Fetch error:', fetchError);
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Failed to connect to backend: ${fetchError instanceof Error ? fetchError.message : 'Unknown error'}`,
+        },
+        { status: 503 }
+      );
+    }
 
     if (!response.ok) {
       // If backend returns 404, return empty logs instead of error
@@ -54,10 +73,36 @@ export async function GET(
           }
         });
       }
-      throw new Error(`Backend API returned ${response.status}: ${response.statusText}`);
+      
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch {
+        errorData = { message: `Backend API returned ${response.status}` };
+      }
+      
+      return NextResponse.json(
+        {
+          success: false,
+          error: errorData.message || errorData.error || `Backend API returned ${response.status}`,
+        },
+        { status: response.status }
+      );
     }
 
-    const data = await response.json();
+    let data;
+    try {
+      data = await response.json();
+    } catch (parseError) {
+      console.error('[Logs] Failed to parse backend response:', parseError);
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Invalid response from backend server',
+        },
+        { status: 500 }
+      );
+    }
 
     // Return the data in the expected format
     // Backend returns: { success: true, data: { logs: [...], ... } }

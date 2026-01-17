@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getAuthHeader } from '@/lib/auth-utils';
 
 /**
  * Proxy to backend API for admin orders
@@ -21,13 +22,23 @@ export async function GET(request: NextRequest) {
       ...(status && { order_status: status })
     });
 
-    // Call real backend API
+    // Get JWT token for authentication
+    const authHeader = await getAuthHeader(request);
+    if (!authHeader) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized. Please login.' },
+        { status: 401 }
+      );
+    }
+
+    // Call real backend API with JWT token
     const backendUrl = `${apiUrl}/api/admin/orders/paid?${queryParams.toString()}`;
     
     const response = await fetch(backendUrl, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': authHeader,
       },
       // Add timeout to prevent hanging
       signal: AbortSignal.timeout(30000), // 30 seconds
