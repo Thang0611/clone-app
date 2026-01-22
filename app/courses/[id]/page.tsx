@@ -21,6 +21,9 @@ import {
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { toast } from "sonner";
+import Breadcrumb from "@/components/Breadcrumb";
+import StructuredData from "@/components/StructuredData";
+import { generateCourseSchema } from "@/lib/seo";
 
 // Mock course data - In production, fetch from API
 const COURSES = [
@@ -137,22 +140,33 @@ export default function CourseDetailPage() {
     // Add to cart logic
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+  // Generate Course Structured Data
+  const courseSchema = generateCourseSchema({
+    name: course.title,
+    description: course.description,
+    provider: course.platform,
+    image: course.thumbnail,
+    url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://getcourses.net'}/courses/${course.id}`,
+    price: course.price,
+    priceCurrency: 'VND',
+    rating: course.rating,
+    reviewCount: course.students,
+  });
 
-      {/* Breadcrumb */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <button
-            onClick={() => router.back()}
-            className="flex items-center gap-2 text-slate-600 hover:text-primary-600 transition-colors text-sm"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Quay lại
-          </button>
-        </div>
-      </div>
+  return (
+    <>
+      {/* Course Structured Data */}
+      <StructuredData data={courseSchema} />
+      
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+
+        {/* Breadcrumb */}
+        <Breadcrumb items={[
+          { name: "Khóa học", url: "/courses" },
+          { name: course.category || "Danh mục", url: `/courses?category=${encodeURIComponent(course.category || '')}` },
+          { name: course.title, url: `/courses/${course.id}` },
+        ]} />
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -345,5 +359,6 @@ export default function CourseDetailPage() {
 
       <Footer />
     </div>
+    </>
   );
 }

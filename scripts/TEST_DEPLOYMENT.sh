@@ -2,8 +2,8 @@
 
 # ============================================
 # Deployment Testing Script
-# Frontend: khoahocgiare.info
-# Backend API: api.khoahocgiare.info
+# Frontend: getcourses.net
+# Backend API: api.getcourses.net
 # ============================================
 
 set -e  # Exit on error
@@ -45,8 +45,8 @@ echo ""
 echo "🔧 Creating environment files..."
 
 cat > .env.production << 'EOF'
-NEXT_PUBLIC_SOCKET_URL=https://api.khoahocgiare.info
-NEXT_PUBLIC_API_URL=https://api.khoahocgiare.info
+NEXT_PUBLIC_SOCKET_URL=https://api.getcourses.net
+NEXT_PUBLIC_API_URL=https://api.getcourses.net
 EOF
 
 cat > .env.local << 'EOF'
@@ -125,10 +125,10 @@ echo "📋 Next Steps:"
 echo "1. Deploy with PM2: pm2 start ecosystem.config.js"
 echo "2. Save PM2 config: pm2 save"
 echo "3. Check status: pm2 status"
-echo "4. View logs: pm2 logs khoahocgiare-frontend"
+echo "4. View logs: pm2 logs getcourses-frontend"
 echo ""
 echo "🌐 Access URLs:"
-echo "  - Production: https://khoahocgiare.info"
-echo "  - Admin: https://khoahocgiare.info/admin"
-echo "  - Backend API: https://api.khoahocgiare.info"
+echo "  - Production: https://getcourses.net"
+echo "  - Admin: https://getcourses.net/admin"
+echo "  - Backend API: https://api.getcourses.net"
 echo ""

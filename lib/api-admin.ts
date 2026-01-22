@@ -14,7 +14,7 @@ class AuthenticatedAPIClient {
   private baseURL: string;
 
   constructor(baseURL?: string) {
-    this.baseURL = baseURL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    this.baseURL = baseURL || process.env.NEXT_PUBLIC_API_URL || 'https://api.getcourses.net';
   }
 
   /**

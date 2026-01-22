@@ -7,6 +7,7 @@ import { Calendar, Clock, User, ArrowRight, Search, Tag } from "lucide-react";
 import { Card, CardBody } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import Breadcrumb from "@/components/Breadcrumb";
 
 // Mock blog posts
 const BLOG_POSTS = [
@@ -111,6 +112,11 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
+
+      {/* Breadcrumb */}
+      <Breadcrumb items={[
+        { name: "Blog", url: "/blog" },
+      ]} />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 py-16 px-4">

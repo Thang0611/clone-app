@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { toast } from "sonner";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -57,6 +58,11 @@ export default function ContactPage() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
+      {/* Breadcrumb */}
+      <Breadcrumb items={[
+        { name: "Liên hệ", url: "/contact" },
+      ]} />
+
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -92,10 +98,10 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-bold text-slate-900 mb-2">Email</h3>
                     <a 
-                      href="mailto:support@khoahocgiare.info" 
+                      href="mailto:getcourses.net@gmail.com" 
                       className="text-indigo-600 hover:text-indigo-700 font-medium"
                     >
-                      support@khoahocgiare.info
+                      getcourses.net@gmail.com
                     </a>
                     <p className="text-sm text-slate-600 mt-1">
                       Phản hồi trong 24h
@@ -115,15 +121,17 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">Hotline</h3>
+                    <h3 className="font-bold text-slate-900 mb-2">Zalo/Hotline</h3>
                     <a 
-                      href="tel:0123456789" 
+                      href="https://zalo.me/0986787542" 
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-green-600 hover:text-green-700 font-bold text-lg"
                     >
-                      0123 456 789
+                      0986 787 542
                     </a>
                     <p className="text-sm text-slate-600 mt-1">
-                      Hỗ trợ 24/7
+                      Hỗ trợ 24/7 qua Zalo
                     </p>
                   </div>
                 </div>
@@ -186,10 +194,12 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-bold text-slate-900 mb-2">Facebook</h3>
                     <a 
-                      href="#" 
+                      href="http://facebook.com/getcourses.net/" 
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-700 font-medium"
                     >
-                      KhoaHocGiaRe Fanpage
+                      GetCourses Facebook
                     </a>
                     <p className="text-sm text-slate-600 mt-1">
                       Chat trực tiếp
@@ -212,7 +222,7 @@ export default function ContactPage() {
                   Điền form bên dưới và chúng tôi sẽ phản hồi sớm nhất có thể
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6" action="#">
                   
                   {/* Name Input */}
                   <div>

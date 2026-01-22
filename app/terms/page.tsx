@@ -38,7 +38,7 @@ export default function TermsPage() {
                   1. Giới thiệu
                 </h2>
                 <p className="text-slate-700 leading-relaxed mb-4">
-                  Chào mừng bạn đến với <strong>KhoaHocGiaRe.info</strong>. Bằng việc truy cập và sử dụng dịch vụ của chúng tôi, 
+                  Chào mừng bạn đến với <strong>GetCourses</strong>. Bằng việc truy cập và sử dụng dịch vụ của chúng tôi, 
                   bạn đồng ý tuân thủ và bị ràng buộc bởi các điều khoản và điều kiện sau đây. 
                   Vui lòng đọc kỹ trước khi sử dụng dịch vụ.
                 </p>
@@ -54,7 +54,7 @@ export default function TermsPage() {
                   2. Mô tả dịch vụ
                 </h2>
                 <p className="text-slate-700 leading-relaxed mb-4">
-                  KhoaHocGiaRe.info cung cấp dịch vụ phân phối khóa học trực tuyến từ các nền tảng như Udemy, Coursera, và LinkedIn Learning. 
+                  GetCourses cung cấp dịch vụ phân phối khóa học trực tuyến từ các nền tảng như Udemy, Coursera, và LinkedIn Learning. 
                   Chúng tôi:
                 </p>
                 <ul className="space-y-3 mb-4">
@@ -139,7 +139,7 @@ export default function TermsPage() {
                   6. Giới hạn trách nhiệm
                 </h2>
                 <p className="text-slate-700 leading-relaxed mb-4">
-                  KhoaHocGiaRe.info không chịu trách nhiệm cho:
+                  GetCourses.net không chịu trách nhiệm cho:
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-slate-700 ml-4">
                   <li>Chất lượng nội dung khóa học (do tác giả gốc quyết định)</li>
@@ -234,13 +234,13 @@ export default function TermsPage() {
                 </p>
                 <div className="bg-slate-50 rounded-lg p-6 border-2 border-slate-200">
                   <p className="text-slate-700 mb-2">
-                    <strong>Email:</strong> support@khoahocgiare.info
+                    <strong>Email:</strong> getcourses.net@gmail.com
                   </p>
                   <p className="text-slate-700 mb-2">
                     <strong>Hotline:</strong> 0123 456 789
                   </p>
                   <p className="text-slate-700">
-                    <strong>Website:</strong> khoahocgiare.info
+                    <strong>Website:</strong> getcourses.net
                   </p>
                 </div>
               </section>

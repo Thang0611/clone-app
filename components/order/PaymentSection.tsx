@@ -38,13 +38,13 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
               <Button
                 size="lg"
                 className="w-full"
-                onClick={() => window.open('mailto:support@khoahocgiare.info?subject=Thanh toán đơn hàng ' + orderData.orderCode, '_blank')}
+                onClick={() => window.open('mailto:getcourses.net@gmail.com?subject=Payment for order ' + orderData.orderCode, '_blank')}
               >
                 📧 Liên hệ support
               </Button>
               <p className="text-sm text-slate-600">
-                Email: support@khoahocgiare.info<br/>
-                Hotline: 0123 456 789
+                Email: getcourses.net@gmail.com<br/>
+                Zalo: 0986 787 542
               </p>
             </div>
           </div>

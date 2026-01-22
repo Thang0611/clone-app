@@ -6,7 +6,7 @@ import { BookOpen } from "lucide-react";
 import { Spinner } from "./ui/Spinner";
 import { useCoursePayment } from "@/hooks/useCoursePayment";
 import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
-import { useTracking } from "@/hooks/useTracking";
+// import { useTracking } from "@/hooks/useTracking"; // ❌ REMOVED: Không track InitiateCheckout trong modal nữa
 import { CourseModalHeader } from "./course-modal/CourseModalHeader";
 import { CourseScrollList } from "./course-modal/CourseScrollList";
 import { PaymentFooter } from "./course-modal/PaymentFooter";
@@ -29,8 +29,8 @@ export default function CourseModal({
 }: CourseModalProps) {
   const router = useRouter();
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-  const { trackCheckout } = useTracking();
-  const checkoutTracked = useRef(false);
+  // const { trackCheckout } = useTracking(); // ❌ REMOVED: Không track InitiateCheckout trong modal nữa
+  // const checkoutTracked = useRef(false); // ❌ REMOVED: Không cần nữa
   
   // Payment logic
   const {
@@ -50,38 +50,20 @@ export default function CourseModal({
     },
   });
 
-  // Step 3.5: Track begin_checkout when modal opens with courses
-  useEffect(() => {
-    if (isOpen && successfulCourses.length > 0 && !isLoading && !checkoutTracked.current) {
-      // Helper function to extract platform from URL
-      const getPlatformFromUrl = (url?: string): string => {
-        if (!url) return 'Unknown';
-        if (url.includes('udemy.com')) return 'Udemy';
-        if (url.includes('coursera.org')) return 'Coursera';
-        if (url.includes('linkedin.com/learning')) return 'LinkedIn Learning';
-        return 'Unknown';
-      };
-
-      // Prepare items for tracking
-      const items = successfulCourses.map((course, index) => ({
-        item_id: String(course.courseId || `course_${index}`),
-        item_name: course.title || 'Khóa học',
-        item_category: 'education',
-        item_brand: getPlatformFromUrl(course.url),
-        price: course.price || 2000,
-        quantity: 1,
-      }));
-
-      // Track checkout
-      trackCheckout(totalAmount, 'VND', items);
-      checkoutTracked.current = true;
-    }
-
-    // Reset when modal closes
-    if (!isOpen) {
-      checkoutTracked.current = false;
-    }
-  }, [isOpen, successfulCourses, isLoading, totalAmount, trackCheckout]);
+  // ❌ REMOVED: Track begin_checkout khi mở modal
+  // ✅ InitiateCheckout sẽ được track khi vào trang order (trang show QR)
+  // Xem: app/order/[orderCode]/page.tsx - Track khi page load với orderData
+  // 
+  // Lý do remove:
+  // - InitiateCheckout chỉ nên track khi user vào trang thanh toán (show QR)
+  // - Modal checkout chỉ là preview, chưa phải trang thanh toán thực sự
+  // - Trang order (/order/[orderCode]) mới là trang show QR code để thanh toán
+  //
+  // useEffect(() => {
+  //   if (isOpen && successfulCourses.length > 0 && !isLoading && !checkoutTracked.current) {
+  //     // ... track checkout code ...
+  //   }
+  // }, [isOpen, successfulCourses, isLoading, totalAmount, trackCheckout, email]);
 
   // Horizontal scroll logic
   const {

@@ -13,7 +13,7 @@ export const getSocketUrl = (): string => {
  * Get the API base URL based on environment
  */
 export const getApiUrl = (): string => {
-  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+  return process.env.NEXT_PUBLIC_API_URL || 'https://api.getcourses.net';
 };
 
 /**

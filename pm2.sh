@@ -39,13 +39,13 @@ if [ "$1" == "start" ]; then
 # Restart
 elif [ "$1" == "restart" ]; then
     echo -e "${YELLOW}Restarting PM2...${NC}"
-    pm2 restart khoahocgiare-frontend --update-env
+    pm2 restart getcourses-frontend --update-env
     echo -e "${GREEN}✓ Restarted!${NC}"
 
 # Stop
 elif [ "$1" == "stop" ]; then
     echo -e "${YELLOW}Stopping PM2...${NC}"
-    pm2 stop khoahocgiare-frontend
+    pm2 stop getcourses-frontend
     echo -e "${GREEN}✓ Stopped!${NC}"
 
 # Status
@@ -55,11 +55,11 @@ elif [ "$1" == "status" ]; then
 # Logs (tail -f)
 elif [ "$1" == "logs" ]; then
     echo -e "${GREEN}Showing PM2 logs (Ctrl+C to exit)...${NC}"
-    pm2 logs khoahocgiare-frontend
+    pm2 logs getcourses-frontend
 
 # Logs tail (last 50 lines)
 elif [ "$1" == "logs-tail" ]; then
-    pm2 logs khoahocgiare-frontend --lines 50 --nostream
+    pm2 logs getcourses-frontend --lines 50 --nostream
 
 # Save
 elif [ "$1" == "save" ]; then
@@ -70,7 +70,7 @@ elif [ "$1" == "save" ]; then
 # Delete
 elif [ "$1" == "delete" ]; then
     echo -e "${RED}Deleting PM2 process...${NC}"
-    pm2 delete khoahocgiare-frontend
+    pm2 delete getcourses-frontend
     echo -e "${YELLOW}✓ Deleted!${NC}"
 
 # Setup auto-start

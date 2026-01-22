@@ -1,15 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Code, Palette, Users, Globe, TrendingUp, Briefcase, Sparkles } from "lucide-react";
+import { Code, Palette, Users, Globe, TrendingUp, Briefcase, Sparkles, Brain, Shield, Share2 } from "lucide-react";
 
 const categories = [
+  // Nhóm Công nghệ & Lập trình
   { name: "Lập trình", icon: Code, color: "from-blue-500 to-cyan-500" },
+  { name: "AI/LLM", icon: Brain, color: "from-teal-500 to-cyan-500" },
+  { name: "Cyber Security", icon: Shield, color: "from-red-500 to-orange-500" },
+  // Nhóm Thiết kế & Sáng tạo
   { name: "Thiết kế đồ họa", icon: Palette, color: "from-pink-500 to-rose-500" },
-  { name: "Kỹ năng mềm", icon: Users, color: "from-purple-500 to-indigo-500" },
-  { name: "Tiếng Anh", icon: Globe, color: "from-green-500 to-emerald-500" },
+  { name: "Facebook/TikTok", icon: Share2, color: "from-blue-600 to-purple-600" },
+  // Nhóm Kinh doanh & Marketing
   { name: "Marketing", icon: TrendingUp, color: "from-orange-500 to-amber-500" },
   { name: "Quản lý dự án", icon: Briefcase, color: "from-violet-500 to-purple-500" },
+  // Nhóm Kỹ năng & Phát triển bản thân
+  { name: "Kỹ năng mềm", icon: Users, color: "from-purple-500 to-indigo-500" },
+  { name: "Tiếng Anh", icon: Globe, color: "from-green-500 to-emerald-500" },
 ];
 
 const platforms = [

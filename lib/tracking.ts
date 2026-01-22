@@ -24,6 +24,23 @@ function initDataLayer(): void {
 }
 
 /**
+ * Get test event code from URL if present
+ */
+function getTestEventCode(): string | undefined {
+  if (typeof window === 'undefined') {
+    return undefined;
+  }
+
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const testCode = urlParams.get('test_event_code');
+    return testCode || undefined;
+  } catch (error) {
+    return undefined;
+  }
+}
+
+/**
  * Push event to dataLayer (for GTM)
  */
 export function pushToDataLayer(data: Record<string, any>): void {
@@ -37,9 +54,14 @@ export function pushToDataLayer(data: Record<string, any>): void {
 
   initDataLayer();
 
+  // Get test event code from URL if present
+  const testEventCode = getTestEventCode();
+
   const eventData = {
     ...data,
     timestamp: new Date().toISOString(),
+    // Add test event code if present in URL
+    ...(testEventCode && { test_event_code: testEventCode }),
   };
 
   if (window.dataLayer) {
@@ -49,6 +71,9 @@ export function pushToDataLayer(data: Record<string, any>): void {
   // Log in development
   if (process.env.NODE_ENV === 'development') {
     console.log('[Tracking] Event pushed to dataLayer:', eventData);
+    if (testEventCode) {
+      console.log(`[Tracking] Test event code: ${testEventCode}`);
+    }
   }
 }
 
@@ -67,17 +92,20 @@ export function trackPageView(path: string, title?: string): void {
 
 /**
  * Track View Content
+ * @param contentIds - optional: mã khóa học (content_ids) để Facebook hiển thị thông tin khóa học
  */
 export function trackViewContent(
   contentType: string,
   contentName?: string,
-  contentCategory?: string
+  contentCategory?: string,
+  contentIds?: string[]
 ): void {
   pushToDataLayer({
     event: 'view_content',
     content_type: contentType,
     content_name: contentName,
     content_category: contentCategory,
+    ...(contentIds?.length ? { content_ids: contentIds } : {}),
   });
 }
 
@@ -99,12 +127,14 @@ export function trackFormStart(
 
 /**
  * Track Form Submit
+ * @param emailHash - Optional: SHA-256 hashed email for Advanced Matching
  */
 export function trackFormSubmit(
   formId: string,
   formName: string,
   formLocation?: string,
-  courseCount?: number
+  courseCount?: number,
+  emailHash?: string
 ): void {
   pushToDataLayer({
     event: 'form_submit',
@@ -112,6 +142,7 @@ export function trackFormSubmit(
     form_name: formName,
     form_location: formLocation,
     course_count: courseCount,
+    email_hash: emailHash,
   });
 }
 
@@ -147,6 +178,7 @@ export function trackFormSubmitError(
 
 /**
  * Track Begin Checkout (InitiateCheckout)
+ * @param emailHash - Optional: SHA-256 hashed email for Advanced Matching
  */
 export function trackBeginCheckout(
   value: number,
@@ -159,7 +191,8 @@ export function trackBeginCheckout(
     price: number;
     quantity: number;
   }>,
-  transactionId?: string
+  transactionId?: string,
+  emailHash?: string
 ): void {
   pushToDataLayer({
     event: 'begin_checkout',
@@ -167,6 +200,7 @@ export function trackBeginCheckout(
     value: value,
     items: items,
     transaction_id: transactionId || `temp_${Date.now()}`,
+    email_hash: emailHash,
   });
 }
 

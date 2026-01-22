@@ -12,15 +12,19 @@
 export const trackingConfig = {
   // Google Tag Manager ID
   // Get from: https://tagmanager.google.com/
-  gtmId: process.env.NEXT_PUBLIC_GTM_ID || '', // e.g., 'GTM-XXXXXXX'
+  gtmId: process.env.NEXT_PUBLIC_GTM_ID || 'GTM-5TL3J9D8', // e.g., 'GTM-XXXXXXX'
 
   // Google Analytics 4 Measurement ID
   // Get from: https://analytics.google.com/
-  ga4Id: process.env.NEXT_PUBLIC_GA4_ID || '', // e.g., 'G-XXXXXXXXXX'
+  ga4Id: process.env.NEXT_PUBLIC_GA4_ID || 'G-Z68W3D9YRF', // e.g., 'G-XXXXXXXXXX'
+
+  // Load GA4 via GTM instead of direct integration
+  // Set NEXT_PUBLIC_GA4_VIA_GTM=true to disable GoogleAnalytics component
+  ga4ViaGTM: process.env.NEXT_PUBLIC_GA4_VIA_GTM === 'true',
 
   // Meta Pixel ID
   // Get from: https://business.facebook.com/events_manager2/
-  metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || '', // e.g., '1234567890123456'
+  metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || '2048390439314825', // e.g., '1234567890123456'
 
   // Enable/disable tracking (useful for development)
   enabled: process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_ENABLE_TRACKING === 'true',
@@ -29,7 +33,7 @@ export const trackingConfig = {
   currency: 'VND',
 
   // Site domain
-  siteDomain: process.env.NEXT_PUBLIC_SITE_DOMAIN || 'khoahocgiare.info',
+  siteDomain: process.env.NEXT_PUBLIC_SITE_DOMAIN || 'getcourses.net',
 } as const;
 
 /**

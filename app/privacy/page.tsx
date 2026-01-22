@@ -38,7 +38,7 @@ export default function PrivacyPage() {
                   1. Giới thiệu
                 </h2>
                 <p className="text-slate-700 leading-relaxed mb-4">
-                  Tại <strong>KhoaHocGiaRe.info</strong>, chúng tôi cam kết bảo vệ quyền riêng tư và 
+                  Tại <strong>GetCourses</strong>, chúng tôi cam kết bảo vệ quyền riêng tư và 
                   thông tin cá nhân của bạn. Chính sách bảo mật này mô tả cách chúng tôi thu thập, 
                   sử dụng, lưu trữ và bảo vệ thông tin của bạn.
                 </p>
@@ -204,7 +204,7 @@ export default function PrivacyPage() {
                   ))}
                 </ul>
                 <p className="text-slate-700 leading-relaxed">
-                  Để thực hiện các quyền này, vui lòng liên hệ: <strong>support@khoahocgiare.info</strong>
+                  Để thực hiện các quyền này, vui lòng liên hệ: <strong>getcourses.net@gmail.com</strong>
                 </p>
               </section>
 
@@ -295,13 +295,13 @@ export default function PrivacyPage() {
                 </p>
                 <div className="bg-indigo-50 rounded-lg p-6 border-2 border-indigo-200">
                   <p className="text-slate-700 mb-2">
-                    <strong>Email:</strong> support@khoahocgiare.info
+                    <strong>Email:</strong> getcourses.net@gmail.com
                   </p>
                   <p className="text-slate-700 mb-2">
                     <strong>Hotline:</strong> 0123 456 789
                   </p>
                   <p className="text-slate-700">
-                    <strong>Website:</strong> khoahocgiare.info
+                    <strong>Website:</strong> getcourses.net
                   </p>
                 </div>
               </section>

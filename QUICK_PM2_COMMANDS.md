@@ -37,9 +37,9 @@ cd /root/project/clone-app
 ### ❌ Trước (dài):
 ```bash
 cd /root/project/clone-app
-pm2 restart khoahocgiare-frontend --update-env
+pm2 restart getcourses-frontend --update-env
 pm2 save
-pm2 logs khoahocgiare-frontend --lines 50
+pm2 logs getcourses-frontend --lines 50
 ```
 
 ### ✅ Sau (ngắn):

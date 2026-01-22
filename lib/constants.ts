@@ -3,7 +3,7 @@
 // ============================================
 
 // API Configuration
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.khoahocgiare.info';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.getcourses.net';
 export const API_VERSION = 'v1';
 
 // API Endpoints

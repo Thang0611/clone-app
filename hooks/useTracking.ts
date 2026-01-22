@@ -50,13 +50,15 @@ export function useTracking() {
 
   /**
    * Track view content
+   * @param contentIds - optional: mã khóa học (content_ids) cho Facebook
    */
   const trackContent = useCallback((
     contentType: string,
     contentName?: string,
-    contentCategory?: string
+    contentCategory?: string,
+    contentIds?: string[]
   ) => {
-    trackViewContent(contentType, contentName, contentCategory);
+    trackViewContent(contentType, contentName, contentCategory, contentIds);
   }, []);
 
   /**
@@ -78,14 +80,18 @@ export function useTracking() {
 
   /**
    * Track form submit
+   * @param email - Optional: User email (will be hashed automatically)
    */
-  const trackForm = useCallback((
+  const trackForm = useCallback(async (
     formId: string,
     formName: string,
     formLocation?: string,
-    courseCount?: number
+    courseCount?: number,
+    email?: string
   ) => {
-    trackFormSubmit(formId, formName, formLocation, courseCount);
+    // Hash email if provided
+    const emailHash = email ? await hashEmail(email) : undefined;
+    trackFormSubmit(formId, formName, formLocation, courseCount, emailHash);
   }, []);
 
   /**
@@ -111,8 +117,9 @@ export function useTracking() {
 
   /**
    * Track begin checkout
+   * @param email - Optional: User email (will be hashed automatically)
    */
-  const trackCheckout = useCallback((
+  const trackCheckout = useCallback(async (
     value: number,
     currency: string,
     items: Array<{
@@ -123,9 +130,12 @@ export function useTracking() {
       price: number;
       quantity: number;
     }>,
-    transactionId?: string
+    transactionId?: string,
+    email?: string
   ) => {
-    trackBeginCheckout(value, currency, items, transactionId);
+    // Hash email if provided
+    const emailHash = email ? await hashEmail(email) : undefined;
+    trackBeginCheckout(value, currency, items, transactionId, emailHash);
   }, []);
 
   /**

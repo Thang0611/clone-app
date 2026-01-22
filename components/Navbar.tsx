@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { scrollToFormAndFocus } from "@/lib/scrollToForm";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,10 +19,7 @@ export default function Navbar() {
   }, []);
 
   const scrollToForm = () => {
-    const heroSection = document.querySelector('section');
-    if (heroSection) {
-      heroSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToFormAndFocus();
     setMobileMenuOpen(false);
   };
 
@@ -36,10 +34,10 @@ export default function Navbar() {
             <div className="relative transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">
               <Image
                 src="/images/logo.png"
-                alt="Khóa Học Giá Rẻ"
-                width={240}
-                height={90}
-                className="h-14 md:h-16 w-auto object-contain drop-shadow-md"
+                alt="GetCourses"
+                width={2816}
+                height={428}
+                className="h-8 md:h-10 w-auto object-contain drop-shadow-md"
                 priority
               />
             </div>

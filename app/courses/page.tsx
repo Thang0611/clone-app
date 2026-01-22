@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Input } from "@/components/ui/Input";
 import CourseCard from "@/components/CourseCard";
 import { toast } from "sonner";
+import Breadcrumb from "@/components/Breadcrumb";
 
 // Mock course data
 const COURSES = [
@@ -294,6 +295,11 @@ function CoursesPageContent() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
+
+      {/* Breadcrumb */}
+      <Breadcrumb items={[
+        { name: "Khóa học", url: "/courses" },
+      ]} />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 py-16 px-4">

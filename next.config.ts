@@ -61,8 +61,8 @@ const nextConfig: NextConfig = {
       '169.254.83.107', // IP local network nếu cần
       'localhost',
       '127.0.0.1',
-      'khoahocgiare.info',
-      'api.khoahocgiare.info',
+      'getcourses.net',
+      'api.getcourses.net',
     ],
   }),
 };

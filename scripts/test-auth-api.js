@@ -8,7 +8,7 @@
 const http = require('http');
 
 const BASE_URL = process.argv[2] || 'http://localhost:4000';
-const EMAIL = process.argv[3] || 'khoahocgiare.info@gmail.com';
+const EMAIL = process.argv[3] || 'support@getcourses.net';
 const PASSWORD = process.argv[4] || 'Nguyenhuuthanga3@';
 
 console.log('\n🧪 Testing Authentication API');

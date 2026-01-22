@@ -297,7 +297,7 @@ export default function TrackOrderPage() {
         {/* Search Form - Overlapping Card */}
         <Card className="mb-8 shadow-2xl border border-slate-200/50 backdrop-blur-sm bg-white/95">
           <CardBody className="p-6 sm:p-8">
-            <form onSubmit={handleSearch}>
+            <form onSubmit={handleSearch} action="#">
               {/* Search Input */}
               <div className="mb-6">
                 <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -599,11 +599,11 @@ export default function TrackOrderPage() {
                 <div className="mt-6 pt-6 border-t border-indigo-200">
                   <p className="font-semibold mb-2">Liên hệ hỗ trợ:</p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="mailto:support@khoahocgiare.info" className="text-indigo-600 hover:text-indigo-700 font-medium">
-                      📧 support@khoahocgiare.info
+                    <a href="mailto:getcourses.net@gmail.com" className="text-indigo-600 hover:text-indigo-700 font-medium">
+                      📧 getcourses.net@gmail.com
                     </a>
                     <span className="text-slate-600">
-                      📞 Hotline: 0123 456 789
+                      📞 Zalo: 0986 787 542
                     </span>
                   </div>
                 </div>

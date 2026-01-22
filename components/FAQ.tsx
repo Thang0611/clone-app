@@ -19,7 +19,7 @@ const FAQ_DATA = [
   {
     id: 2,
     question: "Mình có được tải về không?",
-    answer: "Có. Bạn hoàn toàn có quyền download mọi khóa học khi mua tại Khóa Học Giá Rẻ",
+    answer: "Có. Bạn hoàn toàn có quyền download mọi khóa học khi mua tại GetCourses",
   },
   {
     id: 3,
@@ -36,9 +36,9 @@ const FAQ_DATA = [
     question: "Cách dùng phụ đề rời như thể nào? Cách dịch phụ đề sang tiếng việt?",
     answer: (
       <>
-        Hướng dẫn dùng phụ đề rời: <a href="#" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
+        Hướng dẫn dùng phụ đề rời: <a href="https://youtu.be/YA5jUsf4O2g?si=Yh6XkL46VKj0POFe" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
         <br />
-        Cách dịch sang tiếng việt: <a href="#" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
+        Cách dịch sang tiếng việt: <a href="https://youtu.be/YA5jUsf4O2g?si=Yh6XkL46VKj0POFe" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
       </>
     ),
   },
@@ -91,7 +91,7 @@ export default function FAQ() {
           CÂU HỎI THƯỜNG GẶP
         </h2>
         <p className="text-xl text-slate-600 mb-16 text-center">
-          Các câu hỏi thường gặp khi mua khoá học tại Khóa Học Giá Rẻ
+          Các câu hỏi thường gặp khi mua khoá học tại GetCourses
         </p>
 
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">

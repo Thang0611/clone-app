@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Meta Pixel - TEST59193</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1877f2;
+            margin-bottom: 10px;
+        }
+        .test-code {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        button {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #166fe5;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        #console-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .log {
+            margin: 5px 0;
+        }
+        .log-info { color: #4ec9b0; }
+        .log-success { color: #4fc1ff; }
+        .log-error { color: #f48771; }
+        .log-warn { color: #dcdcaa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Meta Pixel Tracking</h1>
+        <p>Test Event Code: <span class="test-code">TEST59193</span></p>
+
+        <div id="status" class="status info">
+            <strong>ℹ️ Status:</strong> Đang kiểm tra...
+        </div>
+
+        <div>
+            <h3>Test Events:</h3>
+            <button onclick="testPageView()">Test PageView</button>
+            <button onclick="testViewContent()">Test ViewContent</button>
+            <button onclick="testLead()">Test Lead</button>
+            <button onclick="testInitiateCheckout()">Test InitiateCheckout</button>
+            <button onclick="testPurchase()">Test Purchase</button>
+            <button onclick="testAllEvents()">Test All Events</button>
+        </div>
+
+        <div>
+            <h3>Console Output:</h3>
+            <div id="console-output"></div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h3>Hướng dẫn:</h3>
+            <ol>
+                <li>Click các nút test để gửi events</li>
+                <li>Kiểm tra console output bên dưới</li>
+                <li>Vào <a href="https://business.facebook.com/events_manager2/" target="_blank">Facebook Events Manager</a></li>
+                <li>Chọn Pixel → Test Events tab</li>
+                <li>Nhập code: <strong>TEST59193</strong></li>
+                <li>Xem events trong real-time</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        const TEST_EVENT_CODE = 'TEST59193';
+        let logCount = 0;
+
+        // Console logging
+        function log(message, type = 'info') {
+            const output = document.getElementById('console-output');
+            const logDiv = document.createElement('div');
+            logDiv.className = `log log-${type}`;
+            logDiv.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            output.appendChild(logDiv);
+            output.scrollTop = output.scrollHeight;
+            logCount++;
+        }
+
+        // Update status
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = `<strong>${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'} Status:</strong> ${message}`;
+        }
+
+        // Check setup
+        function checkSetup() {
+            log('Checking setup...', 'info');
+            
+            // Check URL for test code
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlTestCode = urlParams.get('test_event_code');
+            
+            if (urlTestCode === TEST_EVENT_CODE) {
+                log(`✅ Test event code found in URL: ${TEST_EVENT_CODE}`, 'success');
+            } else {
+                log(`⚠️ Test event code not in URL. Add ?test_event_code=${TEST_EVENT_CODE}`, 'warn');
+            }
+
+            // Check dataLayer
+            if (typeof window.dataLayer === 'undefined') {
+                log('❌ window.dataLayer is not defined!', 'error');
+                updateStatus('dataLayer chưa được khởi tạo', 'error');
+                return false;
+            }
+            log(`✅ dataLayer exists (${window.dataLayer.length} events)`, 'success');
+
+            // Check Meta Pixel
+            if (typeof window.fbq === 'undefined') {
+                log('⚠️ Meta Pixel (fbq) not loaded (may be OK if using GTM)', 'warn');
+            } else {
+                log('✅ Meta Pixel (fbq) is loaded', 'success');
+            }
+
+            updateStatus('Setup OK - Sẵn sàng test', 'success');
+            return true;
+        }
+
+        // Track event with test code
+        function trackEvent(eventName, eventData = {}) {
+            const data = {
+                ...eventData,
+                test_event_code: TEST_EVENT_CODE,
+                timestamp: new Date().toISOString()
+            };
+
+            // Push to dataLayer
+            if (window.dataLayer) {
+                window.dataLayer.push({
+                    event: eventName.toLowerCase().replace(/([A-Z])/g, '_$1').toLowerCase(),
+                    ...data
+                });
+                log(`✅ Pushed to dataLayer: ${eventName}`, 'success');
+            }
+
+            // Track via fbq if available
+            if (typeof window.fbq !== 'undefined') {
+                try {
+                    window.fbq('track', eventName, data);
+                    log(`✅ Tracked via fbq: ${eventName}`, 'success');
+                } catch (error) {
+                    log(`❌ Error tracking via fbq: ${error.message}`, 'error');
+                }
+            }
+
+            log(`Event data: ${JSON.stringify(data, null, 2)}`, 'info');
+        }
+
+        // Test functions
+        function testPageView() {
+            log('--- Testing PageView ---', 'info');
+            trackEvent('PageView', {
+                content_name: 'Test Page',
+                test: true
+            });
+        }
+
+        function testViewContent() {
+            log('--- Testing ViewContent ---', 'info');
+            trackEvent('ViewContent', {
+                content_type: 'test',
+                content_name: 'Test Content',
+                content_category: 'test'
+            });
+        }
+
+        function testLead() {
+            log('--- Testing Lead ---', 'info');
+            trackEvent('Lead', {
+                content_name: 'Test Form',
+                content_category: 'test'
+            });
+        }
+
+        function testInitiateCheckout() {
+            log('--- Testing InitiateCheckout ---', 'info');
+            trackEvent('InitiateCheckout', {
+                value: 1000,
+                currency: 'VND',
+                num_items: 1
+            });
+        }
+
+        function testPurchase() {
+            log('--- Testing Purchase ---', 'info');
+            trackEvent('Purchase', {
+                value: 2000,
+                currency: 'VND',
+                contents: [{
+                    id: 'test_item_1',
+                    quantity: 1,
+                    item_price: 2000
+                }],
+                content_type: 'product',
+                content_ids: ['test_item_1']
+            });
+        }
+
+        function testAllEvents() {
+            log('=== Testing All Events ===', 'info');
+            testPageView();
+            setTimeout(() => testViewContent(), 500);
+            setTimeout(() => testLead(), 1000);
+            setTimeout(() => testInitiateCheckout(), 1500);
+            setTimeout(() => testPurchase(), 2000);
+            setTimeout(() => {
+                log('=== All Events Tested ===', 'success');
+                updateStatus('Đã test tất cả events! Kiểm tra Facebook Events Manager', 'success');
+            }, 2500);
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            log('Test page loaded', 'info');
+            checkSetup();
+        });
+    </script>
+</body>
+</html>

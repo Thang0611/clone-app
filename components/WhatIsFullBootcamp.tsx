@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { scrollToFormAndFocus } from "@/lib/scrollToForm";
 
 export default function WhatIsFullBootcamp() {
   return (
@@ -7,7 +10,7 @@ export default function WhatIsFullBootcamp() {
         {/* Header */}
         <div className="text-center mb-10 sm:mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-            Khóa Học Giá Rẻ là gì?
+            GetCourses là gì?
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto px-4">
             Là công cụ giúp bạn tải khóa học từ Udemy, Coursera, LinkedIn Learning về Drive với chi phí thấp hơn giá gốc.
@@ -25,7 +28,7 @@ export default function WhatIsFullBootcamp() {
           <div className="w-full order-2 lg:order-1">
             <div className="relative w-full aspect-[690/765] rounded-2xl overflow-hidden shadow-xl">
               <Image 
-                src="/images/udemy-1.jpg" 
+                src="/images/udemy-1.webp" 
                 alt="Udemy Course Laptop" 
                 fill
                 className="object-cover"
@@ -105,7 +108,10 @@ export default function WhatIsFullBootcamp() {
             
             {/* CTA Button */}
             <div className="mt-2">
-              <button className="w-full sm:w-auto bg-gradient-to-r from-red-500 to-red-600 text-white px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-red-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]">
+              <button 
+                onClick={scrollToFormAndFocus}
+                className="w-full sm:w-auto bg-gradient-to-r from-red-500 to-red-600 text-white px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-red-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
+              >
                 Tải khóa học ngay!
               </button>
             </div>

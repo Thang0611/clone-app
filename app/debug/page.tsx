@@ -2,11 +2,12 @@
 
 import { API_BASE_URL, API_ENDPOINTS } from '@/lib/constants';
 import { getApiUrl } from '@/lib/config';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function DebugPage() {
   const [testResult, setTestResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [trackingStatus, setTrackingStatus] = useState<Record<string, unknown> | null>(null);
 
   const testAPI = async () => {
     setLoading(true);
@@ -34,6 +35,39 @@ export default function DebugPage() {
       setTestResult({ success: false, error: error.message });
     }
     setLoading(false);
+  };
+
+  // Tracking / GTM verification (client-side)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const d: Record<string, unknown> = {};
+    d.dataLayerExists = Array.isArray(window.dataLayer);
+    d.dataLayerLength = window.dataLayer?.length ?? 0;
+    d.dataLayerEvents = window.dataLayer
+      ?.map((e: { event?: string }) => e?.event)
+      .filter((x): x is string => Boolean(x))
+      .filter((v, i, a) => a.indexOf(v) === i) ?? [];
+    d.gtmLoaded = typeof (window as unknown as { google_tag_manager?: unknown }).google_tag_manager !== 'undefined';
+    d.fbqLoaded = typeof (window as unknown as { fbq?: unknown }).fbq !== 'undefined';
+    const gtmContainers = (window as unknown as { google_tag_manager?: Record<string, unknown> }).google_tag_manager;
+    d.gtmContainerIds = gtmContainers ? Object.keys(gtmContainers) : [];
+    setTrackingStatus(d);
+  }, []);
+
+  const runTrackingCheck = () => {
+    if (typeof window === 'undefined') return;
+    const d: Record<string, unknown> = {};
+    d.dataLayerExists = Array.isArray(window.dataLayer);
+    d.dataLayerLength = window.dataLayer?.length ?? 0;
+    d.dataLayerEvents = window.dataLayer
+      ?.map((e: { event?: string }) => e?.event)
+      .filter((x): x is string => Boolean(x))
+      .filter((v, i, a) => a.indexOf(v) === i) ?? [];
+    d.gtmLoaded = typeof (window as unknown as { google_tag_manager?: unknown }).google_tag_manager !== 'undefined';
+    d.fbqLoaded = typeof (window as unknown as { fbq?: unknown }).fbq !== 'undefined';
+    const gtmContainers = (window as unknown as { google_tag_manager?: Record<string, unknown> }).google_tag_manager;
+    d.gtmContainerIds = gtmContainers ? Object.keys(gtmContainers) : [];
+    setTrackingStatus(d);
   };
 
   return (
@@ -116,6 +150,26 @@ export default function DebugPage() {
             </pre>
           </div>
         )}
+      </div>
+
+      {/* Tracking / GTM Verification */}
+      <div style={{ background: '#e0f2fe', padding: '20px', borderRadius: '8px', marginBottom: '20px', border: '2px solid #0ea5e9' }}>
+        <h2 style={{ fontSize: '20px', marginBottom: '15px' }}>📊 Tracking / GTM / Pixel</h2>
+        <button
+          onClick={runTrackingCheck}
+          style={{ padding: '10px 20px', background: '#0ea5e9', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', marginBottom: '15px' }}
+        >
+          🔄 Kiểm tra lại
+        </button>
+        {trackingStatus && (
+          <pre style={{ background: '#fff', padding: '15px', borderRadius: '4px', overflow: 'auto', fontSize: '14px' }}>
+            {JSON.stringify(trackingStatus, null, 2)}
+          </pre>
+        )}
+        <p style={{ marginTop: '10px', fontSize: '14px', color: '#0c4a6e' }}>
+          ✅ dataLayerExists: true, gtmLoaded: true = GTM chạy đúng. 
+          dataLayerEvents cần có: page_view, set_user_properties.
+        </p>
       </div>
 
       <div style={{ background: '#fff3cd', padding: '20px', borderRadius: '8px', border: '2px solid #ffc107' }}>

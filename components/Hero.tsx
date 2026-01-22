@@ -4,6 +4,7 @@ import { useState, FormEvent, useEffect, useRef } from "react";
 import { BookOpen, GraduationCap, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import CourseModal from "./CourseModal";
+import YouTubeModal from "./YouTubeModal";
 import { Button } from "./ui/Button";
 import { Input } from "./ui/Input";
 import { Textarea } from "./ui/Textarea";
@@ -14,6 +15,7 @@ import type { CourseInfo } from "@/types";
 
 export default function Hero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isYouTubeModalOpen, setIsYouTubeModalOpen] = useState(false);
   const [courses, setCourses] = useState<CourseInfo[]>([]);
   const [userEmail, setUserEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
@@ -26,6 +28,14 @@ export default function Hero() {
   const formRef = useRef<HTMLFormElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const formViewTracked = useRef(false);
+  const formSubmitTracked = useRef(false); // Prevent duplicate Lead event
+
+  // Reset form submit tracking flag when modal closes (allow re-tracking if user submits again)
+  useEffect(() => {
+    if (!isModalOpen) {
+      formSubmitTracked.current = false;
+    }
+  }, [isModalOpen]);
 
   // Step 3.2: ViewContent tracking - Track when form is in viewport for 3+ seconds
   useEffect(() => {
@@ -91,8 +101,17 @@ export default function Hero() {
       return;
     }
 
-    // Step 3.4: Track form submit BEFORE API call
-    trackForm('hero_course_form', 'Course Request Form', 'hero_section', urls.length);
+    // Step 3.4: Track form submit BEFORE API call (with email for Advanced Matching)
+    // Prevent duplicate Lead event - chỉ track 1 lần mỗi lần submit form
+    if (!formSubmitTracked.current) {
+      // Validate email trước khi track
+      if (!email || !email.trim()) {
+        console.warn('[Tracking] Lead: Email is missing when submitting form');
+      } else {
+        await trackForm('hero_course_form', 'Course Request Form', 'hero_section', urls.length, email.trim());
+      }
+      formSubmitTracked.current = true;
+    }
 
     // Store email for later use
     setUserEmail(email);
@@ -162,7 +181,7 @@ export default function Hero() {
               variant="secondary" 
               size="lg"
               className="mb-12"
-              onClick={() => toast.info("Tính năng đang phát triển")}
+              onClick={() => setIsYouTubeModalOpen(true)}
             >
               Hướng dẫn sử dụng
             </Button>
@@ -211,7 +230,7 @@ export default function Hero() {
                 </p>
               </div>
               
-              <form ref={formRef} className="space-y-5" onSubmit={handleSubmit}>
+              <form ref={formRef} className="space-y-5" onSubmit={handleSubmit} action="#">
                 {/* Email Input - Modern Style */}
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -354,6 +373,14 @@ export default function Hero() {
         courses={courses}
         isLoading={courseInfoLoading}
         email={userEmail}
+      />
+
+      {/* YouTube Modal */}
+      <YouTubeModal
+        isOpen={isYouTubeModalOpen}
+        onClose={() => setIsYouTubeModalOpen(false)}
+        videoId="YA5jUsf4O2g"
+        title="Hướng dẫn sử dụng GetCourses"
       />
     </section>
   );

@@ -22,7 +22,7 @@ if (fs.existsSync(envProductionPath)) {
 module.exports = {
   apps: [
     {
-      name: 'khoahocgiare-frontend',
+      name: 'getcourses-frontend',
       
       // Point directly to Next.js binary
       script: './node_modules/next/dist/bin/next',
@@ -33,24 +33,28 @@ module.exports = {
       env: {
         NODE_ENV: 'production',
         PORT: 4000,
-        NEXTAUTH_URL: envVars.NEXTAUTH_URL || 'https://khoahocgiare.info',
+        DOTENV_QUIET: 'true', // Tắt dotenv tips logs
+        NEXTAUTH_URL: envVars.NEXTAUTH_URL || 'https://getcourses.net',
         NEXTAUTH_SECRET: envVars.NEXTAUTH_SECRET || '',
         ADMIN_EMAIL: envVars.ADMIN_EMAIL || '',
         ADMIN_PASSWORD_HASH: envVars.ADMIN_PASSWORD_HASH || '',
-        NEXT_PUBLIC_API_URL: envVars.NEXT_PUBLIC_API_URL || 'https://api.khoahocgiare.info',
-        NEXT_PUBLIC_SOCKET_URL: envVars.NEXT_PUBLIC_SOCKET_URL || 'https://api.khoahocgiare.info'
+        NEXT_PUBLIC_API_URL: envVars.NEXT_PUBLIC_API_URL || 'https://api.getcourses.net',
+        NEXT_PUBLIC_SOCKET_URL: envVars.NEXT_PUBLIC_SOCKET_URL || 'https://api.getcourses.net',
+        NEXT_PUBLIC_SITE_URL: envVars.NEXT_PUBLIC_SITE_URL || 'https://getcourses.net'
       },
       
       // Production environment variables (from .env.production)
       env_production: {
         NODE_ENV: 'production',
         PORT: 4000,
-        NEXTAUTH_URL: envVars.NEXTAUTH_URL || 'https://khoahocgiare.info',
+        DOTENV_QUIET: 'true', // Tắt dotenv tips logs
+        NEXTAUTH_URL: envVars.NEXTAUTH_URL || 'https://getcourses.net',
         NEXTAUTH_SECRET: envVars.NEXTAUTH_SECRET || '',
         ADMIN_EMAIL: envVars.ADMIN_EMAIL || '',
         ADMIN_PASSWORD_HASH: envVars.ADMIN_PASSWORD_HASH || '',
-        NEXT_PUBLIC_API_URL: envVars.NEXT_PUBLIC_API_URL || 'https://api.khoahocgiare.info',
-        NEXT_PUBLIC_SOCKET_URL: envVars.NEXT_PUBLIC_SOCKET_URL || 'https://api.khoahocgiare.info'
+        NEXT_PUBLIC_API_URL: envVars.NEXT_PUBLIC_API_URL || 'https://api.getcourses.net',
+        NEXT_PUBLIC_SOCKET_URL: envVars.NEXT_PUBLIC_SOCKET_URL || 'https://api.getcourses.net',
+        NEXT_PUBLIC_SITE_URL: envVars.NEXT_PUBLIC_SITE_URL || 'https://getcourses.net'
       },
       
       // Log configuration

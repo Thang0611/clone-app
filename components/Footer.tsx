@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-col items-center text-center gap-4 md:flex-row md:justify-between md:items-center">
           {/* Copyright */}
           <p className="text-white/70 text-xs md:text-sm">
-            © 2026 KhoaHocGiaRe.info - All Rights Reserved.
+            © 2026 GetCourses - All Rights Reserved.
           </p>
           
           {/* Social Links / Terms */}

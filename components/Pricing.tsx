@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { scrollToFormAndFocus } from "@/lib/scrollToForm";
 
 export default function Pricing() {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,13 +27,6 @@ export default function Pricing() {
       }
     };
   }, []);
-
-  const scrollToForm = () => {
-    const heroSection = document.querySelector('section');
-    if (heroSection) {
-      heroSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section ref={sectionRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 px-4 sm:px-6 relative overflow-hidden">
@@ -96,7 +90,7 @@ export default function Pricing() {
             </ul>
 
             <button 
-              onClick={scrollToForm}
+              onClick={scrollToFormAndFocus}
               className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-[0.98] transform hover:scale-105 group-hover:shadow-2xl"
             >
               <span className="flex items-center justify-center gap-2">
@@ -114,7 +108,7 @@ export default function Pricing() {
           }`}
           style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}>
             {/* Recommended Badge */}
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse group-hover:animate-none group-hover:scale-110">
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-110">
               KHUYÊN DÙNG
             </div>
             
@@ -154,7 +148,7 @@ export default function Pricing() {
             </ul>
 
             <button 
-              onClick={scrollToForm}
+              onClick={scrollToFormAndFocus}
               className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-[0.98] transform hover:scale-105 group-hover:shadow-2xl"
             >
               <span className="flex items-center justify-center gap-2">
@@ -209,7 +203,7 @@ export default function Pricing() {
             </ul>
 
             <button 
-              onClick={scrollToForm}
+              onClick={scrollToFormAndFocus}
               className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-[0.98] transform hover:scale-105 group-hover:shadow-2xl"
             >
               <span className="flex items-center justify-center gap-2">

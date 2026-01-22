@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -13,6 +13,8 @@ import { usePolling } from "@/hooks/usePolling";
 import { useOrderData } from "@/hooks/useOrderData";
 import { useCheckoutTimer } from "@/hooks/useCheckoutTimer";
 import { useTracking } from "@/hooks/useTracking";
+import { hashEmail } from "@/lib/tracking";
+import { trackingConfig } from "@/lib/tracking-config";
 import { OrderHeader } from "@/components/order/OrderHeader";
 import { CheckoutTimer } from "@/components/order/CheckoutTimer";
 import { PaymentSection } from "@/components/order/PaymentSection";
@@ -23,7 +25,7 @@ function OrderPageContent() {
   const params = useParams();
   const router = useRouter();
   const orderCode = params.orderCode as string;
-  const { trackPurchase } = useTracking();
+  const { trackPurchase, trackCheckout } = useTracking();
   
   // Fetch order data
   const { orderData, isLoading, loadError, updateOrderData } = useOrderData(orderCode);
@@ -64,14 +66,19 @@ function OrderPageContent() {
           }));
 
           // Track confirmed purchase
-          await trackPurchase(
-            orderCode,
-            paymentData.amount || orderData.totalAmount,
-            'VND',
-            items,
-            'bank_transfer',
-            orderData.email
-          );
+          // Validate email trước khi track
+          if (!orderData.email || !orderData.email.trim()) {
+            console.warn('[Tracking] Purchase: Email is missing in orderData', orderData);
+          } else {
+            await trackPurchase(
+              orderCode,
+              paymentData.amount || orderData.totalAmount,
+              'VND',
+              items,
+              'bank_transfer',
+              orderData.email.trim() // Trim để đảm bảo không có space
+            );
+          }
 
           // Mark as tracked to prevent duplicates
           localStorage.setItem(trackingKey, 'true');
@@ -101,6 +108,72 @@ function OrderPageContent() {
 
   const isPaid = status === 'paid' || orderData?.paymentStatus === 'paid';
   const isExpired = pollingTimeRemaining <= 0 && !isPaid;
+
+  // Track InitiateCheckout khi vào trang order (trang show QR) - CHỈ khi chưa paid
+  const checkoutTracked = useRef(false);
+  useEffect(() => {
+    // Chỉ track khi:
+    // 1. Có orderData (đã load xong)
+    // 2. Chưa thanh toán (isNotPaid)
+    // 3. Chưa track rồi (checkoutTracked.current = false)
+    if (orderData && isNotPaid && !checkoutTracked.current) {
+      // Helper function to extract platform from URL
+      const getPlatformFromUrl = (url?: string): string => {
+        if (!url) return 'Unknown';
+        if (url.includes('udemy.com')) return 'Udemy';
+        if (url.includes('coursera.org')) return 'Coursera';
+        if (url.includes('linkedin.com/learning')) return 'LinkedIn Learning';
+        return 'Unknown';
+      };
+
+      // Prepare items for tracking
+      const items = orderData.items.map((item, index) => ({
+        item_id: String(item.courseId || `course_${index}`),
+        item_name: item.title || 'Khóa học',
+        item_category: 'education',
+        item_brand: getPlatformFromUrl(item.url),
+        price: item.price || 0,
+        quantity: 1,
+      }));
+
+      // Track InitiateCheckout với email hash cho Advanced Matching
+      // Validate email trước khi track
+      if (!orderData.email || !orderData.email.trim()) {
+        console.warn('[Tracking] InitiateCheckout: Email is missing in orderData', orderData);
+      } else {
+        trackCheckout(
+          orderData.totalAmount,
+          'VND',
+          items,
+          orderCode, // transaction_id
+          orderData.email.trim() // Trim để đảm bảo không có space
+        );
+      }
+
+      checkoutTracked.current = true;
+    }
+
+    // Reset tracking flag nếu order đã paid (để có thể track lại nếu cần)
+    if (isPaid) {
+      checkoutTracked.current = false;
+    }
+  }, [orderData, isNotPaid, isPaid, orderCode, trackCheckout]);
+
+  // Meta Advanced Matching: gửi hashed email khi có orderData.email để Facebook match user
+  // Lưu ý: Pixel đã được init bởi MetaPixel component, chỉ cần set user data
+  const metaUserMatchDone = useRef(false);
+  useEffect(() => {
+    const email = orderData?.email?.trim();
+    if (!email || metaUserMatchDone.current || !trackingConfig.metaPixelId) return;
+    const fbq = typeof window !== 'undefined' ? (window as { fbq?: unknown }).fbq : undefined;
+    if (!fbq) return;
+    metaUserMatchDone.current = true;
+    hashEmail(email).then((hashed) => {
+      const fbq = (typeof window !== 'undefined' && window) ? (window as { fbq?: (cmd: string, ...args: any[]) => void }).fbq : undefined;
+      // Dùng fbq('set', 'user', ...) thay vì fbq('init', ...) để tránh conflict với MetaPixel component
+      if (hashed && fbq) fbq('set', 'user', { em: hashed });
+    });
+  }, [orderData?.email]);
 
   // Loading state
   if (isLoading) {

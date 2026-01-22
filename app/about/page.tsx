@@ -5,17 +5,23 @@ import Footer from "@/components/Footer";
 import { Target, Users, Heart, TrendingUp, Shield, Clock, CheckCircle2, Star } from "lucide-react";
 import { Card, CardBody } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
 
+      {/* Breadcrumb */}
+      <Breadcrumb items={[
+        { name: "Về chúng tôi", url: "/about" },
+      ]} />
+
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Về KhoaHocGiaRe.info
+            Về GetCourses
           </h1>
           <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
             Nền tảng cung cấp khóa học online uy tín với mục tiêu làm cho giáo dục 
@@ -40,7 +46,7 @@ export default function AboutPage() {
             <Card>
               <CardBody className="p-8 md:p-12">
                 <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                  <strong className="text-indigo-600">KhoaHocGiaRe.info</strong> được thành lập với niềm tin rằng 
+                  <strong className="text-indigo-600">GetCourses</strong> được thành lập với niềm tin rằng 
                   <strong> giáo dục không nên bị giới hạn bởi rào cản tài chính</strong>. 
                   Chúng tôi nhận thấy rằng nhiều khóa học chất lượng cao trên các nền tảng như Udemy, Coursera, và LinkedIn Learning 
                   có giá khá cao, khiến nhiều người không thể tiếp cận.
