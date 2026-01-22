@@ -2627,3 +2627,22 @@
 2026-01-21 01:14:07 +07:00: [AUTH CONFIG] File exists: true
 2026-01-21 01:14:07 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
 2026-01-21 01:14:07 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-22 13:59:22 +07:00: ▲ Next.js 16.1.1
+2026-01-22 13:59:22 +07:00: - Local:         http://localhost:4000
+2026-01-22 13:59:22 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-22 13:59:22 +07:00: 
+2026-01-22 13:59:22 +07:00: ✓ Starting...
+2026-01-22 13:59:24 +07:00: ✓ Ready in 4.3s
+2026-01-22 13:59:24 +07:00: [AUTH CONFIG] Loading .env.production from: /root/project/clone-app/.env.production
+2026-01-22 13:59:24 +07:00: [AUTH CONFIG] File exists: true
+2026-01-22 13:59:24 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-22 13:59:24 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-22 14:01:05 +07:00: Debug Env: Loaded
+2026-01-22 14:01:05 +07:00: adminPasswordHash $2b$10$v9SiBR5o6x3cNTltrpnzoe3ol1I15L6JO8PQ3pe3keAYjRNoQjSPu
+2026-01-22 14:01:05 +07:00: adminPasswordPlain undefined
+2026-01-22 14:01:05 +07:00: ✅ [AUTH] Email matches, checking password...
+2026-01-22 14:01:05 +07:00: 🔍 [AUTH] Using bcrypt comparison
+2026-01-22 14:01:05 +07:00:    bcrypt.compare result: true
+2026-01-22 14:01:05 +07:00: ✅ [AUTH] Password is valid! Returning user object...
+2026-01-22 14:01:14 +07:00: [Retry Download] Calling backend: https://api.getcourses.net/api/admin/orders/87/retry-download
+2026-01-22 14:01:21 +07:00: [Retry Download] Calling backend: https://api.getcourses.net/api/admin/orders/86/retry-download
