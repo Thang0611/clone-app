@@ -131,7 +131,8 @@ export async function deleteProgress(courseId: string, lectureId: string): Promi
 }
 
 /**
- * Thêm progress vào sync queue
+ * Thêm hoặc update progress trong sync queue (UPSERT logic)
+ * Phase 1 Optimization: Deduplication by lectureId
  */
 async function addToSyncQueue(progress: VideoProgress): Promise<void> {
   try {
@@ -139,8 +140,12 @@ async function addToSyncQueue(progress: VideoProgress): Promise<void> {
     const transaction = db.transaction([SYNC_QUEUE_STORE], 'readwrite');
     const store = transaction.objectStore(SYNC_QUEUE_STORE);
 
+    // Use composite key for upsert: courseId + lectureId
+    const key = [progress.courseId, progress.lectureId];
+    
     await new Promise<void>((resolve, reject) => {
-      const request = store.add({
+      // Use put() instead of add() for upsert behavior
+      const request = store.put({
         ...progress,
         timestamp: Date.now(),
       });
@@ -148,7 +153,7 @@ async function addToSyncQueue(progress: VideoProgress): Promise<void> {
       request.onerror = () => reject(request.error);
     });
   } catch (error) {
-    console.error('[ProgressManager] ❌ Failed to add to sync queue:', error);
+    console.error('[ProgressManager] ❌ Failed to upsert sync queue:', error);
     // Không throw - sync queue là optional
   }
 }
@@ -261,6 +266,7 @@ export async function syncProgressToServer(
 
 /**
  * Auto-sync progress với server mỗi N giây
+ * DISABLED: Local-only mode, no server sync needed
  */
 let syncInterval: NodeJS.Timeout | null = null;
 
@@ -271,15 +277,19 @@ export function startAutoSync(
 ): void {
   stopAutoSync(); // Clear existing interval
 
-  syncInterval = setInterval(async () => {
-    try {
-      await syncProgressToServer(apiEndpoint, deviceId);
-    } catch (error) {
-      console.error('[ProgressManager] ❌ Auto-sync error:', error);
-    }
-  }, intervalSeconds * 1000);
+  // DISABLED: Server sync not needed for local-only learning
+  console.log(`[ProgressManager] ℹ️ Auto-sync DISABLED (local-only mode)`);
+  return;
 
-  console.log(`[ProgressManager] ✅ Auto-sync started (every ${intervalSeconds}s)`);
+  // Original code (commented out):
+  // syncInterval = setInterval(async () => {
+  //   try {
+  //     await syncProgressToServer(apiEndpoint, deviceId);
+  //   } catch (error) {
+  //     console.error('[ProgressManager] ❌ Auto-sync error:', error);
+  //   }
+  // }, intervalSeconds * 1000);
+  // console.log(`[ProgressManager] ✅ Auto-sync started (every ${intervalSeconds}s)`);
 }
 
 export function stopAutoSync(): void {
@@ -292,24 +302,41 @@ export function stopAutoSync(): void {
 
 /**
  * Phase 2: Save progress với hybrid storage (IndexedDB + File)
- * Nếu có write access, lưu vào file .progress.json
+ * Phase 1 Optimization: Throttled file saves (60s interval)
+ * Force save on pause/end/beforeunload
  */
 export async function saveProgressHybrid(
   progress: VideoProgress,
-  directoryHandle?: FileSystemDirectoryHandle
+  directoryHandle?: FileSystemDirectoryHandle,
+  forceFileSave: boolean = false
 ): Promise<void> {
-  // Save to IndexedDB (always)
+  // Save to IndexedDB (always - fast operation)
   await saveProgress(progress);
 
-  // Save to file if write access available
+  // Save to file with throttling if write access available
   if (directoryHandle) {
     try {
       const { saveProgressToFile, hasWriteAccess } = await import('./progress-file-manager');
       const hasAccess = await hasWriteAccess(directoryHandle);
-      if (hasAccess) {
-        // Get all progress for this course
+      if (!hasAccess) return;
+
+      // File save function
+      const doFileSave = async () => {
         const allProgress = await getCourseProgress(progress.courseId);
         await saveProgressToFile(directoryHandle, progress.courseId, allProgress);
+      };
+
+      if (forceFileSave) {
+        // Force save immediately (pause, end, beforeunload)
+        const { forceSave } = await import('./progress-file-saver');
+        await forceSave(doFileSave);
+      } else {
+        // Throttled save (every 60s)
+        const { saveWithThrottling } = await import('./progress-file-saver');
+        const saved = await saveWithThrottling(progress.courseId, doFileSave);
+        if (!saved) {
+          console.log('[ProgressManager] 📅 File save scheduled for later (throttled)');
+        }
       }
     } catch (error) {
       // File save is optional, don't throw

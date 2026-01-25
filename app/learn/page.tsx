@@ -48,7 +48,7 @@ export default function LearnPage() {
   const isSupported = typeof window !== 'undefined' && 'showDirectoryPicker' in window;
 
   return (
-    <div className="flex min-h-screen flex-col bg-white dark:bg-gray-900">
+    <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-900">
       <Navbar />
 
       <main className="flex-1">
@@ -163,7 +163,7 @@ export default function LearnPage() {
           </Card>
 
           {/* How It Works */}
-          <div className="mt-12">
+          {/* <div className="mt-12">
             <h2 className="mb-8 text-center text-3xl font-bold text-gray-900 dark:text-gray-100">
               Cách Thức Hoạt Động
             </h2>
@@ -216,7 +216,7 @@ export default function LearnPage() {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Benefits */}
           <div className="mt-16 rounded-2xl border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800">

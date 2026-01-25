@@ -6,9 +6,9 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import type { VideoFile } from '@/lib/video-scanner';
+import type { VideoFile, SubtitleTrack } from '@/lib/video-scanner';
 import { getProgress, saveProgressHybrid } from '@/lib/progress-manager';
-import { findSubtitleFile } from '@/lib/video-scanner';
+import { findAllSubtitleFiles } from '@/lib/video-scanner';
 
 interface LocalVideoPlayerProps {
   video: VideoFile;
@@ -35,7 +35,7 @@ export function LocalVideoPlayer({
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [subtitleUrl, setSubtitleUrl] = useState<string | null>(null);
+  const [subtitleTracks, setSubtitleTracks] = useState<SubtitleTrack[]>([]);
   const progressSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const previousVideoPathRef = useRef<string | null>(null);
 
@@ -60,19 +60,27 @@ export function LocalVideoPlayer({
       setBlobUrl(newBlobUrl);
       videoRef.current.src = newBlobUrl;
 
-      // Load subtitle nếu có
+      // Load all subtitle tracks
       try {
-        const subtitleHandle = await findSubtitleFile(video, directoryHandle);
-        if (subtitleHandle) {
-          const subtitleFile = await subtitleHandle.getFile();
-          const subtitleBlobUrl = URL.createObjectURL(subtitleFile);
-          setSubtitleUrl(subtitleBlobUrl);
-        } else {
-          setSubtitleUrl(null);
-        }
+        const foundSubtitles = await findAllSubtitleFiles(video, directoryHandle);
+        
+        // Create Blob URLs for each subtitle
+        const tracksWithUrls = await Promise.all(
+          foundSubtitles.map(async (track) => {
+            const file = await track.handle.getFile();
+            const blobUrl = URL.createObjectURL(file);
+            return {
+              ...track,
+              src: blobUrl,
+            };
+          })
+        );
+        
+        setSubtitleTracks(tracksWithUrls);
+        console.log(`[LocalVideoPlayer] ✅ Loaded ${tracksWithUrls.length} subtitle tracks`);
       } catch (subtitleError) {
-        console.warn('[LocalVideoPlayer] Could not load subtitle:', subtitleError);
-        setSubtitleUrl(null);
+        console.warn('[LocalVideoPlayer] Could not load subtitles:', subtitleError);
+        setSubtitleTracks([]);
       }
 
       // Load saved progress
@@ -126,9 +134,12 @@ export function LocalVideoPlayer({
       if (blobUrl) {
         URL.revokeObjectURL(blobUrl);
       }
-      if (subtitleUrl) {
-        URL.revokeObjectURL(subtitleUrl);
-      }
+      // Cleanup all subtitle blob URLs
+      subtitleTracks.forEach(track => {
+        if (track.src) {
+          URL.revokeObjectURL(track.src);
+        }
+      });
       if (progressSaveTimeoutRef.current) {
         clearTimeout(progressSaveTimeoutRef.current);
       }
@@ -301,9 +312,16 @@ export function LocalVideoPlayer({
         playsInline
         autoPlay={autoPlay}
       >
-        {subtitleUrl && (
-          <track kind="subtitles" src={subtitleUrl} srcLang="vi" label="Vietnamese" default />
-        )}
+        {subtitleTracks.map((track, index) => (
+          <track
+            key={track.language}
+            kind="subtitles"
+            src={track.src}
+            srcLang={track.language}
+            label={track.label}
+            default={index === 0} // First track is default
+          />
+        ))}
         Trình duyệt của bạn không hỗ trợ video.
       </video>
     </div>

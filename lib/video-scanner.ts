@@ -49,8 +49,9 @@ export function cleanFileName(name: string): string {
   // Xóa "Copy of", "Copy (1) of", etc.
   cleaned = cleaned.replace(/^Copy\s*(\(\d+\))?\s*of\s+/i, '');
 
-  // Xóa số thứ tự ở đầu (01, 02, 03, ...)
-  cleaned = cleaned.replace(/^\d+\s*[-.]\s*/, '');
+  // Xóa số thứ tự ở đầu (001, 01, 1, etc.) với hoặc không có separator
+  // Patterns: "003 Title", "003-Title", "003.Title", "003_Title"
+  cleaned = cleaned.replace(/^0*\d+\s*[-_.\s]*/, '');
 
   // Xóa các ký tự đặc biệt thừa
   cleaned = cleaned.replace(/[_-]+/g, ' ');
@@ -189,15 +190,50 @@ export async function scanFolderRecursive(
   return sorted;
 }
 
+export interface SubtitleTrack {
+  handle: FileSystemFileHandle;
+  language: string; // en, vn, etc
+  label: string; // English, Tiếng Việt
+  src: string; // Blob URL (will be created later)
+}
+
 /**
  * Tìm subtitle file (.vtt, .srt) cho video
+ * @deprecated Use findAllSubtitleFiles instead for multiple language support
  */
 export async function findSubtitleFile(
   videoFile: VideoFile,
   directoryHandle: FileSystemDirectoryHandle
 ): Promise<FileSystemFileHandle | null> {
+  const subtitles = await findAllSubtitleFiles(videoFile, directoryHandle);
+  return subtitles.length > 0 ? subtitles[0].handle : null;
+}
+
+/**
+ * Tìm tất cả subtitle files cho video (hỗ trợ nhiều ngôn ngữ)
+ * Patterns: video_en.srt, video_vn.srt, video.srt
+ */
+export async function findAllSubtitleFiles(
+  videoFile: VideoFile,
+  directoryHandle: FileSystemDirectoryHandle
+): Promise<SubtitleTrack[]> {
   const videoName = videoFile.name.substring(0, videoFile.name.lastIndexOf('.'));
   const subtitleExtensions = ['.vtt', '.srt'];
+  const subtitles: SubtitleTrack[] = [];
+
+  // Language mappings
+  const languageMap: Record<string, string> = {
+    en: 'English',
+    vn: 'Tiếng Việt',
+    vi: 'Tiếng Việt',
+    zh: '中文',
+    ja: '日本語',
+    ko: '한국어',
+    fr: 'Français',
+    de: 'Deutsch',
+    es: 'Español',
+    default: 'Default',
+  };
 
   // Tìm trong cùng folder với video
   const videoPath = videoFile.path.split('/');
@@ -212,21 +248,67 @@ export async function findSubtitleFile(
       }
     }
 
-    // Tìm subtitle file
+    // Tìm tất cả subtitle files
     for (const ext of subtitleExtensions) {
-      const subtitleName = `${videoName}${ext}`;
+      // Pattern 1a: video.en.srt, video.vi.srt (with dot separator)
+      for (const lang of Object.keys(languageMap)) {
+        const subtitleNameDot = `${videoName}.${lang}${ext}`;
+        try {
+          const subtitleHandle = await currentHandle.getFileHandle(subtitleNameDot);
+          console.log(`[VideoScanner] ✅ Found subtitle: ${subtitleNameDot}`);
+          subtitles.push({
+            handle: subtitleHandle,
+            language: lang,
+            label: languageMap[lang],
+            src: '', // Will be set later
+          });
+        } catch {
+          // File không tồn tại, thử pattern tiếp theo
+        }
+      }
+      
+      // Pattern 1b: video_en.srt, video_vn.srt (with underscore separator - legacy)
+      for (const lang of Object.keys(languageMap)) {
+        const subtitleNameUnderscore = `${videoName}_${lang}${ext}`;
+        try {
+          const subtitleHandle = await currentHandle.getFileHandle(subtitleNameUnderscore);
+          console.log(`[VideoScanner] ✅ Found subtitle: ${subtitleNameUnderscore}`);
+          // Check if not already added (từ pattern dot)
+          const alreadyExists = subtitles.some(s => s.language === lang);
+          if (!alreadyExists) {
+            subtitles.push({
+              handle: subtitleHandle,
+              language: lang,
+              label: languageMap[lang],
+              src: '', // Will be set later
+            });
+          }
+        } catch {
+          // File không tồn tại, thử pattern tiếp theo
+        }
+      }
+
+      // Pattern 2: video.srt (default, no language code)
+      const defaultSubtitleName = `${videoName}${ext}`;
       try {
-        const subtitleHandle = await currentHandle.getFileHandle(subtitleName);
-        return subtitleHandle;
+        const subtitleHandle = await currentHandle.getFileHandle(defaultSubtitleName);
+        // Chỉ thêm nếu chưa có subtitle nào (tránh duplicate)
+        if (subtitles.length === 0) {
+          subtitles.push({
+            handle: subtitleHandle,
+            language: 'default',
+            label: languageMap['default'],
+            src: '',
+          });
+        }
       } catch {
-        // File không tồn tại, thử extension tiếp theo
-        continue;
+        // File không tồn tại
       }
     }
   } catch (error) {
     // Folder không tồn tại hoặc không truy cập được
-    console.warn(`[VideoScanner] ⚠️ Could not find subtitle for ${videoFile.name}:`, error);
+    console.warn(`[VideoScanner] ⚠️ Could not find subtitles for ${videoFile.name}:`, error);
   }
 
-  return null;
+  return subtitles;
 }

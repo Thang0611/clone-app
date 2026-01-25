@@ -3622,3 +3622,24 @@
 2026-01-25 02:01:05 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
 2026-01-25 02:01:05 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
 2026-01-25 02:01:05 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-25 09:48:51 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-javascript-course
+2026-01-25 09:48:51 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 09:48:51 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-javascript-course/curriculum
+2026-01-25 09:48:51 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 10:37:17 +07:00: ▲ Next.js 16.1.1
+2026-01-25 10:37:17 +07:00: - Local:         http://localhost:4000
+2026-01-25 10:37:17 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-25 10:37:17 +07:00: 
+2026-01-25 10:37:17 +07:00: ✓ Starting...
+2026-01-25 10:37:18 +07:00: ✓ Ready in 2.6s
+2026-01-25 10:37:19 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-25 10:37:19 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-25 10:37:19 +07:00: [AUTH CONFIG] File exists: true
+2026-01-25 10:37:19 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-25 10:37:19 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-25 10:37:19 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-25 10:37:19 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-25 11:45:56 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/nlp-natural-language-processing-with-python
+2026-01-25 11:45:56 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 11:45:56 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/nlp-natural-language-processing-with-python/curriculum
+2026-01-25 11:45:56 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
