@@ -3,15 +3,20 @@
  * Gateway Authentication setup for Admin login
  */
 
-// Load environment variables from .env.production if not already loaded
+// Load environment variables from .env files if not already loaded
 // This ensures env vars are available even if PM2 doesn't pass them correctly
-if (typeof process !== 'undefined' && process.env.NODE_ENV === 'production') {
+if (typeof process !== 'undefined') {
   try {
     const fs = require('fs');
     const path = require('path');
-    const envPath = path.join(process.cwd(), '.env.production');
     
-    console.log('[AUTH CONFIG] Loading .env.production from:', envPath);
+    // Try to load .env file (for development) or .env.production (for production)
+    const nodeEnv = process.env.NODE_ENV || 'development';
+    const envFileName = nodeEnv === 'production' ? '.env.production' : '.env';
+    const envPath = path.join(process.cwd(), envFileName);
+    
+    console.log('[AUTH CONFIG] Loading environment from:', envPath);
+    console.log('[AUTH CONFIG] NODE_ENV:', nodeEnv);
     console.log('[AUTH CONFIG] File exists:', fs.existsSync(envPath));
     
     if (fs.existsSync(envPath)) {
@@ -32,13 +37,14 @@ if (typeof process !== 'undefined' && process.env.NODE_ENV === 'production') {
           }
         }
       });
-      console.log('[AUTH CONFIG] Loaded', loadedCount, 'environment variables from .env.production');
+      console.log('[AUTH CONFIG] Loaded', loadedCount, 'environment variables from', envFileName);
       console.log('[AUTH CONFIG] ADMIN_PASSWORD_HASH:', process.env.ADMIN_PASSWORD_HASH ? 'Loaded (' + process.env.ADMIN_PASSWORD_HASH.length + ' chars)' : 'NOT SET');
+      console.log('[AUTH CONFIG] NEXTAUTH_SECRET:', process.env.NEXTAUTH_SECRET ? 'Loaded (' + process.env.NEXTAUTH_SECRET.length + ' chars)' : 'NOT SET');
     } else {
-      console.warn('[AUTH CONFIG] .env.production not found at:', envPath);
+      console.warn('[AUTH CONFIG]', envFileName, 'not found at:', envPath);
     }
   } catch (error) {
-    console.error('[AUTH CONFIG] Failed to load .env.production:', error);
+    console.error('[AUTH CONFIG] Failed to load .env file:', error);
   }
 }
 
@@ -181,25 +187,35 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            console.log('[AUTH] Missing credentials');
+            return null;
+          }
+
+          console.log('[AUTH] Authorize called with email:', credentials.email);
+
+          const user = await validateAdminCredentials(
+            credentials.email as string,
+            credentials.password as string
+          );
+
+          if (!user) {
+            console.log('[AUTH] User validation failed');
+            return null;
+          }
+
+          console.log('[AUTH] User validated successfully:', user.email);
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+          };
+        } catch (error) {
+          console.error('[AUTH] Error in authorize:', error);
           return null;
         }
-
-        const user = await validateAdminCredentials(
-          credentials.email as string,
-          credentials.password as string
-        );
-
-        if (!user) {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role: user.role,
-        };
       },
     }),
   ],

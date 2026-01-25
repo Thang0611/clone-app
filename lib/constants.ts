@@ -14,7 +14,7 @@ export const API_ENDPOINTS = {
 } as const;
 
 // Pricing
-export const DEFAULT_COURSE_PRICE = 2000; // VND
+export const DEFAULT_COURSE_PRICE = 50000; // VND
 
 // Polling Configuration
 export const POLLING_INTERVAL = 3000; // 3 seconds

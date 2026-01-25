@@ -1,34 +1,52 @@
 import type { Metadata } from "next";
 import { generateMetadata as generateSEOMetadata } from "@/lib/seo";
 
-// Mock function - Replace with actual API call when ready
 async function getCourse(id: string) {
-  // TODO: Replace with actual API call
-  // const response = await fetch(`${process.env.API_URL}/courses/${id}`);
-  // return response.json();
-  
-  // Mock data for now
-  const mockCourses: Record<string, any> = {
-    "1": {
-      title: "The Complete Web Development Bootcamp",
-      description: "Become a Full-Stack Web Developer with just ONE course. HTML, CSS, Javascript, Node, React, PostgreSQL, Web3 and DApps.",
-      thumbnail: "https://via.placeholder.com/800x450/4F46E5/FFFFFF?text=Web+Development",
-      platform: "Udemy",
-      category: "Lập trình",
-      rating: 4.7,
-      price: 30000,
-    },
-  };
-  
-  return mockCourses[id] || null;
+  try {
+    const serverUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+    const response = await fetch(
+      `${serverUrl}/api/courses/${id}`,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        cache: 'no-store'
+      }
+    );
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data = await response.json();
+    
+    // Handle different response formats
+    let courseData: any = null;
+    if (data.success) {
+      if (data.data) {
+        courseData = data.data;
+      } else if (data.course) {
+        courseData = data.course;
+      } else {
+        courseData = data;
+      }
+    }
+    
+    return courseData;
+  } catch (error) {
+    console.error('Failed to fetch course for metadata:', error);
+    return null;
+  }
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const course = await getCourse(params.id);
+  // Next.js 15: params is now a Promise and must be awaited
+  const { id } = await params;
+  const course = await getCourse(id);
 
   if (!course) {
     return generateSEOMetadata({
@@ -40,7 +58,7 @@ export async function generateMetadata({
 
   return generateSEOMetadata({
     title: `${course.title} - GetCourses`,
-    description: course.description || `Khóa học ${course.title} từ ${course.platform}. Giá chỉ từ 30k.`,
+    description: course.description || `Khóa học ${course.title} từ ${course.platform}. Giá chỉ 50k.`,
     keywords: [
       course.title.toLowerCase(),
       course.platform?.toLowerCase(),
@@ -50,7 +68,7 @@ export async function generateMetadata({
       'coursera',
     ],
     image: course.thumbnail,
-    url: `/courses/${params.id}`,
+    url: `/courses/${id}`,
     type: 'product',
   });
 }

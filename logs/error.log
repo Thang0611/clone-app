@@ -3345,3 +3345,340 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 2026-01-20 20:36:15 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
 2026-01-20 20:36:15 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
 2026-01-20 20:36:15 +07:00:     at ignore-listed frames
+2026-01-22 15:10:28 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-22 15:10:28 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-22 15:10:28 +07:00:     at ignore-listed frames
+2026-01-22 16:37:12 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-22 16:37:12 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-22 16:37:12 +07:00:     at ignore-listed frames
+2026-01-22 20:16:11 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-22 20:16:11 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-22 20:16:11 +07:00:     at ignore-listed frames
+2026-01-23 00:52:48 +07:00: Failed to import courses: Error: API responded with status 404
+2026-01-23 00:52:48 +07:00:     at f (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:1701)
+2026-01-23 00:52:48 +07:00:     at async d (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:4972)
+2026-01-23 00:52:48 +07:00:     at async l (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:6013)
+2026-01-23 00:52:48 +07:00:     at async Module.N (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:7091)
+2026-01-23 00:52:58 +07:00: Failed to import courses: Error: API responded with status 404
+2026-01-23 00:52:58 +07:00:     at f (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:1701)
+2026-01-23 00:52:58 +07:00:     at async d (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:4972)
+2026-01-23 00:52:58 +07:00:     at async l (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:6013)
+2026-01-23 00:52:58 +07:00:     at async Module.N (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:7091)
+2026-01-23 01:31:25 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-23 01:31:25 +07:00:     at Object.get (.next/server/chunks/ssr/_472c1382._.js:1:12854)
+2026-01-23 01:31:25 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-23 01:31:25 +07:00:     at Object.get (.next/server/chunks/ssr/_472c1382._.js:1:12854)
+2026-01-23 01:31:25 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-23 01:31:25 +07:00:     at Object.get (.next/server/chunks/ssr/_472c1382._.js:1:12854)
+2026-01-23 01:31:25 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-23 01:31:25 +07:00:     at ignore-listed frames
+2026-01-23 01:31:25 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-23 01:31:25 +07:00:     at Object.get (.next/server/chunks/ssr/_472c1382._.js:1:12854)
+2026-01-23 01:31:25 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-23 01:31:25 +07:00:     at Object.get (.next/server/chunks/ssr/_472c1382._.js:1:12854)
+2026-01-23 01:31:25 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-23 01:31:25 +07:00:     at Object.get (.next/server/chunks/ssr/_472c1382._.js:1:12854)
+2026-01-23 01:31:25 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-23 01:31:25 +07:00:     at ignore-listed frames
+2026-01-23 01:31:25 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-23 01:31:25 +07:00:     at Object.get (.next/server/chunks/ssr/_472c1382._.js:1:12854)
+2026-01-23 01:31:25 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-23 01:31:25 +07:00:     at Object.get (.next/server/chunks/ssr/_472c1382._.js:1:12854)
+2026-01-23 01:31:25 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-23 01:31:25 +07:00:     at Object.get (.next/server/chunks/ssr/_472c1382._.js:1:12854)
+2026-01-23 01:31:25 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-23 01:31:25 +07:00:     at ignore-listed frames
+2026-01-23 02:10:11 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:11 +07:00:     at ignore-listed frames
+2026-01-23 02:10:12 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:12 +07:00:     at ignore-listed frames
+2026-01-23 02:10:13 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:13 +07:00:     at ignore-listed frames
+2026-01-23 02:10:14 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:14 +07:00:     at ignore-listed frames
+2026-01-23 02:10:15 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:15 +07:00:     at ignore-listed frames
+2026-01-23 02:10:16 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:16 +07:00:     at ignore-listed frames
+2026-01-23 02:10:17 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:17 +07:00:     at ignore-listed frames
+2026-01-23 02:10:19 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:19 +07:00:     at ignore-listed frames
+2026-01-23 02:10:21 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:21 +07:00:     at ignore-listed frames
+2026-01-23 02:10:22 +07:00: Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+2026-01-23 02:10:22 +07:00:     at ignore-listed frames
+2026-01-23 06:51:24 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-23 06:51:24 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-23 06:51:24 +07:00:     at ignore-listed frames
+2026-01-23 12:04:37 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-23 12:04:37 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-23 12:04:37 +07:00:     at ignore-listed frames
+2026-01-23 17:13:17 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-23 17:13:17 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-23 17:13:17 +07:00:     at ignore-listed frames
+2026-01-23 18:26:40 +07:00: Failed to fetch courses: Error: API responded with status 502
+2026-01-23 18:26:40 +07:00:     at w (.next/server/chunks/[root-of-the-server]__86db4579._.js:1:1602)
+2026-01-23 18:26:40 +07:00:     at async u (.next/server/chunks/[root-of-the-server]__86db4579._.js:1:5948)
+2026-01-23 18:26:40 +07:00:     at async l (.next/server/chunks/[root-of-the-server]__86db4579._.js:1:6989)
+2026-01-23 18:26:40 +07:00:     at async Module.N (.next/server/chunks/[root-of-the-server]__86db4579._.js:1:8067)
+2026-01-24 03:59:27 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 03:59:27 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 03:59:27 +07:00:     at ignore-listed frames
+2026-01-24 03:59:27 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 03:59:27 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 03:59:27 +07:00:     at ignore-listed frames
+2026-01-24 03:59:28 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 03:59:28 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 03:59:28 +07:00:     at ignore-listed frames
+2026-01-24 03:59:28 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 03:59:28 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 03:59:28 +07:00:     at ignore-listed frames
+2026-01-24 03:59:29 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 03:59:29 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 03:59:29 +07:00:     at ignore-listed frames
+2026-01-24 03:59:29 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 03:59:29 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 03:59:29 +07:00:     at ignore-listed frames
+2026-01-24 05:03:13 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 05:03:13 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 05:03:13 +07:00:     at ignore-listed frames
+2026-01-24 05:03:19 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 05:03:19 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 05:03:19 +07:00:     at ignore-listed frames
+2026-01-24 05:03:25 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 05:03:25 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 05:03:25 +07:00:     at ignore-listed frames
+2026-01-24 05:03:29 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 05:03:29 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 05:03:29 +07:00:     at ignore-listed frames
+2026-01-24 05:03:34 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 05:03:34 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 05:03:34 +07:00:     at ignore-listed frames
+2026-01-24 12:24:39 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:24:39 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10088)
+2026-01-24 12:24:39 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10038)
+2026-01-24 12:24:39 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:9906)
+2026-01-24 12:24:39 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:24:39 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:24:39 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:24:39 +07:00:   digest: '2995102241'
+2026-01-24 12:24:39 +07:00: }
+2026-01-24 12:25:56 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:25:56 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10088)
+2026-01-24 12:25:56 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10038)
+2026-01-24 12:25:56 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:9906)
+2026-01-24 12:25:56 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:25:56 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:25:56 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:25:56 +07:00:   digest: '2995102241'
+2026-01-24 12:25:56 +07:00: }
+2026-01-24 12:26:29 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:26:29 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10088)
+2026-01-24 12:26:29 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10038)
+2026-01-24 12:26:29 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:9906)
+2026-01-24 12:26:29 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:26:29 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:26:29 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:26:29 +07:00:   digest: '2995102241'
+2026-01-24 12:26:29 +07:00: }
+2026-01-24 12:31:28 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:31:28 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10088)
+2026-01-24 12:31:28 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10038)
+2026-01-24 12:31:28 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:9906)
+2026-01-24 12:31:28 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:31:28 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:31:28 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:31:28 +07:00:   digest: '2995102241'
+2026-01-24 12:31:28 +07:00: }
+2026-01-24 12:34:30 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:34:30 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10088)
+2026-01-24 12:34:30 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10038)
+2026-01-24 12:34:30 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:9906)
+2026-01-24 12:34:30 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:34:30 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:34:30 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:34:30 +07:00:   digest: '2995102241'
+2026-01-24 12:34:30 +07:00: }
+2026-01-24 12:49:03 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:49:03 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10982)
+2026-01-24 12:49:03 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10932)
+2026-01-24 12:49:03 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10800)
+2026-01-24 12:49:03 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:49:03 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:49:03 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:49:03 +07:00:   digest: '2995102241'
+2026-01-24 12:49:03 +07:00: }
+2026-01-24 12:57:35 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:57:35 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10982)
+2026-01-24 12:57:35 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10932)
+2026-01-24 12:57:35 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10800)
+2026-01-24 12:57:35 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:57:35 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:57:35 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:57:35 +07:00:   digest: '2995102241'
+2026-01-24 12:57:35 +07:00: }
+2026-01-24 12:57:38 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:57:38 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10982)
+2026-01-24 12:57:38 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10932)
+2026-01-24 12:57:38 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10800)
+2026-01-24 12:57:38 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:57:38 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:57:38 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:57:38 +07:00:   digest: '2995102241'
+2026-01-24 12:57:38 +07:00: }
+2026-01-24 12:58:59 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:58:59 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10982)
+2026-01-24 12:58:59 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10932)
+2026-01-24 12:58:59 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10800)
+2026-01-24 12:58:59 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:58:59 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:58:59 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:58:59 +07:00:   digest: '2995102241'
+2026-01-24 12:58:59 +07:00: }
+2026-01-24 12:59:06 +07:00: ⨯ ReferenceError: localStorage is not defined
+2026-01-24 12:59:06 +07:00:     at Object.getOrCreateDeviceId (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10982)
+2026-01-24 12:59:06 +07:00:     at new <anonymous> (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10932)
+2026-01-24 12:59:06 +07:00:     at module evaluation (.next/server/chunks/ssr/app_learn_[courseId]_page_tsx_fdf0d874._.js:1:10800)
+2026-01-24 12:59:06 +07:00:     at instantiateModule (.next/server/chunks/ssr/[turbopack]_runtime.js:740:9)
+2026-01-24 12:59:06 +07:00:     at getOrInstantiateModuleFromParent (.next/server/chunks/ssr/[turbopack]_runtime.js:763:12)
+2026-01-24 12:59:06 +07:00:     at Context.commonJsRequire [as r] (.next/server/chunks/ssr/[turbopack]_runtime.js:249:12) {
+2026-01-24 12:59:06 +07:00:   digest: '2995102241'
+2026-01-24 12:59:06 +07:00: }
+2026-01-24 19:07:01 +07:00: Failed to fetch courses: TypeError: terminated
+2026-01-24 19:07:01 +07:00:     at ignore-listed frames {
+2026-01-24 19:07:01 +07:00:   [cause]: Error [SocketError]: other side closed
+2026-01-24 19:07:01 +07:00:       at ignore-listed frames {
+2026-01-24 19:07:01 +07:00:     code: 'UND_ERR_SOCKET',
+2026-01-24 19:07:01 +07:00:     socket: {
+2026-01-24 19:07:01 +07:00:       localAddress: '2405:19c0:2:5a12::1',
+2026-01-24 19:07:01 +07:00:       localPort: 57004,
+2026-01-24 19:07:01 +07:00:       remoteAddress: '2606:4700:3035::6815:4d59',
+2026-01-24 19:07:01 +07:00:       remotePort: 443,
+2026-01-24 19:07:01 +07:00:       remoteFamily: 'IPv6',
+2026-01-24 19:07:01 +07:00:       timeout: undefined,
+2026-01-24 19:07:01 +07:00:       bytesWritten: 352,
+2026-01-24 19:07:01 +07:00:       bytesRead: 11898
+2026-01-24 19:07:01 +07:00:     }
+2026-01-24 19:07:01 +07:00:   }
+2026-01-24 19:07:01 +07:00: }
+2026-01-24 22:29:47 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:47 +07:00:     at async Module.F (.next/server/chunks/[root-of-the-server]__f661cde5._.js:34:69713) {
+2026-01-24 22:29:47 +07:00:   errno: -2,
+2026-01-24 22:29:47 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:47 +07:00:   syscall: 'open',
+2026-01-24 22:29:47 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:47 +07:00: }
+2026-01-24 22:29:48 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:48 +07:00:     at ignore-listed frames
+2026-01-24 22:29:48 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00:     at async Module.L (.next/server/chunks/ssr/_3c039313._.js:1:2157) {
+2026-01-24 22:29:48 +07:00:   errno: -2,
+2026-01-24 22:29:48 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:48 +07:00:   syscall: 'open',
+2026-01-24 22:29:48 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00: }
+2026-01-24 22:29:48 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00:     at async Module.L (.next/server/chunks/ssr/_c30c48d4._.js:1:2170) {
+2026-01-24 22:29:48 +07:00:   errno: -2,
+2026-01-24 22:29:48 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:48 +07:00:   syscall: 'open',
+2026-01-24 22:29:48 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00: }
+2026-01-24 22:29:48 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:48 +07:00:     at ignore-listed frames
+2026-01-24 22:29:48 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00:     at async Module.F (.next/server/chunks/[root-of-the-server]__f661cde5._.js:34:69713) {
+2026-01-24 22:29:48 +07:00:   errno: -2,
+2026-01-24 22:29:48 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:48 +07:00:   syscall: 'open',
+2026-01-24 22:29:48 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00: }
+2026-01-24 22:29:48 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00:     at async Module.L (.next/server/chunks/ssr/_c30c48d4._.js:1:2170) {
+2026-01-24 22:29:48 +07:00:   errno: -2,
+2026-01-24 22:29:48 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:48 +07:00:   syscall: 'open',
+2026-01-24 22:29:48 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00: }
+2026-01-24 22:29:48 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:48 +07:00:     at ignore-listed frames
+2026-01-24 22:29:48 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:48 +07:00:     at ignore-listed frames
+2026-01-24 22:29:48 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:48 +07:00:     at ignore-listed frames
+2026-01-24 22:29:48 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00:     at async Module.L (.next/server/chunks/ssr/_c30c48d4._.js:1:2170) {
+2026-01-24 22:29:48 +07:00:   errno: -2,
+2026-01-24 22:29:48 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:48 +07:00:   syscall: 'open',
+2026-01-24 22:29:48 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:48 +07:00: }
+2026-01-24 22:29:48 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:48 +07:00:     at ignore-listed frames
+2026-01-24 22:29:49 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:49 +07:00:     at async Module.q (.next/server/chunks/[root-of-the-server]__9807ead6._.js:1:4895) {
+2026-01-24 22:29:49 +07:00:   errno: -2,
+2026-01-24 22:29:49 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:49 +07:00:   syscall: 'open',
+2026-01-24 22:29:49 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:49 +07:00: }
+2026-01-24 22:29:49 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:49 +07:00:     at ignore-listed frames
+2026-01-24 22:29:50 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:50 +07:00:     at async Module.L (.next/server/chunks/ssr/_a6917010._.js:1:2135) {
+2026-01-24 22:29:50 +07:00:   errno: -2,
+2026-01-24 22:29:50 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:50 +07:00:   syscall: 'open',
+2026-01-24 22:29:50 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:50 +07:00: }
+2026-01-24 22:29:50 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:50 +07:00:     at async Module.L (.next/server/chunks/ssr/_b7b0f4c5._.js:1:2107) {
+2026-01-24 22:29:50 +07:00:   errno: -2,
+2026-01-24 22:29:50 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:50 +07:00:   syscall: 'open',
+2026-01-24 22:29:50 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:50 +07:00: }
+2026-01-24 22:29:50 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:50 +07:00:     at async Module.L (.next/server/chunks/ssr/_35590feb._.js:1:2123) {
+2026-01-24 22:29:50 +07:00:   errno: -2,
+2026-01-24 22:29:50 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:50 +07:00:   syscall: 'open',
+2026-01-24 22:29:50 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:50 +07:00: }
+2026-01-24 22:29:50 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:50 +07:00:     at ignore-listed frames
+2026-01-24 22:29:50 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:50 +07:00:     at ignore-listed frames
+2026-01-24 22:29:50 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:50 +07:00:     at ignore-listed frames
+2026-01-24 22:29:50 +07:00: ⨯ Error: ENOENT: no such file or directory, open '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:50 +07:00:     at async Module.L (.next/server/chunks/ssr/_5a35d4f5._.js:1:2135) {
+2026-01-24 22:29:50 +07:00:   errno: -2,
+2026-01-24 22:29:50 +07:00:   code: 'ENOENT',
+2026-01-24 22:29:50 +07:00:   syscall: 'open',
+2026-01-24 22:29:50 +07:00:   path: '/root/project/clone-app/.next/required-server-files.json'
+2026-01-24 22:29:50 +07:00: }
+2026-01-24 22:29:50 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-24 22:29:50 +07:00:     at ignore-listed frames
+2026-01-24 22:54:30 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 22:54:30 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 22:54:30 +07:00:     at ignore-listed frames
+2026-01-24 22:54:33 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 22:54:33 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 22:54:33 +07:00:     at ignore-listed frames
+2026-01-24 22:54:34 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 22:54:34 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 22:54:34 +07:00:     at ignore-listed frames
+2026-01-24 22:54:36 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 22:54:36 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 22:54:36 +07:00:     at ignore-listed frames
+2026-01-24 22:54:37 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 22:54:37 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 22:54:37 +07:00:     at ignore-listed frames
+2026-01-24 22:54:38 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-24 22:54:38 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-24 22:54:38 +07:00:     at ignore-listed frames
+2026-01-25 07:00:44 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 07:00:44 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 07:00:44 +07:00:     at ignore-listed frames

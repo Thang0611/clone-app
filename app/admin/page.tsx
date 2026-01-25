@@ -54,21 +54,21 @@ export default function AdminDashboard() {
       <AdminSidebar activeView="orders" />
 
       {/* Main Content - Modern Clean Light Theme */}
-      <main className="flex-1 overflow-auto bg-gray-50">
+      <main className="flex-1 overflow-auto bg-gray-50 lg:ml-64">
         {/* Header with Connection Status */}
-        <div className="bg-white border-b border-gray-200 px-8 py-6 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+        <div className="bg-white border-b border-gray-200 px-4 py-4 md:px-8 md:py-6 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
                 Bảng quản lý đơn hàng
               </h1>
-              <p className="text-gray-600 mt-1.5">
+              <p className="text-gray-600 mt-1.5 text-sm md:text-base">
                 Theo dõi và quản lý đơn hàng đã thanh toán
               </p>
             </div>
-            <div className="flex items-center gap-2.5 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200">
+            <div className="flex items-center gap-2.5 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200 flex-shrink-0">
               <div className={`w-2.5 h-2.5 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
-              <span className="text-sm font-medium text-gray-700">
+              <span className="text-xs md:text-sm font-medium text-gray-700 whitespace-nowrap">
                 {isConnected ? 'Đang kết nối' : 'Mất kết nối'}
               </span>
             </div>
@@ -76,8 +76,8 @@ export default function AdminDashboard() {
         </div>
 
         {/* Stats Cards - Modern Clean Design */}
-        <div className="p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="p-4 md:p-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
             <StatsCard
               title="Tổng đơn hàng"
               value={statsLoading ? '...' : stats?.orders.total || 0}

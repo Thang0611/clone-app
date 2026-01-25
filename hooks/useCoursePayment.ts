@@ -125,6 +125,8 @@ export function useCoursePayment({ courses, email, onSuccess }: UseCoursePayment
           title: course.title || "Khóa học",
           courseId: course.courseId,
           price: course.price || 2000,
+          courseType: course.courseType || 'temporary', // Pass courseType
+          category: course.category || null, // Pass category
         })),
       });
 

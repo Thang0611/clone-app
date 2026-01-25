@@ -291,9 +291,9 @@ export function OrderTable({
   return (
     <div className="flex flex-col h-full bg-white">
       {/* Header Section - Modern Clean */}
-      <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">Quản lý đơn hàng</h2>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-4 md:px-8 py-4 md:py-6 border-b border-gray-100">
+        <div className="min-w-0">
+          <h2 className="text-xl md:text-2xl font-bold text-gray-900">Quản lý đơn hàng</h2>
           <p className="text-sm text-gray-500 mt-1">
             Theo dõi và quản lý đơn hàng đã thanh toán
           </p>
@@ -301,7 +301,7 @@ export function OrderTable({
         <button
           onClick={onRefresh}
           disabled={loading}
-          className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md font-medium text-sm"
+          className="flex items-center justify-center gap-2 px-4 md:px-5 py-2 md:py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md font-medium text-sm w-full sm:w-auto"
         >
           <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
           Làm mới
@@ -309,15 +309,15 @@ export function OrderTable({
       </div>
 
       {/* Search Section */}
-      <div className="px-8 py-5 bg-gray-50 border-b border-gray-100">
+      <div className="px-4 md:px-8 py-4 md:py-5 bg-gray-50 border-b border-gray-100">
         <div className="relative max-w-md">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
             type="text"
             placeholder="Tìm kiếm theo mã đơn hàng hoặc email..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 border border-gray-200 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-sm"
+            className="w-full pl-10 md:pl-11 pr-4 py-2 md:py-2.5 border border-gray-200 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all text-sm"
           />
         </div>
       </div>
@@ -341,42 +341,145 @@ export function OrderTable({
             </div>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              {/* Sticky Header */}
-              <thead className="bg-gray-50 sticky top-0 z-20 border-b border-gray-200">
-                <tr>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Order ID
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Email User
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Tổng tiền
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Trạng thái
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Ngày tạo
-                  </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Hành động
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-100">
-                {filteredOrders.map((order) => (
-                  <tr
-                    key={order.id}
-                    onClick={() => onOrderSelect(order)}
-                    className={`group cursor-pointer transition-all duration-150 ${
-                      selectedOrderId === order.id 
-                        ? 'bg-indigo-50 hover:bg-indigo-50' 
-                        : 'hover:bg-gray-50'
-                    }`}
-                  >
+          <>
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-3 p-4">
+              {filteredOrders.map((order) => (
+                <div
+                  key={order.id}
+                  onClick={() => onOrderSelect(order)}
+                  className={`bg-white border rounded-lg p-4 cursor-pointer transition-all ${
+                    selectedOrderId === order.id 
+                      ? 'border-indigo-500 bg-indigo-50' 
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-semibold text-gray-900 truncate">
+                          {order.order_code}
+                        </span>
+                        <StatusBadge status={order.order_status} size="sm" />
+                      </div>
+                      <p className="text-xs text-gray-500">ID: {order.id}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2 mb-3">
+                    <div>
+                      <p className="text-xs text-gray-500 mb-0.5">Email</p>
+                      <p className="text-sm text-gray-900 break-all">{order.user_email}</p>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-xs text-gray-500 mb-0.5">Tổng tiền</p>
+                        <p className="text-sm font-semibold text-gray-900">
+                          {formatCurrency(order.total_amount)}
+                        </p>
+                      </div>
+                      {order.stats && (
+                        <div className="text-right">
+                          <p className="text-xs text-gray-500 mb-0.5">Tiến độ</p>
+                          <p className="text-sm text-gray-900">
+                            {order.stats.completedTasks}/{order.stats.totalTasks}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 mb-0.5">Ngày tạo</p>
+                      <p className="text-sm text-gray-900">
+                        {new Date(order.created_at).toLocaleDateString('vi-VN', {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit'
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 pt-3 border-t border-gray-100" onClick={(e) => e.stopPropagation()}>
+                    <button
+                      onClick={(e) => handleResendEmailClick(e, order)}
+                      disabled={!!loadingActions[order.id]}
+                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-medium"
+                    >
+                      {loadingActions[order.id] === 'resend' ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Mail className="w-4 h-4" />
+                      )}
+                      <span>Email</span>
+                    </button>
+                    <button
+                      onClick={(e) => handleRetryDownloadClick(e, order)}
+                      disabled={!!loadingActions[order.id]}
+                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-green-50 text-green-600 hover:bg-green-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-medium"
+                    >
+                      {loadingActions[order.id] === 'retry' ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Download className="w-4 h-4" />
+                      )}
+                      <span>Tải lại</span>
+                    </button>
+                    {order.order_status === 'processing' && (
+                      <button
+                        onClick={(e) => handleRecoverOrder(e, order)}
+                        disabled={!!loadingActions[order.id]}
+                        className="flex items-center justify-center px-3 py-2 rounded-lg bg-amber-50 text-amber-600 hover:bg-amber-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                        title="Khôi phục"
+                      >
+                        {loadingActions[order.id] === 'recover' ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <RotateCcw className="w-4 h-4" />
+                        )}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full">
+                {/* Sticky Header */}
+                <thead className="bg-gray-50 sticky top-0 z-20 border-b border-gray-200">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Order ID
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Email User
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Tổng tiền
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Trạng thái
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Ngày tạo
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Hành động
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-100">
+                  {filteredOrders.map((order) => (
+                    <tr
+                      key={order.id}
+                      onClick={() => onOrderSelect(order)}
+                      className={`group cursor-pointer transition-all duration-150 ${
+                        selectedOrderId === order.id 
+                          ? 'bg-indigo-50 hover:bg-indigo-50' 
+                          : 'hover:bg-gray-50'
+                      }`}
+                    >
                     {/* Order ID */}
                     <td className="px-6 py-5 whitespace-nowrap">
                       <div className="flex flex-col">
@@ -499,11 +602,12 @@ export function OrderTable({
                         )}
                       </div>
                     </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </div>
 

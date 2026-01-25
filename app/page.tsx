@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
@@ -12,8 +13,8 @@ import StructuredData from "@/components/StructuredData";
 import { generateMetadata as generateSEOMetadata, generateFAQSchema } from "@/lib/seo";
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "GetCourses - Tải Khóa Học Online Chỉ từ 30k",
-  description: "Tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive. 9000+ khóa học có sẵn, cập nhật hàng tuần. Giá chỉ từ 30k. Thanh toán đơn giản, nhận link Google Drive ngay.",
+  title: "GetCourses - Tải Khóa Học Online Chỉ 50k",
+  description: "Tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive. 9000+ khóa học có sẵn, cập nhật hàng tuần. Giá chỉ 50k. Thanh toán đơn giản, nhận link Google Drive ngay.",
   keywords: [
     'khóa học online',
     'udemy giá rẻ',
@@ -55,7 +56,9 @@ export default function Home() {
       
       <div className="min-h-screen bg-white">
         <Navbar />
-        <Hero />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+          <Hero />
+        </Suspense>
         <Stats />
         <WhatIsFullBootcamp />
         <DiverseTopics />

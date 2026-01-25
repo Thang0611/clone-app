@@ -11,7 +11,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'GetCourses - Tải Khóa Học Online',
     short_name: 'GetCourses',
-    description: 'Tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive. Giá chỉ từ 30k.',
+    description: 'Tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive. Giá chỉ 50k.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

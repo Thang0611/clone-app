@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { BookOpen, GraduationCap, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import CourseModal from "./CourseModal";
@@ -14,6 +15,7 @@ import { useTracking } from "@/hooks/useTracking";
 import type { CourseInfo } from "@/types";
 
 export default function Hero() {
+  const searchParams = useSearchParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isYouTubeModalOpen, setIsYouTubeModalOpen] = useState(false);
   const [courses, setCourses] = useState<CourseInfo[]>([]);
@@ -124,7 +126,20 @@ export default function Hero() {
 
     try {
       const results = await getCourseInfo(urls);
-      setCourses(results);
+      // Kiểm tra URL params để xác định courseType
+      // Nếu có courseType=permanent trong URL (từ trang courses), dùng permanent
+      // Ngược lại, mặc định là temporary (từ trang chủ)
+      const courseTypeFromUrl = searchParams.get('courseType');
+      const categoryFromUrl = searchParams.get('category');
+      const courseType: 'temporary' | 'permanent' = courseTypeFromUrl === 'permanent' ? 'permanent' : 'temporary';
+      
+      // Đánh dấu courses với courseType và category từ URL hoặc mặc định
+      const coursesWithType: CourseInfo[] = results.map(course => ({
+        ...course,
+        courseType: courseType,
+        category: categoryFromUrl || course.category || null
+      }));
+      setCourses(coursesWithType);
       
       // Step 3.4: Track form submit success after successful API response
       const validCourses = results.filter(c => c.success).length;
@@ -170,7 +185,7 @@ export default function Hero() {
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-slate-800">
               Tải Khóa Học Online{" "}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent font-extrabold animate-gradient">
-                Giá Chỉ từ 30k
+                Giá Chỉ 50k
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-slate-600">

@@ -89,20 +89,21 @@ export function OrderDetailsDrawer({ order, onClose }: OrderDetailsDrawerProps) 
       />
 
       {/* Drawer */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-3xl bg-white dark:bg-gray-900 shadow-2xl z-50 overflow-hidden flex flex-col animate-slide-in-right">
+      <div className="fixed right-0 top-0 h-full w-full md:max-w-3xl bg-white dark:bg-gray-900 shadow-2xl z-50 overflow-hidden flex flex-col animate-slide-in-right">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+        <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+          <div className="min-w-0 flex-1">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white truncate">
               Order Details
             </h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 truncate">
               {order.order_code}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors flex-shrink-0 ml-2"
+            aria-label="Close"
           >
             <X className="w-6 h-6 text-gray-600 dark:text-gray-400" />
           </button>
@@ -111,11 +112,11 @@ export function OrderDetailsDrawer({ order, onClose }: OrderDetailsDrawerProps) 
         {/* Content */}
         <div className="flex-1 overflow-y-auto">
           {/* Order Summary */}
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="p-4 md:p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+            <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white mb-4">
               Order Summary
             </h3>
-            <dl className="grid grid-cols-2 gap-4">
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <dt className="text-sm text-gray-600 dark:text-gray-400">Customer Email</dt>
                 <dd className="text-sm font-medium text-gray-900 dark:text-white mt-1">
@@ -144,8 +145,8 @@ export function OrderDetailsDrawer({ order, onClose }: OrderDetailsDrawerProps) 
           </div>
 
           {/* Download Tasks */}
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          <div className="p-4 md:p-6 border-b border-gray-200 dark:border-gray-700">
+            <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white mb-4">
               Download Tasks
             </h3>
             <div className="space-y-4">
@@ -162,10 +163,10 @@ export function OrderDetailsDrawer({ order, onClose }: OrderDetailsDrawerProps) 
           </div>
 
           {/* System Logs Section */}
-          <div className="p-6">
+          <div className="p-4 md:p-6">
             <button
               onClick={() => setShowLogs(!showLogs)}
-              className="flex items-center justify-between w-full p-4 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="flex items-center justify-between w-full p-3 md:p-4 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
               <div className="flex items-center gap-3">
                 <FileText className="w-5 h-5 text-gray-600 dark:text-gray-400" />

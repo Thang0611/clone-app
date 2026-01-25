@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
     const testUrl = `${apiUrl}/api/admin/orders/paid?limit=1`;
     
     console.log('[Test] API URL:', apiUrl);
@@ -36,7 +36,7 @@ export async function GET() {
     return NextResponse.json({
       success: false,
       error: error instanceof Error ? error.message : 'Unknown error',
-      apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+      apiUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
     }, { status: 500 });
   }
 }

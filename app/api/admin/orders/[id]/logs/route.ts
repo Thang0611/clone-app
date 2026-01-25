@@ -31,7 +31,7 @@ export async function GET(
     }
 
     // Get backend API URL from environment
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
     
     // Build query string for backend API
     const queryParams = new URLSearchParams();

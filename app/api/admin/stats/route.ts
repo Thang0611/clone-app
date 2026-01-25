@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Get backend API URL from environment
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
     
     // Call real backend API (note: backend route is /api/admin/dashboard/stats)
     const backendUrl = `${apiUrl}/api/admin/dashboard/stats`;

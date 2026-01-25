@@ -7,6 +7,7 @@ import MetaPixel from "@/components/MetaPixel";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PageViewTracker from "@/components/PageViewTracker";
 import UserPropertiesTracker from "@/components/UserPropertiesTracker";
+import GlobalErrorHandler from "@/components/GlobalErrorHandler";
 import { Providers } from "./providers";
 import StructuredData from "@/components/StructuredData";
 import { generateMetadata as generateSEOMetadata, generateViewport, generateOrganizationSchema } from "@/lib/seo";
@@ -15,8 +16,8 @@ import { generateMetadata as generateSEOMetadata, generateViewport, generateOrga
 // For runtime validation, it's handled in env-validation.ts itself
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "GetCourses - Tải Khóa Học Online Chỉ từ 30k",
-  description: "Tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive. 9000+ khóa học có sẵn, cập nhật hàng tuần. Giá chỉ từ 30k.",
+  title: "GetCourses - Tải Khóa Học Online Chỉ 50k",
+  description: "Tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive. 9000+ khóa học có sẵn, cập nhật hàng tuần. Giá chỉ 50k.",
   keywords: [
     'khóa học online',
     'udemy',
@@ -49,6 +50,9 @@ export default function RootLayout({
         <MetaPixel />
       </head>
       <body className="antialiased">
+        {/* Global Error Handler - Suppresses non-critical errors */}
+        <GlobalErrorHandler />
+        
         {/* Google Tag Manager - Must be first in body */}
         <GoogleTagManager />
         

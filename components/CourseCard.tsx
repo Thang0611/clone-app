@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star } from "lucide-react";
 import { Card, CardBody } from "./ui/Card";
 import { Badge } from "./ui/Badge";
 import { formatCurrency } from "@/lib/utils";
 
 interface CourseCardProps {
   id: number;
+  slug?: string | null;
   title: string;
   platform: string;
   category: string;
@@ -21,11 +22,12 @@ interface CourseCardProps {
   thumbnail: string;
   bestseller?: boolean;
   url?: string;
-  onAddToCart?: () => void;
+  onAddToCart?: (course?: { url: string; title: string; courseType: 'permanent'; category: string }) => void;
 }
 
 export default function CourseCard({
   id,
+  slug,
   title,
   platform,
   category,
@@ -47,9 +49,12 @@ export default function CourseCard({
     return num.toString();
   };
 
+  // Use slug if available, fallback to id
+  const coursePath = slug || id.toString();
+
   return (
     <Card className="group overflow-hidden hover:shadow-card-hover transition-all duration-300 border-slate-200">
-      <Link href={`/courses/${id}`} className="block">
+      <Link href={`/courses/${coursePath}`} className="block">
         {/* Thumbnail - 16:9 aspect ratio */}
         <div className="relative w-full aspect-video overflow-hidden bg-slate-100">
           <img
@@ -90,7 +95,7 @@ export default function CourseCard({
           </div>
 
           {/* Price Section */}
-          <div className="flex items-center justify-between mb-4 pt-3 border-t border-slate-100">
+          <div className="mb-4 pt-3 border-t border-slate-100">
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-bold text-emerald-600">
                 {formatCurrency(price)}
@@ -99,18 +104,6 @@ export default function CourseCard({
                 {formatCurrency(originalPrice)}
               </span>
             </div>
-            {/* Add to Cart Icon Button */}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                onAddToCart?.();
-              }}
-              className="p-2.5 rounded-lg bg-primary-50 text-primary-600 hover:bg-primary-100 hover:text-primary-700 transition-colors flex-shrink-0"
-              aria-label="Thêm vào giỏ hàng"
-            >
-              <ShoppingCart className="w-5 h-5" />
-            </button>
           </div>
         </CardBody>
       </Link>

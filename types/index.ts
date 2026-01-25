@@ -10,6 +10,8 @@ export interface CourseInfo {
   price?: number;
   courseId?: number | null;
   message?: string;
+  courseType?: 'temporary' | 'permanent'; // Thêm field mới
+  category?: string | null; // Thêm category
 }
 
 export interface CourseInfoResponse {
@@ -53,6 +55,8 @@ export interface CreateOrderRequest {
     title: string;
     courseId?: number | null;
     price: number;
+    courseType?: 'temporary' | 'permanent'; // Loại khóa học: temporary (trang chủ) hoặc permanent (trang courses)
+    category?: string | null; // Category của khóa học
   }[];
 }
 

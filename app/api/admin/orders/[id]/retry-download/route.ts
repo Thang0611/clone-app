@@ -29,7 +29,7 @@ export async function POST(
     }
 
     // Get backend API URL from environment
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
     const backendUrl = `${apiUrl}/api/admin/orders/${orderId}/retry-download`;
 
     console.log('[Retry Download] Calling backend:', backendUrl);

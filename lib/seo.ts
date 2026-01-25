@@ -7,7 +7,7 @@ import type { Metadata, Viewport } from 'next';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://getcourses.net';
 const SITE_NAME = 'GetCourses';
-const DEFAULT_DESCRIPTION = 'Tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive. 9000+ khóa học có sẵn, cập nhật hàng tuần. Giá chỉ từ 30k.';
+const DEFAULT_DESCRIPTION = 'Tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive. 9000+ khóa học có sẵn, cập nhật hàng tuần. Giá chỉ 50k.';
 const DEFAULT_KEYWORDS = [
   'khóa học online',
   'udemy',

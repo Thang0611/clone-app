@@ -188,7 +188,7 @@ export default function DebugPage() {
 {`# If API URL is wrong, run these commands:
 
 # 1. Update .env.production
-echo "NEXT_PUBLIC_API_URL=http://localhost:3000" > .env.production
+echo "NEXT_PUBLIC_API_URL=http://localhost:3001" > .env.production
 
 # 2. Rebuild Next.js
 npm run build
@@ -197,7 +197,7 @@ npm run build
 pm2 restart client-nextjs --update-env
 
 # 4. Check if backend is running
-curl http://localhost:3000/`}
+curl http://localhost:3001/`}
         </pre>
       </div>
     </div>
