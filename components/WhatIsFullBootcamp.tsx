@@ -16,20 +16,20 @@ export default function WhatIsFullBootcamp() {
             Là công cụ giúp bạn tải khóa học từ Udemy, Coursera, LinkedIn Learning về Drive với chi phí thấp hơn giá gốc.
             <br className="hidden sm:block" />
             <span className="block mt-2 sm:inline sm:mt-0">
-              Bao gồm: Video HD, Phụ đề (eng, vi), Files đầy đủ.
+              Bao gồm: Video 100% FullHD, Phụ đề (eng, vi), Files đầy đủ.
             </span>
           </p>
         </div>
 
         {/* Content - Mobile: Stack vertical, Desktop: 2 columns */}
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          
+
           {/* Image - Mobile first */}
           <div className="w-full order-2 lg:order-1">
             <div className="relative w-full aspect-[690/765] rounded-2xl overflow-hidden shadow-xl">
-              <Image 
-                src="/images/udemy-1.webp" 
-                alt="Udemy Course Laptop" 
+              <Image
+                src="/images/udemy-1.webp"
+                alt="Udemy Course Laptop"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -40,16 +40,16 @@ export default function WhatIsFullBootcamp() {
           {/* Features List - Mobile first */}
           <div className="w-full order-1 lg:order-2 flex flex-col">
             <div className="flex flex-col gap-6 sm:gap-8 mb-8">
-              
+
               {/* Feature 1 */}
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Image 
-                    src="/images/icons/what-1.svg" 
-                    alt="Chất lượng" 
-                    width={32} 
-                    height={32} 
-                    className="w-7 h-7 sm:w-8 sm:h-8" 
+                  <Image
+                    src="/images/icons/what-1.svg"
+                    alt="Chất lượng"
+                    width={32}
+                    height={32}
+                    className="w-7 h-7 sm:w-8 sm:h-8"
                   />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -65,12 +65,12 @@ export default function WhatIsFullBootcamp() {
               {/* Feature 2 */}
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Image 
-                    src="/images/icons/what-2.svg" 
-                    alt="Cập nhật" 
-                    width={32} 
-                    height={32} 
-                    className="w-7 h-7 sm:w-8 sm:h-8" 
+                  <Image
+                    src="/images/icons/what-2.svg"
+                    alt="Cập nhật"
+                    width={32}
+                    height={32}
+                    className="w-7 h-7 sm:w-8 sm:h-8"
                   />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -86,12 +86,12 @@ export default function WhatIsFullBootcamp() {
               {/* Feature 3 */}
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Image 
-                    src="/images/icons/what-3.svg" 
-                    alt="Tiết kiệm" 
-                    width={32} 
-                    height={32} 
-                    className="w-7 h-7 sm:w-8 sm:h-8" 
+                  <Image
+                    src="/images/icons/what-3.svg"
+                    alt="Tiết kiệm"
+                    width={32}
+                    height={32}
+                    className="w-7 h-7 sm:w-8 sm:h-8"
                   />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -105,10 +105,10 @@ export default function WhatIsFullBootcamp() {
               </div>
 
             </div>
-            
+
             {/* CTA Button */}
             <div className="mt-2">
-              <button 
+              <button
                 onClick={scrollToFormAndFocus}
                 className="w-full sm:w-auto bg-gradient-to-r from-red-500 to-red-600 text-white px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-red-600 hover:to-red-700 transition-all shadow-lg hover:shadow-xl active:scale-[0.98]"
               >

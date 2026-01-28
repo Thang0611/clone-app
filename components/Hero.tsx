@@ -25,7 +25,7 @@ export default function Hero() {
 
   const { getCourseInfo, courseInfoLoading } = useCourseAPI();
   const { trackContent, trackFormBegin, trackForm, trackFormSuccess, trackFormError } = useTracking();
-  
+
   // Refs for tracking
   const formRef = useRef<HTMLFormElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -74,7 +74,7 @@ export default function Hero() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     // Reset errors
     setEmailError("");
     setUrlsError("");
@@ -132,7 +132,7 @@ export default function Hero() {
       const courseTypeFromUrl = searchParams.get('courseType');
       const categoryFromUrl = searchParams.get('category');
       const courseType: 'temporary' | 'permanent' = courseTypeFromUrl === 'permanent' ? 'permanent' : 'temporary';
-      
+
       // Đánh dấu courses với courseType và category từ URL hoặc mặc định
       const coursesWithType: CourseInfo[] = results.map(course => ({
         ...course,
@@ -140,11 +140,11 @@ export default function Hero() {
         category: categoryFromUrl || course.category || null
       }));
       setCourses(coursesWithType);
-      
+
       // Step 3.4: Track form submit success after successful API response
       const validCourses = results.filter(c => c.success).length;
       trackFormSuccess('hero_course_form', urls.length, validCourses);
-      
+
       // Success toast
       toast.success("Lấy thông tin thành công!", {
         id: loadingToast,
@@ -154,7 +154,7 @@ export default function Hero() {
       // Step 3.4: Track form submit error on API failure
       const errorMessage = error.message || "Có lỗi xảy ra khi lấy thông tin khóa học";
       trackFormError('hero_course_form', errorMessage);
-      
+
       toast.error("Không thể lấy thông tin khóa học", {
         id: loadingToast,
         description: errorMessage,
@@ -163,7 +163,7 @@ export default function Hero() {
           onClick: () => handleSubmit(e),
         },
       });
-      
+
       setCourses([]);
       setIsModalOpen(false);
     }
@@ -177,7 +177,7 @@ export default function Hero() {
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-300/40 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet-300/30 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -189,11 +189,11 @@ export default function Hero() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-slate-600">
-              Công cụ hỗ trợ tải khóa học từ Udemy, Coursera, LinkedIn Learning về Google Drive
+              Công cụ hỗ trợ tải khóa học từ Udemy 100% FullHD về Google Drive
             </p>
-            
-            <Button 
-              variant="secondary" 
+
+            <Button
+              variant="secondary"
               size="lg"
               className="mb-12"
               onClick={() => setIsYouTubeModalOpen(true)}
@@ -244,7 +244,7 @@ export default function Hero() {
                   Nhập thông tin để nhận khóa học về email của bạn
                 </p>
               </div>
-              
+
               <form ref={formRef} className="space-y-5" onSubmit={handleSubmit} action="#">
                 {/* Email Input - Modern Style */}
                 <div>

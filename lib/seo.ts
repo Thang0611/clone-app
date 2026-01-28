@@ -55,9 +55,9 @@ export function generateMetadata(config: SEOConfig): Metadata {
     nofollow = false,
   } = config;
 
-  const fullTitle = title 
+  const fullTitle = title
     ? `${title} | ${SITE_NAME}`
-    : `${SITE_NAME} - Tải Khóa Học Online Chỉ từ 30k`;
+    : `${SITE_NAME} - Get Khóa Học Udemy chỉ 50k`;
 
   const pageUrl = url || SITE_URL;
   const ogImage = image.startsWith('http') ? image : `${SITE_URL}${image}`;
@@ -69,7 +69,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
     title: fullTitle,
     description,
     keywords: keywords.join(', '),
-    
+
     // Open Graph
     openGraph: {
       type: ogType as 'website' | 'article',
@@ -128,7 +128,7 @@ export function generateMetadata(config: SEOConfig): Metadata {
     // App metadata
     applicationName: SITE_NAME,
     referrer: 'origin-when-cross-origin',
-    
+
     // Icons for browser tab and PWA
     icons: {
       icon: [

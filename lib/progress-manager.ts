@@ -53,9 +53,9 @@ export async function saveProgress(progress: VideoProgress): Promise<void> {
     // Thêm vào sync queue để sync với server sau
     await addToSyncQueue(progressWithTimestamp);
 
-    console.log(`[ProgressManager] ✅ Saved progress: ${progress.lectureId} - ${progress.progressPercent.toFixed(1)}% (lastWatchedAt: ${new Date(progressWithTimestamp.lastWatchedAt).toISOString()})`);
+    // console.log(`[ProgressManager] ✅ Saved progress: ${progress.lectureId} - ${progress.progressPercent.toFixed(1)}% (lastWatchedAt: ${new Date(progressWithTimestamp.lastWatchedAt).toISOString()})`);
   } catch (error) {
-    console.error('[ProgressManager] ❌ Failed to save progress:', error);
+    // console.error('[ProgressManager] ❌ Failed to save progress:', error);
     throw error;
   }
 }
@@ -80,7 +80,7 @@ export async function getProgress(
 
     return progress;
   } catch (error) {
-    console.error('[ProgressManager] ❌ Failed to get progress:', error);
+    // console.error('[ProgressManager] ❌ Failed to get progress:', error);
     return null;
   }
 }
@@ -103,7 +103,7 @@ export async function getCourseProgress(courseId: string): Promise<VideoProgress
 
     return progressList;
   } catch (error) {
-    console.error('[ProgressManager] ❌ Failed to get course progress:', error);
+    // console.error('[ProgressManager] ❌ Failed to get course progress:', error);
     return [];
   }
 }
@@ -123,9 +123,9 @@ export async function deleteProgress(courseId: string, lectureId: string): Promi
       request.onerror = () => reject(request.error);
     });
 
-    console.log(`[ProgressManager] ✅ Deleted progress: ${lectureId}`);
+    // console.log(`[ProgressManager] ✅ Deleted progress: ${lectureId}`);
   } catch (error) {
-    console.error('[ProgressManager] ❌ Failed to delete progress:', error);
+    // console.error('[ProgressManager] ❌ Failed to delete progress:', error);
     throw error;
   }
 }
@@ -153,7 +153,7 @@ async function addToSyncQueue(progress: VideoProgress): Promise<void> {
       request.onerror = () => reject(request.error);
     });
   } catch (error) {
-    console.error('[ProgressManager] ❌ Failed to upsert sync queue:', error);
+    // console.error('[ProgressManager] ❌ Failed to upsert sync queue:', error);
     // Không throw - sync queue là optional
   }
 }
@@ -176,7 +176,7 @@ export async function getSyncQueue(): Promise<VideoProgress[]> {
 
     return queue;
   } catch (error) {
-    console.error('[ProgressManager] ❌ Failed to get sync queue:', error);
+    // console.error('[ProgressManager] ❌ Failed to get sync queue:', error);
     return [];
   }
 }
@@ -201,9 +201,9 @@ export async function clearSyncQueue(ids: number[]): Promise<void> {
       )
     );
 
-    console.log(`[ProgressManager] ✅ Cleared ${ids.length} items from sync queue`);
+    // console.log(`[ProgressManager] ✅ Cleared ${ids.length} items from sync queue`);
   } catch (error) {
-    console.error('[ProgressManager] ❌ Failed to clear sync queue:', error);
+    // console.error('[ProgressManager] ❌ Failed to clear sync queue:', error);
     throw error;
   }
 }
@@ -251,14 +251,14 @@ export async function syncProgressToServer(
       const ids = queue.map((_, index) => index + 1); // IndexedDB auto-increment starts at 1
       await clearSyncQueue(ids);
       synced = queue.length;
-      console.log(`[ProgressManager] ✅ Synced ${synced} progress items to server`);
+      // console.log(`[ProgressManager] ✅ Synced ${synced} progress items to server`);
     } else {
       failed = queue.length;
-      console.error(`[ProgressManager] ❌ Sync failed: ${response.status}`);
+      // console.error(`[ProgressManager] ❌ Sync failed: ${response.status}`);
     }
   } catch (error) {
     failed = queue.length;
-    console.error('[ProgressManager] ❌ Sync error:', error);
+    // console.error('[ProgressManager] ❌ Sync error:', error);
   }
 
   return { success: failed === 0, synced, failed };
@@ -278,7 +278,7 @@ export function startAutoSync(
   stopAutoSync(); // Clear existing interval
 
   // DISABLED: Server sync not needed for local-only learning
-  console.log(`[ProgressManager] ℹ️ Auto-sync DISABLED (local-only mode)`);
+  // console.log(`[ProgressManager] ℹ️ Auto-sync DISABLED (local-only mode)`);
   return;
 
   // Original code (commented out):
@@ -296,7 +296,7 @@ export function stopAutoSync(): void {
   if (syncInterval) {
     clearInterval(syncInterval);
     syncInterval = null;
-    console.log('[ProgressManager] ✅ Auto-sync stopped');
+    // console.log('[ProgressManager] ✅ Auto-sync stopped');
   }
 }
 
@@ -335,12 +335,12 @@ export async function saveProgressHybrid(
         const { saveWithThrottling } = await import('./progress-file-saver');
         const saved = await saveWithThrottling(progress.courseId, doFileSave);
         if (!saved) {
-          console.log('[ProgressManager] 📅 File save scheduled for later (throttled)');
+          // console.log('[ProgressManager] 📅 File save scheduled for later (throttled)');
         }
       }
     } catch (error) {
       // File save is optional, don't throw
-      console.warn('[ProgressManager] ⚠️ Could not save to file:', error);
+      // console.warn('[ProgressManager] ⚠️ Could not save to file:', error);
     }
   }
 }

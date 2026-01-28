@@ -33,12 +33,10 @@ const FAQ_DATA = [
   },
   {
     id: 5,
-    question: "Cách dùng phụ đề rời như thể nào? Cách dịch phụ đề sang tiếng việt?",
+    question: "Cách dùng phụ đề rời như thể nào? Theo dõi quá trình học như chính chủ Udemy thế nào?",
     answer: (
       <>
-        Hướng dẫn dùng phụ đề rời: <a href="https://youtu.be/YA5jUsf4O2g?si=Yh6XkL46VKj0POFe" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
-        <br />
-        Cách dịch sang tiếng việt: <a href="https://youtu.be/YA5jUsf4O2g?si=Yh6XkL46VKj0POFe" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
+        Hướng dẫn dùng phụ đề rời và theo dõi tiến độ học: <a href="https://youtu.be/YA5jUsf4O2g?si=Yh6XkL46VKj0POFe" target="/learn" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
       </>
     ),
   },
@@ -56,16 +54,14 @@ function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
           {question}
         </h3>
         <ChevronDown
-          className={`w-5 h-5 text-slate-500 flex-shrink-0 transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          } group-hover:text-indigo-600`}
+          className={`w-5 h-5 text-slate-500 flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+            } group-hover:text-indigo-600`}
           strokeWidth={2}
         />
       </button>
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
       >
         <div className="px-4 sm:px-6 pb-6">
           <div className="text-base text-slate-600 leading-relaxed">

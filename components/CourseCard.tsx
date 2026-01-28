@@ -45,65 +45,58 @@ export default function CourseCard({
 }: CourseCardProps) {
   const formatNumber = (num: number) => {
     if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    if (num >= 1000) return `${(num / 1000).toFixed(0)}K`;
     return num.toString();
   };
 
-  // Use slug if available, fallback to id
   const coursePath = slug || id.toString();
 
   return (
-    <Card className="group overflow-hidden hover:shadow-card-hover transition-all duration-300 border-slate-200">
+    <Card className="group overflow-hidden hover:shadow-md transition-all duration-200 border-slate-200">
       <Link href={`/courses/${coursePath}`} className="block">
-        {/* Thumbnail - 16:9 aspect ratio */}
-        <div className="relative w-full aspect-video overflow-hidden bg-slate-100">
+        {/* Thumbnail - Compact */}
+        <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-100">
           <img
             src={thumbnail}
             alt={title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
           />
           {bestseller && (
-            <Badge className="absolute top-3 left-3 bg-amber-500 text-white font-semibold shadow-md">
-              Bestseller
+            <Badge className="absolute top-1.5 left-1.5 bg-amber-500 text-white text-[10px] px-1.5 py-0.5">
+              Hot
             </Badge>
           )}
-          <Badge className="absolute top-3 right-3 bg-white/95 text-slate-900 font-medium shadow-sm">
+          <Badge className="absolute top-1.5 right-1.5 bg-white/90 text-slate-700 text-[10px] px-1.5 py-0.5">
             {platform}
           </Badge>
         </div>
 
-        <CardBody className="p-5">
-          {/* Course Title - Truncate after 2 lines */}
-          <h3 className="font-bold text-lg text-slate-900 mb-2 line-clamp-2 min-h-[56px] group-hover:text-primary-600 transition-colors">
+        <CardBody className="p-2 sm:p-3">
+          {/* Title - Compact */}
+          <h3 className="font-semibold text-xs sm:text-sm text-slate-900 mb-1 line-clamp-2 min-h-[32px] sm:min-h-[40px] group-hover:text-primary-600 transition-colors leading-tight">
             {title}
           </h3>
 
-          {/* Instructor */}
-          <p className="text-sm text-slate-600 mb-3">
+          {/* Instructor - Small */}
+          <p className="text-[10px] sm:text-xs text-slate-500 mb-1.5 truncate">
             {instructor}
           </p>
 
-          {/* Rating */}
-          <div className="flex items-center gap-2 mb-3">
-            <div className="flex items-center gap-1">
-              <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-              <span className="font-semibold text-slate-900">{rating}</span>
-            </div>
-            <span className="text-sm text-slate-500">
-              ({formatNumber(students)} đánh giá)
-            </span>
+          {/* Rating - Compact */}
+          <div className="flex items-center gap-1 mb-2">
+            <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+            <span className="text-[10px] sm:text-xs font-medium text-slate-700">{rating}</span>
+            <span className="text-[10px] text-slate-400">({formatNumber(students)})</span>
           </div>
 
-          {/* Price Section */}
-          <div className="mb-4 pt-3 border-t border-slate-100">
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-emerald-600">
-                {formatCurrency(price)}
-              </span>
-              <span className="text-sm text-slate-500 line-through">
-                {formatCurrency(originalPrice)}
-              </span>
-            </div>
+          {/* Price - Compact */}
+          <div className="flex items-baseline gap-1 pt-1.5 border-t border-slate-100">
+            <span className="text-sm sm:text-base font-bold text-emerald-600">
+              {formatCurrency(price)}
+            </span>
+            <span className="text-[10px] text-slate-400 line-through hidden sm:inline">
+              {formatCurrency(originalPrice)}
+            </span>
           </div>
         </CardBody>
       </Link>

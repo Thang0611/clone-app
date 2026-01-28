@@ -8,7 +8,7 @@ Video player bị crop/khuyết phần trên và dưới khi có title bar.
 ### Root Cause:
 ```tsx
 // VidstackVideoPlayer.tsx line 288
-<div style={{ aspectRatio: '16/16', maxHeight: '100%' }}>  // ← WRONG
+<div style={{ aspectRatio: '16/9', maxHeight: '100%' }}>  // ← WRONG
   <MediaPlayer style={{ objectFit: 'contain' }}>
 ```
 
@@ -229,3 +229,4 @@ export async function scanFolderRecursive(): Promise<{
   // Track both videos and empty folders with resources
 }
 ```
+

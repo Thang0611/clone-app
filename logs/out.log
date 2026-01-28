@@ -3643,3 +3643,241 @@
 2026-01-25 11:45:56 +07:00: [Course API] Server URL from env: https://api.getcourses.net
 2026-01-25 11:45:56 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/nlp-natural-language-processing-with-python/curriculum
 2026-01-25 11:45:56 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 13:54:42 +07:00: ▲ Next.js 16.1.1
+2026-01-25 13:54:42 +07:00: - Local:         http://localhost:4000
+2026-01-25 13:54:42 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-25 13:54:42 +07:00: 
+2026-01-25 13:54:42 +07:00: ✓ Starting...
+2026-01-25 13:54:43 +07:00: ✓ Ready in 1032ms
+2026-01-25 13:54:43 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-25 13:54:43 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-25 13:54:43 +07:00: [AUTH CONFIG] File exists: true
+2026-01-25 13:54:43 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-25 13:54:43 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-25 13:54:43 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-25 13:54:43 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-25 14:01:12 +07:00: ▲ Next.js 16.1.1
+2026-01-25 14:01:12 +07:00: - Local:         http://localhost:4000
+2026-01-25 14:01:12 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-25 14:01:12 +07:00: 
+2026-01-25 14:01:12 +07:00: ✓ Starting...
+2026-01-25 14:01:13 +07:00: ✓ Ready in 911ms
+2026-01-25 14:01:13 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-25 14:01:13 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-25 14:01:13 +07:00: [AUTH CONFIG] File exists: true
+2026-01-25 14:01:13 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-25 14:01:13 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-25 14:01:13 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-25 14:01:13 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-25 14:08:33 +07:00: ▲ Next.js 16.1.1
+2026-01-25 14:08:33 +07:00: - Local:         http://localhost:4000
+2026-01-25 14:08:33 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-25 14:08:33 +07:00: 
+2026-01-25 14:08:33 +07:00: ✓ Starting...
+2026-01-25 14:08:34 +07:00: ✓ Ready in 916ms
+2026-01-25 14:08:34 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-25 14:08:34 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-25 14:08:34 +07:00: [AUTH CONFIG] File exists: true
+2026-01-25 14:08:34 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-25 14:08:34 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-25 14:08:34 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-25 14:08:34 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-25 14:09:01 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-web-development-bootcamp/curriculum
+2026-01-25 14:09:01 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:09:01 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-web-development-bootcamp
+2026-01-25 14:09:01 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:25 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/tableau10
+2026-01-25 14:10:25 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:25 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/tableau10/curriculum
+2026-01-25 14:10:25 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:27 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-web-development-bootcamp/curriculum
+2026-01-25 14:10:27 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:27 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-web-development-bootcamp
+2026-01-25 14:10:27 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:29 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/artificial-intelligence-az/curriculum
+2026-01-25 14:10:29 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:29 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/artificial-intelligence-az
+2026-01-25 14:10:29 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:36 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/react-the-complete-guide-incl-redux
+2026-01-25 14:10:36 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:36 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/react-the-complete-guide-incl-redux/curriculum
+2026-01-25 14:10:36 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:53 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/powerbi-complete-introduction
+2026-01-25 14:10:53 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 14:10:53 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/powerbi-complete-introduction/curriculum
+2026-01-25 14:10:53 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 15:02:02 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-react-native-ultimate
+2026-01-25 15:02:02 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 15:02:02 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-react-native-ultimate/curriculum
+2026-01-25 15:02:02 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 15:02:20 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-debug-react-nodejs
+2026-01-25 15:02:20 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 15:02:21 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-debug-react-nodejs/curriculum
+2026-01-25 15:02:21 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 15:02:29 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-java-spring-restful-api-for-beginners
+2026-01-25 15:02:29 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 15:02:29 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-java-spring-restful-api-for-beginners/curriculum
+2026-01-25 15:02:29 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 16:08:57 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-backend-restful-api-from-zero
+2026-01-25 16:08:57 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-25 16:08:57 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-backend-restful-api-from-zero/curriculum
+2026-01-25 16:08:57 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 21:15:30 +07:00: ▲ Next.js 16.1.1
+2026-01-25 21:15:30 +07:00: - Local:         http://localhost:4000
+2026-01-25 21:15:30 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-25 21:15:30 +07:00: 
+2026-01-25 21:15:30 +07:00: ✓ Starting...
+2026-01-25 21:15:31 +07:00: ✓ Ready in 1357ms
+2026-01-25 21:15:31 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-25 21:15:31 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-25 21:15:31 +07:00: [AUTH CONFIG] File exists: true
+2026-01-25 21:15:31 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-25 21:15:31 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-25 21:15:31 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-25 21:15:31 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-25 21:19:28 +07:00: ▲ Next.js 16.1.1
+2026-01-25 21:19:28 +07:00: - Local:         http://localhost:4000
+2026-01-25 21:19:28 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-25 21:19:28 +07:00: 
+2026-01-25 21:19:28 +07:00: ✓ Starting...
+2026-01-25 21:19:31 +07:00: ✓ Ready in 4.6s
+2026-01-25 21:19:32 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-25 21:19:32 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-25 21:19:32 +07:00: [AUTH CONFIG] File exists: true
+2026-01-25 21:19:32 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-25 21:19:32 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-25 21:19:32 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-25 21:19:32 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-25 21:53:26 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/r-programming/curriculum
+2026-01-25 21:53:26 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-25 21:53:26 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/r-programming
+2026-01-25 21:53:26 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-26 00:23:22 +07:00: ▲ Next.js 16.1.1
+2026-01-26 00:23:22 +07:00: - Local:         http://localhost:4000
+2026-01-26 00:23:22 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-26 00:23:22 +07:00: 
+2026-01-26 00:23:22 +07:00: ✓ Starting...
+2026-01-26 00:23:23 +07:00: ✓ Ready in 921ms
+2026-01-26 00:23:23 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-26 00:23:23 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-26 00:23:23 +07:00: [AUTH CONFIG] File exists: true
+2026-01-26 00:23:23 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-26 00:23:23 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-26 00:23:23 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-26 00:23:23 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-26 01:43:14 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-java-spring-mvc-for-beginners
+2026-01-26 01:43:14 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-26 01:43:14 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-java-spring-mvc-for-beginners/curriculum
+2026-01-26 01:43:14 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-26 12:34:29 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/nlp-natural-language-processing-with-python
+2026-01-26 12:34:29 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-26 12:34:29 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/nlp-natural-language-processing-with-python/curriculum
+2026-01-26 12:34:29 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-26 13:17:53 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-web-development-bootcamp
+2026-01-26 13:17:53 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-26 13:17:53 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-web-development-bootcamp/curriculum
+2026-01-26 13:17:53 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-26 13:17:57 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-backend-restful-api-from-zero/curriculum
+2026-01-26 13:17:57 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-26 13:17:57 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-backend-restful-api-from-zero
+2026-01-26 13:17:57 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-26 13:17:59 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-backend-restful-api-from-zero
+2026-01-26 13:17:59 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-26 13:17:59 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-backend-restful-api-from-zero/curriculum
+2026-01-26 13:17:59 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-26 13:18:04 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-backend-restful-api-from-zero/curriculum
+2026-01-26 13:18:04 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-26 13:18:04 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-backend-restful-api-from-zero
+2026-01-26 13:18:04 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-26 17:54:20 +07:00: [AUTH] Authorize called with email: getcourses.info@gmail.com
+2026-01-26 17:54:20 +07:00: Debug Env: Loaded
+2026-01-26 17:54:20 +07:00: adminPasswordHash $2b$10$v9SiBR5o6x3cNTltrpnzoe3ol1I15L6JO8PQ3pe3keAYjRNoQjSPu
+2026-01-26 17:54:20 +07:00: adminPasswordPlain undefined
+2026-01-26 17:54:20 +07:00: ❌ [AUTH ERROR] Email mismatch
+2026-01-26 17:54:20 +07:00:    Entered: "getcourses.info@gmail.com"
+2026-01-26 17:54:20 +07:00:    Expected: "getcourses.net@gmail.com"
+2026-01-26 17:54:20 +07:00:    Normalized entered: "getcourses.info@gmail.com"
+2026-01-26 17:54:20 +07:00:    Normalized expected: "getcourses.net@gmail.com"
+2026-01-26 17:54:20 +07:00: [AUTH] User validation failed
+2026-01-26 17:54:32 +07:00: [AUTH] Authorize called with email: getcourses.net@gmail.com
+2026-01-26 17:54:32 +07:00: Debug Env: Loaded
+2026-01-26 17:54:32 +07:00: adminPasswordHash $2b$10$v9SiBR5o6x3cNTltrpnzoe3ol1I15L6JO8PQ3pe3keAYjRNoQjSPu
+2026-01-26 17:54:32 +07:00: adminPasswordPlain undefined
+2026-01-26 17:54:32 +07:00: ✅ [AUTH] Email matches, checking password...
+2026-01-26 17:54:32 +07:00: 🔍 [AUTH] Using bcrypt comparison
+2026-01-26 17:54:32 +07:00:    bcrypt.compare result: true
+2026-01-26 17:54:32 +07:00: ✅ [AUTH] Password is valid! Returning user object...
+2026-01-26 17:54:32 +07:00: [AUTH] User validated successfully: getcourses.net@gmail.com
+2026-01-26 17:59:40 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-android-10-developer-course-mastering-android
+2026-01-26 17:59:40 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-26 17:59:40 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-android-10-developer-course-mastering-android/curriculum
+2026-01-26 17:59:40 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-26 18:00:02 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-android-10-developer-course-mastering-android/curriculum
+2026-01-26 18:00:02 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-26 18:00:02 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/the-complete-android-10-developer-course-mastering-android
+2026-01-26 18:00:02 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-27 23:43:59 +07:00: ▲ Next.js 16.1.1
+2026-01-27 23:43:59 +07:00: - Local:         http://localhost:4000
+2026-01-27 23:43:59 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-27 23:43:59 +07:00: 
+2026-01-27 23:43:59 +07:00: ✓ Starting...
+2026-01-27 23:44:01 +07:00: ✓ Ready in 1901ms
+2026-01-27 23:44:01 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-27 23:44:01 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-27 23:44:01 +07:00: [AUTH CONFIG] File exists: true
+2026-01-27 23:44:01 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-27 23:44:01 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-27 23:44:01 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-27 23:44:01 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-28 15:18:30 +07:00: ▲ Next.js 16.1.1
+2026-01-28 15:18:30 +07:00: - Local:         http://localhost:4000
+2026-01-28 15:18:30 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-28 15:18:30 +07:00: 
+2026-01-28 15:18:30 +07:00: ✓ Starting...
+2026-01-28 15:18:31 +07:00: ✓ Ready in 982ms
+2026-01-28 15:18:31 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-28 15:18:31 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-28 15:18:31 +07:00: [AUTH CONFIG] File exists: true
+2026-01-28 15:18:31 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-28 15:18:31 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-28 15:18:31 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-28 15:18:31 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-28 16:56:11 +07:00: ▲ Next.js 16.1.1
+2026-01-28 16:56:11 +07:00: - Local:         http://localhost:4000
+2026-01-28 16:56:11 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-28 16:56:11 +07:00: 
+2026-01-28 16:56:11 +07:00: ✓ Starting...
+2026-01-28 16:56:12 +07:00: ✓ Ready in 990ms
+2026-01-28 16:56:12 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-28 16:56:12 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-28 16:56:12 +07:00: [AUTH CONFIG] File exists: true
+2026-01-28 16:56:12 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-28 16:56:12 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-28 16:56:12 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-28 16:56:12 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-28 17:04:40 +07:00: ▲ Next.js 16.1.1
+2026-01-28 17:04:40 +07:00: - Local:         http://localhost:4000
+2026-01-28 17:04:40 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-28 17:04:40 +07:00: 
+2026-01-28 17:04:40 +07:00: ✓ Starting...
+2026-01-28 17:04:40 +07:00: ✓ Ready in 933ms
+2026-01-28 17:04:41 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-28 17:04:41 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-28 17:04:41 +07:00: [AUTH CONFIG] File exists: true
+2026-01-28 17:04:41 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-28 17:04:41 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-28 17:04:41 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-28 17:04:41 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-28 17:12:15 +07:00: ▲ Next.js 16.1.1
+2026-01-28 17:12:15 +07:00: - Local:         http://localhost:4000
+2026-01-28 17:12:15 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-28 17:12:15 +07:00: 
+2026-01-28 17:12:15 +07:00: ✓ Starting...
+2026-01-28 17:12:16 +07:00: ✓ Ready in 1011ms
+2026-01-28 17:12:16 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-28 17:12:16 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-28 17:12:16 +07:00: [AUTH CONFIG] File exists: true
+2026-01-28 17:12:16 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-28 17:12:16 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-28 17:12:16 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-28 17:12:16 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production

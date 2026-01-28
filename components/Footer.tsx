@@ -8,10 +8,10 @@ export default function Footer() {
         {/* Bottom Bar - Mobile: flex-col centered, Desktop: flex-row justify-between */}
         <div className="flex flex-col items-center text-center gap-4 md:flex-row md:justify-between md:items-center">
           {/* Copyright */}
-          <p className="text-white/70 text-xs md:text-sm">
+          <p className="text-white text-xs md:text-sm">
             © 2026 GetCourses - All Rights Reserved.
           </p>
-          
+
           {/* Social Links / Terms */}
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-xs md:text-sm">
             <Link href="/terms" className="text-white/70 hover:text-white transition-colors">

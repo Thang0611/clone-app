@@ -12,10 +12,15 @@ interface UseCourseAPIReturn {
   courseInfoLoading: boolean;
   courseInfoError: string | null;
 
-  // Create Order
+  // Create Order (original)
   createOrder: (data: CreateOrderRequest) => Promise<OrderData>;
   createOrderLoading: boolean;
   createOrderError: string | null;
+
+  // Create Order All Courses Offer (new)
+  createOrderAllCourses: (data: CreateOrderRequest) => Promise<OrderData>;
+  createOrderAllCoursesLoading: boolean;
+  createOrderAllCoursesError: string | null;
 
   // Reset states
   resetErrors: () => void;
@@ -29,9 +34,13 @@ export function useCourseAPI(): UseCourseAPIReturn {
   const [courseInfoLoading, setCourseInfoLoading] = useState(false);
   const [courseInfoError, setCourseInfoError] = useState<string | null>(null);
 
-  // Create Order states
+  // Create Order states (original)
   const [createOrderLoading, setCreateOrderLoading] = useState(false);
   const [createOrderError, setCreateOrderError] = useState<string | null>(null);
+
+  // Create Order All Courses Offer states (new)
+  const [createOrderAllCoursesLoading, setCreateOrderAllCoursesLoading] = useState(false);
+  const [createOrderAllCoursesError, setCreateOrderAllCoursesError] = useState<string | null>(null);
 
   /**
    * Get course information
@@ -53,7 +62,7 @@ export function useCourseAPI(): UseCourseAPIReturn {
   }, []);
 
   /**
-   * Create order
+   * Create order (original pricing)
    */
   const createOrder = useCallback(async (data: CreateOrderRequest): Promise<OrderData> => {
     setCreateOrderLoading(true);
@@ -72,11 +81,31 @@ export function useCourseAPI(): UseCourseAPIReturn {
   }, []);
 
   /**
+   * Create order with All-Courses Offer pricing
+   */
+  const createOrderAllCourses = useCallback(async (data: CreateOrderRequest): Promise<OrderData> => {
+    setCreateOrderAllCoursesLoading(true);
+    setCreateOrderAllCoursesError(null);
+
+    try {
+      const response = await apiClient.createOrderAllCourses(data);
+      return response;
+    } catch (error: any) {
+      const errorMessage = error.message || 'Failed to create All-Courses order';
+      setCreateOrderAllCoursesError(errorMessage);
+      throw new Error(errorMessage);
+    } finally {
+      setCreateOrderAllCoursesLoading(false);
+    }
+  }, []);
+
+  /**
    * Reset all errors
    */
   const resetErrors = useCallback(() => {
     setCourseInfoError(null);
     setCreateOrderError(null);
+    setCreateOrderAllCoursesError(null);
   }, []);
 
   return {
@@ -86,6 +115,9 @@ export function useCourseAPI(): UseCourseAPIReturn {
     createOrder,
     createOrderLoading,
     createOrderError,
+    createOrderAllCourses,
+    createOrderAllCoursesLoading,
+    createOrderAllCoursesError,
     resetErrors,
   };
 }

@@ -3682,3 +3682,461 @@ Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
 2026-01-25 07:00:44 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
 2026-01-25 07:00:44 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
 2026-01-25 07:00:44 +07:00:     at ignore-listed frames
+2026-01-25 14:07:31 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:31 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:31 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:31 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:31 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:31 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:31 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:31 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:31 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:31 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:31 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:31 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:31 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-25 14:07:31 +07:00:     at ignore-listed frames
+2026-01-25 14:07:31 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-25 14:07:31 +07:00:     at ignore-listed frames
+2026-01-25 14:07:31 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:31 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:31 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:31 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:31 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:31 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:31 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-25 14:07:31 +07:00:     at ignore-listed frames
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2595220642'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2242042466'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2595220642'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2242042466'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '322511954'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '322511954'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2595220642'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2242042466'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2595220642'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2242042466'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2595220642'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2242042466'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2595220642'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '2242042466'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '322511954'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '322511954'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:33 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:33 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:33 +07:00:   digest: '322511954'
+2026-01-25 14:07:33 +07:00: }
+2026-01-25 14:07:34 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:34 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:34 +07:00:   digest: '322511954'
+2026-01-25 14:07:34 +07:00: }
+2026-01-25 14:07:34 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:34 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:34 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:34 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:34 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:34 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:34 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-25 14:07:34 +07:00:     at ignore-listed frames
+2026-01-25 14:07:34 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:34 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:34 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:34 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:34 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:34 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:34 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:34 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:34 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:34 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:34 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:34 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:34 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-25 14:07:34 +07:00:     at ignore-listed frames
+2026-01-25 14:07:34 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-25 14:07:34 +07:00:     at ignore-listed frames
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2595220642'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2242042466'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2595220642'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2242042466'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2595220642'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2242042466'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '322511954'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '322511954'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '322511954'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2595220642'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2242042466'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2595220642'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:37 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:37 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:37 +07:00:   digest: '2242042466'
+2026-01-25 14:07:37 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '322511954'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '322511954'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2595220642'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2242042466'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2595220642'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2242042466'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2595220642'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2242042466'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2595220642'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2242042466'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '322511954'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '322511954'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '322511954'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2595220642'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2242042466'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '322511954'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '322511954'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2595220642'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2242042466'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2595220642'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:38 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:38 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:38 +07:00:   digest: '2242042466'
+2026-01-25 14:07:38 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2595220642'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2242042466'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '322511954'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '322511954'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '322511954'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2595220642'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2242042466'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2595220642'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2242042466'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '322511954'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2595220642'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2242042466'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2595220642'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '2242042466'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '322511954'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '322511954'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:39 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:39 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:39 +07:00:   digest: '322511954'
+2026-01-25 14:07:39 +07:00: }
+2026-01-25 14:07:40 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:40 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:40 +07:00:   digest: '2595220642'
+2026-01-25 14:07:40 +07:00: }
+2026-01-25 14:07:40 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:40 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:40 +07:00:   digest: '2242042466'
+2026-01-25 14:07:40 +07:00: }
+2026-01-25 14:07:40 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:40 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:40 +07:00:   digest: '2595220642'
+2026-01-25 14:07:40 +07:00: }
+2026-01-25 14:07:40 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:40 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:40 +07:00:   digest: '2242042466'
+2026-01-25 14:07:40 +07:00: }
+2026-01-25 14:07:40 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#ViewportBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:40 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:40 +07:00:   digest: '2595220642'
+2026-01-25 14:07:40 +07:00: }
+2026-01-25 14:07:40 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/framework/boundary-components.js#MetadataBoundary" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:40 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:40 +07:00:   digest: '2242042466'
+2026-01-25 14:07:40 +07:00: }
+2026-01-25 14:07:40 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:40 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:40 +07:00:   digest: '322511954'
+2026-01-25 14:07:40 +07:00: }
+2026-01-25 14:07:40 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:40 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:40 +07:00:   digest: '322511954'
+2026-01-25 14:07:40 +07:00: }
+2026-01-25 14:07:40 +07:00: ⨯ Error: Could not find the module "[project]/node_modules/next/dist/esm/lib/metadata/generate/icon-mark.js#IconMark" in the React Client Manifest. This is probably a bug in the React Server Components bundler.
+2026-01-25 14:07:40 +07:00:     at stringify (<anonymous>) {
+2026-01-25 14:07:40 +07:00:   digest: '322511954'
+2026-01-25 14:07:40 +07:00: }
+2026-01-25 14:07:42 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:42 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:42 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:42 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:42 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/contact" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:42 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:42 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-25 14:07:42 +07:00:     at ignore-listed frames
+2026-01-25 14:07:42 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:42 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:42 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:42 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:42 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/terms" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:42 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:42 +07:00: Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:42 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:42 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:42 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:42 +07:00: ⨯ Error [InvariantError]: Invariant: The client reference manifest for route "/privacy" does not exist. This is a bug in Next.js.
+2026-01-25 14:07:42 +07:00:     at Object.get (.next/server/chunks/[root-of-the-server]__24f8fcd9._.js:5:16798)
+2026-01-25 14:07:42 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-25 14:07:42 +07:00:     at ignore-listed frames
+2026-01-25 14:07:42 +07:00: ⨯ Error: Failed to load static file for page: /500 ENOENT: no such file or directory, open '/root/project/clone-app/.next/server/pages/500.html'
+2026-01-25 14:07:42 +07:00:     at ignore-listed frames
+2026-01-25 14:34:22 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 14:34:22 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 14:34:22 +07:00:     at ignore-listed frames
+2026-01-25 14:34:23 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 14:34:23 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 14:34:23 +07:00:     at ignore-listed frames
+2026-01-25 14:34:24 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 14:34:24 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 14:34:24 +07:00:     at ignore-listed frames
+2026-01-25 14:34:25 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 14:34:25 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 14:34:25 +07:00:     at ignore-listed frames
+2026-01-25 14:34:26 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 14:34:26 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 14:34:26 +07:00:     at ignore-listed frames
+2026-01-25 14:34:27 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 14:34:27 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 14:34:27 +07:00:     at ignore-listed frames
+2026-01-25 18:59:54 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 18:59:54 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 18:59:54 +07:00:     at ignore-listed frames
+2026-01-25 19:29:45 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 19:29:45 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 19:29:45 +07:00:     at ignore-listed frames
+2026-01-25 20:09:19 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-25 20:09:19 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-25 20:09:19 +07:00:     at ignore-listed frames
+2026-01-26 01:29:48 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 01:29:48 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 01:29:48 +07:00:     at ignore-listed frames
+2026-01-26 06:34:50 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 06:34:50 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 06:34:50 +07:00:     at ignore-listed frames
+2026-01-26 06:34:52 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 06:34:52 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 06:34:52 +07:00:     at ignore-listed frames
+2026-01-26 06:34:53 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 06:34:53 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 06:34:53 +07:00:     at ignore-listed frames
+2026-01-26 06:34:54 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 06:34:54 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 06:34:54 +07:00:     at ignore-listed frames
+2026-01-26 06:34:54 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 06:34:54 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 06:34:54 +07:00:     at ignore-listed frames
+2026-01-26 06:34:55 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 06:34:55 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 06:34:55 +07:00:     at ignore-listed frames
+2026-01-26 18:21:55 +07:00: Failed to import courses: Error: API responded with status 524
+2026-01-26 18:21:55 +07:00:     at f (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:1701)
+2026-01-26 18:21:55 +07:00:     at async d (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:4972)
+2026-01-26 18:21:55 +07:00:     at async l (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:6013)
+2026-01-26 18:21:55 +07:00:     at async Module.N (.next/server/chunks/[root-of-the-server]__c3a50bdd._.js:1:7091)
+2026-01-26 22:54:20 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 22:54:20 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 22:54:20 +07:00:     at ignore-listed frames
+2026-01-26 22:54:22 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 22:54:22 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 22:54:22 +07:00:     at ignore-listed frames
+2026-01-26 22:54:23 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 22:54:23 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 22:54:23 +07:00:     at ignore-listed frames
+2026-01-26 22:54:24 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 22:54:24 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 22:54:24 +07:00:     at ignore-listed frames
+2026-01-26 22:54:25 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 22:54:25 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 22:54:25 +07:00:     at ignore-listed frames
+2026-01-26 22:54:27 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-26 22:54:27 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-26 22:54:27 +07:00:     at ignore-listed frames
+2026-01-28 04:29:30 +07:00: Error: Failed to find Server Action "x". This request might be from an older or newer deployment.
+2026-01-28 04:29:30 +07:00: Read more: https://nextjs.org/docs/messages/failed-to-find-server-action
+2026-01-28 04:29:30 +07:00:     at ignore-listed frames

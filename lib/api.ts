@@ -102,6 +102,22 @@ class APIClient {
   }
 
   /**
+   * Create order with All-Courses Offer pricing
+   */
+  async createOrderAllCourses(data: CreateOrderRequest): Promise<OrderData> {
+    const response = await this.fetchWithTimeout(
+      `${this.baseURL}${API_ENDPOINTS.CREATE_ORDER_ALL_COURSES}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      }
+    );
+
+    return this.handleResponse<OrderData>(response);
+  }
+
+  /**
    * Check payment status
    */
   async checkPaymentStatus(orderCode: string): Promise<CheckStatusResponse> {

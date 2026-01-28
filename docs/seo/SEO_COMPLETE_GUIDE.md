@@ -74,7 +74,7 @@ import { generateCourseSchema } from '@/lib/seo';
   name: "Course Name",
   description: "Course description",
   provider: "Udemy",
-  price: 30000,
+  price: 50000,
   rating: 4.7,
 })} />
 ```

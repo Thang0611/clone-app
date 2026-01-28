@@ -22,7 +22,7 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Vui lòng điền đầy đủ thông tin");
       return;
@@ -80,12 +80,12 @@ export default function ContactPage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+
           {/* Contact Info Cards */}
           <div className="lg:col-span-1 space-y-6">
-            
+
             {/* Email Card */}
             <Card className="hover:shadow-xl transition-shadow">
               <CardBody className="p-6">
@@ -97,8 +97,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-900 mb-2">Email</h3>
-                    <a 
-                      href="mailto:getcourses.net@gmail.com" 
+                    <a
+                      href="mailto:getcourses.net@gmail.com"
                       className="text-indigo-600 hover:text-indigo-700 font-medium"
                     >
                       getcourses.net@gmail.com
@@ -122,13 +122,13 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-900 mb-2">Zalo/Hotline</h3>
-                    <a 
-                      href="https://zalo.me/0986787542" 
+                    <a
+                      href="https://zalo.me/0986787542"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-600 hover:text-green-700 font-bold text-lg"
                     >
-                      0986 787 542
+                      0986 487 542
                     </a>
                     <p className="text-sm text-slate-600 mt-1">
                       Hỗ trợ 24/7 qua Zalo
@@ -193,8 +193,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-slate-900 mb-2">Facebook</h3>
-                    <a 
-                      href="http://facebook.com/getcourses.net/" 
+                    <a
+                      href="http://facebook.com/getcourses.net/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-700 font-medium"
@@ -223,7 +223,7 @@ export default function ContactPage() {
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-6" action="#">
-                  
+
                   {/* Name Input */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">

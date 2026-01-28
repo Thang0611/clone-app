@@ -164,7 +164,7 @@ export async function scanFolderRecursive(
                 await new Promise((resolve) => setTimeout(resolve, 0));
               }
             } catch (error) {
-              console.warn(`[VideoScanner] ⚠️ Failed to read file ${fileHandle.name}:`, error);
+              // console.warn(`[VideoScanner] ⚠️ Failed to read file ${fileHandle.name}:`, error);
               // Continue với file tiếp theo
             }
           }
@@ -178,7 +178,7 @@ export async function scanFolderRecursive(
         await new Promise((resolve) => setTimeout(resolve, 0));
       }
     } catch (error) {
-      console.error(`[VideoScanner] ❌ Error scanning folder ${currentPath}:`, error);
+      // console.error(`[VideoScanner] ❌ Error scanning folder ${currentPath}:`, error);
       // Continue với folder tiếp theo
     }
   }
@@ -186,7 +186,7 @@ export async function scanFolderRecursive(
   // Natural sort
   const sorted = naturalSort(videos);
 
-  console.log(`[VideoScanner] ✅ Found ${sorted.length} video files in ${foldersScanned} folders`);
+  // console.log(`[VideoScanner] ✅ Found ${sorted.length} video files in ${foldersScanned} folders`);
   return sorted;
 }
 
@@ -255,7 +255,7 @@ export async function findAllSubtitleFiles(
         const subtitleNameDot = `${videoName}.${lang}${ext}`;
         try {
           const subtitleHandle = await currentHandle.getFileHandle(subtitleNameDot);
-          console.log(`[VideoScanner] ✅ Found subtitle: ${subtitleNameDot}`);
+          // console.log(`[VideoScanner] ✅ Found subtitle: ${subtitleNameDot}`);
           subtitles.push({
             handle: subtitleHandle,
             language: lang,
@@ -272,7 +272,7 @@ export async function findAllSubtitleFiles(
         const subtitleNameUnderscore = `${videoName}_${lang}${ext}`;
         try {
           const subtitleHandle = await currentHandle.getFileHandle(subtitleNameUnderscore);
-          console.log(`[VideoScanner] ✅ Found subtitle: ${subtitleNameUnderscore}`);
+          // console.log(`[/] ✅ Found subtitle: ${subtitleNameUnderscore}`);
           // Check if not already added (từ pattern dot)
           const alreadyExists = subtitles.some(s => s.language === lang);
           if (!alreadyExists) {
@@ -307,7 +307,7 @@ export async function findAllSubtitleFiles(
     }
   } catch (error) {
     // Folder không tồn tại hoặc không truy cập được
-    console.warn(`[VideoScanner] ⚠️ Could not find subtitles for ${videoFile.name}:`, error);
+    // console.warn(`[VideoScanner] ⚠️ Could not find subtitles for ${videoFile.name}:`, error);
   }
 
   return subtitles;

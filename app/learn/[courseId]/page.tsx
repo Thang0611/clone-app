@@ -70,51 +70,19 @@ export default function LearnCoursePage() {
   const isSupported = typeof window !== 'undefined' && 'showDirectoryPicker' in window;
 
   return (
-    <div className="flex min-h-screen flex-col bg-white dark:bg-gray-900">
+    <div className="flex h-screen flex-col overflow-hidden bg-white">
       <Navbar />
-
-      <main className="flex-1">
-        {/* Breadcrumb */}
-        <Breadcrumb
-          items={[
-            { name: 'Học khóa học', url: '/learn' },
-            { name: courseTitle || 'Khóa học', url: '#' },
-          ]}
+      
+      {/* Main Content - eLearning Layout - Full Screen */}
+      <div className="flex-1 overflow-hidden ">
+        <LocalCoursePlayer
+          courseId={courseId}
+          courseName={courseTitle}
+          deviceId={deviceId}
+          sidebarOpen={sidebarOpen}
+          onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
         />
-
-
-        {/* Browser Support Warning */}
-        {!isSupported && (
-          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-            <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-800 dark:bg-yellow-900/20">
-              <div className="flex items-start gap-3">
-                <span className="text-yellow-600 dark:text-yellow-400 text-xl">⚠️</span>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-yellow-800 dark:text-yellow-300">
-                    Trình duyệt không hỗ trợ
-                  </h3>
-                  <p className="mt-1 text-sm text-yellow-700 dark:text-yellow-400">
-                    Tính năng này yêu cầu Chrome hoặc Edge (phiên bản mới).
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Main Content - eLearning Layout */}
-        <div className="w-full mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <LocalCoursePlayer
-            courseId={courseId}
-            courseName={courseTitle}
-            deviceId={deviceId}
-            sidebarOpen={sidebarOpen}
-            onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-          />
-        </div>
-      </main>
-
-      <Footer />
+      </div>
     </div>
   );
 }

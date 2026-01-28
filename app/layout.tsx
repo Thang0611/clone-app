@@ -16,13 +16,11 @@ import { generateMetadata as generateSEOMetadata, generateViewport, generateOrga
 // For runtime validation, it's handled in env-validation.ts itself
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: "GetCourses - Tải Khóa Học Online Chỉ 50k",
-  description: "Tải khóa học Udemy, Coursera, LinkedIn Learning về Google Drive. 9000+ khóa học có sẵn, cập nhật hàng tuần. Giá chỉ 50k.",
+  title: "GetCourses - Get Khóa Học Udemy Chỉ 50k",
+  description: "Tải khóa học Udemy về Google Drive. Giá chỉ 50k.",
   keywords: [
     'khóa học online',
     'udemy',
-    'coursera',
-    'linkedin learning',
     'tải khóa học',
     'khóa học giá rẻ',
     'online course',
@@ -52,21 +50,21 @@ export default function RootLayout({
       <body className="antialiased">
         {/* Global Error Handler - Suppresses non-critical errors */}
         <GlobalErrorHandler />
-        
+
         {/* Google Tag Manager - Must be first in body */}
         <GoogleTagManager />
-        
+
         {/* Google Analytics */}
         <GoogleAnalytics />
-        
+
         {/* User Properties Tracker - Detects device, browser, traffic source */}
         <UserPropertiesTracker />
-        
+
         {/* Page View Tracker - Tracks route changes */}
         <Suspense fallback={null}>
           <PageViewTracker />
         </Suspense>
-        
+
         {/* Session Provider for NextAuth */}
         <Providers>
           {children}

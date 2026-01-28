@@ -73,16 +73,16 @@ export function VidstackVideoPlayer({
 
       // Load all subtitle tracks
       try {
-        console.log('[VidstackVideoPlayer] 🔍 Looking for subtitle files...');
+        // console.log('[VidstackVideoPlayer] 🔍 Looking for subtitle files...');
         const foundSubtitles = await findAllSubtitleFiles(video, directoryHandle);
-        console.log('[VidstackVideoPlayer] 📝 Found subtitle files:', foundSubtitles.length);
+        // console.log('[VidstackVideoPlayer] 📝 Found subtitle files:', foundSubtitles.length);
         
         // Create Blob URLs for each subtitle
         const tracksWithUrls = await Promise.all(
           foundSubtitles.map(async (track) => {
             const file = await track.handle.getFile();
             const blobUrl = URL.createObjectURL(file);
-            console.log(`[VidstackVideoPlayer] 📄 Created blob URL for: ${track.label} (${track.language})`);
+            // console.log(`[VidstackVideoPlayer] 📄 Created blob URL for: ${track.label} (${track.language})`);
             return {
               ...track,
               src: blobUrl,
@@ -100,11 +100,11 @@ export function VidstackVideoPlayer({
         });
         
         setSubtitleTracks(sortedTracks);
-        console.log(`[VidstackVideoPlayer] ✅ Loaded ${sortedTracks.length} subtitle tracks:`,
-          sortedTracks.map(t => `${t.label} (${t.language})`).join(', ')
-        );
+        // console.log(`[VidstackVideoPlayer] ✅ Loaded ${sortedTracks.length} subtitle tracks:`,
+        //   sortedTracks.map(t => `${t.label} (${t.language})`).join(', ')
+        // );
       } catch (subtitleError) {
-        console.warn('[VidstackVideoPlayer] Could not load subtitles:', subtitleError);
+        // console.warn('[VidstackVideoPlayer] Could not load subtitles:', subtitleError);
         setSubtitleTracks([]);
       }
 
@@ -127,7 +127,7 @@ export function VidstackVideoPlayer({
         setShouldAutoPlay(true);
       }
     } catch (err) {
-      console.error('[VidstackVideoPlayer] Error loading video:', err);
+      // console.error('[VidstackVideoPlayer] Error loading video:', err);
       setError(err instanceof Error ? err.message : 'Không thể tải video');
       setIsLoading(false);
     }
@@ -184,9 +184,9 @@ export function VidstackVideoPlayer({
       }
 
       const saveType = forceFileSave ? '🔒 FORCE' : '💾';
-      console.log(`[VidstackVideoPlayer] ${saveType} Saved progress: ${video.path} - ${progressPercent.toFixed(1)}%`);
+      // console.log(`[VidstackVideoPlayer] ${saveType} Saved progress: ${video.path} - ${progressPercent.toFixed(1)}%`);
     } catch (err) {
-      console.error('[VidstackVideoPlayer] Error saving progress:', err);
+      // console.error('[VidstackVideoPlayer] Error saving progress:', err);
     }
   }, [video.path, courseId, directoryHandle, useHybridStorage]);
 
@@ -214,7 +214,7 @@ export function VidstackVideoPlayer({
 
   // Handle video ended - FORCE SAVE immediately
   const handleEnded = useCallback(() => {
-    console.log('[VidstackVideoPlayer] 🏁 Video ended, force saving progress...');
+    // console.log('[VidstackVideoPlayer] 🏁 Video ended, force saving progress...');
     if (progressSaveTimeoutRef.current) {
       clearTimeout(progressSaveTimeoutRef.current);
     }
@@ -224,7 +224,7 @@ export function VidstackVideoPlayer({
 
   // Handle pause - FORCE SAVE immediately
   const handlePause = useCallback(() => {
-    console.log('[VidstackVideoPlayer] ⏸️ Video paused, force saving progress...');
+    // console.log('[VidstackVideoPlayer] ⏸️ Video paused, force saving progress...');
     if (progressSaveTimeoutRef.current) {
       clearTimeout(progressSaveTimeoutRef.current);
     }
@@ -251,7 +251,7 @@ export function VidstackVideoPlayer({
         player.play();
         setShouldAutoPlay(false); // Reset
       } catch (err: any) {
-        console.log('[VidstackVideoPlayer] Auto-play blocked:', err?.message || err);
+        // console.log('[VidstackVideoPlayer] Auto-play blocked:', err?.message || err);
       }
     }
   }, [savedTime, shouldAutoPlay]);
@@ -259,7 +259,7 @@ export function VidstackVideoPlayer({
   // Force save on window.beforeunload (user closing tab/browser)
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      console.log('[VidstackVideoPlayer] 🚪 beforeunload - force saving progress...');
+      // console.log('[VidstackVideoPlayer] 🚪 beforeunload - force saving progress...');
       // Force save synchronously (beforeunload must be sync)
       saveProgressNow(true);
       // No need to prevent default - just save

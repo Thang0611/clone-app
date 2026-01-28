@@ -43,7 +43,7 @@ export default function TrackOrderPage() {
 
   const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     if (!email.trim()) {
       setError("Vui lòng nhập địa chỉ email");
       toast.error("Vui lòng nhập email");
@@ -66,12 +66,12 @@ export default function TrackOrderPage() {
     try {
       // Call the new lookup API
       console.log('Calling API:', `${API_BASE_URL}/api/v1/payment/lookup?email=${email.trim()}`);
-      
+
       const response = await fetch(
         `${API_BASE_URL}/api/v1/payment/lookup?email=${encodeURIComponent(email.trim())}`,
         {
           method: 'GET',
-          headers: { 
+          headers: {
             'Content-Type': 'application/json',
           },
           mode: 'cors', // Explicitly set CORS mode
@@ -101,9 +101,9 @@ export default function TrackOrderPage() {
       }
     } catch (err) {
       console.error('Lookup error:', err);
-      
+
       let errorMessage = "Có lỗi xảy ra khi tra cứu đơn hàng";
-      
+
       if (err instanceof Error) {
         if (err.message.includes('CORS')) {
           errorMessage = "Lỗi kết nối: CORS policy. Vui lòng liên hệ admin để cấu hình backend.";
@@ -115,7 +115,7 @@ export default function TrackOrderPage() {
           errorMessage = `Lỗi: ${err.message}`;
         }
       }
-      
+
       setError(errorMessage);
       toast.error(errorMessage);
     } finally {
@@ -124,10 +124,10 @@ export default function TrackOrderPage() {
   };
 
   const getPaymentStatusInfo = (paymentStatus: string) => {
-    const statusMap: Record<string, { 
-      label: string; 
-      color: string; 
-      icon: any; 
+    const statusMap: Record<string, {
+      label: string;
+      color: string;
+      icon: any;
       bgColor: string;
       borderColor: string;
       description: string;
@@ -170,39 +170,39 @@ export default function TrackOrderPage() {
   };
 
   const getOrderStatusInfo = (status: string) => {
-    const statusMap: Record<string, { 
-      label: string; 
-      bgColor: string; 
+    const statusMap: Record<string, {
+      label: string;
+      bgColor: string;
       textColor: string;
       borderColor: string;
     }> = {
-      pending: { 
-        label: "Chờ xử lý", 
+      pending: {
+        label: "Chờ xử lý",
         bgColor: "bg-amber-100",
         textColor: "text-amber-800",
         borderColor: "border-amber-300"
       },
-      processing: { 
-        label: "Đang xử lý", 
+      processing: {
+        label: "Đang xử lý",
         bgColor: "bg-blue-100",
         textColor: "text-blue-800",
         borderColor: "border-blue-300"
       },
-      completed: { 
-        label: "Hoàn thành", 
+      completed: {
+        label: "Hoàn thành",
         bgColor: "bg-green-100",
         textColor: "text-green-800",
         borderColor: "border-green-300"
       },
-      failed: { 
-        label: "Thất bại", 
+      failed: {
+        label: "Thất bại",
         bgColor: "bg-red-100",
         textColor: "text-red-800",
         borderColor: "border-red-300"
       },
     };
-    return statusMap[status] || { 
-      label: status, 
+    return statusMap[status] || {
+      label: status,
       bgColor: "bg-gray-100",
       textColor: "text-gray-800",
       borderColor: "border-gray-300"
@@ -232,16 +232,16 @@ export default function TrackOrderPage() {
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return "N/A";
-    
+
     try {
       const date = new Date(dateString);
-      
+
       // Check if date is valid
       if (isNaN(date.getTime())) {
         console.warn('Invalid date:', dateString);
         return "N/A";
       }
-      
+
       return new Intl.DateTimeFormat("vi-VN", {
         year: "numeric",
         month: "long",
@@ -262,17 +262,17 @@ export default function TrackOrderPage() {
       {/* Hero Section - Minimalist Modern Design */}
       <section className="relative bg-white pt-24 pb-32 px-4 overflow-hidden">
         {/* Dot Pattern Overlay */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `radial-gradient(circle, #000 1px, transparent 1px)`,
             backgroundSize: '24px 24px',
           }}
         />
-        
+
         {/* Soft Glow Blob */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 blur-3xl rounded-full -z-0" />
-        
+
         <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Modern Badge */}
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg mb-6 backdrop-blur-sm">
@@ -281,7 +281,7 @@ export default function TrackOrderPage() {
               Tra cứu tự động
             </span>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             Tra cứu đơn hàng
           </h1>
@@ -293,7 +293,7 @@ export default function TrackOrderPage() {
 
       {/* Main Content */}
       <div className="max-w-4xl min-h-screen mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
-        
+
         {/* Search Form - Overlapping Card */}
         <Card className="mb-8 shadow-2xl border border-slate-200/50 backdrop-blur-sm bg-white/95">
           <CardBody className="p-6 sm:p-8">
@@ -398,11 +398,11 @@ export default function TrackOrderPage() {
               const isExpanded = isOrderExpanded(order.order_code);
               const paymentInfo = getPaymentStatusInfo(order.payment_status);
               const orderInfo = getOrderStatusInfo(order.status);
-              
+
               return (
                 <Card key={order.order_code} className="border-2 overflow-hidden transition-all hover:shadow-md">
                   {/* Collapsed Header - Always Visible */}
-                  <div 
+                  <div
                     className="p-4 sm:p-5 cursor-pointer hover:bg-slate-50 transition-colors"
                     onClick={() => toggleOrder(order.order_code)}
                   >
@@ -456,122 +456,122 @@ export default function TrackOrderPage() {
                   {/* Expanded Details - Collapsible */}
                   {isExpanded && (
                     <CardBody className="pt-0 pb-6 px-4 sm:px-5 border-t border-slate-200">
-                    {/* Expanded Content */}
-                    <div className="mt-4 space-y-4">
-                      {/* Status Description */}
-                      <div className={`p-4 rounded-lg ${paymentInfo.bgColor} border ${paymentInfo.borderColor} flex items-start gap-3`}>
-                        {(() => {
-                          const StatusIcon = paymentInfo.icon;
-                          return <StatusIcon className={`w-6 h-6 ${paymentInfo.color} flex-shrink-0 mt-0.5`} />;
-                        })()}
-                        <div>
-                          <p className={`font-semibold ${paymentInfo.color} mb-1`}>
-                            {paymentInfo.description}
-                          </p>
-                          {order.payment_status === 'pending' && (
-                            <p className="text-sm text-slate-700 font-medium">
-                              Vui lòng liên hệ support để nhận thông tin thanh toán
+                      {/* Expanded Content */}
+                      <div className="mt-4 space-y-4">
+                        {/* Status Description */}
+                        <div className={`p-4 rounded-lg ${paymentInfo.bgColor} border ${paymentInfo.borderColor} flex items-start gap-3`}>
+                          {(() => {
+                            const StatusIcon = paymentInfo.icon;
+                            return <StatusIcon className={`w-6 h-6 ${paymentInfo.color} flex-shrink-0 mt-0.5`} />;
+                          })()}
+                          <div>
+                            <p className={`font-semibold ${paymentInfo.color} mb-1`}>
+                              {paymentInfo.description}
                             </p>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Copy Order Code */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCopy(order.order_code, "mã đơn hàng");
-                        }}
-                        className="flex items-center gap-2 p-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors w-full text-left"
-                      >
-                        <Copy className="w-4 h-4 text-slate-600" />
-                        <span className="text-sm text-slate-600">Copy mã đơn hàng:</span>
-                        <span className="font-mono font-bold text-slate-900">{order.order_code}</span>
-                      </button>
-
-                      {/* Course Items List */}
-                      {order.items && order.items.length > 0 && (
-                        <div>
-                          <h4 className="text-base font-bold text-slate-900 mb-3">
-                            Danh sách khóa học ({order.items.length})
-                          </h4>
-                          <div className="space-y-2">
-                            {order.items.map((item) => (
-                              <div 
-                                key={item.id}
-                                className="flex flex-col gap-2 p-3 border border-slate-200 rounded-lg bg-white hover:bg-slate-50 transition-colors"
-                              >
-                                <div className="flex items-start justify-between gap-3">
-                                  <div className="flex-1 min-w-0">
-                                    <h5 className="font-semibold text-slate-900 text-sm mb-1 line-clamp-2">
-                                      {item.title}
-                                    </h5>
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                      {(() => {
-                                        const itemStatus = getOrderStatusInfo(item.status);
-                                        return (
-                                          <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${itemStatus.bgColor} ${itemStatus.textColor} border ${itemStatus.borderColor}`}>
-                                            {itemStatus.label}
-                                          </span>
-                                        );
-                                      })()}
-                                      <span className="text-sm font-bold text-slate-900">
-                                        {formatCurrency(typeof item.price === 'string' ? parseInt(item.price) : item.price)}
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                                
-                                {/* Action Links */}
-                                <div className="flex gap-2 text-xs">
-                                  {item.course_url && (
-                                    <a 
-                                      href={item.course_url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      onClick={(e) => e.stopPropagation()}
-                                      className="text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
-                                    >
-                                      Xem khóa học <ExternalLink className="w-3 h-3" />
-                                    </a>
-                                  )}
-                                  {item.drive_link && (
-                                    <a 
-                                      href={item.drive_link}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      onClick={(e) => e.stopPropagation()}
-                                      className="text-green-600 hover:text-green-700 flex items-center gap-1"
-                                    >
-                                      📥 Tải về <ExternalLink className="w-3 h-3" />
-                                    </a>
-                                  )}
-                                </div>
-                              </div>
-                            ))}
+                            {order.payment_status === 'pending' && (
+                              <p className="text-sm text-slate-700 font-medium">
+                                Vui lòng liên hệ support để nhận thông tin thanh toán
+                              </p>
+                            )}
                           </div>
                         </div>
-                      )}
 
-                      {/* Action Button - Only for Completed Orders */}
-                      {order.payment_status === 'paid' && order.status === 'completed' && order.items.some(item => item.drive_link) && (
-                        <div className="pt-4 border-t border-slate-200">
-                          <Button
-                            size="sm"
-                            className="w-full"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const firstItemWithLink = order.items.find(item => item.drive_link);
-                              if (firstItemWithLink?.drive_link) {
-                                window.open(firstItemWithLink.drive_link, '_blank');
-                              }
-                            }}
-                          >
-                            📥 Tải khóa học
-                          </Button>
-                        </div>
-                      )}
-                    </div>
+                        {/* Copy Order Code */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCopy(order.order_code, "mã đơn hàng");
+                          }}
+                          className="flex items-center gap-2 p-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors w-full text-left"
+                        >
+                          <Copy className="w-4 h-4 text-slate-600" />
+                          <span className="text-sm text-slate-600">Copy mã đơn hàng:</span>
+                          <span className="font-mono font-bold text-slate-900">{order.order_code}</span>
+                        </button>
+
+                        {/* Course Items List */}
+                        {order.items && order.items.length > 0 && (
+                          <div>
+                            <h4 className="text-base font-bold text-slate-900 mb-3">
+                              Danh sách khóa học ({order.items.length})
+                            </h4>
+                            <div className="space-y-2">
+                              {order.items.map((item) => (
+                                <div
+                                  key={item.id}
+                                  className="flex flex-col gap-2 p-3 border border-slate-200 rounded-lg bg-white hover:bg-slate-50 transition-colors"
+                                >
+                                  <div className="flex items-start justify-between gap-3">
+                                    <div className="flex-1 min-w-0">
+                                      <h5 className="font-semibold text-slate-900 text-sm mb-1 line-clamp-2">
+                                        {item.title}
+                                      </h5>
+                                      <div className="flex items-center gap-2 flex-wrap">
+                                        {(() => {
+                                          const itemStatus = getOrderStatusInfo(item.status);
+                                          return (
+                                            <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${itemStatus.bgColor} ${itemStatus.textColor} border ${itemStatus.borderColor}`}>
+                                              {itemStatus.label}
+                                            </span>
+                                          );
+                                        })()}
+                                        <span className="text-sm font-bold text-slate-900">
+                                          {formatCurrency(typeof item.price === 'string' ? parseInt(item.price) : item.price)}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {/* Action Links */}
+                                  <div className="flex gap-2 text-xs">
+                                    {item.course_url && (
+                                      <a
+                                        href={item.course_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                                      >
+                                        Xem khóa học <ExternalLink className="w-3 h-3" />
+                                      </a>
+                                    )}
+                                    {item.drive_link && (
+                                      <a
+                                        href={item.drive_link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="text-green-600 hover:text-green-700 flex items-center gap-1"
+                                      >
+                                        📥 Tải về <ExternalLink className="w-3 h-3" />
+                                      </a>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Action Button - Only for Completed Orders */}
+                        {order.payment_status === 'paid' && order.status === 'completed' && order.items.some(item => item.drive_link) && (
+                          <div className="pt-4 border-t border-slate-200">
+                            <Button
+                              size="sm"
+                              className="w-full"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const firstItemWithLink = order.items.find(item => item.drive_link);
+                                if (firstItemWithLink?.drive_link) {
+                                  window.open(firstItemWithLink.drive_link, '_blank');
+                                }
+                              }}
+                            >
+                              📥 Tải khóa học
+                            </Button>
+                          </div>
+                        )}
+                      </div>
                     </CardBody>
                   )}
                 </Card>
@@ -603,7 +603,7 @@ export default function TrackOrderPage() {
                       📧 getcourses.net@gmail.com
                     </a>
                     <span className="text-slate-600">
-                      📞 Zalo: 0986 787 542
+                      📞 Zalo: 0986 487 542
                     </span>
                   </div>
                 </div>

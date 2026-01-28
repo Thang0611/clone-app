@@ -1,8 +1,7 @@
 'use client';
 
 /**
- * Learn Page - Trang chọn folder để học
- * Thiết kế theo chuẩn eLearning
+ * Learn Page - Compact mobile-friendly design
  */
 
 import { useState, useEffect } from 'react';
@@ -10,15 +9,13 @@ import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { DirectorySelector } from '@/components/learning/DirectorySelector';
-import { FolderOpen, BookOpen, Play, CheckCircle2, ArrowRight, Sparkles, Shield, Zap } from 'lucide-react';
+import { FolderOpen, Play, CheckCircle2, Shield, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { Card, CardBody } from '@/components/ui/Card';
 
 export default function LearnPage() {
   const router = useRouter();
   const [deviceId, setDeviceId] = useState<string>('');
 
-  // Generate or get device ID
   useEffect(() => {
     if (typeof window !== 'undefined') {
       let id = localStorage.getItem('device-id');
@@ -34,106 +31,73 @@ export default function LearnPage() {
     handle: FileSystemDirectoryHandle,
     folderName: string
   ) => {
-    // Generate course ID từ folder name (slugify)
     const courseSlug = folderName
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
-
-    // Navigate to course page
     router.push(`/learn/${courseSlug}`);
   };
 
-  // Check browser support
   const isSupported = typeof window !== 'undefined' && 'showDirectoryPicker' in window;
 
   return (
-    <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-900">
+    <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900">
       <Navbar />
 
-      <main className="flex-1">
-        
+      <main className="flex-1 px-3 sm:px-4 py-6 sm:py-10">
+        <div className="mx-auto max-w-3xl">
 
-        {/* Main Content */}
-        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-          {/* Features Grid */}
-          <div className="mb-12 grid gap-6 md:grid-cols-3">
-            <Card className="border-2 border-transparent transition-all hover:border-blue-200 hover:shadow-lg dark:hover:border-blue-800">
-              <CardBody className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
-                  <FolderOpen className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  Chọn Folder
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Chọn folder chứa video khóa học đã tải về từ máy tính
-                </p>
-              </CardBody>
-            </Card>
-
-            <Card className="border-2 border-transparent transition-all hover:border-indigo-200 hover:shadow-lg dark:hover:border-indigo-800">
-              <CardBody className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/30">
-                  <Play className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  Xem Video
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Phát video trực tiếp từ ổ cứng, không cần upload hay stream
-                </p>
-              </CardBody>
-            </Card>
-
-            <Card className="border-2 border-transparent transition-all hover:border-purple-200 hover:shadow-lg dark:hover:border-purple-800">
-              <CardBody className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30">
-                  <CheckCircle2 className="h-8 w-8 text-purple-600 dark:text-purple-400" />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  Lưu Tiến Độ
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Tự động lưu tiến độ học tập, tiếp tục từ vị trí đã xem
-                </p>
-              </CardBody>
-            </Card>
+          {/* Compact Header */}
+          <div className="text-center mb-6">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              📚 Học Offline
+            </h1>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Chọn folder chứa video khóa học đã tải về
+            </p>
           </div>
 
-          {/* Browser Support Warning */}
+          {/* Compact Features - Horizontal scroll on mobile */}
+          <div className="flex gap-2 overflow-x-auto pb-3 mb-6 no-scrollbar">
+            <div className="flex-shrink-0 bg-white dark:bg-gray-800 rounded-lg px-3 py-2 border border-gray-200 dark:border-gray-700 flex items-center gap-2">
+              <FolderOpen className="w-4 h-4 text-blue-500" />
+              <span className="text-xs text-gray-700 dark:text-gray-300 whitespace-nowrap">Chọn Folder</span>
+            </div>
+            <div className="flex-shrink-0 bg-white dark:bg-gray-800 rounded-lg px-3 py-2 border border-gray-200 dark:border-gray-700 flex items-center gap-2">
+              <Play className="w-4 h-4 text-indigo-500" />
+              <span className="text-xs text-gray-700 dark:text-gray-300 whitespace-nowrap">Xem Video</span>
+            </div>
+            <div className="flex-shrink-0 bg-white dark:bg-gray-800 rounded-lg px-3 py-2 border border-gray-200 dark:border-gray-700 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-500" />
+              <span className="text-xs text-gray-700 dark:text-gray-300 whitespace-nowrap">Lưu Tiến Độ</span>
+            </div>
+          </div>
+
+          {/* Browser Support Warning - Compact */}
           {!isSupported && (
-            <div className="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 p-6 dark:border-yellow-800 dark:bg-yellow-900/20">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-100 dark:bg-yellow-900/30">
-                    <span className="text-xl">⚠️</span>
-                  </div>
-                </div>
+            <div className="mb-4 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 p-3">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">⚠️</span>
                 <div className="flex-1">
-                  <h3 className="mb-2 text-lg font-semibold text-yellow-800 dark:text-yellow-300">
-                    Trình duyệt không hỗ trợ
-                  </h3>
-                  <p className="mb-3 text-sm text-yellow-700 dark:text-yellow-400">
-                    Tính năng này yêu cầu Chrome hoặc Edge (phiên bản mới). Vui lòng sử dụng
-                    trình duyệt được hỗ trợ để có trải nghiệm tốt nhất.
+                  <p className="text-sm font-medium text-yellow-800 dark:text-yellow-300">
+                    Yêu cầu Chrome hoặc Edge
                   </p>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 mt-2">
                     <Button
                       variant="secondary"
                       size="sm"
                       onClick={() => window.open('https://www.google.com/chrome/', '_blank')}
-                      className="border-yellow-300 text-yellow-800 hover:bg-yellow-100 dark:border-yellow-700 dark:text-yellow-300 dark:hover:bg-yellow-900/30"
+                      className="text-xs py-1 px-2"
                     >
-                      Tải Chrome
+                      Chrome
                     </Button>
                     <Button
                       variant="secondary"
                       size="sm"
                       onClick={() => window.open('https://www.microsoft.com/edge', '_blank')}
-                      className="border-yellow-300 text-yellow-800 hover:bg-yellow-100 dark:border-yellow-700 dark:text-yellow-300 dark:hover:bg-yellow-900/30"
+                      className="text-xs py-1 px-2"
                     >
-                      Tải Edge
+                      Edge
                     </Button>
                   </div>
                 </div>
@@ -141,154 +105,38 @@ export default function LearnPage() {
             </div>
           )}
 
-          {/* Folder Selector Card */}
-          <Card className="border-2 border-gray-200 shadow-xl dark:border-gray-700">
-            <CardBody className="p-8">
-              <div className="mb-6 text-center">
-                <h2 className="mb-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  Bắt Đầu Học Ngay
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Chọn folder chứa video khóa học để bắt đầu
-                </p>
-              </div>
+          {/* Folder Selector - Main Card */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 sm:p-6 mb-6">
+            <DirectorySelector
+              onFolderSelected={handleFolderSelected}
+              onError={(error) => console.error('[LearnPage] Error:', error)}
+            />
+          </div>
 
-              <DirectorySelector
-                onFolderSelected={handleFolderSelected}
-                onError={(error) => {
-                  console.error('[LearnPage] Error:', error);
-                }}
-              />
-            </CardBody>
-          </Card>
-
-          {/* How It Works */}
-          {/* <div className="mt-12">
-            <h2 className="mb-8 text-center text-3xl font-bold text-gray-900 dark:text-gray-100">
-              Cách Thức Hoạt Động
-            </h2>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-              <div className="text-center">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-lg font-bold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
-                  1
-                </div>
-                <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
-                  Chọn Folder
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Click nút "Chọn Folder Khóa Học" và chọn folder chứa video
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-lg font-bold text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400">
-                  2
-                </div>
-                <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
-                  Quét Video
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Hệ thống tự động quét và hiển thị danh sách video
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 text-lg font-bold text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
-                  3
-                </div>
-                <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
-                  Bắt Đầu Học
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Click vào video để bắt đầu xem, tự động tiếp tục từ vị trí đã xem
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-lg font-bold text-green-600 dark:bg-green-900/30 dark:text-green-400">
-                  4
-                </div>
-                <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
-                  Lưu Tiến Độ
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Tiến độ được tự động lưu, có thể mang theo khi copy folder
-                </p>
-              </div>
+          {/* Compact Benefits - Grid */}
+          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+              <Shield className="w-5 h-5 text-green-500 mb-1" />
+              <p className="text-xs font-medium text-gray-900 dark:text-white">Offline</p>
+              <p className="text-[10px] text-gray-500 dark:text-gray-400">Không cần internet</p>
             </div>
-          </div> */}
-
-          {/* Benefits */}
-          <div className="mt-16 rounded-2xl border border-gray-200 bg-white p-8 dark:border-gray-700 dark:bg-gray-800">
-            <h2 className="mb-6 text-center text-2xl font-bold text-gray-900 dark:text-gray-100">
-              Tại Sao Chọn Giải Pháp Này?
-            </h2>
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
-                    <Shield className="h-5 w-5 text-green-600 dark:text-green-400" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="mb-1 font-semibold text-gray-900 dark:text-gray-100">
-                    Hoàn Toàn Offline
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Không cần internet, học mọi lúc mọi nơi
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
-                    <Shield className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="mb-1 font-semibold text-gray-900 dark:text-gray-100">
-                    Bảo Mật Tuyệt Đối
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Video không bao giờ rời khỏi máy tính của bạn
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30">
-                    <Zap className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="mb-1 font-semibold text-gray-900 dark:text-gray-100">
-                    Portable Progress
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Copy folder → Progress đi theo, học trên nhiều máy
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/30">
-                    <Zap className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-                  </div>
-                </div>
-                <div>
-                  <h3 className="mb-1 font-semibold text-gray-900 dark:text-gray-100">
-                    Zero Install
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Không cần cài đặt phần mềm, chỉ cần trình duyệt
-                  </p>
-                </div>
-              </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+              <Shield className="w-5 h-5 text-blue-500 mb-1" />
+              <p className="text-xs font-medium text-gray-900 dark:text-white">Bảo mật</p>
+              <p className="text-[10px] text-gray-500 dark:text-gray-400">Video ở máy bạn</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+              <Zap className="w-5 h-5 text-purple-500 mb-1" />
+              <p className="text-xs font-medium text-gray-900 dark:text-white">Portable</p>
+              <p className="text-[10px] text-gray-500 dark:text-gray-400">Học nhiều máy</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+              <Zap className="w-5 h-5 text-indigo-500 mb-1" />
+              <p className="text-xs font-medium text-gray-900 dark:text-white">Zero Install</p>
+              <p className="text-[10px] text-gray-500 dark:text-gray-400">Chỉ cần browser</p>
             </div>
           </div>
+
         </div>
       </main>
 

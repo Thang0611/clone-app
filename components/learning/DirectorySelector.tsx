@@ -50,7 +50,7 @@ export function DirectorySelector({
       try {
         const name = await getCachedFolderName();
         setCachedFolderName(name);
-        
+
         // Load danh sách tất cả folders
         const folders = await getAllFolders();
         setFoldersList(folders);
@@ -80,7 +80,7 @@ export function DirectorySelector({
 
       // Update cached folder name
       setCachedFolderName(folderName);
-      
+
       // Reload folders list
       const folders = await getAllFolders();
       setFoldersList(folders);
@@ -126,7 +126,7 @@ export function DirectorySelector({
 
       // Update cached folder name
       setCachedFolderName(folderName);
-      
+
       // Reload folders list
       const folders = await getAllFolders();
       setFoldersList(folders);
@@ -169,7 +169,7 @@ export function DirectorySelector({
       // Set as current handle
       await saveDirectoryHandle(folder.handle, folder.folderName);
       setCachedFolderName(folder.folderName);
-      
+
       // Callback
       onFolderSelected(folder.handle, folder.folderName);
     } catch (error) {
@@ -186,7 +186,7 @@ export function DirectorySelector({
       await removeFolderFromList(folderName);
       const folders = await getAllFolders();
       setFoldersList(folders);
-      
+
       // If removed folder was current, clear current
       if (cachedFolderName === folderName) {
         await clearDirectoryHandle();
@@ -203,14 +203,14 @@ export function DirectorySelector({
 
   if (!isSupported) {
     return (
-      <div className={`rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-800 dark:bg-yellow-900/20 ${className}`}>
+      <div className={`rounded-lg border border-yellow-200 bg-yellow-50 p-4 ${className}`}>
         <div className="flex items-start gap-3">
-          <span className="text-yellow-600 dark:text-yellow-400 text-xl">⚠️</span>
+          <span className="text-yellow-600  text-xl">⚠️</span>
           <div className="flex-1">
-            <h3 className="font-semibold text-yellow-800 dark:text-yellow-300 mb-1">
+            <h3 className="font-semibold text-yellow-800 mb-1">
               Trình duyệt không hỗ trợ
             </h3>
-            <p className="text-sm text-yellow-700 dark:text-yellow-400">
+            <p className="text-sm text-yellow-700 ">
               Tính năng này yêu cầu Chrome hoặc Edge (phiên bản mới). Vui lòng sử dụng trình duyệt
               được hỗ trợ để có trải nghiệm tốt nhất.
             </p>
@@ -225,7 +225,7 @@ export function DirectorySelector({
     return (
       <div className={`flex items-center justify-center p-8 ${className}`}>
         <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"></div>
-        <span className="ml-3 text-sm text-gray-600 dark:text-gray-400">Đang kiểm tra...</span>
+        <span className="ml-3 text-sm text-gray-600 ">Đang kiểm tra...</span>
       </div>
     );
   }
@@ -236,7 +236,7 @@ export function DirectorySelector({
       {/* Danh sách folders đã chọn */}
       {foldersList.length > 0 && (
         <div className="space-y-2">
-          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+          <h3 className="text-sm font-semibold text-gray-700 ">
             Folders đã chọn ({foldersList.length})
           </h3>
           <div className="space-y-2">
@@ -244,19 +244,18 @@ export function DirectorySelector({
               <div
                 key={`${folder.folderName}-${folder.savedAt}`}
                 onClick={() => handleSelectFolderFromList(folder)}
-                className={`group relative flex items-center justify-between rounded-lg border p-3 transition-all cursor-pointer ${
-                  cachedFolderName === folder.folderName
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                    : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50/50 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-700 dark:hover:bg-gray-700'
-                }`}
+                className={`group relative flex items-center justify-between rounded-lg border p-3 transition-all cursor-pointer ${cachedFolderName === folder.folderName
+                    ? 'border-blue-500 bg-blue-50 '
+                    : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50/50 '
+                  }`}
               >
                 <div className="flex items-center gap-3 flex-1 min-w-0">
                   <span className="text-2xl">📂</span>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-gray-900 dark:text-gray-100 truncate">
+                    <p className="font-medium text-gray-900  truncate">
                       {folder.folderName}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-gray-500 ">
                       {new Date(folder.savedAt).toLocaleDateString('vi-VN', {
                         day: '2-digit',
                         month: '2-digit',
@@ -274,7 +273,7 @@ export function DirectorySelector({
                 )}
                 <button
                   onClick={(e) => handleRemoveFolder(folder.folderName, e)}
-                  className="ml-2 opacity-0 group-hover:opacity-100 rounded p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all"
+                  className="ml-2 opacity-0 group-hover:opacity-100 rounded p-1 text-gray-400 hover:text-red-600 hover:bg-red-50  transition-all"
                   title="Xóa folder"
                 >
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -288,25 +287,25 @@ export function DirectorySelector({
       )}
 
       {/* Nút thêm folder mới */}
-      <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+      <div className="pt-2 border-t border-gray-200 ">
         <button
           onClick={handleSelectNewFolder}
           disabled={isLoading}
-          className="w-full rounded-lg border-2 border-dashed border-gray-300 bg-white p-6 text-center transition-colors hover:border-blue-500 hover:bg-blue-50 dark:border-gray-600 dark:bg-gray-800 dark:hover:border-blue-500 dark:hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-lg border-2 border-dashed border-gray-300 bg-white p-6 text-center transition-colors hover:border-blue-500 hover:bg-blue-50   disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isLoading ? (
             <div className="flex flex-col items-center gap-3">
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-300 border-t-blue-600"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">Đang xử lý...</span>
+              <span className="text-sm text-gray-600 ">Đang xử lý...</span>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-3">
               <span className="text-4xl">➕</span>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                <h3 className="text-lg font-semibold text-gray-900 ">
                   {foldersList.length > 0 ? 'Thêm Folder Mới' : 'Chọn Folder Khóa Học'}
                 </h3>
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                <p className="mt-1 text-sm text-gray-600 d">
                   {foldersList.length > 0
                     ? 'Chọn folder chứa video khóa học khác'
                     : 'Chọn folder chứa các video khóa học đã tải về'}

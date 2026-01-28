@@ -143,6 +143,11 @@ export function trackFormSubmit(
     form_location: formLocation,
     course_count: courseCount,
     email_hash: emailHash,
+    ...(emailHash && {
+      user_data: {
+        sha256_email_address: emailHash
+      }
+    }),
   });
 }
 
@@ -201,6 +206,11 @@ export function trackBeginCheckout(
     items: items,
     transaction_id: transactionId || `temp_${Date.now()}`,
     email_hash: emailHash,
+    ...(emailHash && {
+      user_data: {
+        sha256_email_address: emailHash
+      }
+    }),
   });
 }
 
@@ -232,6 +242,11 @@ export function trackPurchase(
     items: items,
     payment_type: paymentType,
     email_hash: emailHash,
+    ...(emailHash && {
+      user_data: {
+        sha256_email_address: emailHash
+      }
+    }),
   });
 }
 

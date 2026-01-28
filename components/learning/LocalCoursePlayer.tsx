@@ -116,7 +116,7 @@ export function LocalCoursePlayer({
             }
           }
         } catch (err) {
-          console.warn('[scanResourceFolders] Could not scan:', folderPath, err);
+          // Could not scan folder
         }
         
         // Only add if has resources
@@ -179,24 +179,19 @@ export function LocalCoursePlayer({
             const isValid = await verifyDirectoryHandle(cached.handle);
             if (isValid) {
               // Có cached handle và valid → tự động load
-              console.log('[LocalCoursePlayer] ✅ Auto-loaded cached folder:', cached.folderName);
               await handleFolderSelected(cached.handle, cached.folderName);
             } else {
               // Handle invalid → Clear cache nhưng không show picker
               const { clearDirectoryHandle } = await import('@/lib/directory-manager');
               await clearDirectoryHandle();
-              console.log('[LocalCoursePlayer] ⚠️ Cached folder invalid, cleared');
             }
           } else {
-            console.log('[LocalCoursePlayer] ℹ️ Cached folder does not match courseId, skipping auto-load');
             // Folder name không khớp → không auto-load, chờ user chọn
           }
         } else {
-          console.log('[LocalCoursePlayer] ℹ️ No cached folder found');
           // Không có cached folder → không làm gì, chờ user chọn
         }
       } catch (error) {
-        console.error('[LocalCoursePlayer] Error loading cached folder:', error);
         // Lỗi → không làm gì, chờ user chọn
       }
     }
@@ -308,7 +303,7 @@ export function LocalCoursePlayer({
       const cachedMetadata = await loadMetadataCache(name);
       
       if (cachedMetadata) {
-        console.log('[LocalCoursePlayer] 📦 Found cached metadata, validating...');
+        // console.log('[LocalCoursePlayer] 📦 Found cached metadata, validating...');
         
         // Quick scan để validate cache (chỉ check files, không load handles)
         // For now, we'll do a full scan but can optimize later
@@ -326,7 +321,7 @@ export function LocalCoursePlayer({
         if (isValid && cachedMetadata.videos.length === scannedVideos.length) {
           // Cache is valid, use it (but we already scanned, so use scanned results)
           // In future, we can optimize to not scan if cache is valid
-          console.log('[LocalCoursePlayer] ✅ Cache is valid, using scanned results');
+          // console.log('[LocalCoursePlayer] ✅ Cache is valid, using scanned results');
         } else {
           // Cache invalid, save new cache
           await saveMetadataCache(name, scannedVideos);
@@ -352,9 +347,9 @@ export function LocalCoursePlayer({
       try {
         const scannedResourceFolders = await scanResourceFolders(handle, scannedVideos);
         setResourceFolders(scannedResourceFolders);
-        console.log(`[LocalCoursePlayer] 📁 Found ${scannedResourceFolders.length} resource folders`);
+        // console.log(`[LocalCoursePlayer] 📁 Found ${scannedResourceFolders.length} resource folders`);
       } catch (err) {
-        console.warn('[LocalCoursePlayer] Could not scan resource folders:', err);
+        // console.warn('[LocalCoursePlayer] Could not scan resource folders:', err);
         setResourceFolders([]);
       }
 
@@ -370,7 +365,7 @@ export function LocalCoursePlayer({
           }
         );
         if (syncedCount > 0) {
-          console.log(`[LocalCoursePlayer] ✅ Synced ${syncedCount} progress items from file`);
+          // console.log(`[LocalCoursePlayer] ✅ Synced ${syncedCount} progress items from file`);
           // Reload progress map
           const progressList = await getCourseProgress(courseId);
           const map: Record<string, number> = {};
@@ -380,7 +375,7 @@ export function LocalCoursePlayer({
           setProgressMap(map);
         }
       } catch (fileError) {
-        console.warn('[LocalCoursePlayer] ⚠️ Could not sync from file:', fileError);
+        // console.warn('[LocalCoursePlayer] ⚠️ Could not sync from file:', fileError);
         // Continue, file sync is optional
       }
 
@@ -407,20 +402,20 @@ export function LocalCoursePlayer({
           }
           
           if (lastWatchedVideo) {
-            console.log(`[LocalCoursePlayer] 🎯 Auto-selecting last watched video: ${lastWatchedVideo.displayName}`);
+            // console.log(`[LocalCoursePlayer] 🎯 Auto-selecting last watched video: ${lastWatchedVideo.displayName}`);
             setSelectedVideo(lastWatchedVideo);
           } else {
             // Không có video đang xem → chọn video đầu tiên
             setSelectedVideo(scannedVideos[0]);
           }
         } catch (err) {
-          console.error('[LocalCoursePlayer] Error finding last watched video:', err);
+          // console.error('[LocalCoursePlayer] Error finding last watched video:', err);
           // Fallback: chọn video đầu tiên
           setSelectedVideo(scannedVideos[0]);
         }
       }
     } catch (err) {
-      console.error('[LocalCoursePlayer] Error scanning folder:', err);
+      // console.error('[LocalCoursePlayer] Error scanning folder:', err);
       setError(err instanceof Error ? err.message : 'Lỗi khi quét folder');
     } finally {
       setIsScanning(false);
@@ -445,7 +440,7 @@ export function LocalCoursePlayer({
     
     if (currentProgress >= 95) {
       // Video đã xem hết 100% → Reset progress để xem lại từ đầu
-      console.log(`[LocalCoursePlayer] 🔄 Resetting completed video: ${video.displayName}`);
+      // console.log(`[LocalCoursePlayer] 🔄 Resetting completed video: ${video.displayName}`);
       
       try {
         // Reset progress trong IndexedDB
@@ -467,7 +462,7 @@ export function LocalCoursePlayer({
           [video.path]: 0,
         }));
       } catch (err) {
-        console.error('[LocalCoursePlayer] Error resetting progress:', err);
+        // console.error('[LocalCoursePlayer] Error resetting progress:', err);
       }
     }
     
@@ -649,7 +644,7 @@ export function LocalCoursePlayer({
   };
 
   return (
-    <div className={`flex h-screen gap-2 ${className}`}>
+    <div className={`flex h-screen gap-2 ${className} py-14`}>
       {/* Main - Video player (eLearning style) */}
       <div className="flex-1 min-w-0">
         {selectedVideo && directoryHandle ? (
@@ -955,7 +950,7 @@ export function LocalCoursePlayer({
                                         </p>
                                         {progressData && progressData.totalDurationSeconds > 0 && (
                                           <div className="mt-1.5">
-                                            <div className="h-1 w-full overflow-hidden rounded-full bg-gray-200">
+                                            <div className="h-1 w-full rounded-full bg-gray-200">
                                               <div
                                                 className={`h-full transition-all ${
                                                   isCompleted
@@ -966,7 +961,7 @@ export function LocalCoursePlayer({
                                               />
                                             </div>
                                             <div className="mt-0.5 flex items-center justify-between text-xs text-gray-500">
-                                              <span>{formatTime(progressData.currentTimeSeconds)}</span>
+                                              {/* <span>{formatTime(progressData.currentTimeSeconds)}</span> */}
                                               <span>{formatTime(progressData.totalDurationSeconds)}</span>
                                             </div>
                                           </div>

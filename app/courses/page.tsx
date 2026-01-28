@@ -45,7 +45,7 @@ const MOCK_COURSES = [
     students: 856234,
     duration: "54.5 hours",
     lectures: 392,
-    price: 2000,
+    price: 50000,
     originalPrice: 4990000,
     thumbnail: "https://via.placeholder.com/400x225/4F46E5/FFFFFF?text=Web+Dev",
     bestseller: true,
@@ -62,7 +62,7 @@ const MOCK_COURSES = [
     students: 623451,
     duration: "58 hours",
     lectures: 445,
-    price: 2000,
+    price: 50000,
     originalPrice: 3990000,
     thumbnail: "https://via.placeholder.com/400x225/7C3AED/FFFFFF?text=Python",
     bestseller: true,
@@ -79,7 +79,7 @@ const MOCK_COURSES = [
     students: 432890,
     duration: "63.5 hours",
     lectures: 489,
-    price: 2000,
+    price: 50000,
     originalPrice: 4290000,
     thumbnail: "https://via.placeholder.com/400x225/EC4899/FFFFFF?text=Fullstack",
     url: "https://www.udemy.com/course/the-web-developer-bootcamp/",
@@ -95,7 +95,7 @@ const MOCK_COURSES = [
     students: 782345,
     duration: "48.5 hours",
     lectures: 578,
-    price: 2000,
+    price: 50000,
     originalPrice: 3790000,
     thumbnail: "https://via.placeholder.com/400x225/06B6D4/FFFFFF?text=React",
     bestseller: true,
@@ -112,7 +112,7 @@ const MOCK_COURSES = [
     students: 234567,
     duration: "22 hours",
     lectures: 145,
-    price: 2000,
+    price: 50000,
     originalPrice: 2990000,
     thumbnail: "https://via.placeholder.com/400x225/F59E0B/FFFFFF?text=Design",
     url: "https://www.udemy.com/course/graphic-design-masterclass/",
@@ -128,7 +128,7 @@ const MOCK_COURSES = [
     students: 345678,
     duration: "23 hours",
     lectures: 178,
-    price: 2000,
+    price: 50000,
     originalPrice: 3290000,
     thumbnail: "https://via.placeholder.com/400x225/10B981/FFFFFF?text=Marketing",
     url: "https://www.udemy.com/course/learn-digital-marketing-course/",
@@ -144,7 +144,7 @@ const MOCK_COURSES = [
     students: 567890,
     duration: "35 hours",
     lectures: 234,
-    price: 2000,
+    price: 50000,
     originalPrice: 2590000,
     thumbnail: "https://via.placeholder.com/400x225/EF4444/FFFFFF?text=English",
     url: "https://www.udemy.com/course/complete-english-course/",
@@ -160,7 +160,7 @@ const MOCK_COURSES = [
     students: 456789,
     duration: "47 hours",
     lectures: 389,
-    price: 2000,
+    price: 50000,
     originalPrice: 3990000,
     thumbnail: "https://via.placeholder.com/400x225/8B5CF6/FFFFFF?text=Finance",
     url: "https://www.udemy.com/course/the-complete-financial-analyst-course/",
@@ -176,7 +176,7 @@ const MOCK_COURSES = [
     students: 934567,
     duration: "44 hours",
     lectures: 312,
-    price: 2000,
+    price: 50000,
     originalPrice: 4590000,
     thumbnail: "https://via.placeholder.com/400x225/6366F1/FFFFFF?text=AI+ML",
     bestseller: true,
@@ -193,7 +193,7 @@ const MOCK_COURSES = [
     students: 12345,
     duration: "15 hours",
     lectures: 89,
-    price: 2000,
+    price: 50000,
     originalPrice: 1990000,
     thumbnail: "https://via.placeholder.com/400x225/DB2777/FFFFFF?text=UI+UX",
     url: "https://www.coursera.org/learn/ui-ux-design",
@@ -209,7 +209,7 @@ const MOCK_COURSES = [
     students: 23456,
     duration: "12 hours",
     lectures: 67,
-    price: 2000,
+    price: 50000,
     originalPrice: 1490000,
     thumbnail: "https://via.placeholder.com/400x225/059669/FFFFFF?text=Excel",
     url: "https://www.coursera.org/learn/excel-basics",
@@ -225,7 +225,7 @@ const MOCK_COURSES = [
     students: 8901,
     duration: "28 hours",
     lectures: 156,
-    price: 2000,
+    price: 50000,
     originalPrice: 2990000,
     thumbnail: "https://via.placeholder.com/400x225/DC2626/FFFFFF?text=Java",
     url: "https://www.linkedin.com/learning/java-spring-boot",
@@ -243,7 +243,10 @@ function CoursesPageContent() {
   const [selectedCategory, setSelectedCategory] = useState("Tất cả");
   const [selectedPlatform, setSelectedPlatform] = useState("Tất cả");
   const [showFilters, setShowFilters] = useState(false);
-  const [sortBy, setSortBy] = useState("popular"); // popular, rating, newest
+  const [sortBy, setSortBy] = useState("newest"); // popular, rating, newest
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const ITEMS_PER_PAGE = 21;
 
   // Initialize search query from URL params
   useEffect(() => {
@@ -259,7 +262,7 @@ function CoursesPageContent() {
       try {
         const response = await fetch('/api/courses/categories');
         const data = await response.json();
-        
+
         // Handle different response formats
         let categoriesArray: string[] = [];
         if (data.success) {
@@ -271,7 +274,7 @@ function CoursesPageContent() {
             categoriesArray = data.categories;
           }
         }
-        
+
         if (categoriesArray.length > 0) {
           setCategories(["Tất cả", ...categoriesArray]);
         }
@@ -284,7 +287,7 @@ function CoursesPageContent() {
       try {
         const response = await fetch('/api/courses/platforms');
         const data = await response.json();
-        
+
         // Handle different response formats
         let platformsArray: string[] = [];
         if (data.success) {
@@ -296,7 +299,7 @@ function CoursesPageContent() {
             platformsArray = data.platforms;
           }
         }
-        
+
         if (platformsArray.length > 0) {
           setPlatforms(["Tất cả", ...platformsArray]);
         }
@@ -311,23 +314,26 @@ function CoursesPageContent() {
 
   // Load courses from API
   useEffect(() => {
-    loadCourses();
+    setPage(1);
+    setHasMore(true);
+    setCourses([]);
+    loadCourses(1, true);
   }, [selectedCategory, selectedPlatform, searchQuery]);
 
-  const loadCourses = async () => {
+  const loadCourses = async (pageNum: number = 1, isNewFilter: boolean = false) => {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/courses?category=${encodeURIComponent(selectedCategory)}&platform=${encodeURIComponent(selectedPlatform)}&search=${encodeURIComponent(searchQuery)}&page=1&limit=100`
+        `/api/courses?category=${encodeURIComponent(selectedCategory)}&platform=${encodeURIComponent(selectedPlatform)}&search=${encodeURIComponent(searchQuery)}&page=${pageNum}&limit=${ITEMS_PER_PAGE}`
       );
       const data = await response.json();
-      
+
       // Handle different response formats
       // Format 1: { success: true, courses: [...] }
       // Format 2: { success: true, data: { courses: [...] } }
       // Format 3: { success: true, data: [...] }
       let coursesArray: any[] = [];
-      
+
       if (data.success) {
         if (Array.isArray(data.data)) {
           coursesArray = data.data;
@@ -337,7 +343,7 @@ function CoursesPageContent() {
           coursesArray = data.courses;
         }
       }
-      
+
       if (coursesArray.length > 0) {
         // Transform API response to match Course interface
         const transformedCourses: Course[] = coursesArray.map((c: any) => ({
@@ -358,16 +364,39 @@ function CoursesPageContent() {
           url: c.course_url || c.url, // Support both course_url and url
           description: c.description
         }));
-        setCourses(transformedCourses);
+
+        if (isNewFilter || pageNum === 1) {
+          setCourses(transformedCourses);
+        } else {
+          setCourses(prev => [...prev, ...transformedCourses]);
+        }
+
+        // If we got fewer items than requested, there are no more pages
+        if (coursesArray.length < ITEMS_PER_PAGE) {
+          setHasMore(false);
+        }
       } else {
-        setCourses([]);
+        if (isNewFilter || pageNum === 1) {
+          setCourses([]);
+        }
+        setHasMore(false);
       }
     } catch (error) {
       console.error('Failed to load courses:', error);
       toast.error('Không thể tải danh sách khóa học');
-      setCourses([]);
+      if (isNewFilter || pageNum === 1) {
+        setCourses([]);
+      }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loading && hasMore) {
+      const nextPage = page + 1;
+      setPage(nextPage);
+      loadCourses(nextPage, false);
     }
   };
 
@@ -443,167 +472,142 @@ function CoursesPageContent() {
     <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
 
-      {/* Breadcrumb */}
-      <Breadcrumb items={[
-        { name: "Khóa học", url: "/courses" },
-      ]} />
+      <main className="flex-1">
+        <Breadcrumb items={[{ name: "Khóa học", url: "/courses" }]} />
 
-      {/* Main Content */}
-      <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-        {/* Search and Filters Bar */}
-        <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
-          {/* Search Bar */}
-          <div className="mb-6">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Tìm kiếm khóa học, giảng viên..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-slate-200 bg-white text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-              />
+        {/* Main Content: Header & Filters */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+          <div className="flex flex-col space-y-8">
+            {/* Header Section */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <div className="max-w-2xl">
+                <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                  Khám phá khóa học
+                </h1>
+                <p className="text-lg text-slate-600">
+                  Học từ những chuyên gia hàng đầu trên thế giới với chi phí tiết kiệm nhất.
+                </p>
+              </div>
+
+              <div className="relative w-full md:w-96 group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5 group-focus-within:text-indigo-500 transition-colors" />
+                <input
+                  type="text"
+                  placeholder="Tìm kiếm khóa học, giảng viên..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3.5 rounded-2xl border-2 border-slate-100 bg-slate-50 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white transition-all shadow-sm"
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-            {/* Filter Toggle (Mobile) */}
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="lg:hidden flex items-center gap-2 text-slate-700 font-medium"
-            >
-              <Filter className="w-5 h-5" />
-              Bộ lọc
-              <ChevronDown className={`w-4 h-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
-            </button>
 
-            {/* Filters */}
-            <div className={`flex flex-col lg:flex-row gap-4 w-full lg:w-auto ${showFilters ? 'block' : 'hidden lg:flex'}`}>
-              {/* Category Filter */}
-              <div className="relative">
-                <label className="text-sm font-medium text-slate-700 mb-2 block lg:hidden">
-                  Danh mục
-                </label>
-                <div className="relative">
-                  <select
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="appearance-none px-4 py-2.5 pr-10 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700 font-medium min-w-[180px] shadow-sm hover:border-slate-400 transition-colors cursor-pointer"
+            {/* Category Bar */}
+            <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md pt-2 pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 border-b border-slate-100">
+              <div className="flex items-center gap-3 overflow-x-auto no-scrollbar pb-2">
+                <Button
+                  variant={selectedCategory === "Tất cả" ? "primary" : "secondary"}
+                  size="sm"
+                  onClick={() => setSelectedCategory("Tất cả")}
+                  className={`rounded-full whitespace-nowrap px-6 transition-all duration-300 ${selectedCategory === "Tất cả"
+                    ? "shadow-lg shadow-indigo-200"
+                    : "hover:bg-slate-50 border-slate-200 text-slate-600"
+                    }`}
+                >
+                  Tất cả
+                </Button>
+                {["IT", "Ngoại ngữ", "Thiết kế đồ họa", "Marketing", "Facebook/Tiktok", "Kỹ năng mềm"].map((cat) => (
+                  <Button
+                    key={cat}
+                    variant={selectedCategory === cat ? "primary" : "secondary"}
+                    size="sm"
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`rounded-full whitespace-nowrap px-6 transition-all duration-300 ${selectedCategory === cat
+                      ? "shadow-lg shadow-indigo-200"
+                      : "hover:bg-slate-50 border-slate-200 text-slate-600"
+                      }`}
                   >
-                    {categories.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
-                </div>
+                    {cat}
+                  </Button>
+                ))}
               </div>
+            </div>
 
-              {/* Platform Filter */}
-              <div className="relative">
-                <label className="text-sm font-medium text-slate-700 mb-2 block lg:hidden">
-                  Nền tảng
-                </label>
-                <div className="relative">
-                  <select
-                    value={selectedPlatform}
-                    onChange={(e) => setSelectedPlatform(e.target.value)}
-                    className="appearance-none px-4 py-2.5 pr-10 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700 font-medium min-w-[150px] shadow-sm hover:border-slate-400 transition-colors cursor-pointer"
-                  >
-                    {platforms.map((platform) => (
-                      <option key={platform} value={platform}>
-                        {platform}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
-                </div>
-              </div>
-
-              {/* Sort By */}
-              <div className="relative">
-                <label className="text-sm font-medium text-slate-700 mb-2 block lg:hidden">
-                  Sắp xếp
-                </label>
+            {/* Additional Filters - Sort only */}
+            <div className="flex flex-wrap items-center gap-4 justify-between">
+              <div className="flex items-center gap-3">
                 <div className="relative">
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="appearance-none px-4 py-2.5 pr-10 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white text-slate-700 font-medium min-w-[150px] shadow-sm hover:border-slate-400 transition-colors cursor-pointer"
+                    className="appearance-none pl-4 pr-10 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 text-sm font-semibold hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer shadow-sm min-w-[150px]"
                   >
                     <option value="popular">Phổ biến nhất</option>
                     <option value="rating">Đánh giá cao</option>
                     <option value="newest">Mới nhất</option>
                   </select>
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                 </div>
               </div>
-            </div>
 
-            {/* Results Count */}
-            <div className="text-slate-600 font-medium">
-              {filteredCourses.length} khóa học
+              <div className="text-sm font-bold text-slate-400 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100">
+                <span className="text-slate-900">{filteredCourses.length}</span> kết quả
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Courses Grid */}
-        {loading ? (
-          <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="text-center">
-              <div className="animate-pulse text-slate-600">Đang tải khóa học...</div>
-            </div>
-          </div>
-        ) : filteredCourses.length === 0 ? (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-2">
-              Không tìm thấy khóa học
-            </h3>
-            <p className="text-slate-600">
-              Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCourses.map((course) => (
-              <CourseCard
-                key={course.id}
-                id={course.id}
-                slug={course.slug}
-                title={course.title}
-                platform={course.platform}
-                category={course.category || ''}
-                instructor={course.instructor || ''}
-                rating={course.rating || 0}
-                students={course.students || 0}
-                duration={course.duration || ''}
-                lectures={course.lectures || 0}
-                price={course.price}
-                originalPrice={course.original_price || course.price}
-                thumbnail={course.thumbnail || 'https://via.placeholder.com/400x225'}
-                bestseller={course.bestseller}
-                url={course.url}
-                onAddToCart={handleQuickOrder}
-              />
-            ))}
-          </div>
-        )}
+        {/* Courses List Section */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 w-full mt-4">
+          <div className="min-h-[400px]">
+            {loading && courses.length === 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 opacity-50">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="bg-slate-50 rounded-2xl h-[400px] animate-pulse border border-slate-100" />
+                ))}
+              </div>
+            ) : filteredCourses.length === 0 ? (
+              <div className="text-center py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Không tìm thấy khóa học</h3>
+                <p className="text-slate-600">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                {filteredCourses.map((course) => (
+                  <CourseCard
+                    key={course.id}
+                    {...course}
+                    originalPrice={course.original_price || course.price}
+                    thumbnail={course.thumbnail || 'https://via.placeholder.com/400x225'}
+                    category={course.category || ''}
+                    instructor={course.instructor || ''}
+                    rating={course.rating || 0}
+                    students={course.students || 0}
+                    duration={course.duration || ''}
+                    lectures={course.lectures || 0}
+                    onAddToCart={handleQuickOrder}
+                  />
+                ))}
+              </div>
+            )}
 
-        {/* CTA Section */}
-        <div className="mt-6  text-center">
-          {/* <p className="text-sm text-slate-600 mb-3">
-            Nếu không tìm thấy khóa học bạn muốn? Gửi link khóa học và chúng tôi sẽ hỗ trợ bạn
-          </p>
-          <Button
-            size="sm"
-            variant="primary"
-            onClick={() => window.location.href = "/"}
-          >
-            Tải ngay
-          </Button> */}
+            {/* Load More Button */}
+            {filteredCourses.length > 0 && hasMore && (
+              <div className="flex justify-center mt-12">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={handleLoadMore}
+                  disabled={loading}
+                  className="w-full sm:w-auto min-w-[200px]"
+                >
+                  {loading ? "Đang tải..." : "Xem thêm khóa học"}
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>

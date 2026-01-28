@@ -67,9 +67,9 @@ export async function saveMetadataCache(
       request.onerror = () => reject(request.error);
     });
 
-    console.log(`[VideoMetadataCache] ✅ Cached metadata for ${folderName}: ${videos.length} videos`);
+    // console.log(`[VideoMetadataCache] ✅ Cached metadata for ${folderName}: ${videos.length} videos`);
   } catch (error) {
-    console.error('[VideoMetadataCache] ❌ Failed to save metadata cache:', error);
+    // console.error('[VideoMetadataCache] ❌ Failed to save metadata cache:', error);
     throw error;
   }
 }
@@ -95,14 +95,14 @@ export async function loadMetadataCache(
     });
 
     if (metadata) {
-      console.log(`[VideoMetadataCache] ✅ Loaded cached metadata: ${metadata.videos.length} videos`);
+      // console.log(`[VideoMetadataCache] ✅ Loaded cached metadata: ${metadata.videos.length} videos`);
     } else {
-      console.log('[VideoMetadataCache] ℹ️ No cached metadata found');
+      // console.log('[VideoMetadataCache] ℹ️ No cached metadata found');
     }
 
     return metadata;
   } catch (error) {
-    console.error('[VideoMetadataCache] ❌ Failed to load metadata cache:', error);
+    // console.error('[VideoMetadataCache] ❌ Failed to load metadata cache:', error);
     return null;
   }
 }
@@ -117,7 +117,7 @@ export async function isMetadataCacheValid(
 ): Promise<boolean> {
   // Nếu số lượng video khác nhau → Cache invalid
   if (cachedMetadata.videos.length !== currentVideos.length) {
-    console.log('[VideoMetadataCache] ⚠️ Cache invalid: Video count changed');
+    // console.log('[VideoMetadataCache] ⚠️ Cache invalid: Video count changed');
     return false;
   }
 
@@ -130,18 +130,18 @@ export async function isMetadataCacheValid(
   for (const video of currentVideos) {
     const cached = cachedMap.get(video.path);
     if (!cached) {
-      console.log(`[VideoMetadataCache] ⚠️ Cache invalid: New video found: ${video.path}`);
+      // console.log(`[VideoMetadataCache] ⚠️ Cache invalid: New video found: ${video.path}`);
       return false;
     }
 
     // So sánh size và lastModified
     if (cached.size !== video.size || cached.lastModified !== video.lastModified) {
-      console.log(`[VideoMetadataCache] ⚠️ Cache invalid: Video changed: ${video.path}`);
+      // console.log(`[VideoMetadataCache] ⚠️ Cache invalid: Video changed: ${video.path}`);
       return false;
     }
   }
 
-  console.log('[VideoMetadataCache] ✅ Cache is valid');
+  // console.log('[VideoMetadataCache] ✅ Cache is valid');
   return true;
 }
 
@@ -165,9 +165,9 @@ export async function clearMetadataCache(
       request.onerror = () => reject(request.error);
     });
 
-    console.log('[VideoMetadataCache] ✅ Cleared metadata cache');
+    // console.log('[VideoMetadataCache] ✅ Cleared metadata cache');
   } catch (error) {
-    console.error('[VideoMetadataCache] ❌ Failed to clear metadata cache:', error);
+    // console.error('[VideoMetadataCache] ❌ Failed to clear metadata cache:', error);
     throw error;
   }
 }
@@ -249,10 +249,10 @@ export async function clearOldMetadataCache(daysOld: number = 30): Promise<numbe
       )
     );
 
-    console.log(`[VideoMetadataCache] ✅ Cleared ${keysToDelete.length} old metadata caches`);
+    // console.log(`[VideoMetadataCache] ✅ Cleared ${keysToDelete.length} old metadata caches`);
     return keysToDelete.length;
   } catch (error) {
-    console.error('[VideoMetadataCache] ❌ Failed to clear old metadata cache:', error);
+    // console.error('[VideoMetadataCache] ❌ Failed to clear old metadata cache:', error);
     return 0;
   }
 }

@@ -53,7 +53,7 @@ export const metadata = generateMetadata({
 **Before:**
 ```typescript
 export const metadata: Metadata = {
-  title: "Khóa Học Giá Rẻ - Tải Khóa Học Online Chỉ từ 30k",
+  title: "Khóa Học Giá Rẻ - Get Khóa Học Udemy Chỉ từ 50k",
   description: "Tải khóa học Udemy, Coursera, LinkedIn Learning...",
 };
 ```
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
 **After:**
 ```typescript
 export const metadata: Metadata = generateSEOMetadata({
-  title: "Khóa Học Giá Rẻ - Tải Khóa Học Online Chỉ từ 30k",
+  title: "Khóa Học Giá Rẻ - Get Khóa Học Udemy Chỉ từ 50k",
   description: "Tải khóa học Udemy, Coursera, LinkedIn Learning...",
   keywords: [...],
   image: "/images/logo.webp",

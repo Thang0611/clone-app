@@ -10,11 +10,17 @@ export const API_VERSION = 'v1';
 export const API_ENDPOINTS = {
   GET_COURSE_INFO: `/api/${API_VERSION}/get-course-info`,
   CREATE_ORDER: `/api/${API_VERSION}/payment/create-order`,
+  CREATE_ORDER_ALL_COURSES: `/api/${API_VERSION}/payment/create-order-all-courses`,
   CHECK_STATUS: `/api/${API_VERSION}/payment/check-status`,
 } as const;
 
-// Pricing
-export const DEFAULT_COURSE_PRICE = 50000; // VND
+// Pricing - Regular download
+export const REGULAR_PRICE_PER_COURSE = 39000; // VND per course
+export const REGULAR_PRICE_COMBO_5 = 99000; // VND for 5 courses
+export const REGULAR_PRICE_COMBO_10 = 199000; // VND for 10 courses
+
+// Pricing - Premium (all courses access)
+export const PREMIUM_PRICE = 199000; // VND - Fixed price for all courses access
 
 // Polling Configuration
 export const POLLING_INTERVAL = 3000; // 3 seconds

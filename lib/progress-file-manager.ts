@@ -37,7 +37,7 @@ export async function hasWriteAccess(
     const newPermission = await directoryHandle.requestPermission({ mode: 'readwrite' });
     return newPermission === 'granted';
   } catch (error) {
-    console.warn('[ProgressFileManager] ⚠️ Could not check write access:', error);
+    // console.warn('[ProgressFileManager] ⚠️ Could not check write access:', error);
     return false;
   }
 }
@@ -54,7 +54,7 @@ export async function saveProgressToFile(
     // Check write access
     const hasAccess = await hasWriteAccess(directoryHandle);
     if (!hasAccess) {
-      console.log('[ProgressFileManager] ℹ️ No write access, skipping file save');
+      // console.log('[ProgressFileManager] ℹ️ No write access, skipping file save');
       return false;
     }
 
@@ -82,7 +82,7 @@ export async function saveProgressToFile(
     try {
       fileHandle = await directoryHandle.getFileHandle(PROGRESS_FILE_NAME, { create: true });
     } catch (error) {
-      console.error('[ProgressFileManager] ❌ Failed to get file handle:', error);
+      // console.error('[ProgressFileManager] ❌ Failed to get file handle:', error);
       return false;
     }
 
@@ -91,10 +91,10 @@ export async function saveProgressToFile(
     await writable.write(blob);
     await writable.close();
 
-    console.log(`[ProgressFileManager] ✅ Saved progress to file: ${progressList.length} items`);
+    // console.log(`[ProgressFileManager] ✅ Saved progress to file: ${progressList.length} items`);
     return true;
   } catch (error) {
-    console.error('[ProgressFileManager] ❌ Failed to save progress to file:', error);
+    // console.error('[ProgressFileManager] ❌ Failed to save progress to file:', error);
     return false;
   }
 }
@@ -113,7 +113,7 @@ export async function loadProgressFromFile(
       fileHandle = await directoryHandle.getFileHandle(PROGRESS_FILE_NAME);
     } catch (error) {
       // File doesn't exist
-      console.log('[ProgressFileManager] ℹ️ Progress file not found');
+      // console.log('[ProgressFileManager] ℹ️ Progress file not found');
       return null;
     }
 
@@ -126,13 +126,13 @@ export async function loadProgressFromFile(
 
     // Validate version and courseId
     if (fileData.version !== '1.0') {
-      console.warn('[ProgressFileManager] ⚠️ Unsupported file version:', fileData.version);
+      // console.warn('[ProgressFileManager] ⚠️ Unsupported file version:', fileData.version);
       return null;
     }
 
     if (fileData.courseId !== courseId) {
       console.warn(
-        '[ProgressFileManager] ⚠️ Course ID mismatch:',
+        // '[ProgressFileManager] ⚠️ Course ID mismatch:',
         fileData.courseId,
         'vs',
         courseId
@@ -151,10 +151,10 @@ export async function loadProgressFromFile(
       lastWatchedAt: p.lastWatchedAt,
     }));
 
-    console.log(`[ProgressFileManager] ✅ Loaded progress from file: ${progressList.length} items`);
+    // console.log(`[ProgressFileManager] ✅ Loaded progress from file: ${progressList.length} items`);
     return progressList;
   } catch (error) {
-    console.error('[ProgressFileManager] ❌ Failed to load progress from file:', error);
+    // console.error('[ProgressFileManager] ❌ Failed to load progress from file:', error);
     return null;
   }
 }
@@ -168,16 +168,16 @@ export async function deleteProgressFile(
   try {
     const hasAccess = await hasWriteAccess(directoryHandle);
     if (!hasAccess) {
-      console.log('[ProgressFileManager] ℹ️ No write access, cannot delete file');
+      // console.log('[ProgressFileManager] ℹ️ No write access, cannot delete file');
       return false;
     }
 
     await directoryHandle.removeEntry(PROGRESS_FILE_NAME);
-    console.log('[ProgressFileManager] ✅ Deleted progress file');
+    // console.log('[ProgressFileManager] ✅ Deleted progress file');
     return true;
   } catch (error) {
     // File might not exist, that's okay
-    console.log('[ProgressFileManager] ℹ️ Could not delete progress file:', error);
+    // console.log('[ProgressFileManager] ℹ️ Could not delete progress file:', error);
     return false;
   }
 }
@@ -205,16 +205,16 @@ export async function syncProgressFromFileToIndexedDB(
         synced++;
       } catch (error) {
         console.error(
-          `[ProgressFileManager] ⚠️ Failed to sync progress for ${progress.lectureId}:`,
+          // `[ProgressFileManager] ⚠️ Failed to sync progress for ${progress.lectureId}:`,
           error
         );
       }
     }
 
-    console.log(`[ProgressFileManager] ✅ Synced ${synced} progress items from file to IndexedDB`);
+    // console.log(`[ProgressFileManager] ✅ Synced ${synced} progress items from file to IndexedDB`);
     return synced;
   } catch (error) {
-    console.error('[ProgressFileManager] ❌ Failed to sync progress from file:', error);
+    // console.error('[ProgressFileManager] ❌ Failed to sync progress from file:', error);
     return 0;
   }
 }
@@ -231,14 +231,14 @@ export async function syncProgressFromIndexedDBToFile(
   try {
     const progressList = await getCourseProgress(courseId);
     if (progressList.length === 0) {
-      console.log('[ProgressFileManager] ℹ️ No progress to sync');
+      // console.log('[ProgressFileManager] ℹ️ No progress to sync');
       return false;
     }
 
     const success = await saveProgressToFile(directoryHandle, courseId, progressList);
     return success;
   } catch (error) {
-    console.error('[ProgressFileManager] ❌ Failed to sync progress to file:', error);
+    // console.error('[ProgressFileManager] ❌ Failed to sync progress to file:', error);
     return false;
   }
 }

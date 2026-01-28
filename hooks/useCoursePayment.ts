@@ -2,7 +2,12 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { useCourseAPI } from './useCourseAPI';
-// import { useTracking } from './useTracking'; // ❌ REMOVED: Không track purchase khi tạo order
+import {
+  REGULAR_PRICE_PER_COURSE,
+  REGULAR_PRICE_COMBO_5,
+  REGULAR_PRICE_COMBO_10,
+  PREMIUM_PRICE
+} from '@/lib/constants';
 import type { CourseInfo, OrderData } from '@/types';
 
 interface UseCoursePaymentProps {
@@ -17,15 +22,31 @@ interface BankInfo {
   accountName: string;
 }
 
+type PaymentType = 'regular' | 'premium';
+
+/**
+ * Calculate regular pricing with combo discounts
+ */
+const calculateRegularPrice = (courseCount: number): number => {
+  if (courseCount <= 0) return 0;
+  if (courseCount === 10) return REGULAR_PRICE_COMBO_10;
+  if (courseCount >= 5) return REGULAR_PRICE_COMBO_5;
+  return courseCount * REGULAR_PRICE_PER_COURSE;
+};
+
 export function useCoursePayment({ courses, email, onSuccess }: UseCoursePaymentProps) {
   const router = useRouter();
-  const { createOrder, createOrderLoading } = useCourseAPI();
-  // const { trackPurchase } = useTracking(); // ❌ REMOVED: Không track purchase khi tạo order
+  const { createOrder, createOrderLoading, createOrderAllCourses, createOrderAllCoursesLoading } = useCourseAPI();
   const [isPaymentInProgress, setIsPaymentInProgress] = useState(false);
+  const [loadingType, setLoadingType] = useState<PaymentType | null>(null);
   const paymentRequestRef = useRef<boolean>(false);
 
   const successfulCourses = courses.filter(c => c.success);
-  const totalAmount = successfulCourses.reduce((sum, course) => sum + (course.price || 2000), 0);
+  const courseCount = successfulCourses.length;
+
+  // Calculate both pricing options
+  const regularAmount = calculateRegularPrice(courseCount);
+  const premiumAmount = PREMIUM_PRICE;
 
   /**
    * Parse bank info from QR code URL
@@ -58,7 +79,7 @@ export function useCoursePayment({ courses, email, onSuccess }: UseCoursePayment
       items: successfulCourses.map(course => ({
         title: course.title || "Khóa học",
         url: course.url || "",
-        price: course.price || 2000,
+        price: course.price || REGULAR_PRICE_PER_COURSE,
         courseId: course.courseId,
       })),
       status: "Chưa thanh toán",
@@ -70,10 +91,8 @@ export function useCoursePayment({ courses, email, onSuccess }: UseCoursePayment
    * Store order data in localStorage and server cache
    */
   const storeOrderData = async (orderCode: string, orderData: OrderData) => {
-    // Store in localStorage as backup
     localStorage.setItem("orderData", JSON.stringify(orderData));
 
-    // Store order data in server-side cache via API
     try {
       await fetch('/api/orders/store', {
         method: 'POST',
@@ -82,21 +101,18 @@ export function useCoursePayment({ courses, email, onSuccess }: UseCoursePayment
       });
     } catch (err) {
       console.error('Failed to cache order on server:', err);
-      // Non-critical, continue anyway
     }
   };
 
   /**
-   * Handle payment with double-submission prevention
+   * Handle payment with type selection
    */
-  const handlePayment = async () => {
-    // Guard 1: Check if already processing
+  const handlePayment = async (type: PaymentType) => {
     if (isPaymentInProgress || paymentRequestRef.current) {
       toast.warning("Đang xử lý đơn hàng, vui lòng đợi...");
       return;
     }
 
-    // Guard 2: Validate data
     if (successfulCourses.length === 0) {
       toast.error("Không có khóa học hợp lệ để thanh toán");
       return;
@@ -107,112 +123,112 @@ export function useCoursePayment({ courses, email, onSuccess }: UseCoursePayment
       return;
     }
 
-    // Set protection flags IMMEDIATELY
     setIsPaymentInProgress(true);
+    setLoadingType(type);
     paymentRequestRef.current = true;
 
-    // Show loading toast
-    const loadingToast = toast.loading("Đang tạo đơn hàng...", {
-      description: "Vui lòng không đóng trang này",
-    });
+    const loadingToast = toast.loading(
+      type === 'premium' ? "Đang tạo đơn Premium..." : "Đang tạo đơn hàng...",
+      { description: "Vui lòng không đóng trang này" }
+    );
 
     try {
-      // Create order
-      const orderData = await createOrder({
-        email: email.trim(),
-        courses: successfulCourses.map(course => ({
-          url: course.url || "",
-          title: course.title || "Khóa học",
-          courseId: course.courseId,
-          price: course.price || 2000,
-          courseType: course.courseType || 'temporary', // Pass courseType
-          category: course.category || null, // Pass category
-        })),
-      });
+      // Use appropriate API based on payment type
+      const orderData = type === 'premium'
+        ? await createOrderAllCourses({
+          email: email.trim(),
+          courses: successfulCourses.map(course => ({
+            url: course.url || "",
+            title: course.title || "Khóa học",
+            courseId: course.courseId,
+            price: course.price || REGULAR_PRICE_PER_COURSE,
+            courseType: course.courseType || 'temporary',
+            category: course.category || null,
+          })),
+        })
+        : await createOrder({
+          email: email.trim(),
+          courses: successfulCourses.map(course => ({
+            url: course.url || "",
+            title: course.title || "Khóa học",
+            courseId: course.courseId,
+            price: course.price || REGULAR_PRICE_PER_COURSE,
+            courseType: course.courseType || 'temporary',
+            category: course.category || null,
+          })),
+        });
 
-      // Parse bank info from QR URL if not provided
-      const bankInfo = orderData.bankInfo 
-        ? null 
-        : orderData.qrCodeUrl 
+      const bankInfo = orderData.bankInfo
+        ? null
+        : orderData.qrCodeUrl
           ? parseBankInfoFromQR(orderData.qrCodeUrl)
           : null;
 
-      // Prepare full order data
       const fullOrderData = prepareOrderData(orderData, bankInfo);
-
-      // Store order data
       await storeOrderData(orderData.orderCode, fullOrderData);
 
-      // ❌ REMOVED: Track purchase khi tạo order (chưa có tiền)
-      // ✅ Purchase event sẽ được track khi payment confirmed
-      // Xem: app/order/[orderCode]/page.tsx (usePolling.onSuccess)
-      // 
-      // Lý do remove:
-      // - Purchase event chỉ nên track khi ĐÃ NHẬN ĐƯỢC TIỀN
-      // - Khi tạo order, payment status = 'pending' → chưa có tiền
-      // - Tracking ở đây sẽ gây duplicate và sai số conversion
-      // 
-      // Flow đúng:
-      // 1. User tạo order → (Không track Purchase)
-      // 2. User thanh toán → Backend update status = 'paid'
-      // 3. Polling detect status = 'paid' → Track Purchase (app/order/[orderCode]/page.tsx)
+      toast.success(
+        type === 'premium' ? "Tạo đơn Premium thành công!" : "Tạo đơn hàng thành công!",
+        {
+          id: loadingToast,
+          description: `Mã đơn hàng: ${orderData.orderCode}`,
+          duration: 5000,
+        }
+      );
 
-      // Success toast
-      toast.success("Tạo đơn hàng thành công!", {
-        id: loadingToast,
-        description: `Mã đơn hàng: ${orderData.orderCode}`,
-        duration: 5000,
-      });
-
-      // Reset payment flags before navigation
       setIsPaymentInProgress(false);
+      setLoadingType(null);
       paymentRequestRef.current = false;
 
-      // Call success callback or navigate
       if (onSuccess) {
         onSuccess(orderData.orderCode);
       } else {
         router.push(`/order/${orderData.orderCode}`);
       }
-      
+
     } catch (error: any) {
       const errorMessage = error.message || "Có lỗi xảy ra khi tạo đơn hàng";
-      
+
       toast.error("Không thể tạo đơn hàng", {
         id: loadingToast,
         description: errorMessage,
         action: {
           label: "Thử lại",
           onClick: () => {
-            // Reset flags before retry
             setIsPaymentInProgress(false);
+            setLoadingType(null);
             paymentRequestRef.current = false;
-            handlePayment();
+            handlePayment(type);
           },
         },
         duration: 7000,
       });
 
-      // Reset flags on error
       setIsPaymentInProgress(false);
+      setLoadingType(null);
       paymentRequestRef.current = false;
     }
   };
 
-  /**
-   * Reset payment state
-   */
+  const handlePaymentRegular = () => handlePayment('regular');
+  const handlePaymentPremium = () => handlePayment('premium');
+
   const resetPaymentState = () => {
     setIsPaymentInProgress(false);
+    setLoadingType(null);
     paymentRequestRef.current = false;
   };
 
   return {
-    handlePayment,
+    handlePaymentRegular,
+    handlePaymentPremium,
     resetPaymentState,
     isPaymentInProgress,
-    isLoading: isPaymentInProgress || createOrderLoading,
+    isLoading: isPaymentInProgress || createOrderLoading || createOrderAllCoursesLoading,
+    loadingType,
     successfulCourses,
-    totalAmount,
+    courseCount,
+    regularAmount,
+    premiumAmount,
   };
 }

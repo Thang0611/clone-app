@@ -39,9 +39,9 @@ export async function saveDirectoryHandle(
       request.onerror = () => reject(request.error);
     });
 
-    console.log('[DirectoryManager] ✅ Saved handle to IndexedDB:', folderName);
+    // console.log('[DirectoryManager] ✅ Saved handle to IndexedDB:', folderName);
   } catch (error) {
-    console.error('[DirectoryManager] ❌ Failed to save handle:', error);
+    // console.error('[DirectoryManager] ❌ Failed to save handle:', error);
     throw error;
   }
 }
@@ -65,14 +65,14 @@ export async function loadDirectoryHandle(): Promise<DirectoryHandleData | null>
     });
 
     if (data) {
-      console.log('[DirectoryManager] ✅ Loaded handle from IndexedDB:', data.folderName);
+      // console.log('[DirectoryManager] ✅ Loaded handle from IndexedDB:', data.folderName);
     } else {
-      console.log('[DirectoryManager] ℹ️ No cached handle found');
+      // console.log('[DirectoryManager] ℹ️ No cached handle found');
     }
 
     return data;
   } catch (error) {
-    console.error('[DirectoryManager] ❌ Failed to load handle:', error);
+    // console.error('[DirectoryManager] ❌ Failed to load handle:', error);
     return null;
   }
 }
@@ -92,9 +92,9 @@ export async function clearDirectoryHandle(): Promise<void> {
       request.onerror = () => reject(request.error);
     });
 
-    console.log('[DirectoryManager] ✅ Cleared cached handle');
+    // console.log('[DirectoryManager] ✅ Cleared cached handle');
   } catch (error) {
-    console.error('[DirectoryManager] ❌ Failed to clear handle:', error);
+    // console.error('[DirectoryManager] ❌ Failed to clear handle:', error);
     throw error;
   }
 }
@@ -111,7 +111,7 @@ export async function verifyDirectoryHandle(
     const permission = await handle.queryPermission({ mode: 'read' });
     
     if (permission === 'denied') {
-      console.log('[DirectoryManager] ⚠️ Permission denied');
+      // console.log('[DirectoryManager] ⚠️ Permission denied');
       return false;
     }
 
@@ -119,7 +119,7 @@ export async function verifyDirectoryHandle(
     if (permission === 'prompt') {
       const newPermission = await handle.requestPermission({ mode: 'read' });
       if (newPermission !== 'granted') {
-        console.log('[DirectoryManager] ⚠️ Permission not granted');
+        // console.log('[DirectoryManager] ⚠️ Permission not granted');
         return false;
       }
     }
@@ -133,14 +133,14 @@ export async function verifyDirectoryHandle(
       const entries = handle.entries();
       // Chỉ cần check iterator có thể tạo được, không cần iterate hết
       await entries.next();
-      console.log('[DirectoryManager] ✅ Handle verified successfully');
+      // console.log('[DirectoryManager] ✅ Handle verified successfully');
       return true;
     } catch (error) {
-      console.log('[DirectoryManager] ⚠️ Handle invalid (folder may be deleted/moved):', error);
+      // console.log('[DirectoryManager] ⚠️ Handle invalid (folder may be deleted/moved):', error);
       return false;
     }
   } catch (error) {
-    console.error('[DirectoryManager] ❌ Error verifying handle:', error);
+    // console.error('[DirectoryManager] ❌ Error verifying handle:', error);
     return false;
   }
 }
@@ -167,7 +167,7 @@ export async function requestDirectoryAccess(): Promise<{
   if (cached) {
     const isValid = await verifyDirectoryHandle(cached.handle);
     if (isValid) {
-      console.log('[DirectoryManager] ✅ Using cached handle');
+      // console.log('[DirectoryManager] ✅ Using cached handle');
       return {
         handle: cached.handle,
         folderName: cached.folderName,
@@ -175,7 +175,7 @@ export async function requestDirectoryAccess(): Promise<{
       };
     } else {
       // Handle invalid → Clear cache
-      console.log('[DirectoryManager] ⚠️ Cached handle invalid, clearing...');
+      // console.log('[DirectoryManager] ⚠️ Cached handle invalid, clearing...');
       await clearDirectoryHandle();
     }
   }
@@ -194,7 +194,7 @@ export async function requestDirectoryAccess(): Promise<{
     // Thêm vào danh sách folders
     await addFolderToList(handle, folderName);
 
-    console.log('[DirectoryManager] ✅ New folder selected:', folderName);
+    // console.log('[DirectoryManager] ✅ New folder selected:', folderName);
     return {
       handle,
       folderName,
@@ -203,12 +203,12 @@ export async function requestDirectoryAccess(): Promise<{
   } catch (error: any) {
     if (error.name === 'AbortError') {
       // User cancel → Không làm gì
-      console.log('[DirectoryManager] ℹ️ User cancelled folder selection');
+      // console.log('[DirectoryManager] ℹ️ User cancelled folder selection');
       return null;
     }
 
     // Other error → Throw với message thân thiện
-    console.error('[DirectoryManager] ❌ Error selecting folder:', error);
+    // console.error('[DirectoryManager] ❌ Error selecting folder:', error);
     throw new Error(
       `Không thể truy cập folder: ${error.message || 'Lỗi không xác định'}. Vui lòng thử lại.`
     );
@@ -243,7 +243,7 @@ export async function requestNewDirectoryAccess(): Promise<{
     // Thêm vào danh sách folders
     await addFolderToList(handle, folderName);
 
-    console.log('[DirectoryManager] ✅ New folder selected (forced):', folderName);
+    // console.log('[DirectoryManager] ✅ New folder selected (forced):', folderName);
     return {
       handle,
       folderName,
@@ -251,12 +251,12 @@ export async function requestNewDirectoryAccess(): Promise<{
   } catch (error: any) {
     if (error.name === 'AbortError') {
       // User cancel → Không làm gì
-      console.log('[DirectoryManager] ℹ️ User cancelled folder selection');
+      // console.log('[DirectoryManager] ℹ️ User cancelled folder selection');
       return null;
     }
 
     // Other error → Throw với message thân thiện
-    console.error('[DirectoryManager] ❌ Error selecting folder:', error);
+    // console.error('[DirectoryManager] ❌ Error selecting folder:', error);
     throw new Error(
       `Không thể truy cập folder: ${error.message || 'Lỗi không xác định'}. Vui lòng thử lại.`
     );
@@ -312,12 +312,12 @@ export async function addFolderToList(
         request.onerror = () => reject(request.error);
       });
 
-      console.log('[DirectoryManager] ✅ Added folder to list:', folderName);
+      // console.log('[DirectoryManager] ✅ Added folder to list:', folderName);
     } else {
-      console.log('[DirectoryManager] ℹ️ Folder already exists in list:', folderName);
+      // console.log('[DirectoryManager] ℹ️ Folder already exists in list:', folderName);
     }
   } catch (error) {
-    console.error('[DirectoryManager] ❌ Failed to add folder to list:', error);
+    // console.error('[DirectoryManager] ❌ Failed to add folder to list:', error);
     throw error;
   }
 }
@@ -349,7 +349,7 @@ export async function getAllFolders(): Promise<DirectoryHandleData[]> {
           validFolders.push(folder);
         }
       } catch (error) {
-        console.log('[DirectoryManager] ⚠️ Folder invalid, skipping:', folder.folderName);
+        // console.log('[DirectoryManager] ⚠️ Folder invalid, skipping:', folder.folderName);
       }
     }
 
@@ -367,7 +367,7 @@ export async function getAllFolders(): Promise<DirectoryHandleData[]> {
 
     return validFolders;
   } catch (error) {
-    console.error('[DirectoryManager] ❌ Failed to load folders list:', error);
+    // console.error('[DirectoryManager] ❌ Failed to load folders list:', error);
     return [];
   }
 }
@@ -401,9 +401,9 @@ export async function removeFolderFromList(folderName: string): Promise<void> {
       request.onerror = () => reject(request.error);
     });
 
-    console.log('[DirectoryManager] ✅ Removed folder from list:', folderName);
+    // console.log('[DirectoryManager] ✅ Removed folder from list:', folderName);
   } catch (error) {
-    console.error('[DirectoryManager] ❌ Failed to remove folder from list:', error);
+    // console.error('[DirectoryManager] ❌ Failed to remove folder from list:', error);
     throw error;
   }
 }

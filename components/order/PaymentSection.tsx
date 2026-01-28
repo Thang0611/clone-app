@@ -43,8 +43,8 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
                 📧 Liên hệ support
               </Button>
               <p className="text-sm text-slate-600">
-                Email: getcourses.net@gmail.com<br/>
-                Zalo: 0986 787 542
+                Email: getcourses.net@gmail.com<br />
+                Zalo: 0986 487 542
               </p>
             </div>
           </div>
@@ -63,7 +63,7 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
               <QrCode className="w-5 h-5 sm:w-6 sm:h-6" />
               <span>Thông tin chuyển khoản</span>
             </h2>
-          
+
             <div className="space-y-2 sm:space-y-3">
               {/* Bank Name */}
               <div className="bg-slate-50 p-3 sm:p-4 rounded-lg">
@@ -72,9 +72,9 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
                   {orderData.bankInfo?.bankName || "..."}
                 </p>
               </div>
-              
+
               {/* Account Number */}
-              <div 
+              <div
                 className="bg-slate-50 p-3 sm:p-4 rounded-lg cursor-pointer hover:bg-slate-100 active:scale-[0.99] transition-all group"
                 onClick={() => handleCopy(orderData.bankInfo?.accountNo || "", "số tài khoản")}
               >
@@ -96,9 +96,9 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
                   {orderData.bankInfo?.accountName || "..."}
                 </p>
               </div>
-              
+
               {/* Order Code */}
-              <div 
+              <div
                 className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 p-3 sm:p-4 rounded-lg cursor-pointer hover:shadow-md active:scale-[0.99] transition-all group"
                 onClick={() => handleCopy(orderData.orderCode, "nội dung chuyển khoản")}
               >
@@ -115,7 +115,7 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
                   * Click để copy - Nhập chính xác
                 </p>
               </div>
-              
+
               {/* Amount */}
               <div className="bg-slate-50 p-3 sm:p-4 rounded-lg">
                 <p className="text-xs sm:text-sm text-slate-500 mb-1">Số tiền</p>
@@ -131,12 +131,12 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
             <p className="text-sm sm:text-base text-slate-700 mb-3 sm:mb-4 font-semibold text-center">
               Quét mã để thanh toán tự động
             </p>
-            
+
             <div className="bg-white p-2 sm:p-3 rounded-xl shadow-lg w-full max-w-[280px]">
               {orderData.qrCodeUrl ? (
-                <img 
-                  src={orderData.qrCodeUrl} 
-                  alt="QR Payment" 
+                <img
+                  src={orderData.qrCodeUrl}
+                  alt="QR Payment"
                   className="w-full h-auto object-contain"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -149,7 +149,7 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
                 </div>
               )}
             </div>
-            
+
             <p className="text-xs sm:text-sm text-slate-600 mt-3 sm:mt-4 text-center px-2">
               Dùng App ngân hàng/Ví điện tử để quét
             </p>

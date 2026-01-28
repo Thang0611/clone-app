@@ -20,26 +20,30 @@ interface CourseModalProps {
   email?: string;
 }
 
-export default function CourseModal({ 
-  isOpen, 
-  onClose, 
-  courses, 
-  isLoading, 
-  email 
+export default function CourseModal({
+  isOpen,
+  onClose,
+  courses,
+  isLoading,
+  email
 }: CourseModalProps) {
   const router = useRouter();
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
   // const { trackCheckout } = useTracking(); // ❌ REMOVED: Không track InitiateCheckout trong modal nữa
   // const checkoutTracked = useRef(false); // ❌ REMOVED: Không cần nữa
-  
+
   // Payment logic
   const {
-    handlePayment,
+    handlePaymentRegular,
+    handlePaymentPremium,
     resetPaymentState,
     isPaymentInProgress,
     isLoading: paymentLoading,
+    loadingType,
     successfulCourses,
-    totalAmount,
+    courseCount,
+    regularAmount,
+    premiumAmount,
   } = useCoursePayment({
     courses,
     email,
@@ -96,7 +100,7 @@ export default function CourseModal({
   // Reset image errors when courses change
   useEffect(() => {
     setImageErrors(new Set());
-    
+
     // Check scroll position after courses load
     if (courses.length > 0) {
       setTimeout(checkScrollPosition, 100);
@@ -108,7 +112,7 @@ export default function CourseModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden animate-in slide-in-from-bottom-4 duration-300 flex flex-col">
-        
+
         {/* Header */}
         <CourseModalHeader
           successfulCount={successfulCourses.length}
@@ -148,9 +152,13 @@ export default function CourseModal({
         {/* Footer - Payment Section */}
         {successfulCourses.length > 0 && !isLoading && (
           <PaymentFooter
-            totalAmount={totalAmount}
-            onPayment={handlePayment}
+            regularAmount={regularAmount}
+            premiumAmount={premiumAmount}
+            courseCount={courseCount}
+            onPaymentRegular={handlePaymentRegular}
+            onPaymentPremium={handlePaymentPremium}
             isLoading={paymentLoading}
+            loadingType={loadingType}
           />
         )}
       </div>
