@@ -3881,3 +3881,295 @@
 2026-01-28 17:12:16 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
 2026-01-28 17:12:16 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
 2026-01-28 17:12:16 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-28 17:17:13 +07:00: ▲ Next.js 16.1.1
+2026-01-28 17:17:13 +07:00: - Local:         http://localhost:4000
+2026-01-28 17:17:13 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-28 17:17:13 +07:00: 
+2026-01-28 17:17:13 +07:00: ✓ Starting...
+2026-01-28 17:17:14 +07:00: ✓ Ready in 1405ms
+2026-01-28 17:17:14 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-28 17:17:14 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-28 17:17:14 +07:00: [AUTH CONFIG] File exists: true
+2026-01-28 17:17:14 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-28 17:17:14 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-28 17:17:14 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-28 17:17:14 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-28 17:39:39 +07:00: ▲ Next.js 16.1.1
+2026-01-28 17:39:39 +07:00: - Local:         http://localhost:4000
+2026-01-28 17:39:39 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-28 17:39:39 +07:00: 
+2026-01-28 17:39:39 +07:00: ✓ Starting...
+2026-01-28 17:39:41 +07:00: ✓ Ready in 1378ms
+2026-01-28 17:39:41 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-28 17:39:41 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-28 17:39:41 +07:00: [AUTH CONFIG] File exists: true
+2026-01-28 17:39:41 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-28 17:39:41 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-28 17:39:41 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-28 17:39:41 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-28 17:55:44 +07:00: ▲ Next.js 16.1.1
+2026-01-28 17:55:44 +07:00: - Local:         http://localhost:4000
+2026-01-28 17:55:44 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-28 17:55:44 +07:00: 
+2026-01-28 17:55:44 +07:00: ✓ Starting...
+2026-01-28 17:55:45 +07:00: ✓ Ready in 924ms
+2026-01-28 17:55:45 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-01-28 17:55:45 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-01-28 17:55:45 +07:00: [AUTH CONFIG] File exists: true
+2026-01-28 17:55:45 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-01-28 17:55:45 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-01-28 17:55:45 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-01-28 17:55:45 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-01-29 10:42:39 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-react-typescript-portfolio
+2026-01-29 10:42:39 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-01-29 10:42:39 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/hoidanit-react-typescript-portfolio/curriculum
+2026-01-29 10:42:39 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-01-30 11:56:11 +07:00: [AUTH] Authorize called with email: getcourses.net@gmail.com
+2026-01-30 11:56:11 +07:00: Debug Env: Loaded
+2026-01-30 11:56:11 +07:00: adminPasswordHash $2b$10$v9SiBR5o6x3cNTltrpnzoe3ol1I15L6JO8PQ3pe3keAYjRNoQjSPu
+2026-01-30 11:56:11 +07:00: adminPasswordPlain undefined
+2026-01-30 11:56:11 +07:00: ✅ [AUTH] Email matches, checking password...
+2026-01-30 11:56:11 +07:00: 🔍 [AUTH] Using bcrypt comparison
+2026-01-30 11:56:12 +07:00:    bcrypt.compare result: true
+2026-01-30 11:56:12 +07:00: ✅ [AUTH] Password is valid! Returning user object...
+2026-01-30 11:56:12 +07:00: [AUTH] User validated successfully: getcourses.net@gmail.com
+2026-01-30 11:58:13 +07:00: [Retry Download] Calling backend: https://api.getcourses.net/api/admin/orders/129/retry-download
+2026-01-30 14:29:49 +07:00: [Retry Download] Calling backend: https://api.getcourses.net/api/admin/orders/129/retry-download
+2026-01-30 15:37:39 +07:00: [Retry Download] Calling backend: https://api.getcourses.net/api/admin/orders/107/retry-download
+2026-01-30 15:42:03 +07:00: [Retry Download] Calling backend: https://api.getcourses.net/api/admin/orders/107/retry-download
+2026-01-30 15:57:21 +07:00: [Retry Download] Calling backend: https://api.getcourses.net/api/admin/orders/107/retry-download
+2026-01-30 15:58:09 +07:00: [Retry Download] Calling backend: https://api.getcourses.net/api/admin/orders/107/retry-download
+2026-01-30 15:58:35 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:35 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:35 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:35 +07:00: 
+2026-01-30 15:58:35 +07:00: ✓ Starting...
+2026-01-30 15:58:37 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:37 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:37 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:37 +07:00: 
+2026-01-30 15:58:37 +07:00: ✓ Starting...
+2026-01-30 15:58:38 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:38 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:38 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:38 +07:00: 
+2026-01-30 15:58:38 +07:00: ✓ Starting...
+2026-01-30 15:58:39 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:39 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:39 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:39 +07:00: 
+2026-01-30 15:58:39 +07:00: ✓ Starting...
+2026-01-30 15:58:42 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:42 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:42 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:42 +07:00: 
+2026-01-30 15:58:42 +07:00: ✓ Starting...
+2026-01-30 15:58:44 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:44 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:44 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:44 +07:00: 
+2026-01-30 15:58:44 +07:00: ✓ Starting...
+2026-01-30 15:58:46 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:46 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:46 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:46 +07:00: 
+2026-01-30 15:58:46 +07:00: ✓ Starting...
+2026-01-30 15:58:49 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:49 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:49 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:49 +07:00: 
+2026-01-30 15:58:49 +07:00: ✓ Starting...
+2026-01-30 15:58:51 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:51 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:51 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:51 +07:00: 
+2026-01-30 15:58:51 +07:00: ✓ Starting...
+2026-01-30 15:58:52 +07:00: ▲ Next.js 16.1.1
+2026-01-30 15:58:52 +07:00: - Local:         http://localhost:4000
+2026-01-30 15:58:52 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 15:58:52 +07:00: 
+2026-01-30 15:58:52 +07:00: ✓ Starting...
+2026-01-30 18:40:35 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:35 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:35 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:35 +07:00: 
+2026-01-30 18:40:35 +07:00: ✓ Starting...
+2026-01-30 18:40:36 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:36 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:36 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:36 +07:00: 
+2026-01-30 18:40:36 +07:00: ✓ Starting...
+2026-01-30 18:40:37 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:37 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:37 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:37 +07:00: 
+2026-01-30 18:40:37 +07:00: ✓ Starting...
+2026-01-30 18:40:38 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:38 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:38 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:38 +07:00: 
+2026-01-30 18:40:38 +07:00: ✓ Starting...
+2026-01-30 18:40:38 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:38 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:38 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:38 +07:00: 
+2026-01-30 18:40:38 +07:00: ✓ Starting...
+2026-01-30 18:40:39 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:39 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:39 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:39 +07:00: 
+2026-01-30 18:40:39 +07:00: ✓ Starting...
+2026-01-30 18:40:40 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:40 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:40 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:40 +07:00: 
+2026-01-30 18:40:40 +07:00: ✓ Starting...
+2026-01-30 18:40:41 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:41 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:41 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:41 +07:00: 
+2026-01-30 18:40:41 +07:00: ✓ Starting...
+2026-01-30 18:40:42 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:42 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:42 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:42 +07:00: 
+2026-01-30 18:40:42 +07:00: ✓ Starting...
+2026-01-30 18:40:43 +07:00: ▲ Next.js 16.1.1
+2026-01-30 18:40:43 +07:00: - Local:         http://localhost:4000
+2026-01-30 18:40:43 +07:00: - Network:       http://103.178.234.132:4000
+2026-01-30 18:40:43 +07:00: 
+2026-01-30 18:40:43 +07:00: ✓ Starting...
+2026-02-01 11:10:17 +07:00: ▲ Next.js 16.1.1
+2026-02-01 11:10:17 +07:00: - Local:         http://localhost:4000
+2026-02-01 11:10:17 +07:00: - Network:       http://103.178.234.132:4000
+2026-02-01 11:10:17 +07:00: 
+2026-02-01 11:10:17 +07:00: ✓ Starting...
+2026-02-01 11:10:18 +07:00: ✓ Ready in 886ms
+2026-02-01 11:10:18 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-02-01 11:10:18 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-02-01 11:10:18 +07:00: [AUTH CONFIG] File exists: true
+2026-02-01 11:10:18 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-02-01 11:10:18 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-02-01 11:10:18 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-02-01 11:10:18 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-02-01 11:10:42 +07:00: [AUTH] User synced to backend: 1
+2026-02-01 11:14:44 +07:00: ▲ Next.js 16.1.1
+2026-02-01 11:14:44 +07:00: - Local:         http://localhost:4000
+2026-02-01 11:14:44 +07:00: - Network:       http://103.178.234.132:4000
+2026-02-01 11:14:44 +07:00: 
+2026-02-01 11:14:44 +07:00: ✓ Starting...
+2026-02-01 11:14:44 +07:00: ✓ Ready in 904ms
+2026-02-01 11:14:44 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-02-01 11:14:44 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-02-01 11:14:44 +07:00: [AUTH CONFIG] File exists: true
+2026-02-01 11:14:44 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-02-01 11:14:44 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-02-01 11:14:44 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-02-01 11:14:44 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-02-01 11:15:38 +07:00: [AUTH] User synced to backend: 2
+2026-02-01 11:15:45 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation/curriculum
+2026-02-01 11:15:45 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:15:45 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation
+2026-02-01 11:15:45 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:27:00 +07:00: ▲ Next.js 16.1.1
+2026-02-01 11:27:00 +07:00: - Local:         http://localhost:4000
+2026-02-01 11:27:00 +07:00: - Network:       http://103.178.234.132:4000
+2026-02-01 11:27:00 +07:00: 
+2026-02-01 11:27:00 +07:00: ✓ Starting...
+2026-02-01 11:27:01 +07:00: ✓ Ready in 870ms
+2026-02-01 11:27:01 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-02-01 11:27:01 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-02-01 11:27:01 +07:00: [AUTH CONFIG] File exists: true
+2026-02-01 11:27:01 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-02-01 11:27:01 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-02-01 11:27:01 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-02-01 11:27:01 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-02-01 11:27:23 +07:00: ▲ Next.js 16.1.1
+2026-02-01 11:27:23 +07:00: - Local:         http://localhost:4000
+2026-02-01 11:27:23 +07:00: - Network:       http://103.178.234.132:4000
+2026-02-01 11:27:23 +07:00: 
+2026-02-01 11:27:23 +07:00: ✓ Starting...
+2026-02-01 11:27:23 +07:00: ✓ Ready in 675ms
+2026-02-01 11:27:23 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-02-01 11:27:23 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-02-01 11:27:23 +07:00: [AUTH CONFIG] File exists: true
+2026-02-01 11:27:23 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-02-01 11:27:23 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-02-01 11:27:23 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-02-01 11:27:23 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-02-01 11:27:44 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation
+2026-02-01 11:27:44 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:27:44 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation/curriculum
+2026-02-01 11:27:44 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:41:50 +07:00: ▲ Next.js 16.1.1
+2026-02-01 11:41:50 +07:00: - Local:         http://localhost:4000
+2026-02-01 11:41:50 +07:00: - Network:       http://103.178.234.132:4000
+2026-02-01 11:41:50 +07:00: 
+2026-02-01 11:41:50 +07:00: ✓ Starting...
+2026-02-01 11:41:51 +07:00: ✓ Ready in 1663ms
+2026-02-01 11:41:52 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-02-01 11:41:52 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-02-01 11:41:52 +07:00: [AUTH CONFIG] File exists: true
+2026-02-01 11:41:52 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-02-01 11:41:52 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-02-01 11:41:52 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-02-01 11:41:52 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-02-01 11:42:03 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation
+2026-02-01 11:42:03 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:42:03 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation/curriculum
+2026-02-01 11:42:03 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:42:10 +07:00: [AUTH] User synced to backend: 2
+2026-02-01 11:42:11 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation
+2026-02-01 11:42:11 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:42:11 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation/curriculum
+2026-02-01 11:42:11 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:42:26 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation
+2026-02-01 11:42:26 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:42:26 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation/curriculum
+2026-02-01 11:42:26 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:48:46 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation
+2026-02-01 11:48:46 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:48:46 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation/curriculum
+2026-02-01 11:48:46 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:49:28 +07:00: [AUTH] User synced to backend: 4
+2026-02-01 11:49:34 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation
+2026-02-01 11:49:34 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:49:34 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation/curriculum
+2026-02-01 11:49:34 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:50:54 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation
+2026-02-01 11:50:54 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 11:50:54 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation/curriculum
+2026-02-01 11:50:54 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-01 12:12:41 +07:00: ▲ Next.js 16.1.1
+2026-02-01 12:12:41 +07:00: - Local:         http://localhost:4000
+2026-02-01 12:12:41 +07:00: - Network:       http://103.178.234.132:4000
+2026-02-01 12:12:41 +07:00: 
+2026-02-01 12:12:41 +07:00: ✓ Starting...
+2026-02-01 12:12:42 +07:00: ✓ Ready in 1476ms
+2026-02-01 12:12:43 +07:00: [AUTH CONFIG] Loading environment from: /root/project/clone-app/.env.production
+2026-02-01 12:12:43 +07:00: [AUTH CONFIG] NODE_ENV: production
+2026-02-01 12:12:43 +07:00: [AUTH CONFIG] File exists: true
+2026-02-01 12:12:43 +07:00: [AUTH CONFIG] Loaded 1 environment variables from .env.production
+2026-02-01 12:12:43 +07:00: [AUTH CONFIG] ADMIN_PASSWORD_HASH: Loaded (60 chars)
+2026-02-01 12:12:43 +07:00: [AUTH CONFIG] NEXTAUTH_SECRET: Loaded (44 chars)
+2026-02-01 12:12:43 +07:00: [AUTH ROUTE] Loaded 0 environment variables from .env.production
+2026-02-01 12:14:30 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation
+2026-02-01 12:14:30 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 12:14:30 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/linkedin-marketing-lead-generation/curriculum
+2026-02-01 12:14:30 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-01 12:44:50 +07:00: [AUTH] User synced to backend: 4
+2026-02-01 12:45:21 +07:00: [AUTH] User synced to backend: 4
+2026-02-01 12:47:06 +07:00: [Course API] Proxying to backend: https://api.getcourses.net/api/courses/youtube-masterclass
+2026-02-01 12:47:06 +07:00: [Course API] Server URL from env: https://api.getcourses.net
+2026-02-01 12:47:06 +07:00: [Curriculum API] Proxying to backend: https://api.getcourses.net/api/courses/youtube-masterclass/curriculum
+2026-02-01 12:47:06 +07:00: [Curriculum API] Server URL from env: https://api.getcourses.net
+2026-02-03 10:14:48 +07:00: [AUTH] User synced to backend: 5
+2026-02-03 14:06:44 +07:00: [AUTH] Authorize called with email: getcourses.net@gmail.com
+2026-02-03 14:06:44 +07:00: Debug Env: Loaded
+2026-02-03 14:06:44 +07:00: adminPasswordHash $2b$10$v9SiBR5o6x3cNTltrpnzoe3ol1I15L6JO8PQ3pe3keAYjRNoQjSPu
+2026-02-03 14:06:44 +07:00: adminPasswordPlain undefined
+2026-02-03 14:06:44 +07:00: ✅ [AUTH] Email matches, checking password...
+2026-02-03 14:06:44 +07:00: 🔍 [AUTH] Using bcrypt comparison
+2026-02-03 14:06:44 +07:00:    bcrypt.compare result: true
+2026-02-03 14:06:44 +07:00: ✅ [AUTH] Password is valid! Returning user object...
+2026-02-03 14:06:44 +07:00: [AUTH] User validated successfully: getcourses.net@gmail.com

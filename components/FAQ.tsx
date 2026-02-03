@@ -14,7 +14,7 @@ const FAQ_DATA = [
   {
     id: 1,
     question: "Giá khoá học là bao nhiêu?",
-    answer: "1 khoá Udemy = 50k, Coursera = 50k, LinkedIn Learning = 50k nhé bạn",
+    answer: "Regular: 39k/khóa (5 khóa 99k, 10 khóa 199k). Premium: 199k + truy cập kho",
   },
   {
     id: 2,
@@ -23,20 +23,20 @@ const FAQ_DATA = [
   },
   {
     id: 3,
-    question: "Có được Update khi khóa học cập nhật thêm không?",
-    answer: "Có. Mình có cập nhật MIỄN PHÍ cho các bạn",
+    question: "Có được Update khi khóa học cập nhật?",
+    answer: "Có. Cập nhật MIỄN PHÍ cho các bạn",
   },
   {
     id: 4,
-    question: "Thanh toán xong bao lâu nhận được khoá học?",
+    question: "Thanh toán xong bao lâu nhận được?",
     answer: "Thời gian giao hàng khoảng 2-4 tiếng. Khoá nào nặng có thể lâu hơn",
   },
   {
     id: 5,
-    question: "Cách dùng phụ đề rời như thể nào? Theo dõi quá trình học như chính chủ Udemy thế nào?",
+    question: "Cách dùng phụ đề rời?",
     answer: (
       <>
-        Hướng dẫn dùng phụ đề rời và theo dõi tiến độ học: <a href="https://youtu.be/YA5jUsf4O2g?si=Yh6XkL46VKj0POFe" target="/learn" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Tại đây</a>
+        Hướng dẫn: <a href="https://youtu.be/YA5jUsf4O2g?si=Yh6XkL46VKj0POFe" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline font-semibold">Xem tại đây</a>
       </>
     ),
   },
@@ -47,24 +47,24 @@ function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
     <div className="border-b border-slate-200 last:border-b-0">
       <button
         onClick={onClick}
-        className="w-full py-6 px-4 sm:px-6 flex items-center justify-between text-left hover:bg-slate-50 transition-colors duration-200 group"
+        className="w-full py-3 sm:py-4 px-3 sm:px-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors duration-200 group"
         aria-expanded={isOpen}
       >
-        <h3 className="text-lg sm:text-xl font-semibold text-slate-900 pr-4 flex-1">
+        <h3 className="text-sm sm:text-base font-medium text-slate-900 pr-2 flex-1">
           {question}
         </h3>
         <ChevronDown
-          className={`w-5 h-5 text-slate-500 flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+          className={`w-4 h-4 text-slate-400 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
             } group-hover:text-indigo-600`}
           strokeWidth={2}
         />
       </button>
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        className={`overflow-hidden transition-all duration-200 ${isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
           }`}
       >
-        <div className="px-4 sm:px-6 pb-6">
-          <div className="text-base text-slate-600 leading-relaxed">
+        <div className="px-3 sm:px-4 pb-3">
+          <div className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             {answer}
           </div>
         </div>
@@ -81,16 +81,16 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-100">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 text-center">
+    <section className="py-8 sm:py-12 px-3 sm:px-4 bg-slate-100">
+      <div className="max-w-2xl mx-auto">
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 text-center">
           CÂU HỎI THƯỜNG GẶP
         </h2>
-        <p className="text-xl text-slate-600 mb-16 text-center">
-          Các câu hỏi thường gặp khi mua khoá học tại GetCourses
+        <p className="text-xs sm:text-sm text-slate-600 mb-6 text-center">
+          Các câu hỏi thường gặp khi mua khoá học
         </p>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
           {FAQ_DATA.map((item, index) => (
             <FAQItem
               key={item.id}

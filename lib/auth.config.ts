@@ -9,16 +9,16 @@ if (typeof process !== 'undefined') {
   try {
     const fs = require('fs');
     const path = require('path');
-    
+
     // Try to load .env file (for development) or .env.production (for production)
     const nodeEnv = process.env.NODE_ENV || 'development';
     const envFileName = nodeEnv === 'production' ? '.env.production' : '.env';
     const envPath = path.join(process.cwd(), envFileName);
-    
+
     console.log('[AUTH CONFIG] Loading environment from:', envPath);
     console.log('[AUTH CONFIG] NODE_ENV:', nodeEnv);
     console.log('[AUTH CONFIG] File exists:', fs.existsSync(envPath));
-    
+
     if (fs.existsSync(envPath)) {
       const envContent = fs.readFileSync(envPath, 'utf8');
       let loadedCount = 0;
@@ -48,10 +48,8 @@ if (typeof process !== 'undefined') {
   }
 }
 
-// NextAuth v4 types - importing NextAuthOptions
-// Will work correctly after installing next-auth v4
-// Using any type temporarily during migration
-type NextAuthOptions = any;
+// NextAuth v4 types
+import type { NextAuthOptions } from 'next-auth';
 
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
@@ -66,19 +64,19 @@ async function validateAdminCredentials(
   password: string
 ): Promise<{ id: string; email: string; role: string; name: string } | null> {
   const isDev = process.env.NODE_ENV === 'development';
-  
+
   // Debug log for environment variable loading
   console.log("Debug Env:", process.env.ADMIN_PASSWORD_HASH ? "Loaded" : "Missing");
-  
+
   if (isDev) {
     console.log('🔍 [AUTH DEBUG] validateAdminCredentials called');
     console.log('   Email received:', JSON.stringify(email));
     console.log('   Password length:', password.length);
   }
-  
+
   // Get admin credentials from environment variables
   const adminEmail = process.env.ADMIN_EMAIL;
-  
+
   // Support both hashed and plain text (for migration)
   const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
   const adminPasswordPlain = process.env.ADMIN_PASSWORD;
@@ -110,13 +108,13 @@ async function validateAdminCredentials(
   // Normalize emails (trim, lowercase) for comparison
   const normalizedEmail = email.trim().toLowerCase();
   const normalizedAdminEmail = adminEmail.trim().toLowerCase();
-  
+
   if (isDev) {
     console.log('   Normalized email entered:', JSON.stringify(normalizedEmail));
     console.log('   Normalized email expected:', JSON.stringify(normalizedAdminEmail));
     console.log('   Email match:', normalizedEmail === normalizedAdminEmail);
   }
-  
+
   if (normalizedEmail !== normalizedAdminEmail) {
     console.log('❌ [AUTH ERROR] Email mismatch');
     console.log('   Entered:', JSON.stringify(email));
@@ -125,7 +123,7 @@ async function validateAdminCredentials(
     console.log('   Normalized expected:', JSON.stringify(normalizedAdminEmail));
     return null; // Email mismatch, don't reveal which field is wrong
   }
-  
+
   console.log('✅ [AUTH] Email matches, checking password...');
 
   // Validate password - prefer hashed over plain text
@@ -137,7 +135,7 @@ async function validateAdminCredentials(
     try {
       passwordValid = await bcrypt.compare(password, adminPasswordHash);
       console.log('   bcrypt.compare result:', passwordValid);
-      
+
       if (!passwordValid) {
         console.log('❌ [AUTH ERROR] Password comparison failed');
         console.log('   Hash length:', adminPasswordHash.length);
@@ -157,7 +155,7 @@ async function validateAdminCredentials(
     }
     passwordValid = password === adminPasswordPlain;
     console.log('   Plain text comparison result:', passwordValid);
-    
+
     if (!passwordValid) {
       console.log('❌ [AUTH ERROR] Plain text password comparison failed');
     }
@@ -177,9 +175,67 @@ async function validateAdminCredentials(
   return null;
 }
 
+/**
+ * Sync user to backend after OAuth login
+ * Creates or updates user in the backend database
+ */
+async function syncUserToBackend(user: { email: string; name?: string; image?: string; googleId?: string }) {
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+    const response = await fetch(`${apiUrl}/api/v1/users/sync`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: user.email,
+        google_id: user.googleId,
+        name: user.name,
+        avatar_url: user.image
+      })
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('[AUTH] User synced to backend:', data.user?.id);
+      return data.user;
+    } else {
+      console.error('[AUTH] Failed to sync user to backend:', response.status);
+      return null;
+    }
+  } catch (error) {
+    console.error('[AUTH] Error syncing user to backend:', error);
+    return null;
+  }
+}
+
+// Import Google provider
+import GoogleProvider from 'next-auth/providers/google';
+
+// Validate Google OAuth credentials
+const googleClientId = process.env.GOOGLE_CLIENT_ID;
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+if (!googleClientId || !googleClientSecret) {
+  console.warn('[AUTH CONFIG] ⚠️ GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET not set. Google OAuth will not work.');
+}
+
 // NextAuth v4 configuration
 export const authOptions: NextAuthOptions = {
   providers: [
+    // Google OAuth provider for regular users (only add if credentials exist)
+    ...(googleClientId && googleClientSecret ? [
+      GoogleProvider({
+        clientId: googleClientId,
+        clientSecret: googleClientSecret,
+        authorization: {
+          params: {
+            prompt: 'consent',
+            access_type: 'offline',
+            response_type: 'code'
+          }
+        }
+      })
+    ] : []),
+    // Credentials provider for admin login
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -220,23 +276,48 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: '/admin/login',
-    error: '/admin/login',
+    signIn: '/login', // User login page (Google OAuth)
+    error: '/login',
   },
   callbacks: {
-    async jwt({ token, user }: any) {
+    async jwt({ token, user, account }: any) {
       // Initial sign in
       if (user) {
         token.id = user.id;
-        token.role = (user as any).role;
         token.email = user.email;
+        token.name = user.name;
+        token.picture = user.image;
+
+        // Determine role based on provider
+        if (account?.provider === 'google') {
+          token.role = 'user';
+          token.googleId = account.providerAccountId;
+
+          // Sync Google user to backend
+          const backendUser = await syncUserToBackend({
+            email: user.email,
+            name: user.name,
+            image: user.image,
+            googleId: account.providerAccountId
+          });
+
+          if (backendUser) {
+            token.backendUserId = backendUser.id;
+            token.isPremium = backendUser.is_premium;
+          }
+        } else if (account?.provider === 'credentials') {
+          token.role = (user as any).role || 'admin';
+        }
       }
       return token;
     },
     async session({ session, token }: any) {
       if (session.user) {
         session.user.id = token.id as string;
+        session.user.backendUserId = token.backendUserId as number;
         (session.user as any).role = token.role as string;
+        (session.user as any).googleId = token.googleId as string;
+        (session.user as any).isPremium = token.isPremium as boolean;
         (session as any).accessToken = token.accessToken as string;
       }
       return session;

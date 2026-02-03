@@ -24,17 +24,17 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
   // Check if payment info is available
   if (!orderData.qrCodeUrl && !orderData.bankInfo) {
     return (
-      <Card className="mb-8 border-2 border-amber-200 bg-amber-50">
-        <CardBody className="p-6 sm:p-8">
+      <Card className="mb-6 border-2 border-amber-200 bg-amber-50">
+        <CardBody className="p-4 sm:p-6">
           <div className="text-center">
-            <AlertCircle className="w-16 h-16 text-amber-600 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-slate-900 mb-3">
+            <AlertCircle className="w-12 h-12 text-amber-600 mx-auto mb-3" />
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">
               Thông tin thanh toán không khả dụng
             </h2>
-            <p className="text-lg text-slate-700 mb-6">
+            <p className="text-sm text-slate-700 mb-4">
               Đơn hàng này không có thông tin thanh toán. Vui lòng liên hệ support để được hỗ trợ.
             </p>
-            <div className="space-y-3">
+            <div className="space-y-2">
               <Button
                 size="lg"
                 className="w-full"
@@ -42,7 +42,7 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
               >
                 📧 Liên hệ support
               </Button>
-              <p className="text-sm text-slate-600">
+              <p className="text-xs text-slate-600">
                 Email: getcourses.net@gmail.com<br />
                 Zalo: 0986 487 542
               </p>
@@ -54,13 +54,13 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
   }
 
   return (
-    <Card className="mb-8 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <CardBody className="p-4 sm:p-6 md:p-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
+    <Card className="mb-6 overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <CardBody className="p-4 sm:p-5 md:p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
           {/* Bank Info */}
-          <div className="space-y-3 sm:space-y-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-4 sm:mb-6 flex items-center gap-2">
-              <QrCode className="w-5 h-5 sm:w-6 sm:h-6" />
+          <div className="space-y-2 sm:space-y-3">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-800 mb-3 sm:mb-4 flex items-center gap-2">
+              <QrCode className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Thông tin chuyển khoản</span>
             </h2>
 
@@ -119,7 +119,7 @@ export function PaymentSection({ orderData, isPolling }: PaymentSectionProps) {
               {/* Amount */}
               <div className="bg-slate-50 p-3 sm:p-4 rounded-lg">
                 <p className="text-xs sm:text-sm text-slate-500 mb-1">Số tiền</p>
-                <p className="text-2xl sm:text-3xl font-bold text-green-600">
+                <p className="text-xl sm:text-2xl font-bold text-green-600">
                   {formatCurrency(orderData.totalAmount)}
                 </p>
               </div>

@@ -34,7 +34,7 @@ Card.displayName = 'Card';
 export function CardHeader({ children, className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('px-6 py-4 border-b border-slate-200', className)}
+      className={cn('px-4 py-3 border-b border-slate-200', className)}
       {...props}
     >
       {children}
@@ -44,7 +44,7 @@ export function CardHeader({ children, className, ...props }: HTMLAttributes<HTM
 
 export function CardBody({ children, className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('p-6', className)} {...props}>
+    <div className={cn('p-4', className)} {...props}>
       {children}
     </div>
   );
@@ -53,7 +53,7 @@ export function CardBody({ children, className, ...props }: HTMLAttributes<HTMLD
 export function CardFooter({ children, className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('px-6 py-4 border-t border-slate-200', className)}
+      className={cn('px-4 py-3 border-t border-slate-200', className)}
       {...props}
     >
       {children}

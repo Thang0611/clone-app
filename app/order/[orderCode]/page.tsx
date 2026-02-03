@@ -26,7 +26,7 @@ function OrderPageContent() {
   const router = useRouter();
   const orderCode = params.orderCode as string;
   const { trackPurchase, trackCheckout } = useTracking();
-  
+
   // Fetch order data
   const { orderData, isLoading, loadError, updateOrderData } = useOrderData(orderCode);
 
@@ -45,7 +45,7 @@ function OrderPageContent() {
         // Check for duplicate tracking using localStorage
         const trackingKey = `tracking_sent_${orderCode}`;
         const alreadyTracked = localStorage.getItem(trackingKey);
-        
+
         if (!alreadyTracked && paymentData.status === 'paid' && orderData) {
           // Prepare items for tracking
           const getPlatformFromUrl = (url?: string): string => {
@@ -88,7 +88,7 @@ function OrderPageContent() {
           description: "Khóa học sẽ được gửi đến email của bạn trong 15-30 phút",
           duration: 10000,
         });
-        
+
         // Update order data
         if (orderData) {
           updateOrderData({
@@ -180,10 +180,10 @@ function OrderPageContent() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Navbar />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
           <Card>
             <CardBody>
-              <div className="text-center py-12">
+              <div className="text-center py-8">
                 <Spinner size="lg" text="Đang tải thông tin đơn hàng..." />
               </div>
             </CardBody>
@@ -199,15 +199,15 @@ function OrderPageContent() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Navbar />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
           <Card>
             <CardBody>
-              <div className="text-center py-12">
-                <AlertCircle className="w-16 h-16 text-amber-500 mx-auto mb-4" />
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">
+              <div className="text-center py-8">
+                <AlertCircle className="w-12 h-12 text-amber-500 mx-auto mb-3" />
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
                   {loadError}
                 </h2>
-                <p className="text-slate-600 mb-6">
+                <p className="text-sm text-slate-600 mb-4">
                   Vui lòng tạo đơn hàng mới hoặc kiểm tra lại mã đơn hàng
                 </p>
                 <Button onClick={() => router.push('/')}>
@@ -227,15 +227,15 @@ function OrderPageContent() {
     return (
       <div className="min-h-screen bg-gray-50">
         <Navbar />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
           <Card>
             <CardBody>
-              <div className="text-center py-12">
-                <AlertCircle className="w-16 h-16 text-amber-500 mx-auto mb-4" />
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">
+              <div className="text-center py-8">
+                <AlertCircle className="w-12 h-12 text-amber-500 mx-auto mb-3" />
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
                   Không tìm thấy thông tin đơn hàng
                 </h2>
-                <p className="text-slate-600 mb-6">
+                <p className="text-sm text-slate-600 mb-4">
                   Vui lòng tạo đơn hàng mới hoặc kiểm tra lại đường link
                 </p>
                 <Button onClick={() => router.push('/')}>
@@ -254,9 +254,9 @@ function OrderPageContent() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+
         {/* Header Status */}
         <OrderHeader isPaid={isPaid} isExpired={isExpired} isPolling={isPolling} />
 
@@ -281,7 +281,7 @@ function OrderPageContent() {
         <OrderItemsList orderData={orderData} />
 
         {/* Back to Home Button */}
-        <div className="mt-8 text-center">
+        <div className="mt-6 text-center">
           <Button variant="ghost" onClick={() => router.push('/')}>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Về trang chủ

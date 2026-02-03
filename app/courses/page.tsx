@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Search, Filter, Star, Clock, Users, BookOpen, ChevronDown } from "lucide-react";
@@ -235,6 +236,7 @@ const MOCK_COURSES = [
 
 function CoursesPageContent() {
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>(["Tất cả"]);
@@ -246,7 +248,10 @@ function CoursesPageContent() {
   const [sortBy, setSortBy] = useState("newest"); // popular, rating, newest
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [purchasedCourseIds, setPurchasedCourseIds] = useState<Set<number>>(new Set());
   const ITEMS_PER_PAGE = 21;
+
+  const backendUserId = (session?.user as any)?.backendUserId;
 
   // Initialize search query from URL params
   useEffect(() => {
@@ -255,6 +260,32 @@ function CoursesPageContent() {
       setSearchQuery(searchParam);
     }
   }, [searchParams]);
+
+  // Fetch user enrollments to show purchased badge
+  useEffect(() => {
+    const fetchEnrollments = async () => {
+      if (!backendUserId) {
+        setPurchasedCourseIds(new Set());
+        return;
+      }
+
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+        const response = await fetch(`${apiUrl}/api/v1/users/${backendUserId}/enrollments`);
+        if (response.ok) {
+          const data = await response.json();
+          const enrolledIds = new Set<number>(
+            (data.enrollments || []).map((e: any) => e.course_id).filter(Boolean)
+          );
+          setPurchasedCourseIds(enrolledIds);
+        }
+      } catch (err) {
+        console.error('Failed to fetch enrollments:', err);
+      }
+    };
+
+    fetchEnrollments();
+  }, [backendUserId]);
 
   // Load categories and platforms
   useEffect(() => {
@@ -476,15 +507,15 @@ function CoursesPageContent() {
         <Breadcrumb items={[{ name: "Khóa học", url: "/courses" }]} />
 
         {/* Main Content: Header & Filters */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
-          <div className="flex flex-col space-y-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
+          <div className="flex flex-col space-y-4 sm:space-y-6">
             {/* Header Section */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div className="max-w-2xl">
-                <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-2">
                   Khám phá khóa học
                 </h1>
-                <p className="text-lg text-slate-600">
+                <p className="text-sm sm:text-base text-slate-600">
                   Học từ những chuyên gia hàng đầu trên thế giới với chi phí tiết kiệm nhất.
                 </p>
               </div>
@@ -557,19 +588,19 @@ function CoursesPageContent() {
         </div>
 
         {/* Courses List Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 w-full mt-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 w-full mt-2">
           <div className="min-h-[400px]">
             {loading && courses.length === 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 opacity-50">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 opacity-50">
                 {[...Array(6)].map((_, i) => (
                   <div key={i} className="bg-slate-50 rounded-2xl h-[400px] animate-pulse border border-slate-100" />
                 ))}
               </div>
             ) : filteredCourses.length === 0 ? (
-              <div className="text-center py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200">
-                <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Không tìm thấy khóa học</h3>
-                <p className="text-slate-600">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+              <div className="text-center py-12 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200">
+                <div className="text-5xl mb-3">🔍</div>
+                <h3 className="text-xl font-bold text-slate-900 mb-1.5">Không tìm thấy khóa học</h3>
+                <p className="text-sm text-slate-600">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -585,6 +616,7 @@ function CoursesPageContent() {
                     students={course.students || 0}
                     duration={course.duration || ''}
                     lectures={course.lectures || 0}
+                    isPurchased={purchasedCourseIds.has(course.id)}
                     onAddToCart={handleQuickOrder}
                   />
                 ))}
@@ -593,7 +625,7 @@ function CoursesPageContent() {
 
             {/* Load More Button */}
             {filteredCourses.length > 0 && hasMore && (
-              <div className="flex justify-center mt-12">
+              <div className="flex justify-center mt-8">
                 <Button
                   variant="outline"
                   size="lg"

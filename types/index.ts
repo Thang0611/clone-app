@@ -50,6 +50,7 @@ export interface OrderData {
 
 export interface CreateOrderRequest {
   email: string;
+  userId?: number | null; // Backend user ID for authenticated users
   courses: {
     url: string;
     title: string;

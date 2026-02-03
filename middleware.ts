@@ -1,6 +1,8 @@
 /**
  * Next.js Middleware (NextAuth v4)
  * Protects admin routes and handles authentication
+ * Regular users (Google OAuth) can access public routes
+ * Only admin routes require admin role
  */
 
 import { withAuth } from 'next-auth/middleware';
@@ -9,15 +11,15 @@ import type { NextRequest } from 'next/server';
 
 export default withAuth(
   function middleware(req: NextRequest & { nextauth?: { token: any } }) {
-    // This callback runs after authentication is verified
     const token = req.nextauth?.token;
+    const { pathname } = req.nextUrl;
 
-    // Check if user has admin role
-    if (token && (token as any).role !== 'admin') {
-      return NextResponse.json(
-        { error: 'Unauthorized. Admin access required.' },
-        { status: 403 }
-      );
+    // Only check admin role for admin routes
+    if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
+      if (!token || (token as any).role !== 'admin') {
+        // Redirect to admin login if not admin
+        return NextResponse.redirect(new URL('/admin/login', req.url));
+      }
     }
 
     return NextResponse.next();
@@ -27,22 +29,22 @@ export default withAuth(
       authorized: ({ token, req }: { token: any; req: NextRequest }) => {
         const { pathname } = req.nextUrl;
 
-        // Allow login page for unauthenticated users
-        if (pathname === '/admin/login') {
+        // Allow login pages for unauthenticated users
+        if (pathname === '/admin/login' || pathname === '/login') {
           return true;
         }
 
-        // Protect admin routes - require valid token
+        // Protect admin routes - require valid token with admin role
         if (pathname.startsWith('/admin')) {
           return !!token;
         }
 
-        // Allow other routes
+        // Allow all other routes (including for Google OAuth users)
         return true;
       },
     },
     pages: {
-      signIn: '/admin/login',
+      signIn: '/login', // Default sign in page for regular users
     },
   }
 );

@@ -10,6 +10,7 @@ import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
 import { CourseModalHeader } from "./course-modal/CourseModalHeader";
 import { CourseScrollList } from "./course-modal/CourseScrollList";
 import { PaymentFooter } from "./course-modal/PaymentFooter";
+import LoginModal from "./auth/LoginModal";
 import type { CourseInfo } from "@/types";
 
 interface CourseModalProps {
@@ -29,6 +30,7 @@ export default function CourseModal({
 }: CourseModalProps) {
   const router = useRouter();
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const [showLoginModal, setShowLoginModal] = useState(false);
   // const { trackCheckout } = useTracking(); // ❌ REMOVED: Không track InitiateCheckout trong modal nữa
   // const checkoutTracked = useRef(false); // ❌ REMOVED: Không cần nữa
 
@@ -51,6 +53,10 @@ export default function CourseModal({
       // Close modal and navigate to order page
       onClose();
       router.push(`/order/${orderCode}`);
+    },
+    onRequireLogin: () => {
+      // Show login modal when user tries to pay without being logged in
+      setShowLoginModal(true);
     },
   });
 
@@ -162,6 +168,13 @@ export default function CourseModal({
           />
         )}
       </div>
+
+      {/* Login Modal - shown when user tries to pay without being logged in */}
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        message="Vui lòng đăng nhập để mua khóa học"
+      />
     </div>
   );
 }

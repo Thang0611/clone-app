@@ -260,7 +260,7 @@ export default function TrackOrderPage() {
       <Navbar />
 
       {/* Hero Section - Minimalist Modern Design */}
-      <section className="relative bg-white pt-24 pb-32 px-4 overflow-hidden">
+      <section className="relative bg-white pt-16 pb-20 px-4 overflow-hidden">
         {/* Dot Pattern Overlay */}
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -271,36 +271,36 @@ export default function TrackOrderPage() {
         />
 
         {/* Soft Glow Blob */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 blur-3xl rounded-full -z-0" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/10 blur-3xl rounded-full -z-0" />
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
           {/* Modern Badge */}
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg mb-6 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-3 py-1.5 rounded-full shadow-lg mb-4 backdrop-blur-sm">
             <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-            <span className="text-sm font-semibold tracking-wide">
+            <span className="text-xs font-semibold tracking-wide">
               Tra cứu tự động
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3">
             Tra cứu đơn hàng
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
             Nhập email để xem tất cả đơn hàng và link tải khóa học của bạn
           </p>
         </div>
       </section>
 
       {/* Main Content */}
-      <div className="max-w-4xl min-h-screen mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
+      <div className="max-w-4xl min-h-screen mx-auto px-4 sm:px-6 lg:px-8 -mt-14 relative z-10">
 
         {/* Search Form - Overlapping Card */}
-        <Card className="mb-8 shadow-2xl border border-slate-200/50 backdrop-blur-sm bg-white/95">
-          <CardBody className="p-6 sm:p-8">
+        <Card className="mb-6 shadow-xl border border-slate-200/50 backdrop-blur-sm bg-white/95">
+          <CardBody className="p-4 sm:p-6">
             <form onSubmit={handleSearch} action="#">
               {/* Search Input */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-slate-700 mb-1.5">
                   Nhập email đã sử dụng khi đặt hàng
                 </label>
                 <div className="relative">
@@ -310,11 +310,11 @@ export default function TrackOrderPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="VD: example@email.com"
                     disabled={isLoading}
-                    className="w-full px-4 py-3.5 pl-12 rounded-xl border-2 border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 focus:bg-white disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-slate-50 text-lg"
+                    className="w-full px-4 py-3 pl-10 rounded-xl border-2 border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 focus:bg-white disabled:opacity-60 disabled:cursor-not-allowed disabled:bg-slate-50 text-base"
                   />
-                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                 </div>
-                <p className="mt-2 text-sm text-slate-500">
+                <p className="mt-1.5 text-xs text-slate-500">
                   Hệ thống sẽ hiển thị tất cả đơn hàng liên kết với email này
                 </p>
               </div>
@@ -345,21 +345,21 @@ export default function TrackOrderPage() {
         {/* Error State */}
         {error && orders.length === 0 && hasSearched && (
           <Card className="border-2 border-red-200 bg-red-50">
-            <CardBody className="p-6 sm:p-8">
-              <div className="flex items-start gap-4">
+            <CardBody className="p-4 sm:p-6">
+              <div className="flex items-start gap-3">
                 <div className="flex-shrink-0">
-                  <AlertCircle className="w-8 h-8 text-red-600" />
+                  <AlertCircle className="w-6 h-6 text-red-600" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-red-900 mb-2">
+                  <h3 className="text-lg font-bold text-red-900 mb-2">
                     Không tìm thấy đơn hàng
                   </h3>
-                  <p className="text-red-700 mb-4">
+                  <p className="text-sm text-red-700 mb-3">
                     {error}
                   </p>
-                  <div className="space-y-2 text-sm text-red-600">
+                  <div className="space-y-1 text-xs text-red-600">
                     <p>💡 <strong>Gợi ý:</strong></p>
-                    <ul className="list-disc list-inside space-y-1 ml-4">
+                    <ul className="list-disc list-inside space-y-0.5 ml-4">
                       <li>Kiểm tra lại địa chỉ email</li>
                       <li>Đảm bảo đã nhận email xác nhận đơn hàng</li>
                       <li>Đơn hàng mới tạo có thể mất vài phút để xuất hiện</li>
@@ -374,9 +374,9 @@ export default function TrackOrderPage() {
 
         {/* Orders List - Accordion Style */}
         {orders.length > 0 && (
-          <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold text-slate-900">
+          <div className="space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900">
                 Tìm thấy {orders.length} đơn hàng
               </h2>
               <Button
@@ -403,50 +403,50 @@ export default function TrackOrderPage() {
                 <Card key={order.order_code} className="border-2 overflow-hidden transition-all hover:shadow-md">
                   {/* Collapsed Header - Always Visible */}
                   <div
-                    className="p-4 sm:p-5 cursor-pointer hover:bg-slate-50 transition-colors"
+                    className="p-3 sm:p-4 cursor-pointer hover:bg-slate-50 transition-colors"
                     onClick={() => toggleOrder(order.order_code)}
                   >
-                    <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center justify-between gap-3">
                       {/* Left: Order Info */}
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <h3 className="text-lg font-bold text-slate-900">
+                        <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                          <h3 className="text-base font-bold text-slate-900">
                             #{order.order_code}
                           </h3>
-                          <span className={`px-3 py-1.5 rounded-full text-xs font-semibold ${paymentInfo.bgColor} ${paymentInfo.color} border ${paymentInfo.borderColor}`}>
+                          <span className={`px-2 py-1 rounded-full text-xs font-semibold ${paymentInfo.bgColor} ${paymentInfo.color} border ${paymentInfo.borderColor}`}>
                             {paymentInfo.label}
                           </span>
-                          <span className={`px-3 py-1.5 rounded-full text-xs font-semibold ${orderInfo.bgColor} ${orderInfo.textColor} border ${orderInfo.borderColor}`}>
+                          <span className={`px-2 py-1 rounded-full text-xs font-semibold ${orderInfo.bgColor} ${orderInfo.textColor} border ${orderInfo.borderColor}`}>
                             {orderInfo.label}
                           </span>
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-slate-600">
+                        <div className="flex items-center gap-3 text-xs text-slate-600">
                           <span className="flex items-center gap-1">
-                            <Calendar className="w-4 h-4" />
+                            <Calendar className="w-3 h-3" />
                             {(() => {
                               const dateToFormat = order.created_at || (order.items && order.items[0]?.created_at);
                               return dateToFormat ? formatDate(dateToFormat) : 'N/A';
                             })()}
                           </span>
                           <span className="flex items-center gap-1">
-                            <Package className="w-4 h-4" />
+                            <Package className="w-3 h-3" />
                             {order.items?.length || 0} khóa học
                           </span>
                         </div>
                       </div>
 
                       {/* Right: Amount & Toggle */}
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2">
                         <div className="text-right">
-                          <p className="text-xl font-bold text-green-600">
+                          <p className="text-lg font-bold text-green-600">
                             {formatCurrency(typeof order.total_amount === 'string' ? parseInt(order.total_amount) : order.total_amount)}
                           </p>
                         </div>
                         <div className="text-slate-400">
                           {isExpanded ? (
-                            <ChevronUp className="w-6 h-6" />
+                            <ChevronUp className="w-5 h-5" />
                           ) : (
-                            <ChevronDown className="w-6 h-6" />
+                            <ChevronDown className="w-5 h-5" />
                           )}
                         </div>
                       </div>
@@ -455,21 +455,21 @@ export default function TrackOrderPage() {
 
                   {/* Expanded Details - Collapsible */}
                   {isExpanded && (
-                    <CardBody className="pt-0 pb-6 px-4 sm:px-5 border-t border-slate-200">
+                    <CardBody className="pt-0 pb-4 px-3 sm:px-4 border-t border-slate-200">
                       {/* Expanded Content */}
-                      <div className="mt-4 space-y-4">
+                      <div className="mt-3 space-y-3">
                         {/* Status Description */}
-                        <div className={`p-4 rounded-lg ${paymentInfo.bgColor} border ${paymentInfo.borderColor} flex items-start gap-3`}>
+                        <div className={`p-3 rounded-lg ${paymentInfo.bgColor} border ${paymentInfo.borderColor} flex items-start gap-2`}>
                           {(() => {
                             const StatusIcon = paymentInfo.icon;
-                            return <StatusIcon className={`w-6 h-6 ${paymentInfo.color} flex-shrink-0 mt-0.5`} />;
+                            return <StatusIcon className={`w-5 h-5 ${paymentInfo.color} flex-shrink-0 mt-0.5`} />;
                           })()}
                           <div>
-                            <p className={`font-semibold ${paymentInfo.color} mb-1`}>
+                            <p className={`font-semibold text-sm ${paymentInfo.color} mb-0.5`}>
                               {paymentInfo.description}
                             </p>
                             {order.payment_status === 'pending' && (
-                              <p className="text-sm text-slate-700 font-medium">
+                              <p className="text-xs text-slate-700 font-medium">
                                 Vui lòng liên hệ support để nhận thông tin thanh toán
                               </p>
                             )}
@@ -482,20 +482,20 @@ export default function TrackOrderPage() {
                             e.stopPropagation();
                             handleCopy(order.order_code, "mã đơn hàng");
                           }}
-                          className="flex items-center gap-2 p-3 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors w-full text-left"
+                          className="flex items-center gap-2 p-2.5 bg-slate-50 hover:bg-slate-100 rounded-lg transition-colors w-full text-left"
                         >
                           <Copy className="w-4 h-4 text-slate-600" />
-                          <span className="text-sm text-slate-600">Copy mã đơn hàng:</span>
-                          <span className="font-mono font-bold text-slate-900">{order.order_code}</span>
+                          <span className="text-xs text-slate-600">Copy mã đơn hàng:</span>
+                          <span className="font-mono font-bold text-sm text-slate-900">{order.order_code}</span>
                         </button>
 
                         {/* Course Items List */}
                         {order.items && order.items.length > 0 && (
                           <div>
-                            <h4 className="text-base font-bold text-slate-900 mb-3">
+                            <h4 className="text-sm font-bold text-slate-900 mb-2">
                               Danh sách khóa học ({order.items.length})
                             </h4>
-                            <div className="space-y-2">
+                            <div className="space-y-1.5">
                               {order.items.map((item) => (
                                 <div
                                   key={item.id}
@@ -583,22 +583,22 @@ export default function TrackOrderPage() {
         {/* Help Section */}
         {orders.length === 0 && !error && !hasSearched && (
           <Card className="bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-100">
-            <CardBody className="p-6 sm:p-8">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">
+            <CardBody className="p-4 sm:p-6">
+              <h3 className="text-lg font-bold text-slate-900 mb-3">
                 💡 Cần hỗ trợ?
               </h3>
-              <div className="space-y-3 text-slate-700">
+              <div className="space-y-2 text-sm text-slate-700">
                 <p>
                   <strong>Không tìm thấy đơn hàng?</strong>
                 </p>
-                <ul className="list-disc list-inside space-y-2 ml-4">
+                <ul className="list-disc list-inside space-y-1 ml-4 text-xs">
                   <li>Kiểm tra email đã dùng khi đặt hàng</li>
                   <li>Tìm email xác nhận đơn hàng</li>
                   <li>Đơn hàng mới tạo có thể mất vài phút để xuất hiện</li>
                 </ul>
-                <div className="mt-6 pt-6 border-t border-indigo-200">
-                  <p className="font-semibold mb-2">Liên hệ hỗ trợ:</p>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                <div className="mt-4 pt-4 border-t border-indigo-200">
+                  <p className="font-semibold mb-1.5 text-sm">Liên hệ hỗ trợ:</p>
+                  <div className="flex flex-col sm:flex-row gap-3 text-xs">
                     <a href="mailto:getcourses.net@gmail.com" className="text-indigo-600 hover:text-indigo-700 font-medium">
                       📧 getcourses.net@gmail.com
                     </a>

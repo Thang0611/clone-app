@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Star } from "lucide-react";
+import { Star, CheckCircle2 } from "lucide-react";
 import { Card, CardBody } from "./ui/Card";
 import { Badge } from "./ui/Badge";
 import { formatCurrency } from "@/lib/utils";
@@ -21,6 +21,7 @@ interface CourseCardProps {
   originalPrice: number;
   thumbnail: string;
   bestseller?: boolean;
+  isPurchased?: boolean; // Show "Đã mua" badge for owned courses
   url?: string;
   onAddToCart?: (course?: { url: string; title: string; courseType: 'permanent'; category: string }) => void;
 }
@@ -40,6 +41,7 @@ export default function CourseCard({
   originalPrice,
   thumbnail,
   bestseller = false,
+  isPurchased = false,
   url,
   onAddToCart,
 }: CourseCardProps) {
@@ -61,9 +63,15 @@ export default function CourseCard({
             alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
           />
-          {bestseller && (
+          {bestseller && !isPurchased && (
             <Badge className="absolute top-1.5 left-1.5 bg-amber-500 text-white text-[10px] px-1.5 py-0.5">
               Hot
+            </Badge>
+          )}
+          {isPurchased && (
+            <Badge className="absolute top-1.5 left-1.5 bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 flex items-center gap-0.5">
+              <CheckCircle2 className="w-2.5 h-2.5" />
+              Đã mua
             </Badge>
           )}
           <Badge className="absolute top-1.5 right-1.5 bg-white/90 text-slate-700 text-[10px] px-1.5 py-0.5">

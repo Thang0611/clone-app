@@ -170,7 +170,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-blue-100 via-indigo-100 to-violet-100 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-blue-100 via-indigo-100 to-violet-100 py-10 sm:py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-300/40 rounded-full blur-3xl animate-pulse"></div>
@@ -179,23 +179,23 @@ export default function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">
           {/* Left Content */}
           <div className="animate-in fade-in slide-in-from-left duration-700">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-slate-800">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight text-slate-800">
               Tải Khóa Học Online{" "}
               <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent font-extrabold animate-gradient">
                 Giá Chỉ 50k
               </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-slate-600">
+            <p className="text-base sm:text-lg mb-5 text-slate-600">
               Công cụ hỗ trợ tải khóa học từ Udemy 100% FullHD về Google Drive
             </p>
 
             <Button
               variant="secondary"
-              size="lg"
-              className="mb-12"
+              size="md"
+              className="mb-6 sm:mb-8"
               onClick={() => setIsYouTubeModalOpen(true)}
             >
               Hướng dẫn sử dụng
@@ -234,18 +234,18 @@ export default function Hero() {
           </div>
 
           {/* Right Form - Modern Clean Design */}
-          <div className="lg:pl-8 animate-in fade-in slide-in-from-right duration-700">
-            <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-slate-200/50 p-8 md:p-10 hover:shadow-2xl transition-all duration-300 hover:scale-[1.01]">
-              <div className="text-center mb-8">
-                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
+          <div className="lg:pl-6 animate-in fade-in slide-in-from-right duration-700">
+            <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-xl border border-slate-200/50 p-5 sm:p-6 hover:shadow-2xl transition-all duration-300 hover:scale-[1.01]">
+              <div className="text-center mb-5">
+                <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-1.5">
                   Bắt đầu ngay
                 </h2>
-                <p className="text-slate-600 text-sm">
+                <p className="text-slate-600 text-xs sm:text-sm">
                   Nhập thông tin để nhận khóa học về email của bạn
                 </p>
               </div>
 
-              <form ref={formRef} className="space-y-5" onSubmit={handleSubmit} action="#">
+              <form ref={formRef} className="space-y-4" onSubmit={handleSubmit} action="#">
                 {/* Email Input - Modern Style */}
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -322,7 +322,7 @@ export default function Hero() {
                   type="submit"
                   disabled={courseInfoLoading}
                   className="
-                    group relative w-full px-6 py-4 rounded-xl font-semibold text-base
+                    group relative w-full px-5 py-3 rounded-xl font-semibold text-sm sm:text-base
                     text-white bg-gradient-to-r from-indigo-600 to-indigo-700
                     hover:from-indigo-700 hover:to-indigo-800
                     focus:outline-none focus:ring-4 focus:ring-indigo-100
@@ -353,8 +353,8 @@ export default function Hero() {
               </form>
 
               {/* Trust Indicators */}
-              <div className="mt-6 pt-6 border-t border-slate-100">
-                <div className="flex items-center justify-center gap-6 text-xs text-slate-500">
+              <div className="mt-4 pt-4 border-t border-slate-100">
+                <div className="flex items-center justify-center gap-4 text-[10px] sm:text-xs text-slate-500">
                   <div className="flex items-center gap-1">
                     <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />

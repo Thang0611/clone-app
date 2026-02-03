@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { useSession } from 'next-auth/react';
 import { useCourseAPI } from './useCourseAPI';
 import {
   REGULAR_PRICE_PER_COURSE,
@@ -14,6 +15,7 @@ interface UseCoursePaymentProps {
   courses: CourseInfo[];
   email?: string;
   onSuccess?: (orderCode: string) => void;
+  onRequireLogin?: () => void; // Callback when login is required before payment
 }
 
 interface BankInfo {
@@ -34,12 +36,17 @@ const calculateRegularPrice = (courseCount: number): number => {
   return courseCount * REGULAR_PRICE_PER_COURSE;
 };
 
-export function useCoursePayment({ courses, email, onSuccess }: UseCoursePaymentProps) {
+export function useCoursePayment({ courses, email, onSuccess, onRequireLogin }: UseCoursePaymentProps) {
   const router = useRouter();
+  const { data: session } = useSession();
   const { createOrder, createOrderLoading, createOrderAllCourses, createOrderAllCoursesLoading } = useCourseAPI();
   const [isPaymentInProgress, setIsPaymentInProgress] = useState(false);
   const [loadingType, setLoadingType] = useState<PaymentType | null>(null);
   const paymentRequestRef = useRef<boolean>(false);
+
+  // Get backend user ID from session
+  const backendUserId = (session?.user as any)?.backendUserId as number | null;
+  const isLoggedIn = !!session?.user;
 
   const successfulCourses = courses.filter(c => c.success);
   const courseCount = successfulCourses.length;
@@ -113,13 +120,24 @@ export function useCoursePayment({ courses, email, onSuccess }: UseCoursePayment
       return;
     }
 
+    // Check login requirement
+    if (!isLoggedIn) {
+      if (onRequireLogin) {
+        onRequireLogin();
+      } else {
+        toast.error("Vui lòng đăng nhập để tiếp tục");
+      }
+      return;
+    }
+
     if (successfulCourses.length === 0) {
       toast.error("Không có khóa học hợp lệ để thanh toán");
       return;
     }
 
-    if (!email || email.trim() === "") {
-      toast.error("Vui lòng nhập email");
+    const orderEmail = email?.trim() || session?.user?.email || '';
+    if (!orderEmail) {
+      toast.error("Không tìm thấy email");
       return;
     }
 
@@ -134,9 +152,11 @@ export function useCoursePayment({ courses, email, onSuccess }: UseCoursePayment
 
     try {
       // Use appropriate API based on payment type
+      // Include backendUserId to link order to authenticated user
       const orderData = type === 'premium'
         ? await createOrderAllCourses({
-          email: email.trim(),
+          email: orderEmail,
+          userId: backendUserId,
           courses: successfulCourses.map(course => ({
             url: course.url || "",
             title: course.title || "Khóa học",
@@ -147,7 +167,8 @@ export function useCoursePayment({ courses, email, onSuccess }: UseCoursePayment
           })),
         })
         : await createOrder({
-          email: email.trim(),
+          email: orderEmail,
+          userId: backendUserId,
           courses: successfulCourses.map(course => ({
             url: course.url || "",
             title: course.title || "Khóa học",

@@ -1,0 +1,52 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+.next
+out
+
+# Environment files (mounted at runtime)
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode
+.cursor
+.idea
+
+# Archive (unused files)
+_archive
+docs
+scripts
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Dev files
+*.md
+!README.md
+*.txt
+*.sh
+*.ps1
+
+# Test files
+test-*
+*.test.*
+__tests__
+coverage
+
+# Misc
+.client-dev.pid
+eslint.config.mjs
